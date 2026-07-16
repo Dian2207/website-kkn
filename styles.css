@@ -1,0 +1,136 @@
+/* ============================================================
+   GLOBAL & RESET
+   ============================================================ */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    vertical-align: middle;
+}
+
+.focus-ring:focus {
+    outline: 4px solid #F9A825;
+    outline-offset: 2px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+.service-card {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s ease,
+        border-color 0.2s ease;
+}
+.service-card:hover {
+    transform: translateY(-6px);
+}
+.service-card .icon-bg {
+    transition: transform 0.3s ease;
+}
+.service-card:hover .icon-bg {
+    transform: scale(1.08);
+}
+
+/* ============================================================
+   CHART BARS
+   ============================================================ */
+.chart-bar-hover {
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+.chart-bar-hover:hover {
+    filter: brightness(1.1);
+    transform: scaleY(1.05);
+}
+
+/* ============================================================
+   PAGE TRANSITIONS
+   ============================================================ */
+.page-section {
+    display: none;
+    animation: fadeSlideUp 0.4s ease forwards;
+}
+.page-section.active {
+    display: block;
+}
+
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   NAVIGATION LINKS
+   ============================================================ */
+.nav-link.active {
+    color: #0d631b;
+    border-bottom: 4px solid #835400;
+    font-weight: 700;
+}
+.dark .nav-link.active {
+    color: #a3f69c;
+    border-bottom-color: #fcab28;
+}
+
+/* ============================================================
+   BOTTOM NAVIGATION
+   ============================================================ */
+.bottom-nav-item.active .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1;
+}
+.bottom-nav-item.active {
+    background-color: #fcab28;
+    color: #694300;
+    border-radius: 0.75rem;
+    padding: 0.25rem 1rem;
+}
+.dark .bottom-nav-item.active {
+    background-color: #835400;
+    color: #ffffff;
+}
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.summary-card {
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.06);
+}
+
+body {
+    min-height: max(884px, 100dvh);
+}
+
+/* ---- Hero background images (inline fallback) ---- */
+.hero-bg {
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3k7SYjaPCHiciPuPdcc7mS7S7kb9zPIP3acyEdaJ3cFnL4J287K1DCUsuiJXCTz684VG0YjZnj4uj3fU6r8NU4bwpYYuoZqN-x8WACg0TO9PpJUmLYBRf2zR1R_mFtwwoIwygoEamMZ1sPnhNaAlDRNia33v_nH16GSj0PLUPPXYWnBHHblsMsyXySOVdLchGbIortHgQI0vA2U9-zcgbHCN43jbkp2ilaBcKwPBh5PlxSwD1Pp1ONPxbO-SUH9nc1mQkmeJO_g');
+}
+
+/* ---- Utility to hide mobile nav by default ---- */
+#mobileNav.hidden {
+    display: none !important;
+}
+#mobileNav:not(.hidden) {
+    display: block;
+}
+
+/* ---- Initial state for intersection observer animations ---- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
