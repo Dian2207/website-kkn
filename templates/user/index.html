@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Desa Kita - Beranda</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">
+    </script>
+
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        tertiary: "#0054a7",
+                        "inverse-surface": "#2f3131",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-container": "#694300",
+                        primary: "#0d631b",
+                        "surface-container-highest": "#e2e2e2",
+                        background: "#f9f9f9",
+                        "on-tertiary-container": "#edf1ff",
+                        "on-primary-container": "#cbffc2",
+                        "on-secondary-fixed": "#2a1800",
+                        "primary-container": "#2e7d32",
+                        "on-secondary-fixed-variant": "#643f00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#a3f69c",
+                        "secondary-fixed": "#ffddb5",
+                        "surface-bright": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary-fixed": "#001b3d",
+                        "secondary-fixed-dim": "#ffb957",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#88d982",
+                        outline: "#707a6c",
+                        surface: "#f9f9f9",
+                        "error-container": "#ffdad6",
+                        secondary: "#835400",
+                        "surface-dim": "#dadada",
+                        "surface-variant": "#e2e2e2",
+                        error: "#ba1a1a",
+                        "outline-variant": "#bfcaba",
+                        "on-tertiary-fixed-variant": "#00468c",
+                        "secondary-container": "#fcab28",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#005312",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#88d982",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1a1c1c",
+                        "on-primary-fixed": "#002204",
+                        "surface-tint": "#1b6d24",
+                        "tertiary-container": "#246dc8",
+                        "tertiary-fixed": "#d6e3ff",
+                        "on-surface-variant": "#40493d",
+                        "tertiary-fixed-dim": "#a9c7ff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        lg: "40px",
+                        base: "8px",
+                        sm: "12px",
+                        md: "24px",
+                        "touch-target": "56px",
+                        xs: "4px",
+                        xl: "64px",
+                        "container-max": "1200px"
+                    },
+                    fontFamily: {
+                        "title-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+                        "body-lg": ["Atkinson Hyperlegible Next", "sans-serif"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Atkinson Hyperlegible Next", "sans-serif"]
+                    },
+                    fontSize: {
+                        "title-lg": ["22px", { lineHeight: "28px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "label-lg": ["16px", { lineHeight: "20px", letterSpacing: "0.5px", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-1px", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+    <!-- ============================================================ -->
+    <!-- HEADER / TOP APP BAR                                          -->
+    <!-- ============================================================ -->
+    <header class="bg-surface sticky top-0 z-50 shadow-sm border-b border-outline-variant/30">
+        <div class="flex justify-between items-center w-full px-md py-sm max-w-container-max mx-auto h-touch-target">
+            <a href="index.html" class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">
+                Desa Kita
+            </a>
+
+            <nav class="hidden md:flex gap-md items-center" id="desktopNav">
+                <a href="index.html" class="nav-link active text-primary font-bold pb-2 transition-colors">Home</a>
+                <a href="layanan.html" class="nav-link text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors">Layanan</a>
+                <a href="data.html" class="nav-link text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors">Data Desa</a>
+                <a href="berita.html" class="nav-link text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors">Berita</a>
+                <a href="pengaduan.html" class="nav-link text-on-surface-variant font-medium pb-2 hover:text-primary transition-colors">Pengaduan</a>
+                <button class="bg-primary text-on-primary px-md py-xs rounded-xl font-label-lg min-h-touch-target flex items-center justify-center active:opacity-80 transition-all focus-ring">
+                    Masuk
+                </button>
+            </nav>
+
+            <button class="md:hidden p-2 text-primary" id="mobileMenuToggle" aria-label="Menu">
+                <span class="material-symbols-outlined text-[32px]">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile dropdown nav -->
+        <div class="md:hidden hidden bg-surface border-t border-outline-variant/30 px-md py-sm" id="mobileNav">
+            <div class="flex flex-col gap-sm">
+                <a href="index.html" class="nav-link active text-left py-2 text-primary font-bold">Home</a>
+                <a href="layanan.html" class="nav-link text-left py-2 text-on-surface-variant font-medium hover:text-primary">Layanan</a>
+                <a href="data.html" class="nav-link text-left py-2 text-on-surface-variant font-medium hover:text-primary">Data Desa</a>
+                <a href="berita.html" class="nav-link text-left py-2 text-on-surface-variant font-medium hover:text-primary">Berita</a>
+                <a href="pengaduan.html" class="nav-link text-left py-2 text-on-surface-variant font-medium hover:text-primary">Pengaduan</a>
+                <button class="bg-primary text-on-primary px-md py-xs rounded-xl font-label-lg text-center w-full mt-1">
+                    Masuk
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT (HOME)                                          -->
+    <!-- ============================================================ -->
+    <main>
+
+        <!-- Hero -->
+        <section class="relative h-[600px] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="w-full h-full bg-cover bg-center brightness-50 hero-bg"></div>
+            </div>
+            <div class="relative z-10 max-w-container-max mx-auto px-md w-full">
+                <div class="max-w-2xl text-white">
+                    <h1 class="font-display-lg text-display-lg mb-md leading-tight">Selamat Datang di Portal Resmi Desa Kita</h1>
+                    <p class="font-body-lg text-body-lg mb-lg opacity-90">Melayani warga dengan amanah, transparan, dan teknologi untuk mewujudkan desa mandiri yang lebih sejahtera.</p>
+                    <div class="flex flex-wrap gap-md">
+                        <a href="layanan.html" class="bg-secondary-container text-on-secondary-container px-xl py-xs rounded-xl font-label-lg min-h-touch-target flex items-center gap-sm shadow-lg hover:brightness-110 transition-all focus-ring">
+                            <span class="material-symbols-outlined">description</span>
+                            Ajukan Surat
+                        </a>
+                        <a href="data.html" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-xl py-xs rounded-xl font-label-lg min-h-touch-target flex items-center gap-sm hover:bg-white hover:text-primary transition-all focus-ring">
+                            <span class="material-symbols-outlined">info</span>
+                            Pelajari Profil
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome & Quick Info -->
+        <section class="max-w-container-max mx-auto px-md py-xl grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+            <div class="md:col-span-5 relative group">
+                <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdNL2HgPskTF-Pyt0-E_PsiOcZGledc5Zq2q-AfXqnc7UI8S-UvOq1amIye_oefl82Kv4uB_cUe32gG83E3-JqZ2JqO96vrUSRPUdvWg44_59gbuClTlvG9UGJJKqysI57nkCGt-q_LFthHd4gXopxG09B9zD0xwmlhV1cv9Ro77xO2OWDBpVSX8El3oC2JBrkGEKGyQGxAPILzBiJrNayJ97S7krGyQqxwbMk6nf1TM8fp6fukdgdQjfhsGcBQu6ZGvBQ2k8h-Q"
+                    alt="Kepala Desa" />
+                </div>
+                <div class="absolute -bottom-8 -right-8 bg-primary text-white p-md rounded-2xl shadow-xl hidden lg:block max-w-[240px]">
+                    <p class="font-title-lg text-title-lg">Bpk. Ahmad Sujarwo</p>
+                    <p class="opacity-80">Kepala Desa Kita</p>
+                </div>
+            </div>
+            <div class="md:col-span-7">
+                <span class="text-secondary font-bold tracking-widest uppercase text-sm block mb-sm">Sambutan Kepala Desa</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">"Teknologi Untuk Melayani, Amanah Untuk Membangun"</h2>
+                <div class="space-y-md text-on-surface-variant font-body-lg">
+                    <p>Salam sejahtera bagi seluruh warga Desa Kita. Melalui portal digital ini, kami berkomitmen untuk mempercepat birokrasi dan memudahkan akses layanan publik bagi seluruh lapisan masyarakat, dari pemuda hingga lansia.</p>
+                    <p>Mari kita bersinergi membangun desa yang lebih maju dan transparan melalui partisipasi aktif Anda dalam setiap program pembangunan desa.</p>
+                </div>
+                <div class="mt-lg grid grid-cols-2 gap-md">
+                    <div class="bg-surface-container-low p-md rounded-2xl border border-outline-variant">
+                        <p class="text-primary font-display-lg text-display-lg">3.450</p>
+                        <p class="font-label-lg text-on-surface-variant">Total Penduduk</p>
+                    </div>
+                    <div class="bg-surface-container-low p-md rounded-2xl border border-outline-variant">
+                        <p class="text-primary font-display-lg text-display-lg">980</p>
+                        <p class="font-label-lg text-on-surface-variant">Kepala Keluarga</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid (Home) -->
+        <section class="bg-surface-container py-xl">
+            <div class="max-w-container-max mx-auto px-md">
+                <div class="text-center mb-xl">
+                    <h2 class="font-headline-lg text-headline-lg mb-sm">Pusat Layanan Digital</h2>
+                    <p class="text-on-surface-variant max-w-xl mx-auto">Klik pada jenis layanan yang Anda butuhkan. Proses cepat dan transparan tanpa harus antre lama.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+                    <!-- Service cards (sama seperti sebelumnya) -->
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-primary-fixed rounded-2xl flex items-center justify-center text-primary mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">report_problem</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Pengaduan</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Laporkan masalah fasilitas umum atau keamanan desa.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-secondary-fixed rounded-2xl flex items-center justify-center text-secondary mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">home</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Surat Domisili</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Permohonan surat keterangan tempat tinggal resmi.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-tertiary-fixed rounded-2xl flex items-center justify-center text-tertiary mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">child_care</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Surat Kelahiran</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Pengurusan akta dan keterangan lahir penduduk baru.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-error-container rounded-2xl flex items-center justify-center text-error mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">health_and_safety</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Santunan Kematian</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Klaim dana bantuan dan pengurusan akta kematian.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-primary-fixed-dim rounded-2xl flex items-center justify-center text-primary mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">business_center</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Izin Usaha</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Surat keterangan usaha mikro untuk bantuan UMKM.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-white p-md rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 text-left border-2 border-transparent hover:border-primary focus-ring h-full flex flex-col items-start min-h-[220px] animate-on-scroll">
+                        <div class="icon-bg w-16 h-16 bg-tertiary-fixed-dim rounded-2xl flex items-center justify-center text-tertiary mb-md transition-transform">
+                            <span class="material-symbols-outlined !text-4xl" style="font-variation-settings:'FILL'1">group</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg mb-xs">Bantuan Sosial</h3>
+                        <p class="text-on-surface-variant text-sm flex-grow">Cek status penerima bantuan BLT, PKH, dan sembako.</p>
+                    </a>
+                    <a href="layanan.html" class="service-card group bg-primary p-md rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 text-left focus-ring h-full flex flex-col items-center justify-center min-h-[220px] text-on-primary animate-on-scroll">
+                        <span class="material-symbols-outlined !text-5xl mb-sm">grid_view</span>
+                        <span class="font-title-lg text-title-lg">Lihat Semua</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Announcements & News -->
+        <section class="max-w-container-max mx-auto px-md py-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+                <!-- Latest News -->
+                <div class="lg:col-span-2">
+                    <div class="flex justify-between items-center mb-lg">
+                        <h2 class="font-headline-lg text-headline-lg">Berita Terbaru</h2>
+                        <a href="berita.html" class="text-primary font-label-lg flex items-center gap-xs hover:underline">Semua Berita <span class="material-symbols-outlined">arrow_forward</span></a>
+                    </div>
+                    <div class="space-y-lg">
+                        <!-- News item 1 -->
+                        <div class="flex flex-col md:flex-row gap-md group cursor-pointer animate-on-scroll">
+                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-xYUyVQkKtSWFV82bAzNK4Vmh-GIAasN5VW0Mf-pTGFSsy2Cdk0f-R6pYX6LiqWIpFJV0s4SGpOaBukQNnO2WKZYahY-y7DoE6JzR17sVHZJKgLo0oeV6wQFcAXP6ie6v7O5ipCobM8XaZOJCnUhkt_goY5tgnAWT495gVtgu6Xk83c4Er9FE0oFTJvKfgFTPpPxDt82KK8PxNDaPjgES8vrB8NxAXb4CAoNnvs7eCnNGBhZCMAlofoxnDoaYI7mvKyYvIRgh6g"
+                                alt="Panen" />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="flex items-center gap-sm mb-xs">
+                                    <span class="bg-primary-fixed text-on-primary-fixed px-sm py-1 rounded-full text-xs font-bold uppercase">Pembangunan</span>
+                                    <span class="text-on-surface-variant text-sm">15 Okt 2023</span>
+                                </div>
+                                <h3 class="font-title-lg text-title-lg mb-sm group-hover:text-primary transition-colors">Peresmian Jembatan Baru Penghubung Dusun Sejahtera</h3>
+                                <p class="text-on-surface-variant line-clamp-2">Pemerintah desa bersama warga meresmikan jembatan beton permanen sepanjang 12 meter yang akan mempermudah akses ekonomi...</p>
+                            </div>
+                        </div>
+                        <!-- News item 2 -->
+                        <div class="flex flex-col md:flex-row gap-md group cursor-pointer animate-on-scroll">
+                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOjkUkeuTyZ8CwZm9FuFn77sYE87f6zT_bl6flnyYEl0Pj82akNqJjy019bkhskEfQaOR-i9y1lyscqIG2WVf9sReM1r-hcw__jV4rIz27pd2fsizZYwk68msuEJ_DAg-5NvTYFYUcFdKYwbK_ogLuF3k96KhpJds060H4eYKLvd4B9XREEuWBGfiRbSaYCbCGIW24Dt4vDWASztGYmxzubxKMUG1CUvh7Lv61wJD0OEDqc2AUvii0_2YaIbIlQwdPnkYoZ16f2A"
+                                alt="Posyandu" />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="flex items-center gap-sm mb-xs">
+                                    <span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-1 rounded-full text-xs font-bold uppercase">Kesehatan</span>
+                                    <span class="text-on-surface-variant text-sm">12 Okt 2023</span>
+                                </div>
+                                <h3 class="font-title-lg text-title-lg mb-sm group-hover:text-primary transition-colors">Posyandu Lansia: Pemeriksaan Kesehatan Gratis Minggu Depan</h3>
+                                <p class="text-on-surface-variant line-clamp-2">Mengundang seluruh warga usia lanjut untuk mengikuti pemeriksaan rutin tensi, gula darah, dan konsultasi gizi secara cuma-cuma...</p>
+                            </div>
+                        </div>
+                        <!-- News item 3 -->
+                        <div class="flex flex-col md:flex-row gap-md group cursor-pointer animate-on-scroll">
+                            <div class="w-full md:w-64 h-48 rounded-2xl overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8iKhzzRjAOrncnSkdJD998HSVmu2twc029iRN7BrZ0-AmW5kmQFTUlJWkqT2cXDuQNumgaX0xUYDcLH8jkc9a_1eFY10MwdOQmclcoR3l8oGd9ey4br9OaAY2WSPU112JQgT8Z1Cij9DcU-UfKvtZQjpD-SlOoaDIVf2yzxyPBUlpniRwM_6gjJ0R2vxceSRvBZCmnPp6Ezw-nHokhmhDc4ZjZuYBtqrWPiTx1xjkyHDQloEKnwNhVHZd3iIdTynhLU_vCGW-OQ"
+                                alt="UMKM" />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="flex items-center gap-sm mb-xs">
+                                    <span class="bg-secondary-fixed text-on-secondary-fixed px-sm py-1 rounded-full text-xs font-bold uppercase">Ekonomi</span>
+                                    <span class="text-on-surface-variant text-sm">10 Okt 2023</span>
+                                </div>
+                                <h3 class="font-title-lg text-title-lg mb-sm group-hover:text-primary transition-colors">Pelatihan UMKM: Digital Marketing Untuk Produk Lokal</h3>
+                                <p class="text-on-surface-variant line-clamp-2">Membantu pengrajin desa menembus pasar nasional melalui optimasi media sosial dan platform e-commerce terbaru...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Announcements -->
+                <div class="bg-surface-container-high rounded-3xl p-lg h-fit border border-outline-variant">
+                    <div class="flex items-center gap-sm mb-lg">
+                        <span class="material-symbols-outlined text-secondary !text-3xl">campaign</span>
+                        <h2 class="font-title-lg text-title-lg">Pengumuman</h2>
+                    </div>
+                    <div class="space-y-lg">
+                        <div class="border-l-4 border-secondary pl-md">
+                            <p class="text-xs font-bold text-secondary uppercase mb-1">PENTING</p>
+                            <h4 class="font-label-lg text-on-surface leading-tight mb-1">Pemadaman Listrik Bergilir Wilayah Dusun III</h4>
+                            <p class="text-xs text-on-surface-variant">Besok, 09:00 - 14:00 WIB</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-md">
+                            <p class="text-xs font-bold text-primary uppercase mb-1">JADWAL</p>
+                            <h4 class="font-label-lg text-on-surface leading-tight mb-1">Pengambilan Dana BLT Tahap 4</h4>
+                            <p class="text-xs text-on-surface-variant">Kamis, 19 Okt @ Kantor Desa</p>
+                        </div>
+                        <div class="border-l-4 border-tertiary pl-md">
+                            <p class="text-xs font-bold text-tertiary uppercase mb-1">INFO</p>
+                            <h4 class="font-label-lg text-on-surface leading-tight mb-1">Pendaftaran Beasiswa Desa Dibuka</h4>
+                            <p class="text-xs text-on-surface-variant">Batas akhir: 30 Okt 2023</p>
+                        </div>
+                        <div class="border-l-4 border-outline pl-md opacity-70">
+                            <p class="text-xs font-bold text-on-surface-variant uppercase mb-1">ARSIF</p>
+                            <h4 class="font-label-lg text-on-surface leading-tight mb-1">Laporan Realisasi Dana Desa 2022</h4>
+                            <p class="text-xs text-on-surface-variant">Telah diterbitkan</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-xl bg-white text-on-surface border border-outline-variant py-sm rounded-xl font-label-lg hover:bg-surface-container transition-all">
+                        Lihat Semua Pengumuman
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER                                                        -->
+    <!-- ============================================================ -->
+    <footer class="bg-inverse-surface text-surface-bright pt-xl mt-auto">
+        <div class="max-w-container-max mx-auto px-md pb-xl flex flex-col md:flex-row justify-between gap-xl">
+            <div class="max-w-sm">
+                <div class="font-title-lg text-title-lg text-primary-fixed mb-md">Desa Kita</div>
+                <p class="font-body-md text-surface-variant mb-lg leading-relaxed">
+                    Pusat informasi dan layanan digital resmi Pemerintah Desa Kita. Berdedikasi untuk transparansi dan kemudahan akses bagi seluruh warga.
+                </p>
+                <div class="flex gap-md">
+                    <a class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-primary transition-all" href="#">
+                        <span class="material-symbols-outlined">face_nod</span>
+                    </a>
+                    <a class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-primary transition-all" href="#">
+                        <span class="material-symbols-outlined">share</span>
+                    </a>
+                    <a class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary-fixed hover:text-primary transition-all" href="#">
+                        <span class="material-symbols-outlined">mail</span>
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-lg">
+                <div>
+                    <h4 class="font-label-lg mb-md text-white">Tautan Cepat</h4>
+                    <ul class="space-y-sm text-surface-variant">
+                        <li><a class="hover:underline" href="#">Peta Situs</a></li>
+                        <li><a class="hover:underline" href="#">Kebijakan Privasi</a></li>
+                        <li><a class="hover:underline" href="#">Kontak Kami</a></li>
+                        <li><a class="hover:underline" href="#">Lokasi Kantor</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-label-lg mb-md text-white">Layanan</h4>
+                    <ul class="space-y-sm text-surface-variant">
+                        <li><a class="hover:underline" href="#">E-Surat</a></li>
+                        <li><a class="hover:underline" href="#">Aduan Warga</a></li>
+                        <li><a class="hover:underline" href="#">Data Transparansi</a></li>
+                        <li><a class="hover:underline" href="#">Bursa Kerja Desa</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <h4 class="font-label-lg mb-md text-white">Jam Operasional</h4>
+                    <p class="text-surface-variant text-sm mb-xs">Senin - Kamis: 08:00 - 15:00</p>
+                    <p class="text-surface-variant text-sm mb-lg">Jumat: 08:00 - 11:30</p>
+                    <div class="bg-white/5 p-sm rounded-xl border border-white/10">
+                        <p class="text-xs font-bold text-primary-fixed mb-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">emergency</span> DARURAT
+                        </p>
+                        <p class="text-sm text-white font-bold">112 / (021) 888-999</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 py-md text-center text-surface-variant text-sm">
+            © 2024 Pemerintah Desa Indonesia. Melayani dengan Amanah.
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- BOTTOM NAV (MOBILE)                                          -->
+    <!-- ============================================================ -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-touch-target px-2 bg-surface border-t-2 border-outline-variant shadow-lg" id="bottomNav">
+        <a href="index.html" class="bottom-nav-item active flex flex-col items-center justify-center rounded-xl px-4 py-1 active:scale-95 transition-transform duration-150">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL'1">home</span>
+            <span class="text-xs font-bold">Home</span>
+        </a>
+        <a href="layanan.html" class="bottom-nav-item flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform duration-150">
+            <span class="material-symbols-outlined">description</span>
+            <span class="text-xs">Layanan</span>
+        </a>
+        <a href="data.html" class="bottom-nav-item flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform duration-150">
+            <span class="material-symbols-outlined">analytics</span>
+            <span class="text-xs">Data</span>
+        </a>
+        <a href="berita.html" class="bottom-nav-item flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform duration-150">
+            <span class="material-symbols-outlined">newspaper</span>
+            <span class="text-xs">Berita</span>
+        </a>
+        <a href="pengaduan.html" class="bottom-nav-item flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform duration-150">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span class="text-xs">Profil</span>
+        </a>
+    </nav>
+
+    <!-- FAB (Emergency) -->
+    <button class="fixed bottom-24 right-6 w-[72px] h-[72px] rounded-2xl bg-primary text-on-primary shadow-xl flex items-center justify-center active:scale-90 transition-transform z-40 border-4 border-surface md:bottom-6">
+        <span class="material-symbols-outlined text-[36px]" style="font-variation-settings:'FILL'1">emergency</span>
+    </button>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                    -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            // Mobile menu toggle
+            const toggle = document.getElementById('mobileMenuToggle');
+            const nav = document.getElementById('mobileNav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', function() {
+                    nav.classList.toggle('hidden');
+                });
+            }
+
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Active scale effect on buttons (optional)
+            document.querySelectorAll('.active\\:scale-95, .active\\:scale-90').forEach(btn => {
+                btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+                btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+                btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+            });
+        })();
+    </script>
+</body>
+</html>
