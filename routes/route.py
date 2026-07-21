@@ -1,6 +1,6 @@
-# routes/route.py
-
 from flask import Blueprint, render_template
+from models import Infographics
+
 
 main = Blueprint("main", __name__)
 
@@ -10,8 +10,14 @@ main = Blueprint("main", __name__)
 # ==========================
 
 @main.route("/")
-def home():
-    return render_template("user/index.html")
+def index():
+
+    infographic = Infographics.query.first()
+
+    return render_template(
+        "user/index.html",
+        infographic=infographic
+    )
 
 
 # ==========================
