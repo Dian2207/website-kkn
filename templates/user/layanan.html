@@ -163,179 +163,259 @@
 
         <div class="accordion">
 
-            <button class="accordion-btn">
+    <button class="accordion-btn">
 
-                <span>Kartu Keluarga (Cetak Ulang/Perubahan/Pecah KK)</span>
+        <span>Kartu Keluarga (Cetak Ulang / Perubahan / Pecah KK)</span>
 
-                <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-down"></i>
 
-            </button>
+    </button>
 
-            <div class="accordion-content">
+    <div class="accordion-content">
 
-                <button class="btn-document"
-                    onclick="openModal('Domisili')">
+        <table class="document-table">
 
-                    Lihat Dokumen Persyaratan
+            <thead>
 
-                </button>
+                <tr>
 
-            </div>
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
 
-        </div>
+                </tr>
 
-        <!-- ITEM -->
+            </thead>
 
-        <div class="accordion">
+            <tbody class="tableBody">
 
-            <button class="accordion-btn">
+            </tbody>
 
-                <span>Kartu Keluarga (Tambah Jiwa)</span>
+        </table>
 
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('Usaha')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-
-        <div class="accordion">
-
-            <button class="accordion-btn">
-
-                <span>Kartu Keluarga (Pindah)</span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('SKTM')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-
-        <div class="accordion">
-
-            <button class="accordion-btn">
-
-                <span>Kartu Keluarga (Kedatangan)</span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('SKTM')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-
-        <div class="accordion">
-
-            <button class="accordion-btn">
-
-                <span>KTP (Baru/Cetak Ulang)</span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('SKTM')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-
-        <div class="accordion">
-
-            <button class="accordion-btn">
-
-                <span>Akte Kelahiran</span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('SKTM')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ITEM -->
-
-        <div class="accordion">
-
-            <button class="accordion-btn">
-
-                <span>Persyaratan Akte Kematian</span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </button>
-
-            <div class="accordion-content">
-
-                <button class="btn-document"
-                    onclick="openModal('Nikah')">
-
-                    Lihat Dokumen Persyaratan
-
-                </button>
-
-            </div>
+        <div class="pagination" id="pagination">
 
         </div>
 
     </div>
 
+</div>
+
+        <div class="accordion">
+
+    <button class="accordion-btn" data-type="kk-tambah">
+
+        <span>Kartu Keluarga (Tambah Jiwa)</span>
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
+
+    <div class="accordion">
+
+        <button class="accordion-btn" data-type="kk-pindah">
+
+            <span>Kartu Keluarga (Pindah)</span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
+
+<div class="accordion">
+
+        <button class="accordion-btn" data-type="kk-datang">
+
+            <span>Kartu Keluarga (Kedatangan)</span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
+
+<div class="accordion">
+
+        <button class="accordion-btn" data-type="ktp">
+
+            <span>KTP (Baru/Cetak Ulang)</span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
+
+<div class="accordion">
+
+        <button class="accordion-btn" data-type="lahir">
+
+            <span>Akte Kelahiran</span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
+
+<div class="accordion">
+
+        <button class="accordion-btn" data-type="mati">
+
+            <span>Persyaratan Akte Kematian</span>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </button>
+
+    <div class="accordion-content">
+
+        <table class="document-table">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">No.</th>
+                    <th>Dokumen Pendukung</th>
+                    <th>Keterangan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody class="tableBody"></tbody>
+
+        </table>
+
+        <div class="pagination"></div>
+
+    </div>
+
+</div>
 </section>
 
 <!-- ==========================
@@ -454,7 +534,381 @@
 
         </div>
 
+        <script>
 
+/*==================================
+ACCORDION
+==================================*/
+
+const accordionButtons = document.querySelectorAll(".accordion-btn");
+
+accordionButtons.forEach(button=>{
+
+    button.addEventListener("click",function(){
+
+        const accordion=this.parentElement;
+        const content=accordion.querySelector(".accordion-content");
+
+        document.querySelectorAll(".accordion").forEach(item=>{
+
+            if(item!==accordion){
+
+                item.classList.remove("active");
+                item.querySelector(".accordion-content").style.maxHeight=null;
+
+            }
+
+        });
+
+        accordion.classList.toggle("active");
+
+        if(accordion.classList.contains("active")){
+
+            content.style.maxHeight=content.scrollHeight+"px";
+
+        }else{
+
+            content.style.maxHeight=null;
+
+        }
+
+    });
+
+});
+
+
+/*==================================
+DATA DOKUMEN
+==================================*/
+
+const documents = {
+
+    "kk-perubahan":[
+
+        {
+            no:1,
+            nama:"Form Pengantar dari Desa",
+            ket:"-"
+        },
+
+        {
+            no:2,
+            nama:"Form F-1.02",
+            ket:"-"
+        },
+
+        {
+            no:3,
+            nama:"Form F-1.06",
+            ket:"Lampirkan bukti perubahan data."
+        },
+
+        {
+            no:4,
+            nama:"Fotokopi Buku Nikah",
+            ket:"Jika sudah menikah"
+        },
+
+        {
+            no:5,
+            nama:"KK Asli",
+            ket:"Lampirkan surat kehilangan bila hilang"
+        },
+
+        {
+            no:6,
+            nama:"Fotokopi KTP",
+            ket:"1 lembar"
+        },
+
+        {
+            no:7,
+            nama:"Pas Foto",
+            ket:"2 lembar"
+        }
+
+    ],
+
+    "kk-tambah":[
+
+        {
+            no:1,
+            nama:"Surat Pengantar RT/RW",
+            ket:"Asli"
+        },
+
+        {
+            no:2,
+            nama:"KK Lama",
+            ket:"Fotokopi"
+        },
+
+        {
+            no:3,
+            nama:"Akta Kelahiran",
+            ket:"Fotokopi"
+        },
+
+        {
+            no:4,
+            nama:"Surat Nikah",
+            ket:"Jika sudah menikah"
+        },
+
+        {
+            no:5,
+            nama:"KTP",
+            ket:"Fotokopi"
+        },
+
+        {
+            no:6,
+            nama:"Pas Foto",
+            ket:"2 lembar"
+        }
+
+    ],
+
+    "kk-pindah":[
+
+        {
+            no:1,
+            nama:"KK Asli",
+            ket:"Wajib"
+        },
+
+        {
+            no:2,
+            nama:"KTP",
+            ket:"Asli"
+        },
+
+        {
+            no:3,
+            nama:"Surat Pindah",
+            ket:"Asli"
+        }
+
+    ],
+
+    "kk-datang":[
+
+        {
+            no:1,
+            nama:"Surat Pindah Datang",
+            ket:"Asli"
+        },
+
+        {
+            no:2,
+            nama:"KK",
+            ket:"Fotokopi"
+        }
+
+    ],
+
+    "ktp":[
+
+        {
+            no:1,
+            nama:"KK",
+            ket:"Asli"
+        },
+
+        {
+            no:2,
+            nama:"KTP Lama",
+            ket:"Jika cetak ulang"
+        }
+
+    ],
+
+    "lahir":[
+
+        {
+            no:1,
+            nama:"Surat Kelahiran",
+            ket:"Asli"
+        },
+
+        {
+            no:2,
+            nama:"KK Orang Tua",
+            ket:"Fotokopi"
+        },
+
+        {
+            no:3,
+            nama:"Buku Nikah",
+            ket:"Fotokopi"
+        }
+
+    ],
+
+    "mati":[
+
+        {
+            no:1,
+            nama:"Surat Kematian",
+            ket:"Asli"
+        },
+
+        {
+            no:2,
+            nama:"KK",
+            ket:"Fotokopi"
+        },
+
+        {
+            no:3,
+            nama:"KTP Almarhum",
+            ket:"Asli"
+        }
+
+    ]
+
+};
+
+
+/*==================================
+PAGINATION
+==================================*/
+
+const rowsPerPage=5;
+
+let currentPage=1;
+
+const tableBody=document.getElementById("tableBody");
+
+const pagination=document.getElementById("pagination");
+
+function displayTable(page){
+
+    tableBody.innerHTML="";
+
+    const start=(page-1)*rowsPerPage;
+
+    const end=start+rowsPerPage;
+
+    const pageData=documents.slice(start,end);
+
+    pageData.forEach(item=>{
+
+        tableBody.innerHTML+=`
+
+        <tr>
+
+            <td>${item.no}</td>
+
+            <td>${item.nama}</td>
+
+            <td>${item.ket}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+function displayPagination(){
+
+    pagination.innerHTML="";
+
+    const totalPages=Math.ceil(documents.length/rowsPerPage);
+
+    /* tombol sebelumnya */
+
+    const prev=document.createElement("button");
+
+    prev.innerHTML="<";
+
+    prev.disabled=currentPage===1;
+
+    prev.onclick=function(){
+
+        if(currentPage>1){
+
+            currentPage--;
+
+            displayTable(currentPage);
+
+            displayPagination();
+
+        }
+
+    }
+
+    pagination.appendChild(prev);
+
+
+    /* nomor halaman */
+
+    for(let i=1;i<=totalPages;i++){
+
+        const btn=document.createElement("button");
+
+        btn.innerText=i;
+
+        if(i===currentPage){
+
+            btn.classList.add("active");
+
+        }
+
+        btn.onclick=function(){
+
+            currentPage=i;
+
+            displayTable(currentPage);
+
+            displayPagination();
+
+        }
+
+        pagination.appendChild(btn);
+
+    }
+
+
+    /* tombol berikut */
+
+    const next=document.createElement("button");
+
+    next.innerHTML=">";
+
+    next.disabled=currentPage===totalPages;
+
+    next.onclick=function(){
+
+        if(currentPage<totalPages){
+
+            currentPage++;
+
+            displayTable(currentPage);
+
+            displayPagination();
+
+        }
+
+    }
+
+    pagination.appendChild(next);
+
+}
+
+
+/*==================================
+LOAD
+==================================*/
+
+displayTable(currentPage);
+
+displayPagination();
+
+</script>
 </body>
 
 </html>

@@ -231,14 +231,25 @@ ACCORDION
 }
 
 .accordion-content{
-    display:none;
-    padding:30px;
-    border-top:1px solid #eee;
-    background:#fafafa;
+
+    max-height:0;
+
+    overflow:hidden;
+
+    transition:max-height .35s ease;
+
+    background:#fff;
+
+    border-top:1px solid #e6e6e6;
+
+    padding:0 25px;
+
 }
 
 .accordion.active .accordion-content{
-    display:block;
+
+    padding:25px;
+
 }
 
 .btn-document{
@@ -296,80 +307,118 @@ MODAL
     padding:30px;
 }
 
-/* ===========================
-DOCUMENT
-=========================== */
+/*==================================
+TABEL DOKUMEN
+==================================*/
 
-.document-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:20px;
+.document-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:10px;
+
 }
 
-.document-card{
-    background:#fff;
-    border-radius:14px;
-    padding:20px;
-    text-align:center;
-    border:1px solid #ddd;
-    transition:.3s;
+.document-table thead{
+
+    background:#f3f3f3;
+
 }
 
-.document-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
-}
+.document-table th{
 
-.document-card i{
-    font-size:55px;
-    color:#D32F2F;
-    margin-bottom:18px;
-}
+    padding:12px;
 
-.document-card h4{
+    border:1px solid #d9d9d9;
+
     font-size:15px;
-    margin-bottom:18px;
-    min-height:45px;
+
+    font-weight:600;
+
+    text-align:center;
+
 }
 
-.document-card a{
-    display:inline-block;
-    background:#2E7D32;
-    color:#fff;
-    padding:8px 16px;
-    border-radius:6px;
-    font-size:13px;
+.document-table td{
+
+    padding:12px;
+
+    border:1px solid #d9d9d9;
+
+    font-size:14px;
+
+    vertical-align:top;
+
 }
 
-.document-card a:hover{
-    background:#25662a;
+.document-table tbody tr:hover{
+
+    background:#f9fff9;
+
 }
 
-/* ===========================
+/*==================================
 PAGINATION
-=========================== */
+==================================*/
 
 .pagination{
-    margin-top:35px;
+
     display:flex;
+
     justify-content:center;
-    gap:10px;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:18px 0 10px;
+
 }
 
 .pagination button{
-    width:42px;
-    height:42px;
+
+    width:32px;
+
+    height:32px;
+
     border:none;
-    background:#eee;
-    border-radius:8px;
+
+    border-radius:50%;
+
+    background:#e6e6e6;
+
     cursor:pointer;
+
     transition:.3s;
+
+    font-size:14px;
+
 }
 
-.pagination button.active,
 .pagination button:hover{
+
     background:#2E7D32;
+
     color:#fff;
+
+}
+
+.pagination button.active{
+
+    background:#2E7D32;
+
+    color:#fff;
+
+}
+
+.pagination button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
 }
 
 /*====================================
