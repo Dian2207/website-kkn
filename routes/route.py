@@ -26,7 +26,7 @@ def index():
 
 @main.route("/profil-desa")
 def profilDesa():
-    return render_template("user/profil_desa.html")
+    return render_template("user/profilDesa.html")
 
 
 # ==========================
@@ -34,8 +34,8 @@ def profilDesa():
 # ==========================
 
 @main.route("/profil-kkn")
-def profilKKN():
-    return render_template("user/profil_kkn.html")
+def layanan():
+    return render_template("user/layanan.html")
 
 
 # ==========================
@@ -52,55 +52,3 @@ def detailBerita(id):
     return render_template("user/detail_berita.html")
 
 
-# ==========================
-# PROGRAM KERJA
-# ==========================
-
-@main.route("/program-kerja")
-def programKerja():
-    return render_template("user/program_kerja.html")
-
-
-# ==========================
-# GALERI
-# ==========================
-
-@main.route("/galeri")
-def galeri():
-    return render_template("user/galeri.html")
-
-
-# ==========================
-# ANGGOTA KKN
-# ==========================
-
-@main.route("/anggota")
-def anggota():
-    return render_template("user/anggota.html")
-
-
-# ==========================
-# LAYANAN INFORMASI PUBLIK
-# ==========================
-
-@main.route("/layanan")
-def layanan():
-    return render_template("user/layanan.html")
-
-
-# ==========================
-# PENGADUAN
-# ==========================
-
-@main.route("/pengaduan")
-def pengaduan():
-    return render_template("user/pengaduan.html")
-
-
-# ==========================
-# KONTAK
-# ==========================
-
-@main.route("/kontak")
-def kontak():
-    return render_template("user/kontak.html")
