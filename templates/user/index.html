@@ -41,12 +41,31 @@
 
                 <ul class="nav-menu">
 
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Profil Desa</a></li>
-                    <li><a href="#">Layanan</a></li>
-                    <li><a href="#">Berita & Informasi</a></li>
+    <li>
+        <a href="{{ url_for('main.index') }}" class="active">
+            Home
+        </a>
+    </li>
 
-                </ul>
+    <li>
+        <a href="{{ url_for('main.profilDesa') }}">
+            Profil Desa
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('main.layanan') }}">
+            Layanan
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('main.berita') }}">
+            Berita & Informasi
+        </a>
+    </li>
+
+</ul>   
 
             </nav>
 
