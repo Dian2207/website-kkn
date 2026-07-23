@@ -101,12 +101,12 @@ background-repeat: no-repeat;">
 
         <div class="hero-btn">
 
-            <a href="#" class="btn-primary">
+            <a href="{{ url_for('main.layanan') }}" class="btn-primary">
                 <i class="fa-regular fa-file-lines"></i>
                 Ajukan Surat
             </a>
 
-            <a href="#" class="btn-secondary">
+            <a href="{{ url_for('main.profilDesa') }}" class="btn-secondary">
                 <i class="fa-solid fa-circle-info"></i>
                 Pelajari Profil
             </a>
@@ -224,7 +224,7 @@ background-repeat: no-repeat;">
 
                 <i class="fa-solid fa-newspaper"></i>
 
-                <h4>Berita & Pengumuman</h4>
+                <h4>Berita & Informasi</h4>
 
             </div>
 
@@ -275,7 +275,7 @@ background-repeat: no-repeat;">
 
                     <h2>Berita Terbaru</h2>
 
-                    <a href="#">
+                    <a href="{{ url_for('main.berita') }}">
                         Semua Berita
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
