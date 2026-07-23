@@ -750,13 +750,16 @@ footer{
 
     text-align:center;
 
-    padding-top:10px;
+    padding:5px 5px;
     
     font-size:10px;
 
     color:#9c9c9c;
-    width: 100%
 
+    background:#2f2f2f;
+
+    width: 100%
+    
 }
 
 /*====================================
