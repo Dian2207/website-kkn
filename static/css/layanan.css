@@ -1,0 +1,490 @@
+/* ===========================
+RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f8f8f8;
+    color:#222;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+/* ===========================
+NAVBAR
+=========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#386641;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+    z-index:1000;
+}
+
+.navbar{
+    height:50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:35px;
+    height:35px;
+}
+
+.logo h2{
+    color:#fff;
+    font-size:20px;
+    font-weight:700;
+}
+
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.nav-menu a{
+    color:#fff;
+    font-size:14px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    color:#FFD54F;
+}
+
+/* ===========================
+HERO
+=========================== */
+
+.hero{
+    margin-top:90px;
+    margin-bottom:70px;
+}
+
+.hero h1{
+    font-size:42px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+.hero> .container>p{
+    text-align:center;
+    color:#666;
+    line-height:1.8;
+    max-width:800px;
+    margin:auto;
+}
+
+.hero-card{
+    margin-top:45px;
+    background:#2E7D32;
+    border-radius:22px;
+    padding:45px;
+    color:#fff;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.hero-left{
+    width:60%;
+}
+
+.hero-left h2{
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.hero-left p{
+    line-height:1.9;
+    color:#f4f4f4;
+    margin-bottom:30px;
+}
+
+.hero-button{
+    display:flex;
+    gap:18px;
+}
+
+.btn-primary{
+    background:#F4AE2B;
+    color:#222;
+    padding:13px 28px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:#ffca2c;
+}
+
+.btn-secondary{
+    border:2px solid #fff;
+    color:#fff;
+    padding:13px 28px;
+    border-radius:8px;
+}
+
+.btn-secondary:hover{
+    background:#fff;
+    color:#2E7D32;
+}
+
+.hero-right i{
+    font-size:180px;
+    color:rgba(255,255,255,.15);
+}
+
+/* ===========================
+SECTION TITLE
+=========================== */
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#666;
+}
+
+/* ===========================
+ACCORDION
+=========================== */
+
+.layanan{
+    padding-bottom:90px;
+}
+
+.accordion{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    margin-bottom:20px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.accordion-btn{
+    width:100%;
+    border:none;
+    background:#fff;
+    padding:22px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.accordion-btn i{
+    color:#2E7D32;
+    transition:.3s;
+}
+
+.accordion.active .accordion-btn i{
+    transform:rotate(180deg);
+}
+
+.accordion-content{
+    display:none;
+    padding:30px;
+    border-top:1px solid #eee;
+    background:#fafafa;
+}
+
+.accordion.active .accordion-content{
+    display:block;
+}
+
+.btn-document{
+    background:#2E7D32;
+    color:#fff;
+    border:none;
+    padding:13px 28px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.btn-document:hover{
+    background:#25662a;
+}
+
+/* ===========================
+MODAL
+=========================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:9999;
+}
+
+.modal-content{
+    width:90%;
+    max-width:900px;
+    margin:60px auto;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.modal-header{
+    background:#2E7D32;
+    color:#fff;
+    padding:20px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.close{
+    font-size:34px;
+    cursor:pointer;
+}
+
+.modal-body{
+    padding:30px;
+}
+
+/* ===========================
+DOCUMENT
+=========================== */
+
+.document-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
+}
+
+.document-card{
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+    border:1px solid #ddd;
+    transition:.3s;
+}
+
+.document-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.document-card i{
+    font-size:55px;
+    color:#D32F2F;
+    margin-bottom:18px;
+}
+
+.document-card h4{
+    font-size:15px;
+    margin-bottom:18px;
+    min-height:45px;
+}
+
+.document-card a{
+    display:inline-block;
+    background:#2E7D32;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:6px;
+    font-size:13px;
+}
+
+.document-card a:hover{
+    background:#25662a;
+}
+
+/* ===========================
+PAGINATION
+=========================== */
+
+.pagination{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.pagination button{
+    width:42px;
+    height:42px;
+    border:none;
+    background:#eee;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.pagination button.active,
+.pagination button:hover{
+    background:#2E7D32;
+    color:#fff;
+}
+
+/*====================================
+FOOTER
+=====================================*/
+
+footer{
+
+    background:#2f2f2f;
+    color:#fff;
+
+    margin-top:80px;
+    padding:60px 0 20px;
+
+}
+
+.footer-grid{
+
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:5px;
+
+    padding-bottom:35px;
+
+}
+
+/* Judul Desa */
+
+.footer-grid h3{
+
+    color:#32b44a;
+
+    font-size:20px;
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+/* Judul Kolom */
+
+.footer-grid h4{
+
+    font-size:16px;
+    font-weight:600;
+
+    margin-bottom:18px;
+
+    color:#fff;
+
+}
+
+/* Paragraf */
+
+.footer-grid p{
+
+    font-size:12px;
+    color:#cfcfcf;
+
+    line-height:1.9;
+
+    max-width:280px;
+
+}
+
+/* List */
+
+.footer-grid ul{
+
+    padding:0;
+    margin:0;
+
+}
+
+.footer-grid li{
+
+    list-style:none;
+
+    font-size:12px;
+
+    color:#cfcfcf;
+
+    margin-bottom:10px;
+
+    line-height:1.8;
+
+}
+
+/* Hover */
+
+.footer-grid li:hover{
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+}
+
+/* Copyright */
+
+.copyright{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+    padding:5px 5px;
+    
+    font-size:10px;
+
+    color:#9c9c9c;
+
+    background:#2f2f2f;
+
+    width: 100%
+    
+}
