@@ -781,9 +781,7 @@ PENGUMUMAN
 
     display:inline-block;
 
-    padding:4px 10px;
-
-    border-radius:20px;
+    background:#2F8F2F;
 
     color:#fff;
 
@@ -791,19 +789,13 @@ PENGUMUMAN
 
     font-weight:600;
 
+    padding:4px 10px;
+
+    border-radius:20px;
+
     margin-bottom:8px;
 
-}
-
-.agenda{
-
-    background:#28a745;
-
-}
-
-.pengumuman{
-
-    background:#d62828;
+    text-transform:uppercase;
 
 }
 
