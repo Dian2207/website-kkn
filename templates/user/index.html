@@ -220,32 +220,22 @@ background-repeat: no-repeat;">
 
         <div class="menu-grid">
 
-            <div class="menu-card">
+    <a href="{{ url_for('main.berita') }}" class="menu-card">
+        <i class="fa-solid fa-newspaper"></i>
+        <h4>Berita & Informasi</h4>
+    </a>
 
-                <i class="fa-solid fa-newspaper"></i>
+    <a href="{{ url_for('main.layanan') }}" class="menu-card">
+        <i class="fa-solid fa-users"></i>
+        <h4>Layanan Masyarakat</h4>
+    </a>
 
-                <h4>Berita & Informasi</h4>
+    <a href="{{ url_for('main.profilDesa') }}" class="menu-card">
+        <i class="fa-solid fa-building-columns"></i>
+        <h4>Profil Desa</h4>
+    </a>
 
-            </div>
-
-            <div class="menu-card">
-
-                <i class="fa-solid fa-users"></i>
-
-                <h4>Layanan Masyarakat</h4>
-
-            </div>
-
-            <div class="menu-card">
-
-                <i class="fa-solid fa-building-columns"></i>
-
-                <h4>Profil Desa</h4>
-
-            </div>
-
-
-        </div>
+</div>
 
     </div>
 
@@ -260,129 +250,92 @@ background-repeat: no-repeat;">
 
         <div class="news-wrapper">
 
-            <!-- LEFT -->
-
-            <div class="news-left">
-
-                <div class="section-header">
-
-                    <h2>Berita Terbaru</h2>
-
-                    <a href="{{ url_for('main.berita') }}">
-                        Semua Berita
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </div>
-
                 <!-- ITEM -->
 
-                <div class="news-item">
+                <div class="news-left">
 
-                    <img src="{{ url_for('static', filename='image/Insinerator.jpg') }}">
+    <div class="section-header">
 
-                    <div class="news-content">
+        <h2>Berita Terbaru</h2>
 
-                        <div class="news-meta">
+        <a href="{{ url_for('main.berita') }}">
+            Semua Berita
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
-                            <span class="category green">
-                                PEMBANGUNAN
-                            </span>
+    </div>
 
-                            <small>15 Okt 2023</small>
+    {% for item in news %}
 
-                        </div>
+    <div class="news-item">
 
-                        <h3>
-                            Peresmian Insinerator Desa Katemas
-                        </h3>
+        <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
+             alt="{{ item.title }}">
 
-                        <p>
+        <div class="news-content">
 
-                            Pemerintah desa bersama warga meresmikan
-                            jembatan Insinerator baru untuk pengelolaan sampah.
+            <div class="news-meta">
 
-                        </p>
-
-                    </div>
-
-                </div>
-
-                
-
-                <!-- ITEM -->
-
-                <div class="news-item">
-
-                    <img src="{{ url_for('static', filename='image/UMKM.jpg') }}">
-
-                    <div class="news-content">
-
-                        <div class="news-meta">
-
-                            <span class="category orange">
-                                EKONOMI
-                            </span>
-
-                            <small>10 Okt 2023</small>
-
-                        </div>
-
-                        <h3>
-
-                            Pelatihan UMKM:
-                            Digital Marketing Untuk Produk Lokal
-
-                        </h3>
-
-                        <p>
-
-                            Pelatihan pemasaran digital
-                            bagi pelaku UMKM Desa Katemas.
-
-                        </p>
-
-                    </div>
-
-                </div>
+                <small>
+                    {{ item.published_at.strftime('%d %b %Y') }}
+                </small>
 
             </div>
+
+            <h3>
+
+                {{ item.title }}
+
+            </h3>
+
+            <p>
+
+                {{ item.content[:120] }}{% if item.content|length > 120 %}...{% endif %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
 
             <!-- RIGHT -->
 
             <aside class="announcement">
 
-                <h3>
+    <h3>
+        <i class="fa-solid fa-bullhorn"></i>
+        Pengumuman
+    </h3>
 
-                    <i class="fa-solid fa-bullhorn"></i>
+    <div class="announcement-list">
 
-                    Pengumuman
+        {% for item in announcements %}
 
-                </h3>
+<div class="announce">
 
-                <div class="announce">
+    <p>{{ item.title }}</p>
 
-                    <p>Penyaluran Bansos BLT Dana Desa</p>
+    {% if item.event_date %}
+    <small>
+        {{ item.event_date.strftime('%d %B %Y') }}
+    </small>
+    {% endif %}
 
-                    <small>Besok, 08.00 - 15.00 WIB</small>
+</div>
 
-                </div>
+{% endfor %}
 
-                <div class="announce">
+    </div>
 
-                    <p>Perbaikan Pipa Air Utama</p>
+    <a href="{{ url_for('main.berita') }}" class="btn-announcement">
+        Lihat Semua Pengumuman
+    </a>
 
-                    <small>Besok, 13.00 - 16.00 WIB</small>
-
-                </div>
-
-                <a href="#" class="btn-announcement">
-
-                    Lihat Semua Pengumuman
-
-                </a>
-
-            </aside>
+</aside>
 
         </div>
 
