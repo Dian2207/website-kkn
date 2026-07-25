@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template
 
-from models import Infographics
-
 admin_bp = Blueprint(
     "admin_bp",
     __name__,
