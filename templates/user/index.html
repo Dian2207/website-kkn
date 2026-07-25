@@ -276,12 +276,15 @@ background-repeat: no-repeat;">
 
             <div class="news-meta">
 
-                <small>
-                    {{ item.published_at.strftime('%d %b %Y') }}
-                </small>
+    <span class="news-type">
+        {{ item.type }}
+    </span>
 
-            </div>
+    <small>
+        {{ item.published_at.strftime('%d %b %Y') }}
+    </small>
 
+</div>
             <h3>
 
                 {{ item.title }}

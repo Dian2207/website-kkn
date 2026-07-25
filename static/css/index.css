@@ -777,6 +777,36 @@ PENGUMUMAN
     color:#fff;
 } 
 
+.announcement-type{
+
+    display:inline-block;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.agenda{
+
+    background:#28a745;
+
+}
+
+.pengumuman{
+
+    background:#d62828;
+
+}
+
 /*====================================
 FOOTER
 =====================================*/

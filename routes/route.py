@@ -11,18 +11,19 @@ def index():
 
     infographic = Infographics.query.first()
 
+    # Agenda + Pengumuman
+    announcements = (
+        Announcement.query
+        .order_by(Announcement.created_at.desc())
+        .limit(5)
+        .all()
+    )
+
+    # Berita
     news = (
         News.query
         .order_by(News.published_at.desc())
         .limit(2)
-        .all()
-    )
-
-    announcements = (
-        Announcement.query
-        .filter_by(type="Pengumuman")
-        .order_by(Announcement.created_at.desc())
-        .limit(5)
         .all()
     )
 
