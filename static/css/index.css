@@ -399,17 +399,21 @@ MENU
 
 .menu-grid{
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns: repeat(3, 300px);
 
-    gap:25px;
+    justify-content: center;
+
+    gap: 30px;
 
 }
 
 .menu-card{
 
-    background:white;
+    width:300px;
+
+    background:#fff;
 
     padding:45px 20px;
 
