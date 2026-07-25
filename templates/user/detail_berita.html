@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detail Berita | Desa Katemas</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/detail_berita.css') }}">
+
+</head>
+
+<body>
+
+<!-- ======================
+        NAVBAR
+======================= -->
+
+<header>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='image/logo.png') }}">
+
+                <h2>Desa Katemas</h2>
+
+            </div>
+
+            <ul class="nav-menu">
+
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="#">Profil Desa</a></li>
+                <li><a href="#">Layanan</a></li>
+                <li><a href="{{ url_for('main.berita') }}" class="active">
+                    Berita & Informasi
+                </a></li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ======================
+        DETAIL BERITA
+======================= -->
+
+<section class="detail-news">
+
+<div class="container">
+
+<div class="detail-card">
+
+<h1>
+Pembangunan Jalan Lingkungan Dusun II
+Selesai Tepat Waktu
+</h1>
+
+<div class="meta">
+
+<span>
+<i class="fa-regular fa-calendar"></i>
+15 Okt 2023
+</span>
+
+<span>
+<i class="fa-regular fa-user"></i>
+Pemerintah Desa Katemas
+</span>
+
+</div>
+
+<hr>
+
+<img class="cover"
+src="{{ url_for('static', filename='image/berita1.jpg') }}">
+
+
+<div class="content">
+
+<p>
+
+Pemerintah Desa Katemas secara resmi mengumumkan
+penyelesaian proyek pengaspalan jalan lingkungan
+di wilayah Dusun II.
+
+Pembangunan ini dilakukan sebagai bagian dari
+program peningkatan infrastruktur desa guna
+mempermudah mobilitas masyarakat.
+
+</p>
+
+<p>
+
+Jalan yang sebelumnya rusak dan sulit dilalui kini
+telah selesai diperbaiki sehingga dapat digunakan
+oleh masyarakat untuk aktivitas sehari-hari,
+khususnya petani dan pelaku UMKM.
+
+</p>
+
+
+<blockquote>
+
+"Pembangunan ini diharapkan dapat meningkatkan
+aksesibilitas dan pertumbuhan ekonomi masyarakat
+Desa Katemas."
+
+</blockquote>
+
+
+<p>
+
+Selain pengaspalan jalan, pemerintah desa juga
+melakukan pembangunan drainase agar jalan tetap
+bertahan lama ketika musim hujan.
+
+</p>
+
+</div>
+
+
+<div class="gallery">
+
+<img src="{{ url_for('static', filename='image/berita2.jpg') }}">
+
+<img src="{{ url_for('static', filename='image/berita3.jpg') }}">
+
+</div>
+
+
+<p class="last-text">
+
+Pemerintah Desa Katemas akan terus melanjutkan
+program pembangunan infrastruktur secara bertahap
+sesuai kebutuhan masyarakat dan anggaran desa.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================
+        FOOTER
+======================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<h3>Desa Katemas</h3>
+
+<p>
+
+Pusat informasi dan pelayanan digital
+Pemerintah Desa Katemas.
+
+</p>
+
+</div>
+
+<div>
+
+<h4>Layanan</h4>
+
+<ul>
+
+<li>E-Surat</li>
+<li>Aduan Warga</li>
+<li>Data Transparansi</li>
+<li>Bursa Kerja Desa</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h4>Hubungi Kami</h4>
+
+<ul>
+
+<li>Kantor Desa Katemas</li>
+<li>Kecamatan Kembangbahu</li>
+<li>Kabupaten Lamongan</li>
+<li>info@katemas.id</li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h4>Jam Operasional</h4>
+
+<ul>
+
+<li>Senin - Kamis : 08.00 - 15.00</li>
+<li>Jumat : 08.00 - 11.30</li>
+<li>Sabtu - Minggu : Tutup</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>

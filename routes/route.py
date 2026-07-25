@@ -51,8 +51,8 @@ def penduduk():
     return render_template("user/penduduk.html")
 
 
-@main.route("/detail-berita/<int:id>")
-def detailBerita(id):
+@main.route("/detail-berita")
+def detailBerita():
     return render_template("user/detail_berita.html")
 
 
