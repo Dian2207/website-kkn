@@ -241,109 +241,67 @@ background-repeat: no-repeat;">
 
 </section>  
 <!-- ====================================
-            BERITA TERBARU
+    BERITA TERBARU
 ===================================== -->
 
 <section class="news-section">
-
     <div class="container">
-
         <div class="news-wrapper">
 
-                <!-- ITEM -->
+            <!-- LEFT: DAFTAR BERITA -->
+            <div class="news-left">
+                <div class="section-header">
+                    <h2>Berita Terbaru</h2>
+                    <a href="{{ url_for('main.berita') }}" class="see-all">
+                        Semua Berita
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
 
-                <div class="news-left">
+                {% for item in news %}
+                <div class="news-item">
+                    <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
+                         alt="{{ item.title }}">
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-type">{{ item.type or 'Berita' }}</span>
+                            <small>{{ item.published_at.strftime('%d %b %Y') }}</small>
+                        </div>
+                        <h3>
+                            <a href="{{ url_for('main.detailBerita', id=item.id) }}">
+                                {{ item.title }}
+                            </a>
+                        </h3>
+                        <p>{{ item.content[:120] }}{% if item.content|length > 120 %}...{% endif %}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
 
-    <div class="section-header">
-
-        <h2>Berita Terbaru</h2>
-
-        <a href="{{ url_for('main.berita') }}">
-            Semua Berita
-            <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-    </div>
-
-    {% for item in news %}
-
-    <div class="news-item">
-
-        <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
-             alt="{{ item.title }}">
-
-        <div class="news-content">
-
-            <div class="news-meta">
-
-    <span class="news-type">
-        {{ item.type }}
-    </span>
-
-    <small>
-        {{ item.published_at.strftime('%d %b %Y') }}
-    </small>
-
-</div>
-            <h3>
-
-                {{ item.title }}
-
-            </h3>
-
-            <p>
-
-                {{ item.content[:120] }}{% if item.content|length > 120 %}...{% endif %}
-
-            </p>
-
-        </div>
-
-    </div>
-
-    {% endfor %}
-
-</div>
-
-            <!-- RIGHT -->
-
+            <!-- RIGHT: PENGUMUMAN -->
             <aside class="announcement">
-
-    <h3>
-        <i class="fa-solid fa-bullhorn"></i>
-        Pengumuman
-    </h3>
-
-    <div class="announcement-list">
-
-        {% for item in announcements %}
-
-<div class="announce">
-
-    <p>{{ item.title }}</p>
-
-    {% if item.event_date %}
-    <small>
-        {{ item.event_date.strftime('%d %B %Y') }}
-    </small>
-    {% endif %}
-
-</div>
-
-{% endfor %}
-
-    </div>
-
-    <a href="{{ url_for('main.berita') }}" class="btn-announcement">
-        Lihat Semua Pengumuman
-    </a>
-
-</aside>
+                <h3>
+                    <i class="fa-solid fa-bullhorn"></i>
+                    Pengumuman
+                </h3>
+                <div class="announcement-list">
+                    {% for item in announcements %}
+                    <div class="announce {% if item.type and item.type.lower() == 'agenda' %}announce-agenda{% else %}announce-pengumuman{% endif %}">
+                        <span class="announce-type">{{ item.type or 'Informasi' }}</span>
+                        <h4>{{ item.title }}</h4>
+                        {% if item.event_date %}
+                        <small>{{ item.event_date.strftime('%d %B %Y') }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('main.berita') }}" class="btn-announcement">
+                    Lihat Semua Pengumuman
+                </a>
+            </aside>
 
         </div>
-
     </div>
-
 </section>
 
 <footer>

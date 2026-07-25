@@ -1,581 +1,175 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Berita & Informasi - Desa Katemas</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/berita.css') }}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/berita.css') }}" />
 </head>
-
 <body>
 
-<!-- ==========================
-        NAVBAR
-========================== -->
-
+<!-- ===== NAVBAR ===== -->
 <header>
-
     <div class="container">
-
         <nav class="navbar">
-
             <div class="logo">
-
-                <img src="{{ url_for('static', filename='image/logo.png') }}">
-
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" />
                 <h2>Desa Katemas</h2>
-
             </div>
-
             <ul class="nav-menu">
-
-                <li>
-                    <a href="{{ url_for('main.index') }}">
-                        Home
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url_for('main.profilDesa') }}">
-                        Profil Desa
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url_for('main.layanan') }}">
-                        Layanan
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url_for('main.berita') }}"
-                       class="active">
-                        Berita & Informasi
-                    </a>
-                </li>
-
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.profilDesa') }}">Profil Desa</a></li>
+                <li><a href="{{ url_for('main.layanan') }}">Layanan</a></li>
+                <li><a href="{{ url_for('main.berita') }}" class="active">Berita & Informasi</a></li>
             </ul>
-
         </nav>
-
     </div>
-
 </header>
 
-
-<!-- ==========================
-        HEADER
-========================== -->
-
-<section class="news-header">
-
+<!-- ===== HERO / HEADER ===== -->
+<section class="hero">
     <div class="container">
-
-        <h1>
-
-            Berita &
-            Informasi Desa
-
-        </h1>
-
+        <h1>Berita & Informasi Desa</h1>
         <p>
-
-            Dapatkan informasi terbaru mengenai kegiatan,
-            pembangunan, pelayanan, dan pengumuman resmi
-            Pemerintah Desa Katemas.
-
+            Dapatkan informasi terbaru mengenai kegiatan, pembangunan,
+            pelayanan, dan pengumuman resmi Pemerintah Desa Katemas.
         </p>
-
+        </div>
     </div>
-
 </section>
 
-
-<!-- ==========================
-        CONTENT
-========================== -->
-
+<!-- ===== CONTENT ===== -->
 <section class="news-content">
-
-<div class="container">
-
-<div class="news-grid">
-
-<!-- ======================================
-        BERITA
-======================================= -->
-
-<div class="left-news">
-
-<div class="headline-card">
-
-<img src="{{ url_for('static',
-filename='image/Dashboard.JPG') }}">
-
-<div class="headline-body">
-
-<span>
-
-12 Okt 2023
-
-</span>
-
-<h2>
-
-Penyelesaian Jalan Lingkungan
-Dusun II Mencapai 100%
-
-</h2>
-
-<p>
-
-Pemerintah Desa Katemas telah
-menyelesaikan pembangunan jalan
-lingkungan sepanjang 1,2 kilometer.
-
-Pembangunan ini diharapkan mampu
-meningkatkan akses transportasi
-warga dan mempercepat kegiatan
-ekonomi masyarakat.
-
-</p>
-
-<a href="{{ url_for('main.detailBerita') }}">
-
-Baca Selengkapnya
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- ==========================
-        BERITA KECIL
-========================== -->
-
-<div class="small-news">
-
-<div class="small-card">
-
-<img src="{{ url_for('static',
-filename='image/UMKM.jpg') }}">
-
-<div class="small-body">
-
-<span>
-
-10 Okt 2023
-
-</span>
-
-<h3>
-
-UMKM Desa Katemas
-Raih Omzet
-Tertinggi di Pameran
-
-</h3>
-
-<p>
-
-Produk UMKM Desa Katemas
-berhasil menarik perhatian
-pengunjung dalam pameran
-tingkat kabupaten.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="small-card">
-
-<img src="{{ url_for('static',
-filename='image/Posyandu.jpg') }}">
-
-<div class="small-body">
-
-<span>
-
-08 Okt 2023
-
-</span>
-
-<h3>
-
-Jadwal Vaksinasi
-Booster Kedua
-di Puskesmas
-
-</h3>
-
-<p>
-
-Program vaksinasi gratis
-bagi masyarakat Desa Katemas
-akan dilaksanakan minggu depan.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<a href="#" class="btn-news">
-
-Lihat Semua Berita
-
-<i class="fa-solid fa-arrow-right"></i>
-
-</a>
-
-</div>
-
-<!-- ======================================
-        SIDEBAR PENGUMUMAN
-======================================= -->
-
-<div class="right-news">
-
-    <div class="announcement-box">
-
-        <div class="announcement-header">
-
-            <h2>Pengumuman Desa</h2>
-
-            <i class="fa-solid fa-bullhorn"></i>
-
-        </div>
-
-        <div class="announcement-list">
-
-            <!-- ITEM -->
-
-            <div class="announcement-card">
-
-                <div class="announcement-top">
-
-                    <span class="tag">
-                        PENGUMUMAN
-                    </span>
-
-                    <small>Kemarin</small>
-
-                </div>
-
-                <h4>Perbaikan Pipa Air Utama</h4>
-
-                <p>
-                    Aliran air bersih dihentikan sementara
-                    pada Dusun I dan II pukul 13.00 - 18.00 WIB
-                    untuk proses perbaikan darurat.
-                </p>
-
+    <div class="container">
+        <div class="news-grid">
+
+            <!-- KOLOM KIRI: BERITA -->
+            <div class="left-news">
+                {% if news %}
+                    <!-- HEADLINE : berita pertama -->
+                    {% set headline = news[0] %}
+                    <div class="headline-card">
+                        <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}" />
+                        <div class="headline-body">
+                            <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
+                            <h2>{{ headline.title }}</h2>
+                            <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
+                            <a href="{{ url_for('main.detailBerita', id=headline.id) }}">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- BERITA KECIL (sisa berita) -->
+                    <div class="small-news">
+                        {% for item in news[1:5] %}
+                        <div class="small-card">
+                            <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}" alt="{{ item.title }}" />
+                            <div class="small-body">
+                                <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
+                                <h3>{{ item.title }}</h3>
+                                <p>{{ item.content[:100] }}{% if item.content|length > 100 %}...{% endif %}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Belum ada berita.</p>
+                {% endif %}
+
+                <a href="#" class="btn-news">Lihat Semua Berita <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
-            <!-- ITEM -->
-
-            <div class="announcement-card">
-
-                <div class="announcement-top">
-
-                    <span class="tag">
-                        PENGUMUMAN
-                    </span>
-
-                    <small>Kemarin</small>
-
+            <!-- SIDEBAR KANAN: PENGUMUMAN -->
+            <div class="right-news">
+                <div class="announcement-box">
+                    <div class="announcement-header">
+                        <h2>Pengumuman Desa</h2>
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <div class="announcement-list">
+                        {% for ann in announcements %}
+                        <div class="announcement-card {% if ann.type and ann.type.lower() == 'agenda' %}announce-agenda{% else %}announce-pengumuman{% endif %}">
+                            <div class="announcement-top">
+                                <span class="tag">{{ ann.type or 'PENGUMUMAN' }}</span>
+                                <small>{{ ann.created_at.strftime('%d %b') }}</small>
+                            </div>
+                            <h4>{{ ann.title }}</h4>
+                            <p>{{ ann.description[:120] }}{% if ann.description|length > 120 %}...{% endif %}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-
-                <h4>Penerimaan BLT Tahap III</h4>
-
-                <p>
-                    Penyaluran bantuan dimulai pukul
-                    09.00 WIB di Balai Desa Katemas.
-                </p>
-
-            </div>
-
-            <!-- ITEM -->
-
-            <div class="announcement-card">
-
-                <div class="announcement-top">
-
-                    <span class="agenda">
-                        AGENDA
-                    </span>
-
-                    <small>Kemarin</small>
-
-                </div>
-
-                <h4>Kerja Bakti Minggu Pagi</h4>
-
-                <p>
-                    Membersihkan saluran drainase
-                    dan lingkungan desa.
-                </p>
-
-            </div>
-
-            <!-- ITEM -->
-
-            <div class="announcement-card">
-
-                <div class="announcement-top">
-
-                    <span class="agenda">
-                        AGENDA
-                    </span>
-
-                    <small>Kemarin</small>
-
-                </div>
-
-                <h4>Posyandu Balita</h4>
-
-                <p>
-                    Pemeriksaan kesehatan balita
-                    dan imunisasi rutin.
-                </p>
-
             </div>
 
         </div>
-
-
     </div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
-<!-- ======================================
-        INFORMASI LAINNYA
-======================================= -->
-
+<!-- ===== INFORMASI LAINNYA ===== -->
 <section class="information">
-
     <div class="container">
-
-        <h2 class="info-title">
-
-            Informasi Lainnya
-
-        </h2>
-
+        <h2 class="info-title">Informasi Lainnya</h2>
         <div class="information-grid">
-
-            <!-- CARD -->
-
             <div class="info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-users"></i>
-
-                </div>
-
+                <div class="info-icon"><i class="fa-solid fa-users"></i></div>
                 <h3>Penduduk</h3>
-
-                <p>
-
-                    Lihat data demografi
-                    dan kependudukan
-                    secara lengkap.
-
-                </p>
-
-                <a href="{{ url_for('main.penduduk') }}">
-
-                    Eksplor Data
-
-                    <i class="fa-solid fa-angle-right"></i>
-
-                </a>
-
+                <p>Lihat data demografi dan kependudukan secara lengkap.</p>
+                <a href="{{ url_for('main.penduduk') }}">Eksplor Data <i class="fa-solid fa-angle-right"></i></a>
             </div>
-
-            <!-- CARD -->
-
             <div class="info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-chart-column"></i>
-
-                </div>
-
+                <div class="info-icon"><i class="fa-solid fa-chart-column"></i></div>
                 <h3>APBDes</h3>
-
-                <p>
-
-                    Informasi anggaran,
-                    pendapatan serta
-                    belanja desa.
-
-                </p>
-
-                <a href="#">
-
-                    Transparansi
-
-                    <i class="fa-solid fa-angle-right"></i>
-
-                </a>
-
+                <p>Informasi anggaran, pendapatan serta belanja desa.</p>
+                <a href="#">Transparansi <i class="fa-solid fa-angle-right"></i></a>
             </div>
-
-            <!-- CARD -->
-
             <div class="info-card">
-
-                <div class="info-icon">
-
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-
-                </div>
-
+                <div class="info-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
                 <h3>Bansos</h3>
-
-                <p>
-
-                    Informasi penerima
-                    bantuan sosial dan
-                    jadwal penyaluran.
-
-                </p>
-
-                <a href="#">
-
-                    Cek Penerima
-
-                    <i class="fa-solid fa-angle-right"></i>
-
-                </a>
-
+                <p>Informasi penerima bantuan sosial dan jadwal penyaluran.</p>
+                <a href="#">Cek Penerima <i class="fa-solid fa-angle-right"></i></a>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-<!-- ======================================
-                FOOTER
-======================================= -->
-
+<!-- ===== FOOTER ===== -->
 <footer>
-
     <div class="container">
-
         <div class="footer-grid">
-
             <div class="footer-about">
-
                 <h3>Desa Katemas</h3>
-
-                <p>
-
-                    Ragas Kidul,
-                    Desa Katemas,
-                    Kecamatan Kembangbahu,
-                    Kabupaten Lamongan,
-                    Provinsi Jawa Timur,
-                    62282.
-
-                </p>
-
+                <p>Ragas Kidul, Desa Katemas, Kecamatan Kembangbahu, Kabupaten Lamongan, Provinsi Jawa Timur, 62282.</p>
             </div>
-
             <div>
-
                 <h4>Hubungi Kami</h4>
-
                 <ul>
-
                     <li>Kepala Desa Katemas</li>
-
                     <li>Sekretaris Desa</li>
-
                     <li>E-mail</li>
-
                     <li>031-4567890</li>
-
                 </ul>
-
             </div>
-
             <div>
-
                 <h4>Layanan</h4>
-
                 <ul>
-
                     <li>E-Surat</li>
-
                     <li>Aduan Warga</li>
-
                     <li>Data Transparansi</li>
-
                     <li>Bursa Kerja Desa</li>
-
                 </ul>
-
             </div>
-
             <div>
-
                 <h4>Jam Operasional</h4>
-
                 <ul>
-
                     <li>Senin - Kamis : 08.00 - 15.00</li>
-
                     <li>Jumat : 08.00 - 11.30</li>
-
                 </ul>
-
             </div>
-
         </div>
-
     </div>
-
 </footer>
-
-<div class="copyright">
-
-    © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
-
-</div>
+<div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
 
 </body>
-
 </html>

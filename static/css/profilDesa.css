@@ -130,7 +130,7 @@ HEADER
 
 .header-box h1{
 
-    font-size:42px;
+    font-size:36px;
 
     margin-bottom:18px;
 
@@ -231,7 +231,7 @@ SEJARAH DESA
 
 .section-title h2{
 
-    font-size:32px;
+    font-size:28px;
 
 }
 
@@ -309,107 +309,99 @@ SEJARAH DESA
 
 
 /* ===========================
-VISI MISI
+   VISI MISI
 =========================== */
 
-.vision-section{
-
-    margin-bottom:90px;
-
+.vision-section {
+    margin-bottom: 90px;
 }
 
-.vision-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1.3fr;
-
-    gap:30px;
-
+.vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+    align-items: stretch; /* tinggi sama */
 }
 
-.vision-card{
-
-    background:#157A2C;
-
-    color:#fff;
-
-    padding:40px;
-
-    border-radius:20px;
-
+/* Card Visi */
+.vision-card {
+    background: #157A2C;
+    color: #fff;
+    padding: 40px;             /* sama dengan Misi */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.card-title{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:25px;
-
+/* Card Misi */
+.mission-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
 }
 
-.card-title i{
-
-    font-size:24px;
-
+/* Judul sama untuk keduanya */
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
-.card-title h2{
-
-    font-size:30px;
-
+.card-title i {
+    font-size: 24px;
 }
 
-.vision-card p{
-
-    font-size:28px;
-
-    line-height:1.5;
-
-    font-style:italic;
-
-    font-weight:600;
-
+.card-title h2 {
+    font-size: 30px;
+    margin: 0;
+    align-items: center;
 }
 
-.mission-card{
-
-    background:#fff;
-
-    padding:40px;
-
-    border-radius:20px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+/* Warna judul Misi (kuning) */
+.mission-card .card-title {
+    color: #8A5A00;
 }
 
-.mission-card .card-title{
-
-    color:#8A5A00;
-
+/* Konten Visi: dibuat fleksibel agar teks di tengah vertikal */
+.vision-card p {
+    font-size: 22px;
+    line-height: 1.6;
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+    max-width: 90%;
+    margin: auto;           /* tengah vertikal dan horizontal */
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.mission-card ul{
-
-    margin-top:10px;
-
-    padding-left:20px;
-
+/* Konten Misi */
+.mission-card ul {
+    margin-top: 10px;
+    padding-left: 20px;
+    flex: 1;
 }
 
-.mission-card li{
+.mission-card li {
+    margin-bottom: 18px;
+    line-height: 1.8;
+    color: #555;
+}
 
-    margin-bottom:18px;
-
-    line-height:1.8;
-
-    color:#555;
-
+/* Responsive */
+@media (max-width: 768px) {
+    .vision-grid {
+        grid-template-columns: 1fr;
+    }
+    .vision-card p {
+        font-size: 20px;
+    }
 }
 
 
@@ -462,7 +454,7 @@ POTENSI DESA
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
 
     gap:30px;
 
@@ -535,7 +527,7 @@ PERANGKAT DESA
 }
 
 .staff-header h2{
-    font-size:42px;
+    font-size:34px;
     font-weight:700;
     color:#222;
 }
@@ -578,199 +570,247 @@ PERANGKAT DESA
 }
 
 /* ===========================
-PETA LOKASI
+   PETA LOKASI (2 kolom seimbang)
 =========================== */
 
-.location-section{
-
-    margin-bottom:90px;
+.location-section {
+    margin-bottom: 90px;
     margin-top: 70px;
-
 }
 
-.location-grid{
-
-    display:grid;
-
-    grid-template-columns:1.1fr 1fr 280px;
-
-    gap:30px;
-
-    align-items:start;
-
+.location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    align-items: stretch; /* ← tinggi otomatis sama */
 }
 
-/* Card Informasi */
-
-.location-info{
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:50px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+/* Kiri: Informasi */
+.location-info {
+    background: #fff;
+    border-radius: 18px;
+    padding: 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* agar mengisi penuh */
 }
 
-.location-info h3{
-
-    margin-bottom:25px;
-
-    font-size:28px;
-
+.location-info h3 {
+    margin-bottom: 25px;
+    font-size: 28px;
 }
 
-.border-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:20px;
-
+.border-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-.border-grid strong{
-
-    color:#222;
-
+.border-grid strong {
+    color: #222;
 }
 
-.border-grid p{
-
-    color:#666;
-
-    margin-top:6px;
-
+.border-grid p {
+    color: #666;
+    margin-top: 6px;
 }
 
-.location-info hr{
-
-    margin:25px 0;
-
-    border:none;
-
-    border-top:1px solid #ddd;
-
+.location-info hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid #ddd;
 }
 
-.location-data{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:18px;
-
+.location-data {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
-.location-data h4{
-
-    font-size:18px;
-
+.location-data h4 {
+    font-size: 18px;
 }
 
-.location-data span{
-
-    color:#2E7D32;
-
-    font-weight:600;
-
+.location-data span {
+    color: #2E7D32;
+    font-weight: 600;
 }
 
-/* Maps */
-
-.location-map iframe{
-
-    width:100%;
-
-    height:350px;
-
-    border:none;
-
-    border-radius:18px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+/* Kanan: Peta + Jam Operasional */
+.location-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%; /* agar mengisi penuh */
 }
 
-/* Card Maps */
-
-.map-card{
-
-    background:#fff;
-
-    border-radius:15px;
-
-    padding:25px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+.location-map iframe {
+    width: 100%;
+    height: 350px;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
 }
 
-.map-card h4{
-
-    color:#2E7D32;
-
-    margin-bottom:15px;
-
+/* Jam Operasional (di bawah peta) */
+.location-hours {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-.map-card p{
-
-    color:#666;
-
-    line-height:1.8;
-
-    margin-bottom:18px;
-
+.location-hours h4 {
+    color: #2E7D32;
+    font-size: 18px;
+    margin: 0;
 }
 
-.map-card a{
-
-    color:#2E7D32;
-
-    font-weight:600;
-
+.location-hours p {
+    color: #666;
+    line-height: 1.8;
+    margin: 0;
+    font-size: 14px;
 }
 
-.map-card a:hover{
-
-    text-decoration:underline;
-
+.location-hours .btn-maps {
+    background: #2E7D32;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
+.location-hours .btn-maps:hover {
+    background: #1f5c24;
+    transform: translateY(-2px);
+}
 
 /* ===========================
-RESPONSIVE
+   OFFICE CARD (Jam Operasional)
 =========================== */
 
-@media(max-width:992px){
-
-.location-grid{
-
-    grid-template-columns:1fr;
-
+.office-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 35px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    gap: 20px;
+    flex-wrap: wrap; /* agar responsif */
 }
 
+.office-left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* jarak judul dengan tombol */
 }
 
-@media(max-width:768px){
-
-.border-grid{
-
-    grid-template-columns:1fr;
-
+.office-left h3 {
+    margin: 0;
+    color: #0D631B;
+    font-size: 20px;
 }
 
-.location-map iframe{
-
-    height:300px;
-
+.office-left .btn-map {
+    background: #2E7D32;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    text-decoration: none;
 }
 
+.office-left .btn-map:hover {
+    background: #1f5c24;
+    transform: translateY(-2px);
+}
+
+.office-right {
+    text-align: left;
+    line-height: 1.8;
+    font-size: 14px;
+    color: #555;
+}
+
+.office-right div {
+    padding: 2px 0;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .office-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .office-left {
+        align-items: center;
+    }
+
+    .office-left .btn-map {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .office-right {
+        text-align: center;
+    }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 992px) {
+    .location-grid {
+        grid-template-columns: 1fr;
+        align-items: start; /* kembali ke default agar tidak memaksa tinggi */
+    }
+
+    .location-info,
+    .location-right {
+        height: auto;
+    }
+
+    .location-hours {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .border-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-map iframe {
+        height: 300px;
+    }
+
+    .location-info {
+        padding: 30px;
+    }
 }
 
 /*====================================

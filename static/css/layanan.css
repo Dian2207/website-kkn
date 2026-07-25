@@ -98,9 +98,10 @@ HERO
 }
 
 .hero h1{
-    font-size:42px;
+    font-size:34px;
     text-align:center;
     margin-bottom:15px;
+    color:#0D631B;
 }
 
 .hero> .container>p{
@@ -128,7 +129,7 @@ HERO
 }
 
 .hero-left h2{
-    font-size:34px;
+    font-size:28px;
     margin-bottom:18px;
 }
 
@@ -138,38 +139,68 @@ HERO
     margin-bottom:30px;
 }
 
-.hero-button{
-    display:flex;
-    gap:18px;
+/* ===========================
+   TOMBOL (disamakan dengan Beranda)
+=========================== */
+
+.hero-button {
+    display: flex;
+    gap: 18px;
 }
 
-.btn-primary{
-    background:#F4AE2B;
-    color:#222;
-    padding:13px 28px;
-    border-radius:8px;
-    font-weight:600;
+/* Tombol Utama - sama dengan Beranda */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 34px;      /* sama dengan Beranda */
+    font-size: 15px;         /* sama dengan Beranda */
+    font-weight: 600;
+
+    background: #F4AE2B;
+    color: #222;
+
+    border-radius: 8px;
+    transition: 0.3s ease;
+    text-decoration: none;
 }
 
-.btn-primary:hover{
-    background:#ffca2c;
+.btn-primary:hover {
+    background: #ffca61;
+    transform: translateY(-2px);
 }
 
-.btn-secondary{
-    border:2px solid #fff;
-    color:#fff;
-    padding:13px 28px;
-    border-radius:8px;
+/* Tombol Outline - sama dengan Beranda */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 34px;      /* sama dengan Beranda */
+    font-size: 15px;         /* sama dengan Beranda */
+    font-weight: 600;
+
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 8px;
+
+    transition: 0.3s ease;
+    text-decoration: none;
 }
 
-.btn-secondary:hover{
-    background:#fff;
-    color:#2E7D32;
+.btn-secondary:hover {
+    background: #fff;
+    color: #2E7D32;
+    transform: translateY(-2px);
 }
 
-.hero-right i{
-    font-size:180px;
-    color:rgba(255,255,255,.15);
+/* Icon di hero-right (tetap) */
+.hero-right i {
+    font-size: 180px;
+    color: rgba(255, 255, 255, .15);
 }
 
 /* ===========================
@@ -182,8 +213,10 @@ SECTION TITLE
 }
 
 .section-title h2{
-    font-size:36px;
-    margin-bottom:10px;
+    font-size:34px;
+    text-align:center;
+    margin-bottom:15px;
+    color:#0D631B;
 }
 
 .section-title p{
@@ -536,4 +569,49 @@ footer{
 
     width: 100%
     
+}
+
+/* ===========================
+RESPONSIVE (opsional)
+=========================== */
+@media (max-width: 768px) {
+    .hero-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+    .hero-left {
+        width: 100%;
+    }
+    .hero-right i {
+        font-size: 80px;
+        margin-top: 20px;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .nav-menu {
+        gap: 15px;
+    }
+    .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+    .section-title h2 {
+        font-size: 30px;
+    }
+    .accordion-btn {
+        font-size: 15px;
+        padding: 16px 18px;
+    }
+    .document-table th,
+    .document-table td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
 }

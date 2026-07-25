@@ -127,7 +127,7 @@ DETAIL BERITA
 
 .detail-card h1{
 
-    font-size:46px;
+    font-size:36px;
     line-height:1.2;
 
     margin-bottom:18px;
@@ -167,7 +167,7 @@ hr{
 .cover{
 
     width:100%;
-    height:550px;
+    height:400px;
 
     object-fit:cover;
 
