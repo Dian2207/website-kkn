@@ -46,6 +46,10 @@ def layanan():
 def berita():
     return render_template("user/berita.html")
 
+@main.route("/penduduk")
+def penduduk():
+    return render_template("user/penduduk.html")
+
 
 @main.route("/detail-berita/<int:id>")
 def detailBerita(id):

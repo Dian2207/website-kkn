@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Berita & Informasi - Penduduk</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/penduduk.css') }}">
+
+</head>
+
+<body>
+
+<!-- ==========================
+        NAVBAR
+========================== -->
+
+<header>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='image/logo.png') }}">
+
+                <h2>Desa Katemas</h2>
+
+            </div>
+
+            <ul class="nav-menu">
+
+                <li>
+                    <a href="{{ url_for('main.index') }}">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('main.profilDesa') }}">
+                        Profil Desa
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('main.layanan') }}">
+                        Layanan
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('main.berita') }}"
+                       class="active">
+                        Berita & Informasi
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+<!-- =======================================
+        DEMOGRAFI PENDUDUK
+======================================= -->
+
+<section class="demografi">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h1>DEMOGRAFI PENDUDUK</h1>
+
+            <p>
+                Memberikan informasi lengkap mengenai karakteristik demografi
+                penduduk seperti wilayah, jumlah penduduk, jenis kelamin,
+                tingkat pendidikan, serta pekerjaan yang menggambarkan
+                komposisi penduduk secara rinci.
+            </p>
+
+        </div>
+
+        <div class="demografi-wrapper">
+
+            <!-- =====================
+                    LEFT
+            ====================== -->
+
+            <div class="demografi-left">
+
+                <h2>Jumlah Penduduk</h2>
+
+                <div class="statistik-grid">
+
+                    <!-- Card -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-address-card"></i>
+                        </div>
+
+                        <div>
+
+                            <span>TOTAL PENDUDUK</span>
+
+                            <h3>2.003</h3>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Card -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-address-card"></i>
+                        </div>
+
+                        <div>
+
+                            <span>KEPALA KELUARGA</span>
+
+                            <h3>570</h3>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Card -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-address-card"></i>
+                        </div>
+
+                        <div>
+
+                            <span>LAKI-LAKI</span>
+
+                            <h3>1.002</h3>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Card -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+                            <i class="fa-solid fa-address-card"></i>
+                        </div>
+
+                        <div>
+
+                            <span>PEREMPUAN</span>
+
+                            <h3>1.001</h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- =====================
+                    RIGHT
+            ====================== -->
+
+            <div class="demografi-right">
+
+                <img src="{{ url_for('static', filename='image/penduduk.png') }}"
+                     alt="Penduduk">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================
+        BERDASARKAN PENDIDIKAN
+======================================= -->
+
+<section class="education">
+
+    <div class="container">
+
+        <h2 class="section-heading">
+            Berdasarkan Pendidikan
+        </h2>
+
+        <div class="education-wrapper">
+
+            <!-- PIE CHART -->
+
+            <div class="education-chart">
+
+                <img src="{{ url_for('static', filename='image/pie-pendidikan.png') }}"
+                    alt="Grafik Pendidikan">
+
+            </div>
+
+            <!-- KETERANGAN -->
+
+            <div class="education-info">
+
+                <h3>Keterangan :</h3>
+
+                <ul>
+
+                    <li>
+                        <span>SD</span>
+                        <strong>318 Orang</strong>
+                    </li>
+
+                    <li>
+                        <span>SMP</span>
+                        <strong>480 Orang</strong>
+                    </li>
+
+                    <li>
+                        <span>SLTA</span>
+                        <strong>715 Orang</strong>
+                    </li>
+
+                    <li>
+                        <span>Sarjana</span>
+                        <strong>250 Orang</strong>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================
+        BERDASARKAN PEKERJAAN
+======================================= -->
+
+<section class="job-section">
+
+    <div class="container">
+
+        <h2 class="job-title">
+            Berdasarkan Pekerjaan
+        </h2>
+
+        <div class="job-wrapper">
+
+            <!-- ======================
+                    TABEL
+            ======================= -->
+
+            <div class="job-table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+                            <th>Pekerjaan</th>
+                            <th>Jumlah</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>1</td>
+                            <td>Petani</td>
+                            <td>840</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>2</td>
+                            <td>Wiraswasta</td>
+                            <td>410</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>3</td>
+                            <td>Buruh</td>
+                            <td>255</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>4</td>
+                            <td>PNS</td>
+                            <td>98</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>5</td>
+                            <td>Pelajar / Mahasiswa</td>
+                            <td>400</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- ======================
+                    GRAFIK
+            ======================= -->
+
+            <div class="job-chart">
+
+                <img src="{{ url_for('static', filename='image/grafik-pekerjaan.png') }}">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ======================================
+                FOOTER
+======================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-about">
+
+                <h3>Desa Katemas</h3>
+
+                <p>
+
+                    Ragas Kidul,
+                    Desa Katemas,
+                    Kecamatan Kembangbahu,
+                    Kabupaten Lamongan,
+                    Provinsi Jawa Timur,
+                    62282.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h4>Hubungi Kami</h4>
+
+                <ul>
+
+                    <li>Kepala Desa Katemas</li>
+
+                    <li>Sekretaris Desa</li>
+
+                    <li>E-mail</li>
+
+                    <li>031-4567890</li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Layanan</h4>
+
+                <ul>
+
+                    <li>E-Surat</li>
+
+                    <li>Aduan Warga</li>
+
+                    <li>Data Transparansi</li>
+
+                    <li>Bursa Kerja Desa</li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Jam Operasional</h4>
+
+                <ul>
+
+                    <li>Senin - Kamis : 08.00 - 15.00</li>
+
+                    <li>Jumat : 08.00 - 11.30</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<div class="copyright">
+
+    © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+
+</div>
+
+</body>
+
+</html>

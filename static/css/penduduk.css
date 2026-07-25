@@ -1,0 +1,840 @@
+/* ===========================
+RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+    color:#222;
+    background:#ffffff;
+
+}
+
+.container{
+
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+}
+
+a{
+
+    text-decoration:none;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+header{
+    position: fixed;          /* Navbar tetap di atas */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #386641;      /* Warna hijau */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.navbar{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img{
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.logo h2{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-menu li{
+    list-style: none;
+}
+
+.nav-menu a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+    padding: 4px 0;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    color: #FFD54F;
+}
+/*======================================
+DEMOGRAFI PENDUDUK
+======================================*/
+
+.demografi{
+
+    padding:110px 0 60px;
+
+    background:#ffffff;
+
+}
+
+.section-title{
+
+    margin-bottom:35px;
+
+}
+
+.section-title h1{
+
+    font-size:42px;
+
+    color:#156D2F;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    text-transform:uppercase;
+
+}
+
+.section-title p{
+
+    width:75%;
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+/*======================================
+LAYOUT
+======================================*/
+
+.demografi-wrapper{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:35px;
+
+    align-items:start;
+
+}
+
+/*======================================
+JUDUL
+======================================*/
+
+.demografi-left h2{
+
+    font-size:34px;
+
+    color:#156D2F;
+
+    margin-bottom:25px;
+
+    font-weight:700;
+
+}
+
+/*======================================
+GRID CARD
+======================================*/
+
+.statistik-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+/*======================================
+CARD
+======================================*/
+
+.statistik-card{
+
+    background:#ffffff;
+
+    border:1px solid #e4e4e4;
+
+    border-radius:12px;
+
+    padding:18px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    transition:.3s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.statistik-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.08);
+
+}
+
+/*======================================
+ICON
+======================================*/
+
+.icon-box{
+
+    width:42px;
+
+    height:42px;
+
+    background:#B9F5A8;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#156D2F;
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+/*======================================
+TEXT
+======================================*/
+
+.statistik-card span{
+
+    display:block;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#333;
+
+    margin-bottom:6px;
+
+}
+
+.statistik-card h3{
+
+    font-size:30px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+/*======================================
+GAMBAR
+======================================*/
+
+.demografi-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.demografi-right img{
+
+    width:100%;
+
+    max-width:320px;
+
+    object-fit:contain;
+
+}
+
+/*======================================
+RESPONSIVE
+======================================*/
+
+@media(max-width:992px){
+
+.demografi-wrapper{
+
+grid-template-columns:1fr;
+
+}
+
+.section-title p{
+
+width:100%;
+
+}
+
+.demografi-right{
+
+margin-top:30px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.section-title h1{
+
+font-size:32px;
+
+}
+
+.demografi-left h2{
+
+font-size:28px;
+
+}
+
+.statistik-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.statistik-card{
+
+padding:16px;
+
+}
+
+.statistik-card h3{
+
+font-size:24px;
+
+}
+
+.demografi-right img{
+
+max-width:240px;
+
+}
+
+}
+
+/*======================================
+PENDIDIKAN
+======================================*/
+
+.education{
+
+    padding:30px 0 70px;
+
+    background:#fff;
+
+}
+
+.section-heading{
+
+    font-size:36px;
+
+    color:#156D2F;
+
+    margin-bottom:35px;
+
+    font-weight:700;
+
+}
+
+/*======================================
+LAYOUT
+======================================*/
+
+.education-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    gap:80px;
+
+}
+
+/*======================================
+PIE CHART
+======================================*/
+
+.education-chart{
+
+    width:420px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.education-chart img{
+
+    width:320px;
+
+}
+
+/*======================================
+KETERANGAN
+======================================*/
+
+.education-info{
+
+    width:250px;
+
+    background:#ffffff;
+
+    border:1px solid #dddddd;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+}
+
+.education-info h3{
+
+    margin-bottom:18px;
+
+    color:#222;
+
+    font-size:20px;
+
+}
+
+.education-info ul{
+
+    list-style:none;
+
+}
+
+.education-info li{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #eeeeee;
+
+}
+
+.education-info li:last-child{
+
+    border:none;
+
+}
+
+.education-info span{
+
+    color:#555;
+
+}
+
+.education-info strong{
+
+    color:#156D2F;
+
+}
+
+/*======================================
+RESPONSIVE
+======================================*/
+
+@media(max-width:992px){
+
+.education-wrapper{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:35px;
+
+}
+
+.education-chart{
+
+width:100%;
+
+}
+
+.education-chart img{
+
+width:260px;
+
+}
+
+.education-info{
+
+width:100%;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.section-heading{
+
+font-size:30px;
+
+}
+
+.education-chart img{
+
+width:220px;
+
+}
+
+}
+/*======================================
+PEKERJAAN
+======================================*/
+
+.job-section{
+
+    padding:70px 0;
+
+    background:#fafafa;
+
+}
+
+.job-title{
+
+    font-size:36px;
+
+    color:#156D2F;
+
+    margin-bottom:35px;
+
+}
+
+/*======================================
+LAYOUT
+======================================*/
+
+.job-wrapper{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
+
+    align-items:center;
+
+}
+
+/*======================================
+TABLE
+======================================*/
+
+.job-table{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+}
+
+.job-table table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.job-table th{
+
+    background:#156D2F;
+
+    color:#fff;
+
+    padding:16px;
+
+    font-size:15px;
+
+    text-align:center;
+
+}
+
+.job-table td{
+
+    padding:15px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ededed;
+
+    font-size:15px;
+
+}
+
+.job-table tr:hover{
+
+    background:#f4fff4;
+
+}
+
+/*======================================
+GRAFIK
+======================================*/
+
+.job-chart{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.job-chart img{
+
+    width:100%;
+
+    max-width:480px;
+
+}
+
+/*======================================
+RESPONSIVE
+======================================*/
+
+@media(max-width:992px){
+
+.job-wrapper{
+
+grid-template-columns:1fr;
+
+}
+
+.job-chart{
+
+margin-top:30px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.job-title{
+
+font-size:30px;
+
+}
+
+.job-table th,
+
+.job-table td{
+
+font-size:13px;
+
+padding:12px;
+
+}
+
+}
+/*====================================
+FOOTER
+=====================================*/
+
+footer{
+
+    background:#2f2f2f;
+    color:#fff;
+
+    margin-top:80px;
+    padding:60px 0 20px;
+
+}
+
+.footer-grid{
+
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:5px;
+
+    padding-bottom:35px;
+
+}
+
+/* Judul Desa */
+
+.footer-grid h3{
+
+    color:#32b44a;
+
+    font-size:20px;
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+/* Judul Kolom */
+
+.footer-grid h4{
+
+    font-size:16px;
+    font-weight:600;
+
+    margin-bottom:18px;
+
+    color:#fff;
+
+}
+
+/* Paragraf */
+
+.footer-grid p{
+
+    font-size:12px;
+    color:#cfcfcf;
+
+    line-height:1.9;
+
+    max-width:280px;
+
+}
+
+/* List */
+
+.footer-grid ul{
+
+    padding:0;
+    margin:0;
+
+}
+
+.footer-grid li{
+
+    list-style:none;
+
+    font-size:12px;
+
+    color:#cfcfcf;
+
+    margin-bottom:10px;
+
+    line-height:1.8;
+
+}
+
+/* Hover */
+
+.footer-grid li:hover{
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+}
+
+/* Copyright */
+
+.copyright{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+    padding:5px 5px;
+    
+    font-size:10px;
+
+    color:#9c9c9c;
+
+    background:#2f2f2f;
+
+    width: 100%
+    
+}
+
+/*====================================
+RESPONSIVE
+=====================================*/
+
+@media(max-width:992px){
+
+.news-wrapper{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
