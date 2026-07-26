@@ -112,7 +112,7 @@ header{
 }
 
 .hero h1 {
-    font-size: 34px;
+    font-size: 36px;
     text-align: center;
     margin-bottom: 15px;
     color: #0D631B;
@@ -124,8 +124,12 @@ header{
     line-height: 1.8;
     max-width: 800px;
     margin: 0 auto 45px;
+    font-size: 16px;
 }
 
+.hero p{
+    font-size: 16px
+}
 /* =====================================
    CONTENT
 ====================================== */
@@ -166,16 +170,10 @@ header{
     font-size: 14px;
 }
 
-.headline-body h2 {
-    font-size: 34px;
-    line-height: 1.15;
-    margin: 15px 0;
-}
-
 .headline-body p {
     color: #666;
     line-height: 1.8;
-    font-size: 15px;       /* tambah untuk konsistensi */
+    font-size: 14px;       /* tambah untuk konsistensi */
 }
 
 .headline-body a {
@@ -270,15 +268,16 @@ header{
     box-shadow: 0 10px 30px rgba(0,0,0,.05);
 }
 
-.announcement-header {
+.announcement-header{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start;
+    gap: 8px;              /* jarak ikon dengan tulisan */
     margin-bottom: 25px;
 }
 
 .announcement-header h2 {
-    font-size: 20px;        /* dari 26px → 20px */
+    font-size: 28px;        /* dari 26px → 20px */
     color: #222;
 }
 
@@ -453,7 +452,7 @@ header{
         font-size: 28px;
     }
     .headline-body h2 {
-        font-size: 30px;
+        font-size: 24px;
     }
     .small-news {
         grid-template-columns: 1fr;
@@ -636,8 +635,8 @@ HEADLINE
 
 .headline-body h2{
 
-    font-size:34px;
-    line-height:1.15;
+    font-size:24px;
+    line-height:1.4;
     margin:15px 0;
 
 }
@@ -704,7 +703,7 @@ BERITA KECIL
 
 .small-body h3{
 
-    font-size:22px;
+    font-size:20px;
     margin:12px 0;
 
 }
@@ -713,6 +712,7 @@ BERITA KECIL
 
     color:#666;
     line-height:1.7;
+    font-size: 14px;
 
 }
 
@@ -768,20 +768,16 @@ SIDEBAR PENGUMUMAN
 }
 
 .announcement-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;              /* jarak ikon dengan tulisan */
+    margin-bottom: 25px;
 }
 
 .announcement-header h2{
 
-    font-size:26px;
+    font-size:28px;
 
     color:#222;
 
@@ -791,7 +787,7 @@ SIDEBAR PENGUMUMAN
 
     font-size:26px;
 
-    color:#2F8F3A;
+    color: #000;;
 
 }
 
