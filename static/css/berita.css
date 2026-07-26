@@ -183,52 +183,29 @@ header{
     font-weight: 600;
     font-size: 14px;       /* tambah */
 }
-.headline-link{
-    display: block;
-    text-decoration: none;
-    color: #222;
-}
-
-.headline-link:visited{
-    color: #222;
-}
-
-.headline-link:hover{
-    color: #222;
-}
-
-.headline-link .headline-body h2{
-    color: #222;
-}
-
-.headline-link .headline-body p{
-    color: #666;
-}
-
-.headline-link .headline-body span{
-    color: #777;
-}
-
-.headline-card:hover h2{
-    color: #0D631B;
-}
 
 /* =====================================
    BERITA KECIL
 ====================================== */
 
-.small-news {
+.small-news{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 22px;
     margin-top: 25px;
+    align-items: stretch;
 }
 
-.small-card {
+.small-card{
     background: #fff;
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid #ddd;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: .3s;
 }
 
 .small-card img {
@@ -237,8 +214,11 @@ header{
     object-fit: cover;
 }
 
-.small-body {
+.small-body{
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .small-body span {
@@ -246,106 +226,31 @@ header{
     color: #777;
 }
 
-.small-body h3 {
-    font-size: 20px;       /* dari 22px → 20px (konsisten) */
-    margin: 12px 0;
-}
-
-.small-body p {
-    color: #666;
-    line-height: 1.7;
-    font-size: 14px;       /* tambah */
-}
-
-/* ===========================
-   LINK BERITA KECIL
-=========================== */
-
-.small-link{
-    display: block;
-    text-decoration: none;
-    color: inherit;
-}
-
-.small-link:hover{
-    color: inherit;
-}
-
-/* ===========================
-   CARD BERITA KECIL
-=========================== */
-
-.small-card{
-
-    background:#fff;
-    border-radius:16px;
-    overflow:hidden;
-    border:1px solid #ddd;
-
-    cursor:pointer;
-    transition:.3s ease;
-
-}
-
-.small-card:hover{
-
-    transform:translateY(-6px);
-    box-shadow:0 15px 30px rgba(0,0,0,.08);
-
-}
-
-.small-card img{
-
-    width:100%;
-    height:220px;
-    object-fit:cover;
-
-    transition:.3s ease;
-
-}
-
-.small-card:hover img{
-
-    transform:scale(1.04);
-
-}
-
-.small-body{
-
-    padding:20px;
-
-}
-
-.small-body span{
-
-    font-size:13px;
-    color:#777;
-
-}
-
 .small-body h3{
+    font-size: 20px;
+    margin: 12px 0;
+    color: #222;
+    line-height: 1.5;
 
-    font-size:20px;
-    margin:12px 0;
-    color:#222;
-
-    transition:.3s ease;
-
-}
-
-.small-card:hover h3{
-
-    color:#0D631B;
-
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .small-body p{
+    color: #666;
+    line-height: 1.7;
+    font-size: 14px;
 
-    color:#666;
-    line-height:1.7;
-    font-size:14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
+    margin-top: auto;
 }
+
 /* =====================================
    BUTTON "LIHAT SEMUA BERITA"
 ====================================== */
@@ -490,7 +395,8 @@ header{
     text-align: center;
     font-size: 28px;        /* dari 34px → 28px */
     font-weight: 700;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
+    margin-top:-70px;
 }
 
 .information-grid {
@@ -775,6 +681,35 @@ HEADLINE
 
 }
 
+.headline-link{
+    display: block;
+    text-decoration: none;
+    color: #222;
+}
+
+.headline-link:visited{
+    color: #222;
+}
+
+.headline-link:hover{
+    color: #222;
+}
+
+.headline-link .headline-body h2{
+    color: #222;
+}
+
+.headline-link .headline-body p{
+    color: #666;
+}
+
+.headline-link .headline-body span{
+    color: #777;
+}
+
+.headline-card:hover h2{
+    color: #0D631B;
+}
 
 /*=====================================
 BERITA KECIL
@@ -834,6 +769,36 @@ BERITA KECIL
 
 }
 
+.small-link{
+    display: block;
+    text-decoration: none;
+    color: #222;
+}
+
+.small-link:visited{
+    color: #222;
+}
+
+.small-link:hover{
+    color: #222;
+}
+
+.small-link .small-body h3{
+    color: #222;
+    transition: .3s ease;
+}
+
+.small-link .small-body p{
+    color: #666;
+}
+
+.small-link .small-body span{
+    color: #777;
+}
+
+.small-card:hover h3{
+    color: #0D631B;
+}
 
 /*=====================================
 BUTTON
@@ -886,11 +851,15 @@ SIDEBAR PENGUMUMAN
 }
 
 .announcement-header{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;              /* jarak ikon dengan tulisan */
-    margin-bottom: 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
 }
 
 .announcement-header h2{
@@ -1059,7 +1028,7 @@ INFORMASI LAINNYA
 
     font-size:34px;
 
-    margin-bottom:50px;
+    margin-bottom:25px;
 
 }
 
@@ -1162,7 +1131,7 @@ footer{
     background:#2f2f2f;
     color:#fff;
 
-    margin-top:80px;
+    margin-top:0px;
     padding:60px 0 20px;
 
 }
