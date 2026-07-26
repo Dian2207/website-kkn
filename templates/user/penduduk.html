@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="demografi-right">
-                <img src="{{ url_for('static', filename='image/penduduk.png') }}" alt="Penduduk" />
+                <img src="{{ url_for('static', filename='image/Demografi penduduk.png') }}" alt="Penduduk" />
             </div>
         </div>
     </div>
@@ -70,8 +70,8 @@
         <h2 class="section-heading">Berdasarkan Pendidikan</h2>
         <div class="education-wrapper">
             <div class="education-chart">
-                <img src="{{ url_for('static', filename='image/pie-pendidikan.png') }}" alt="Grafik Pendidikan" />
-            </div>
+    <canvas id="educationChart"></canvas>
+</div>
             <div class="education-info">
                 <h3>Keterangan :</h3>
                 <ul>
@@ -127,6 +127,85 @@
     </div>
 </footer>
 <div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
+<script>
+Chart.register(ChartDataLabels);
+
+const dataPendidikan = [
+    {{ infographic.belum_sekolah if infographic else 0 }},
+    {{ infographic.tamat_sd if infographic else 0 }},
+    {{ infographic.tamat_smp if infographic else 0 }},
+    {{ infographic.tamat_slta if infographic else 0 }},
+    {{ infographic.sarjana_s1 if infographic else 0 }}
+];
+
+const total = dataPendidikan.reduce((a,b)=>a+b,0);
+
+const ctx = document.getElementById("educationChart");
+
+new Chart(ctx,{
+    type:'pie',
+    data:{
+        labels:[
+            'Belum Sekolah',
+            'SD',
+            'SMP',
+            'SLTA',
+            'Sarjana'
+        ],
+        datasets:[{
+            data:dataPendidikan,
+            backgroundColor:[
+                '#FF9EA7',
+                '#72ED8B',
+                '#9B9CF4',
+                '#FFE58C',
+                '#FFD35A'
+            ],
+            borderWidth:0
+        }]
+    },
+    options:{
+        responsive:true,
+        layout:{
+    padding:{
+        top:50,
+        right:115,
+        bottom:60,
+        left:100
+    }
+},
+        plugins:{
+            legend:{
+                display:false
+            },
+
+            datalabels:{
+                color:'#333',
+                font:{
+                    size:14,
+                    weight:'500'
+                },
+
+                anchor:'end',
+                align:'end',
+                offset:5,
+
+                formatter:function(value,context){
+
+                    if(value==0) return "";
+
+                    let persen=(value/total*100).toFixed(2);
+
+                    return context.chart.data.labels[context.dataIndex]+
+                           ': '+persen+'%';
+                }
+            }
+        }
+    }
+});
+</script>
 </body>
 </html>

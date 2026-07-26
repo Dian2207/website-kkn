@@ -298,11 +298,12 @@ GAMBAR
 
 .demografi-right img{
 
-    width:100%;
+    width:80%;
 
     max-width:320px;
 
     object-fit:contain;
+    margin-top: 65px;
 
 }
 
@@ -415,21 +416,18 @@ LAYOUT
 /*======================================
 PIE CHART
 ======================================*/
-
 .education-chart{
-
-    width:420px;
-
+    width:550px;
+    height:500px;
+    position:relative;
     display:flex;
-
     justify-content:center;
-
+    align-items:center;
 }
 
-.education-chart img{
-
-    width:320px;
-
+.education-chart canvas{
+    width:100% !important;
+    height:100% !important;
 }
 
 /*======================================
@@ -511,18 +509,6 @@ flex-direction:column;
 align-items:flex-start;
 
 gap:35px;
-
-}
-
-.education-chart{
-
-width:100%;
-
-}
-
-.education-chart img{
-
-width:260px;
 
 }
 

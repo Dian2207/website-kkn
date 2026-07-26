@@ -72,4 +72,8 @@ def detailBerita(id):
 @main.route("/penduduk")
 def penduduk():
     infographic = Infographics.query.first()
-    return render_template("user/penduduk.html", infographic=infographic)
+
+    return render_template(
+        "user/penduduk.html",
+        infographic=infographic
+    )
