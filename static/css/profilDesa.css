@@ -232,6 +232,7 @@ SEJARAH DESA
 .section-title h2{
 
     font-size:28px;
+    padding: 10px;
 
 }
 
@@ -327,7 +328,7 @@ SEJARAH DESA
 .vision-card {
     background: #157A2C;
     color: #fff;
-    padding: 40px;             /* sama dengan Misi */
+    padding: 50px;             /* sama dengan Misi */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -336,7 +337,7 @@ SEJARAH DESA
 /* Card Misi */
 .mission-card {
     background: #fff;
-    padding: 40px;
+    padding: 50px;
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,.08);
     display: flex;
@@ -374,11 +375,12 @@ SEJARAH DESA
     font-weight: 600;
     text-align: center;
     max-width: 90%;
-    margin: auto;           /* tengah vertikal dan horizontal */
+    margin: auto;          /* tengah vertikal dan horizontal */
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 /* Konten Misi */
