@@ -50,32 +50,51 @@
                 {% if news %}
                     <!-- HEADLINE : berita pertama -->
                     {% set headline = news[0] %}
-                    <div class="headline-card">
-                        <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}" />
-                        <div class="headline-body">
-                            <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
-                            <h2>{{ headline.title }}</h2>
-                            <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
-                            <a href="{{ url_for('main.detailBerita', id=headline.id) }}">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    <a href="{{ url_for('main.detailBerita', id=headline.id) }}" class="headline-link">
+    <div class="headline-card">
+        <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}">
 
-                    <!-- BERITA KECIL (sisa berita) -->
-                    <div class="small-news">
-                        {% for item in news[1:5] %}
-                        <div class="small-card">
-                            <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}" alt="{{ item.title }}" />
-                            <div class="small-body">
-                                <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
-                                <h3>{{ item.title }}</h3>
-                                <p>{{ item.content[:100] }}{% if item.content|length > 100 %}...{% endif %}</p>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p>Belum ada berita.</p>
-                {% endif %}
+        <div class="headline-body">
+            <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
+            <h2>{{ headline.title }}</h2>
+            <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
+        </div>
+    </div>
+</a>
+
+<!-- BERITA KECIL (sisa berita) -->
+<div class="small-news">
+    {% for item in news[1:5] %}
+    <a href="{{ url_for('main.detailBerita', id=item.id) }}" class="small-link">
+
+        <div class="small-card">
+
+            <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
+                 alt="{{ item.title }}" />
+
+            <div class="small-body">
+
+                <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
+
+                <h3>{{ item.title }}</h3>
+
+                <p>
+                    {{ item.content[:100] }}
+                    {% if item.content|length > 100 %}...
+                    {% endif %}
+                </p>
+
+            </div>
+
+        </div>
+
+    </a>
+    {% endfor %}
+</div>
+
+{% else %}
+<p>Belum ada berita.</p>
+{% endif %}
 
                 <a href="#" class="btn-news">Lihat Semua Berita <i class="fa-solid fa-arrow-right"></i></a>
             </div>
