@@ -45,80 +45,94 @@
     <div class="container">
         <div class="news-grid">
 
-            <!-- KOLOM KIRI: BERITA -->
-            <div class="left-news">
+            <!-- HEADLINE (baris 1, kolom 1) -->
+            <div class="headline-wrapper">
                 {% if news %}
-                    <!-- HEADLINE : berita pertama -->
                     {% set headline = news[0] %}
                     <a href="{{ url_for('main.detailBerita', id=headline.id) }}" class="headline-link">
-    <div class="headline-card">
-        <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}">
-
-        <div class="headline-body">
-            <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
-            <h2>{{ headline.title }}</h2>
-            <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
-        </div>
-    </div>
-</a>
-
-<!-- BERITA KECIL (sisa berita) -->
-<div class="small-news">
-    {% for item in news[1:5] %}
-    <a href="{{ url_for('main.detailBerita', id=item.id) }}" class="small-link">
-
-        <div class="small-card">
-
-            <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
-                 alt="{{ item.title }}" />
-
-            <div class="small-body">
-
-                <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
-
-                <h3>{{ item.title }}</h3>
-
-                <p>
-                    {{ item.content[:100] }}
-                    {% if item.content|length > 100 %}...
-                    {% endif %}
-                </p>
-
-            </div>
-
-        </div>
-
-    </a>
-    {% endfor %}
-</div>
-
-{% else %}
-<p>Belum ada berita.</p>
-{% endif %}
-
-                <a href="#" class="btn-news">Lihat Semua Berita <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-
-            <!-- SIDEBAR KANAN: PENGUMUMAN -->
-            <div class="right-news">
-                <div class="announcement-box">
-                    <div class="announcement-header">
-                        <i class="fa-solid fa-bullhorn"></i>
-                        <h2>Pengumuman</h2>
-                    </div>
-                    <div class="announcement-list">
-                        {% for ann in announcements %}
-                        <div class="announcement-card {% if ann.type and ann.type.lower() == 'agenda' %}announce-agenda{% else %}announce-pengumuman{% endif %}">
-                            <div class="announcement-top">
-                                <span class="tag">{{ ann.type or 'PENGUMUMAN' }}</span>
-                                <small>{{ ann.created_at.strftime('%d %b') }}</small>
+                        <div class="headline-card">
+                            <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}">
+                            <div class="headline-body">
+                                <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
+                                <h2>{{ headline.title }}</h2>
+                                <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
                             </div>
-                            <h4>{{ ann.title }}</h4>
-                            <p>{{ ann.description[:120] }}{% if ann.description|length > 120 %}...{% endif %}</p>
                         </div>
+                    </a>
+                {% endif %}
+            </div>
+
+            <!-- SIDEBAR PENGUMUMAN (baris 1, kolom 2) -->
+            <aside class="announcement">
+                <h3>
+                    <i class="fa-solid fa-bullhorn"></i>
+                    Pengumuman
+                </h3>
+                <div class="announcement-list">
+                    {% for item in announcements %}
+                    <div class="announce {% if item.type and item.type.lower() == 'agenda' %}announce-agenda{% else %}announce-pengumuman{% endif %}">
+                        <span class="announce-type">{{ item.type or 'Informasi' }}</span>
+                        <h4>{{ item.title }}</h4>
+                        {% if item.event_date %}
+                        <small>{{ item.event_date.strftime('%d %B %Y') }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('main.pengumuman') }}" class="btn-announcement">
+                    Lihat Semua Pengumuman
+                </a>
+            </aside>
+
+            <!-- BERITA KECIL (baris 2, kolom 1 & 2) -->
+            <div class="small-news-wrapper">
+                {% if news %}
+                    <div class="small-news">
+                        {% for item in news[1:5] %}  {# tampilkan 4 berita kecil #}
+                        <a href="{{ url_for('main.detailBerita', id=item.id) }}" class="small-link">
+                            <div class="small-card">
+                                <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}" alt="{{ item.title }}" />
+                                <div class="small-body">
+                                    <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
+                                    <h3>{{ item.title }}</h3>
+                                    <p>{{ item.content[:100] }}{% if item.content|length > 100 %}...{% endif %}</p>
+                                </div>
+                            </div>
+                        </a>
                         {% endfor %}
                     </div>
-                </div>
+
+                    <!-- PAGINATION -->
+                    <div class="pagination-container">
+                        <div class="pagination" id="beritaPagination">
+                            {% if current_page > 1 %}
+                            <button class="page-link" data-page="{{ current_page - 1 }}">
+                                &lt;
+                            </button>
+                            {% else %}
+                            <button class="page-link" disabled>&lt;</button>
+                            {% endif %}
+
+                            {% for p in range(1, total_pages + 1) %}
+                                {% if p == current_page %}
+                                <button class="page-link active" data-page="{{ p }}">{{ p }}</button>
+                                {% else %}
+                                <button class="page-link" data-page="{{ p }}">{{ p }}</button>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if current_page < total_pages %}
+                            <button class="page-link" data-page="{{ current_page + 1 }}">
+                                &gt;
+                            </button>
+                            {% else %}
+                            <button class="page-link" disabled>&gt;</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p>Belum ada berita.</p>
+                {% endif %}
             </div>
 
         </div>
@@ -189,6 +203,24 @@
     </div>
 </footer>
 <div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
+
+<!-- ===== JAVASCRIPT PAGINATION (sama dengan layanan) ===== -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pagination = document.getElementById('beritaPagination');
+        if (!pagination) return;
+
+        pagination.querySelectorAll('.page-link:not([disabled])').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const page = this.dataset.page;
+                if (!page) return;
+                const url = new URL(window.location.href);
+                url.searchParams.set('page', page);
+                window.location.href = url.toString();
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

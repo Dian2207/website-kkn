@@ -135,7 +135,7 @@ header{
 ====================================== */
 
 .news-content {
-    padding-bottom: 80px;
+    padding-bottom: 20px;
 }
 
 .news-grid {
@@ -144,242 +144,151 @@ header{
     gap: 35px;
 }
 
-/* =====================================
-   HEADLINE
-====================================== */
+/* ====================================
+   LEFT NEWS (agar fleksibel vertikal)
+===================================== */
 
-.headline-card {
-    background: #fff;
+.left-news {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ====================================
+   SIDEBAR PENGUMUMAN
+===================================== */
+
+.announcement {
+    background: #F5F5F3;
+    border: 1px solid #D8D8D8;
     border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid #d9d9d9;
-}
-
-.headline-card img {
-    width: 100%;
-    height: 420px;
-    object-fit: cover;
-}
-
-.headline-body {
     padding: 28px;
-}
-
-.headline-body span {
-    color: #777;
-    font-size: 14px;
-}
-
-.headline-body p {
-    color: #666;
-    line-height: 1.8;
-    font-size: 14px;       /* tambah untuk konsistensi */
-}
-
-.headline-body a {
-    display: inline-block;
-    margin-top: 20px;
-    color: #0D631B;
-    font-weight: 600;
-    font-size: 14px;       /* tambah */
-}
-
-/* =====================================
-   BERITA KECIL
-====================================== */
-
-.small-news{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
-    margin-top: 25px;
-    align-items: stretch;
-}
-
-.small-card{
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-
     display: flex;
     flex-direction: column;
-    height: 100%;
-    transition: .3s;
+    height: 670px
 }
 
-.small-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+.announcement h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #222;
 }
 
-.small-body{
-    padding: 20px;
+.announcement h3 i {
+    color: #222;
+}
+
+.announcement-list {
     display: flex;
     flex-direction: column;
+    gap: 16px;
     flex: 1;
 }
 
-.small-body span {
-    font-size: 13px;
-    color: #777;
+.announce {
+    position: relative;
+    padding-left: 16px;
+    border-left: 4px solid #D62828;
+    border-radius: 2px;
 }
 
-.small-body h3{
-    font-size: 20px;
-    margin: 12px 0;
+.announce.announce-agenda {
+    border-left-color: #2F8F3A;
+}
+
+.announce.announce-pengumuman {
+    border-left-color: #D62828;
+}
+
+.announce.announce-agenda .announce-type {
+    background: #2F8F3A;
+    color: #ffffff;
+}
+
+.announce.announce-pengumuman .announce-type {
+    background: #D62828;
+    color: #fff;
+}
+
+.announce .announce-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 12px;
+    letter-spacing: .5px;
+    margin-bottom: 6px;
+}
+
+.announce h4 {
+    font-size: 15px;
+    font-weight: 500;
     color: #222;
     line-height: 1.5;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin-bottom: 4px;
 }
 
-.small-body p{
-    color: #666;
-    line-height: 1.7;
+.announce small {
+    font-size: 12px;
+    color: #888;
+}
+
+.btn-announcement {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #D2D2D2;
+    border-radius: 10px;
+    color: #333;
     font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+}
 
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.btn-announcement:hover {
+    background: #386641;
+    color: #fff;
+}
 
-    margin-top: auto;
+.btn-announcement i {
+    margin-right: 6px;
 }
 
 /* =====================================
    BUTTON "LIHAT SEMUA BERITA"
 ====================================== */
 
-.btn-news {
-    display: block;
-    margin-top: 25px;
-    background: #0D631B;
-    color: white;
-    text-align: center;
-    padding: 12px;          /* dari 16px → 12px */
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;        /* tambah */
-    transition: .3s;
+.btn-news{
+
+    display:block;
+
+    margin-top:25px;
+
+    background:#0D631B;
+
+    color:white;
+
+    text-align:center;
+
+    padding:16px;
+
+    border-radius:8px;
+
+    font-weight:600;
+    
+    font-size: 14px;
 }
 
 .btn-news:hover {
     background: #1a7a2a;
     transform: translateY(-2px);
-}
-
-/* =====================================
-   SIDEBAR PENGUMUMAN
-====================================== */
-
-.right-news {
-    position: sticky;
-    top: 90px;
-    height: max-content;
-}
-
-.announcement-box {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.05);
-}
-
-.announcement-header{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;              /* jarak ikon dengan tulisan */
-    margin-bottom: 25px;
-}
-
-.announcement-header h2 {
-    font-size: 28px;        /* dari 26px → 20px */
-    color: #222;
-}
-
-.announcement-header i {
-    font-size: 24px;        /* dari 26px → 24px */
-    color: #222;            /* diubah menjadi hitam, seperti index */
-}
-
-.announcement-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.announcement-card {
-    background: #f8f8f8;
-    border-radius: 14px;
-    padding: 18px;
-    border-left: 5px solid #2F8F3A; /* default, akan di-override class */
-    transition: .3s;
-}
-
-.announcement-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0,0,0,.08);
-}
-
-/* Agenda → hijau */
-.announcement-card.announce-agenda {
-    border-left-color: #2F8F3A;
-}
-
-/* Pengumuman → merah */
-.announcement-card.announce-pengumuman {
-    border-left-color: #D62828;
-}
-
-/* Warna tag */
-.announcement-card.announce-agenda .tag {
-    background: #2F8F3A;
-    color: #fff;
-}
-
-.announcement-card.announce-pengumuman .tag {
-    background: #D62828;
-    color: #fff;
-}
-
-.announcement-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.tag {
-    font-size: 10px;
-    padding: 4px 10px;      /* sedikit kurangi padding */
-    border-radius: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-}
-
-.announcement-top small {
-    color: #888;
-    font-size: 12px;
-}
-
-.announcement-card h4 {
-    font-size: 15px;        /* dari 16px → 15px */
-    margin-bottom: 8px;     /* dari 10px → 8px */
-    color: #222;
-}
-
-.announcement-card p {
-    color: #666;
-    line-height: 1.8;
-    font-size: 13px;        /* dari 14px → 13px (konsisten) */
 }
 
 /* =====================================
@@ -393,7 +302,7 @@ header{
 
 .info-title {
     text-align: center;
-    font-size: 28px;        /* dari 34px → 28px */
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 25px;
     margin-top:-70px;
@@ -624,16 +533,16 @@ CONTENT
 
 
 /*=====================================
-HEADLINE
+HEADLINE INI
 ======================================*/
-
-.headline-card{
-
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid #d9d9d9;
-
+.headline-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* agar menyesuaikan ruang */
 }
 
 .headline-card img{
@@ -644,41 +553,37 @@ HEADLINE
 
 }
 
-.headline-body{
-
-    padding:28px;
-
+.headline-body {
+    padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.headline-body span{
-
-    color:#777;
-    font-size:14px;
-
+.headline-body span {
+    color: #777;
+    font-size: 14px;
 }
 
-.headline-body h2{
-
-    font-size:24px;
-    line-height:1.4;
-    margin:15px 0;
-
+.headline-body h2 {
+    font-size: 24px;
+    line-height: 1.4;
+    margin: 15px 0;
 }
 
-.headline-body p{
-
-    color:#666;
-    line-height:1.8;
-
+.headline-body p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 14px;
+    flex: 1;
 }
 
-.headline-body a{
-
-    display:inline-block;
-    margin-top:20px;
-    color:#0D631B;
-    font-weight:600;
-
+.headline-body a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #0D631B;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .headline-link{
@@ -720,7 +625,6 @@ BERITA KECIL
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:22px;
-    margin-top:25px;
 
 }
 
@@ -798,30 +702,6 @@ BERITA KECIL
 
 .small-card:hover h3{
     color: #0D631B;
-}
-
-/*=====================================
-BUTTON
-======================================*/
-
-.btn-news{
-
-    display:block;
-
-    margin-top:25px;
-
-    background:#0D631B;
-
-    color:white;
-
-    text-align:center;
-
-    padding:16px;
-
-    border-radius:8px;
-
-    font-weight:600;
-
 }
 
 /*=====================================
@@ -1007,6 +887,68 @@ SIDEBAR PENGUMUMAN
 .btn-green:hover{
 
     background:#245f2d;
+
+}
+
+/* =====================================
+   PAGINATION (sama dengan layanan)
+====================================== */
+
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:18px 0 10px;
+
+}
+
+.pagination button{
+
+    width:32px;
+
+    height:32px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#e6e6e6;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:14px;
+
+}
+
+.pagination button:hover{
+
+    background:#2E7D32;
+
+    color:#fff;
+
+}
+
+.pagination button.active{
+
+    background:#2E7D32;
+
+    color:#fff;
+
+}
+
+.pagination button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
 
 }
 

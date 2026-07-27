@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalender Agenda & Pengumuman - Desa Katemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pengumuman.css') }}" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" />
+                <h2>Desa Katemas</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.profilDesa') }}">Profil Desa</a></li>
+                <li><a href="{{ url_for('main.layanan') }}">Layanan</a></li>
+                <li><a href="{{ url_for('main.berita') }}" class="active">Berita & Informasi</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== JUDUL HALAMAN ===== -->
+<section class="page-title">
+    <div class="container">
+        <h1>Pengumuman dan Agenda Desa Katemas</h1>
+        <p>Lihat pengumuman resmi serta agenda kegiatan yang akan dilaksanakan di Desa.</p>
+    </div>
+</section>
+
+<!-- ===== CONTENT ===== -->
+<section class="calendar-content">
+    <div class="container">
+        <div class="calendar-wrapper">
+
+            <!-- KALENDER UTAMA -->
+            <section class="calendar-main">
+                <div class="calendar-toolbar">
+                    <div class="toolbar-left">
+                        <div class="nav-group">
+                            <button id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+                            <span id="currentMonthYear">Januari 2026</span>
+                            <button id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="toolbar-right">
+                        <div class="legend">
+                            <span class="legend-item">
+                                <span class="legend-dot agenda"></span> Agenda
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-dot pengumuman"></span> Pengumuman
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Header hari akan dibuat oleh JavaScript -->
+                </div>
+            </section>
+
+        </div>
+
+        <!-- DAFTAR SEMUA EVENT -->
+        <section class="all-events">
+            <h2>Semua Agenda &amp; Pengumuman</h2>
+            <div class="events-list" id="allEventsList">
+                {% for item in announcements|sort(attribute='created_at', reverse=True) %}
+                <div class="event-row {% if item.type and item.type.lower() == 'agenda' %}event-row-agenda{% else %}event-row-pengumuman{% endif %}">
+                    <div class="event-row-date">
+                        {% if item.event_date %}
+                        <span class="row-day">{{ item.event_date.strftime('%d') }}</span>
+                        <span class="row-month">{{ item.event_date.strftime('%b %Y') }}</span>
+                        {% else %}
+                        <span class="row-day">--</span>
+                        <span class="row-month">Tanpa tanggal</span>
+                        {% endif %}
+                    </div>
+                    <div class="event-row-body">
+                        <h4>{{ item.title }}</h4>
+                        <p>{{ item.description or 'Tidak ada deskripsi.' }}</p>
+                        <div class="event-row-meta">
+                            <span class="badge">{{ item.type or 'Pengumuman' }}</span>
+                            {% if item.location %}
+                            <span><i class="fa-solid fa-location-dot"></i> {{ item.location }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h3>Desa Katemas</h3>
+                <p>Ragas Kidul, Desa Katemas, Kecamatan Kembangbahu, Kabupaten Lamongan, Provinsi Jawa Timur, 62282.</p>
+            </div>
+            <div>
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li>Kepala Desa Katemas</li>
+                    <li>Sekretaris Desa</li>
+                    <li>E-mail</li>
+                    <li>031-4567890</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Layanan</h4>
+                <ul>
+                    <li>E-Surat</li>
+                    <li>Aduan Warga</li>
+                    <li>Data Transparansi</li>
+                    <li>Bursa Kerja Desa</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Jam Operasional</h4>
+                <ul>
+                    <li>Senin - Kamis : 08.00 - 15.00</li>
+                    <li>Jumat : 08.00 - 11.30</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
+
+<!-- ===== JAVASCRIPT KALENDER ===== -->
+<script>
+const eventsData = [
+    {% for item in announcements if item.event_date %}
+    {
+        date: "{{ item.event_date.strftime('%Y-%m-%d') }}",
+        title: "{{ item.title }}",
+        type: "{{ item.type or 'Pengumuman' }}",
+        location: "{{ item.location or '' }}",
+        description: "{{ item.description or '' }}"
+    },
+    {% endfor %}
+];
+
+const eventsByDate = {};
+eventsData.forEach(e => {
+    if (!eventsByDate[e.date]) eventsByDate[e.date] = [];
+    eventsByDate[e.date].push(e);
+});
+
+const grid = document.getElementById('calendarGrid');
+const monthLabel = document.getElementById('currentMonthYear');
+const prevBtn = document.getElementById('prevMonth');
+const nextBtn = document.getElementById('nextMonth');
+
+let currentDate = new Date();
+let selectedDate = new Date();
+
+const monthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const dayNames = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+
+function formatDateStr(d) {
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function renderCalendar(year, month) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+    const today = new Date();
+    const todayStr = formatDateStr(today);
+    const selectedStr = formatDateStr(selectedDate);
+
+    const label = monthNames[month] + ' ' + year;
+    monthLabel.textContent = label;
+
+    // Buat ulang grid dari awal (perbaiki bug refresh)
+    grid.innerHTML = '';
+
+    // Buat header hari baru
+    dayNames.forEach(day => {
+        const h = document.createElement('div');
+        h.className = 'day-header';
+        h.textContent = day;
+        grid.appendChild(h);
+    });
+
+    // Empty cells sebelum hari pertama
+    for (let i = 0; i < firstDay; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell empty';
+        grid.appendChild(cell);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+        const isToday = dateStr === todayStr;
+        const isSelected = dateStr === selectedStr;
+        const events = eventsByDate[dateStr] || [];
+
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        if (isToday) cell.classList.add('today');
+        if (isSelected) cell.classList.add('selected');
+        cell.dataset.date = dateStr;
+
+        const num = document.createElement('span');
+        num.className = 'day-number';
+        num.textContent = d;
+        cell.appendChild(num);
+
+        // Tampilkan event sebagai PILL (oval) dengan ukuran seragam
+        if (events.length > 0) {
+            const pillContainer = document.createElement('div');
+            pillContainer.className = 'event-pills';
+            // Tampilkan maksimal 2 event
+            const maxShow = 2;
+            const showEvents = events.slice(0, maxShow);
+            const remaining = events.length - maxShow;
+            showEvents.forEach(e => {
+                const pill = document.createElement('span');
+                const isAgenda = e.type && e.type.toLowerCase() === 'agenda';
+                pill.className = `event-pill ${isAgenda ? 'agenda' : 'pengumuman'}`;
+                pill.textContent = e.title;
+                pill.title = e.title; // tooltip lengkap
+                pillContainer.appendChild(pill);
+            });
+            if (remaining > 0) {
+                const more = document.createElement('span');
+                more.className = 'event-pill';
+                more.style.background = '#888';
+                more.textContent = `+${remaining}`;
+                more.title = `+${remaining} kegiatan lainnya`;
+                pillContainer.appendChild(more);
+            }
+            cell.appendChild(pillContainer);
+        }
+
+        cell.addEventListener('click', function() {
+            selectedDate = new Date(dateStr);
+            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            showEventsForDate(dateStr);
+        });
+
+        grid.appendChild(cell);
+    }
+
+    showEventsForDate(selectedStr);
+}
+
+function showEventsForDate(dateStr) {
+    const events = eventsByDate[dateStr] || [];
+    const existing = document.querySelector('.day-events-list');
+    if (existing) existing.remove();
+
+    const container = document.createElement('div');
+    container.className = 'day-events-list';
+    const dateObj = new Date(dateStr);
+    const display = dateObj.getDate() + ' ' + monthNames[dateObj.getMonth()] + ' ' + dateObj.getFullYear();
+
+    if (events.length === 0) {
+        container.innerHTML = `<p class="no-event">Tidak ada kegiatan pada ${display}.</p>`;
+    } else {
+        let html = `<h4>📅 Kegiatan pada ${display}</h4>`;
+        events.forEach(e => {
+            const cls = (e.type && e.type.toLowerCase() === 'agenda') ? 'event-agenda' : 'event-pengumuman';
+            html += `
+                <div class="day-event-item ${cls}">
+                    <span class="day-event-dot"></span>
+                    <div>
+                        <strong>${e.title}</strong>
+                        <small>${e.type || 'Pengumuman'} ${e.location ? '• ' + e.location : ''}</small>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+    grid.parentNode.insertBefore(container, grid.nextSibling);
+}
+
+function goToMonth(delta) {
+    currentDate.setMonth(currentDate.getMonth() + delta);
+    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+}
+
+prevBtn.addEventListener('click', () => goToMonth(-1));
+nextBtn.addEventListener('click', () => goToMonth(1));
+
+// Render awal
+renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+</script>
+
+</body>
+</html>
