@@ -1,5 +1,9 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from models import Infographics, News, Announcement
+from werkzeug.utils import secure_filename
+from datetime import datetime
+import os
+
 
 admin_bp = Blueprint(
     "admin_bp",
@@ -125,7 +129,68 @@ def indexAdmin():
         pekerjaan_list=pekerjaan_list
     )
 
+# ==========================
+# HALAMAN FORM TAMBAH BERITA
+# ==========================
+@admin_bp.route("/berita/tambah")
+def tambah_berita():
+    return render_template("tambah_berita.html")
+
+# ==========================
+# SIMPAN BERITA
+# ==========================
+@admin_bp.route("/berita/simpan", methods=["POST"])
+def simpan_berita():
+
+    judul = request.form.get("judul")
+    slug = request.form.get("slug")
+    ringkasan = request.form.get("ringkasan")
+    content = request.form.get("content")
+    tanggal = request.form.get("tanggal")
+    status = request.form.get("status")
+
+    thumbnail = request.files.get("thumbnail")
+
+    nama_file = None
+
+    if thumbnail:
+        nama_file = secure_filename(thumbnail.filename)
+
+        folder = os.path.join(
+            admin_bp.root_path,
+            "../static/uploads/news"
+        )
+
+        os.makedirs(folder, exist_ok=True)
+
+        thumbnail.save(
+            os.path.join(folder, nama_file)
+        )
+
+    berita = News(
+        title=judul,
+        slug=slug,
+        summary=ringkasan,
+        content=content,
+        thumbnail=nama_file,
+        publish_date=datetime.strptime(
+            tanggal,
+            "%Y-%m-%d"
+        ),
+        status=status
+    )
+
+    db.session.add(berita)
+    db.session.commit()
+
+    flash("Berita berhasil ditambahkan.")
+
+    return redirect(url_for("admin_bp.indexAdmin"))
+
+
 @admin_bp.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('main.index'))
+
+

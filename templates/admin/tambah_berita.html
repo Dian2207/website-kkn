@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Tambah Berita</title>
+
+<link rel="stylesheet"
+href="{{ url_for('admin_bp.static',
+filename='css/tambah_berita.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+</head>
+
+<body>
+<div class="admin-wrapper">
+
+        <!-- ===== TOP NAVBAR ===== -->
+        <header class="admin-navbar">
+            <div class="container">
+                <div class="navbar-left">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                        <span>Desa Katemas</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="notification">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge"></span>
+                    </div>
+                    <div class="admin-profile" id="adminProfile">
+                        <div class="profile-info">
+                            <span class="name">Admin Desa</span>
+                            <span class="role">Administrator</span>
+                        </div>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-user"></i> Profil
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-gear"></i> Pengaturan
+                            </a>
+                            <hr />
+                            <a href="{{ url_for('main.index') }}" class="dropdown-item logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+<form
+class="news-form"
+method="POST"
+action="{{ url_for('admin_bp.simpan_berita') }}"
+enctype="multipart/form-data">
+
+<div class="content">
+
+<div class="left">
+
+<div class="card">
+
+<label>Judul Berita</label>
+
+<input
+type="text"
+name="judul"
+placeholder="Masukkan judul berita..."
+required>
+
+<label>Slug</label>
+
+<input
+type="text"
+name="slug">
+
+<label>Tanggal Publikasi</label>
+
+<input
+type="date"
+name="tanggal">
+
+<label>Ringkasan Berita</label>
+
+<textarea
+name="ringkasan"
+rows="4"></textarea>
+
+</div>
+
+<div class="card">
+
+<label>Isi Berita</label>
+
+<textarea
+name="content"
+rows="18"></textarea>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="card">
+
+<h4>Gambar Utama</h4>
+
+<input
+type="file"
+name="thumbnail"
+accept=".jpg,.jpeg,.png">
+
+</div>
+
+<div class="card">
+
+<h4>Status</h4>
+
+<label>
+
+<input
+type="radio"
+name="status"
+value="draft"
+checked>
+
+Draft
+
+</label>
+
+<label>
+
+<input
+type="radio"
+name="status"
+value="publish">
+
+Publikasikan
+
+</label>
+
+</div>
+
+<button
+class="btn-save"
+type="submit">
+
+Simpan Berita
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</body>
+
+</html>
