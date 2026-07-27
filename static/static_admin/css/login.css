@@ -1,0 +1,300 @@
+/* ===========================
+   RESET & GLOBAL
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+    color: #1a1c1c;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===========================
+   BACKGROUND BLOBS (hijau)
+=========================== */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 0.3s ease-out;
+}
+.bg-blob-1 {
+    width: 500px;
+    height: 500px;
+    background: #88d982;
+    top: -20%;
+    right: -20%;
+}
+.bg-blob-2 {
+    width: 450px;
+    height: 450px;
+    background: #2e7d32;
+    bottom: -20%;
+    left: -20%;
+}
+
+/* ===========================
+   BRAND (Logo & Judul)
+=========================== */
+.brand {
+    text-align: center;
+    margin-top: 0;       /* hilangkan margin atas */
+    margin-bottom: 24px;
+}
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    background: #2e7d32;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(46, 125, 50, 0.30);
+    margin-bottom: 12px;
+}
+.brand-icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+.brand h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0D631B;
+    margin: 0;
+}
+.brand p {
+    font-size: 14px;
+    color: #40493D;
+    margin-top: 2px;
+}
+
+/* ===========================
+   LOGIN CARD
+=========================== */
+.login-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 24px;
+    border: 1px solid #bfcaba;
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.06);
+}
+.login-card h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1c1c;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ===========================
+   FLASH ALERT
+=========================== */
+.alert {
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.alert-danger {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+.alert-success {
+    background: #e8f5e9;
+    color: #1B5E20;
+    border-left: 4px solid #1B5E20;
+}
+
+/* ===========================
+   FORM
+=========================== */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1c1c;
+}
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.forgot-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0D631B;
+    text-decoration: none;
+}
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Input dengan icon */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-wrapper input {
+    width: 100%;
+    height: 48px;
+    padding: 0 44px 0 44px;
+    background: #f9f9f9;
+    border: 2px solid #bfcaba;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    color: #1a1c1c;
+}
+.input-wrapper input:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.15);
+    background: #ffffff;
+    outline: none;
+}
+.input-wrapper input::placeholder {
+    color: #aaa;
+}
+.input-wrapper > i {
+    position: absolute;
+    left: 14px;
+    color: #888;
+}
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding: 4px;
+}
+.toggle-password:hover {
+    color: #386641;
+}
+
+/* ===========================
+   FORM ACTIONS (Tombol)
+=========================== */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+}
+.btn-login, .btn-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+.btn-login {
+    background: #2e7d32;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+.btn-login:hover {
+    background: #1b6d24;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(46, 125, 50, 0.30);
+}
+.btn-home {
+    background: transparent;
+    color: #40493D;
+    border: 2px solid #bfcaba;
+}
+.btn-home:hover {
+    background: #f0f0f0;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.login-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-bottom: 20px;
+}
+.login-footer p {
+    font-size: 12px;
+    color: #707a6c;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 480px) {
+    .login-wrapper {
+        max-width: 100%;
+    }
+    .login-card {
+        padding: 20px 16px;
+    }
+    .brand h1 {
+        font-size: 22px;
+    }
+    .brand-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .brand-icon img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-height: 700px) {
+    body {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+}

@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash
-from models import Infographics, News, Announcement
+from models import Infographics, News, Announcement, User
 from sqlalchemy import or_, and_
 from datetime import datetime, timedelta
-from werkzeug.utils import secure_filename
+from functools import wraps
+from werkzeug.security import check_password_hash
 import os
 
 admin_bp = Blueprint(
@@ -13,7 +14,55 @@ admin_bp = Blueprint(
     template_folder="../templates/admin",
 )
 
+# -------- Decorator untuk proteksi route --------
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            flash('Silakan login terlebih dahulu!', 'danger')
+            return redirect(url_for('admin_bp.login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@admin_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if 'user_id' in session:
+        return redirect(url_for('admin_bp.indexAdmin'))
+
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+
+        if not username or not password:
+            flash('Username dan password wajib diisi!', 'danger')
+            return render_template('login.html')
+
+        # Cari user berdasarkan username atau email
+        user = User.query.filter(
+            (User.username == username) | (User.email == username)
+        ).first()
+
+        if user and check_password_hash(user.password_hash, password):
+            session['user_id'] = user.id
+            session['username'] = user.username
+            session['role'] = user.role
+
+            flash('Login berhasil! Selamat datang Admin.', 'success')
+            return redirect(url_for('admin_bp.indexAdmin'))
+        else:
+            flash('Username atau password salah!', 'danger')
+
+    return render_template('login.html')
+
+@admin_bp.route('/logout')
+def logout():
+    session.clear()
+    flash('Anda telah logout.', 'success')
+    return redirect(url_for('admin_bp.login'))
+
+# ===== DASHBOARD ADMIN (diproteksi) =====
 @admin_bp.route("/")
+@login_required
 def indexAdmin():
     # --- Ambil parameter filter dari URL ---
     search_news = request.args.get('search_news', '')
@@ -262,11 +311,3 @@ def simpan_berita():
     flash("Berita berhasil ditambahkan.")
 
     return redirect(url_for("admin_bp.indexAdmin"))
-
-
-@admin_bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('main.index'))
-
-
