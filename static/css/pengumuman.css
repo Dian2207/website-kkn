@@ -1,0 +1,536 @@
+/* ===========================
+   RESET & GLOBAL
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    background: #f9f9f9;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+a { text-decoration: none; }
+ul { list-style: none; }
+
+/* ===========================
+   NAVBAR
+=========================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #386641;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+.navbar {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+.logo h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.nav-menu li { list-style: none; }
+.nav-menu a {
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+    padding: 4px 0;
+}
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #FFD54F;
+}
+
+/* ===========================
+   JUDUL HALAMAN
+=========================== */
+.page-title {
+    margin-top: 90px;
+    padding: 30px 0 20px;
+}
+.page-title h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #0D631B;
+    font-weight: 700;
+}
+.page-title > .container > p {
+    text-align: center;
+    color: #666;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    font-size: 16px;
+}
+.page-title p {
+    font-size: 16px;
+}
+
+/* ===========================
+   CALENDAR WRAPPER (tanpa sidebar)
+=========================== */
+.calendar-content {
+    padding-bottom: 60px;
+}
+.calendar-wrapper {
+    display: block;
+}
+
+/* ===========================
+   KALENDER UTAMA
+=========================== */
+.calendar-main {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #e5e5e5;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,.05);
+}
+
+.calendar-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    gap: 12px;
+    position: relative;
+}
+.toolbar-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-group button {
+    border: none;
+    background: none;
+    padding: 4px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+    transition: .2s;
+}
+.nav-group button:hover {
+    color: #0D631B;
+}
+.nav-group span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    min-width: 140px;
+    text-align: center;
+}
+
+.toolbar-right {
+    position: absolute;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.legend {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.legend-dot.agenda { background: #2F8F3A; }
+.legend-dot.pengumuman { background: #D62828; }
+
+/* ===========================
+   GRID KALENDER
+=========================== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.day-header {
+    padding: 10px 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #888;
+    background: #f9f9f9;
+    border-bottom: 1px solid #e5e5e5;
+}
+.calendar-cell {
+    min-height: 100px;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    cursor: pointer;
+    transition: .15s;
+    display: flex;
+    flex-direction: column;
+}
+.calendar-cell:nth-child(7n) { border-right: none; }
+.calendar-cell:hover { background: #f5faf5; }
+.calendar-cell.empty {
+    background: #fafafa;
+    cursor: default;
+}
+.calendar-cell.today {
+    background: #f0faf0;
+}
+.calendar-cell.selected {
+    background: #e3f0e3;
+    outline: 2px solid #0D631B;
+    outline-offset: -2px;
+}
+.calendar-cell .day-number {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.calendar-cell.today .day-number {
+    font-weight: 700;
+    color: #1B5E20;
+}
+
+/* Event pills - ukuran seragam, ellipsis jika panjang */
+.calendar-cell .event-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+.calendar-cell .event-pill {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: .2s;
+    line-height: 1.6;
+    color: #fff;
+    text-align: center;
+    max-width: 100%;
+}
+.calendar-cell .event-pill:hover {
+    opacity: 0.85;
+    transform: scale(1.02);
+}
+.calendar-cell .event-pill.agenda {
+    background: #2F8F3A;
+}
+.calendar-cell .event-pill.pengumuman {
+    background: #D62828;
+}
+
+/* Day events list (di bawah grid) */
+.day-events-list {
+    padding: 16px 20px;
+    border-top: 1px solid #e5e5e5;
+}
+.day-events-list h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #333;
+}
+.day-events-list .no-event {
+    font-family: 'Poppins', sans-serif;
+    color: #999;
+    font-size: 14px;
+}
+.day-event-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+.day-event-item:last-child { border-bottom: none; }
+.day-event-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.day-event-item.event-agenda .day-event-dot { background: #2F8F3A; }
+.day-event-item.event-pengumuman .day-event-dot { background: #D62828; }
+.day-event-item strong {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+}
+.day-event-item small {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #888;
+    display: block;
+}
+
+/* ===========================
+   ALL EVENTS (di bawah)
+=========================== */
+.all-events {
+    margin-top: 40px;
+}
+.all-events h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    color: #0D631B;
+    margin-bottom: 20px;
+}
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.event-row {
+    display: flex;
+    gap: 20px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 22px;
+    border-left: 5px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    transition: .2s;
+}
+.event-row:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    transform: translateY(-2px);
+}
+.event-row-agenda { border-left-color: #2F8F3A; }
+.event-row-pengumuman { border-left-color: #D62828; }
+
+.event-row-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+    padding-right: 16px;
+    border-right: 1px solid #eee;
+}
+.event-row-date .row-day {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #222;
+    line-height: 1;
+}
+.event-row-date .row-month {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #888;
+}
+.event-row-body {
+    flex: 1;
+}
+.event-row-body h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+.event-row-body p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+.event-row-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+.event-row-meta .badge {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    color: #555;
+    letter-spacing: .3px;
+}
+.event-row-agenda .badge {
+    background: #2F8F3A;
+    color: #fff;
+}
+.event-row-pengumuman .badge {
+    background: #D62828;
+    color: #fff;
+}
+.event-row-meta span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #888;
+}
+.event-row-meta i {
+    margin-right: 4px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+    background: #2f2f2f;
+    color: #fff;
+    margin-top: 60px;
+    padding: 60px 0 20px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 5px;
+    padding-bottom: 35px;
+}
+.footer-grid h3 { color: #32b44a; font-size: 20px; font-weight: 700; margin-bottom: 18px; }
+.footer-grid h4 { font-size: 16px; font-weight: 600; margin-bottom: 18px; color: #fff; }
+.footer-grid p { font-size: 12px; color: #cfcfcf; line-height: 1.9; max-width: 280px; }
+.footer-grid li {
+    list-style: none;
+    font-size: 12px;
+    color: #cfcfcf;
+    margin-bottom: 10px;
+    line-height: 1.8;
+}
+.footer-grid li:hover { color: #fff; cursor: pointer; }
+.copyright {
+    border-top: 1px solid rgba(255,255,255,.08);
+    text-align: center;
+    padding: 5px 5px;
+    font-size: 10px;
+    color: #9c9c9c;
+    background: #2f2f2f;
+    width: 100%;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+    }
+    .nav-menu {
+        margin-top: 12px;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .page-title {
+        margin-top: 120px;
+    }
+    .page-title h1 {
+        font-size: 28px;
+    }
+    .calendar-toolbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 16px;
+    }
+    .toolbar-right {
+        position: static;
+        margin-top: 8px;
+        justify-content: center;
+    }
+    .calendar-cell {
+        min-height: 60px;
+        padding: 4px;
+    }
+    .calendar-cell .day-number { font-size: 12px; }
+    .calendar-cell .event-pill { font-size: 8px; padding: 1px 4px; }
+    .event-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .event-row-date {
+        flex-direction: row;
+        gap: 12px;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+        padding-right: 0;
+    }
+    .event-row-date .row-day { font-size: 20px; }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .nav-group span {
+        font-size: 16px;
+        min-width: 100px;
+    }
+}
+@media (max-width: 480px) {
+    .page-title h1 {
+        font-size: 24px;
+    }
+    .calendar-cell { min-height: 50px; }
+    .calendar-cell .day-number { font-size: 11px; }
+    .day-header { font-size: 11px; padding: 6px 0; }
+    .legend {
+        font-size: 11px;
+        gap: 10px;
+    }
+}

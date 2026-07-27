@@ -67,6 +67,18 @@ def detailBerita(id):
     return render_template("user/detail_berita.html", news=news_item)
 
 # ==========================
+# PENGUMUMAN & AGENDA (Kalender)
+# ==========================
+@main.route("/pengumuman")
+def pengumuman():
+    announcements = (
+        Announcement.query
+        .order_by(Announcement.created_at.desc())
+        .all()
+    )
+    return render_template("user/pengumuman.html", announcements=announcements)
+
+# ==========================
 # PENDUDUK
 # ==========================
 @main.route("/penduduk")
