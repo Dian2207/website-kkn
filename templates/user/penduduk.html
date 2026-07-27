@@ -109,7 +109,8 @@
                 </table>
             </div>
             <div class="job-chart">
-                <img src="{{ url_for('static', filename='image/grafik-pekerjaan.png') }}" alt="Grafik Pekerjaan" />
+                <h2>Statistik Pekerjaan</h2>
+                <canvas id="jobChart"></canvas>
             </div>
         </div>
     </div>
@@ -206,6 +207,133 @@ new Chart(ctx,{
         }
     }
 });
+
+// ===============================
+// GRAFIK PEKERJAAN
+// ===============================
+
+const jobCtx = document.getElementById("jobChart");
+
+new Chart(jobCtx,{
+
+    type:'bar',
+
+    data:{
+
+        labels:[
+            'Petani',
+            'Lain-lain',
+            'Wiraswasta',
+            'Buruh',
+            'Pedagang',
+            'PNS'
+        ],
+
+        datasets:[{
+
+            data:[
+
+                {{ infographic.petani_perkebunan if infographic else 0 }},
+
+                {{
+                    (
+                        (infographic.pelajar_mahasiswa if infographic else 0) +
+                        (infographic.peternak if infographic else 0) +
+                        (infographic.karyawan if infographic else 0) +
+                        (infographic.guru if infographic else 0) +
+                        ((infographic.bidan if infographic else 0) + (infographic.perawat if infographic else 0))
+                    )
+                }},
+
+                {{ infographic.wiraswasta if infographic else 0 }},
+
+                {{ infographic.buruh_pabrik if infographic else 0 }},
+
+                {{ infographic.pedagang if infographic else 0 }},
+
+                {{ infographic.pns if infographic else 0 }}
+
+            ],
+
+            backgroundColor:'#66A93F',
+            borderRadius:0,
+            barPercentage:0.55,
+            categoryPercentage:0.65
+
+        }]
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+
+            legend:{
+                display:false
+            },
+
+            datalabels:{
+
+                anchor:'end',
+
+                align:'end',
+
+                color:'#333',
+
+                font:{
+                    size:11,
+                    weight:'500'
+                },
+
+                formatter:(value)=>value
+
+            }
+
+        },
+
+        scales:{
+
+            y:{
+
+    beginAtZero:true,
+
+    suggestedMax:1100,
+
+    grid:{
+        color:'#dddddd'
+    },
+
+    ticks:{
+        stepSize:100,
+        color:'#555'
+    }
+
+},
+
+            x:{
+
+                grid:{
+                    display:false
+                },
+
+                ticks:{
+                    color:'#333',
+                    font:{
+                        size:12
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
 </script>
 </body>
 </html>
