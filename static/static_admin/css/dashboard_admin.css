@@ -1,4 +1,11 @@
 /* ===========================
+   GLOBAL FONT
+=========================== */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===========================
    RESET & GLOBAL
 =========================== */
 * {
@@ -18,61 +25,75 @@ body {
 }
 
 /* ===========================
-   TOP NAVBAR
+   TOP NAVBAR (sama dengan navbar publik)
 =========================== */
 .admin-navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    background: #386641;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    z-index: 1000;
+    height: 50px;
+}
+.admin-navbar .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 32px;
-    height: 64px;
-    background: #F7FBF0;
-    border-bottom: 1px solid #BFCABA;
-    flex-wrap: wrap;
-    gap: 12px;
 }
+
 .navbar-left .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #386641;
+    gap: 12px;
 }
-.navbar-left .logo i {
+.navbar-left .logo img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+.navbar-left .logo span {
+    color: #fff;
     font-size: 20px;
+    font-weight: 700;
 }
+
 .navbar-center {
     flex: 1;
-    max-width: 500px;
+    max-width: 300px;
+    margin: 0 20px;
 }
 .search-box {
     display: flex;
     align-items: center;
-    background: #E5EADF;
+    background: rgba(255,255,255,0.15);
     border-radius: 9999px;
-    padding: 4px 16px;
+    padding: 4px 14px;
+    height: 34px;
 }
 .search-box i {
-    color: #40493D;
-    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
 }
 .search-box input {
     border: none;
     background: transparent;
-    padding: 8px 12px;
+    padding: 4px 8px;
     width: 100%;
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
-    color: #222;
+    color: #fff;
 }
 .search-box input::placeholder {
-    color: #6B7280;
+    color: rgba(255,255,255,0.6);
 }
+
 .navbar-right {
     display: flex;
     align-items: center;
@@ -80,16 +101,16 @@ body {
 }
 .notification {
     position: relative;
-    padding: 8px;
+    padding: 4px;
 }
 .notification i {
     font-size: 20px;
-    color: #0D631B;
+    color: rgba(255,255,255,0.8);
 }
 .notification .badge {
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0;
+    right: 0;
     width: 8px;
     height: 8px;
     background: #BA1A1A;
@@ -99,8 +120,10 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding-left: 24px;
-    border-left: 1px solid #BFCABA;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    cursor: pointer;
 }
 .admin-profile .profile-info {
     display: flex;
@@ -110,40 +133,99 @@ body {
 .admin-profile .profile-info .name {
     font-size: 14px;
     font-weight: 500;
-    color: #181D17;
+    color: #fff;
 }
 .admin-profile .profile-info .role {
     font-size: 12px;
-    color: #40493D;
+    color: rgba(255,255,255,0.7);
 }
 .admin-profile .avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #386641;
+    background: rgba(255,255,255,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #386641;
+    border: 2px solid rgba(255,255,255,0.3);
 }
 .admin-profile .avatar i {
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
 }
 .admin-profile .fa-chevron-down {
     font-size: 12px;
-    color: #40493D;
+    color: rgba(255,255,255,0.7);
+    transition: transform 0.3s ease;
+}
+.admin-profile .fa-chevron-down.active {
+    transform: rotate(180deg);
+}
+
+/* ===========================
+   DROPDOWN MENU
+=========================== */
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border: 1px solid #e5e5e5;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.25s ease;
+    z-index: 999;
+}
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .2s;
+}
+.dropdown-item:hover {
+    background: #f5f5f5;
+}
+.dropdown-item i {
+    width: 18px;
+    font-size: 16px;
+    color: #666;
+}
+.dropdown-item.logout {
+    color: #BA1A1A;
+}
+.dropdown-item.logout i {
+    color: #BA1A1A;
+}
+.dropdown-menu hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 6px 12px;
 }
 
 /* ===========================
    MAIN CONTENT
 =========================== */
 .admin-content {
-    max-width: 1400px;
-    width: 95%;
+    padding-top: 70px; /* jarak dari fixed navbar */
+}
+.admin-content .container {
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 0 40px;
-    flex: 1;
 }
 
 /* ===== GREETING ===== */
@@ -219,7 +301,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 .section-header h2 {
     font-size: 20px;
@@ -230,12 +312,12 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
+    padding: 8px 24px;
     background: #2E7D32;
     color: #fff;
     border: none;
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: .2s;
@@ -251,13 +333,14 @@ body {
 .data-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    padding: 0 0 35px 0;
 }
 .data-group h4,
 .data-right h4 {
     font-size: 14px;
     font-weight: 700;
     color: #1A1C1C;
+    margin-bottom: 14px;
 }
 .chart-bar {
     display: flex;
@@ -406,7 +489,7 @@ body {
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: .2s;
@@ -432,6 +515,7 @@ body {
     border-radius: 8px;
     padding: 4px 16px;
     border: 1px solid #E2E8F0;
+    height: 34px;
 }
 .filter-search i {
     color: #40493D;
@@ -451,6 +535,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
+    height: 34px;
     background: #F1F5EB;
     border-radius: 8px;
     border: 1px solid #E2E8F0;
@@ -462,14 +547,6 @@ body {
 .filter-select i {
     color: #40493D;
     font-size: 12px;
-}
-.filter-btn {
-    padding: 10px 12px;
-    background: #F1F5EB;
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #40493D;
 }
 
 /* Table */
@@ -572,7 +649,6 @@ body {
     font-weight: 600;
     color: #40493D;
     transition: .2s;
-    font-family: 'Poppins', sans-serif;
 }
 .pagination button:hover {
     background: #e5e5e5;
@@ -626,15 +702,19 @@ body {
 }
 @media (max-width: 768px) {
     .admin-navbar {
-        padding: 0 16px;
         height: auto;
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding: 12px 0;
+    }
+    .admin-navbar .container {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 8px;
     }
     .navbar-center {
         order: 3;
         flex: 1 1 100%;
         max-width: 100%;
+        margin: 0;
     }
     .navbar-right .admin-profile .profile-info {
         display: none;
@@ -657,10 +737,6 @@ body {
     .table-footer {
         flex-direction: column;
         align-items: center;
-    }
-    .admin-content {
-        width: 100%;
-        padding: 12px;
     }
     .data-section,
     .manage-section {

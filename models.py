@@ -1,45 +1,45 @@
 from extensions import db
 
+from extensions import db
+
+# ---------- INFOGRAPHICS ----------
 class Infographics(db.Model):
     __tablename__ = "infographics"
 
     id = db.Column(db.Integer, primary_key=True)
-
-    # ======================
-    # DEMOGRAFI
-    # ======================
-
-    total_population = db.Column(db.Integer)
-    total_family = db.Column(db.Integer)
-
-    male = db.Column(db.Integer)
-    female = db.Column(db.Integer)
-
-    # ======================
-    # PENDIDIKAN
-    # ======================
-
-    belum_sekolah = db.Column(db.Integer)
-    tamat_sd = db.Column(db.Integer)
-    tamat_smp = db.Column(db.Integer)
-    tamat_slta = db.Column(db.Integer)
-    sarjana_s1 = db.Column(db.Integer)
-
-    # ======================
-    # PEKERJAAN
-    # ======================
-
-    petani_perkebunan = db.Column(db.Integer)
-    wiraswasta = db.Column(db.Integer)
-    buruh_pabrik = db.Column(db.Integer)
-    pns = db.Column(db.Integer)
-    pelajar_mahasiswa = db.Column(db.Integer)
-    pedagang = db.Column(db.Integer)
-    peternak = db.Column(db.Integer)
-    karyawan = db.Column(db.Integer)
-    guru = db.Column(db.Integer)
-    bidan = db.Column(db.Integer)
-    perawat = db.Column(db.Integer)
+    total_population = db.Column(db.Integer, default=0)
+    total_family = db.Column(db.Integer, default=0)
+    male = db.Column(db.Integer, default=0)
+    female = db.Column(db.Integer, default=0)
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    
+    # Pendidikan
+    belum_sekolah = db.Column(db.Integer, default=0)
+    belum_tamat_sd = db.Column(db.Integer, default=0)
+    tamat_sd = db.Column(db.Integer, default=0)
+    tamat_smp = db.Column(db.Integer, default=0)
+    tamat_slta = db.Column(db.Integer, default=0)
+    diploma_i_ii_iii = db.Column(db.Integer, default=0)
+    sarjana_s1 = db.Column(db.Integer, default=0)
+    diploma_iv_strata_i = db.Column(db.Integer, default=0)
+    strata_ii = db.Column(db.Integer, default=0)
+    strata_iii = db.Column(db.Integer, default=0)
+    
+    # Pekerjaan
+    belum_tidak_bekerja = db.Column(db.Integer, default=0)
+    mengurus_rumah_tangga = db.Column(db.Integer, default=0)
+    pelajar_mahasiswa = db.Column(db.Integer, default=0)
+    pensiunan = db.Column(db.Integer, default=0)
+    pns = db.Column(db.Integer, default=0)
+    wiraswasta = db.Column(db.Integer, default=0)
+    petani_perkebunan = db.Column(db.Integer, default=0)
+    peternak = db.Column(db.Integer, default=0)
+    karyawan = db.Column(db.Integer, default=0)
+    buruh_pabrik = db.Column(db.Integer, default=0)
+    guru = db.Column(db.Integer, default=0)
+    bidan = db.Column(db.Integer, default=0)
+    perawat = db.Column(db.Integer, default=0)
+    pedagang = db.Column(db.Integer, default=0)
 
 # ---------- NEWS ----------
 class News(db.Model):

@@ -13,376 +13,349 @@
 
         <!-- ===== TOP NAVBAR ===== -->
         <header class="admin-navbar">
-            <div class="navbar-left">
-                <div class="logo">
-                    <i class="fa-solid fa-tree"></i>
-                    <span>Desa Katemas</span>
-                </div>
-            </div>
-            <div class="navbar-center">
-                <div class="search-box">
-                    <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Cari..." />
-                </div>
-            </div>
-            <div class="navbar-right">
-                <div class="notification">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge"></span>
-                </div>
-                <div class="admin-profile">
-                    <div class="profile-info">
-                        <span class="name">Admin Desa</span>
-                        <span class="role">Administrator</span>
+            <div class="container">
+                <div class="navbar-left">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                        <span>Desa Katemas</span>
                     </div>
-                    <div class="avatar">
-                        <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="navbar-center">
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" placeholder="Cari..." />
                     </div>
-                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="navbar-right">
+                    <div class="notification">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge"></span>
+                    </div>
+                    <div class="admin-profile" id="adminProfile">
+                        <div class="profile-info">
+                            <span class="name">Admin Desa</span>
+                            <span class="role">Administrator</span>
+                        </div>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-user"></i> Profil
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-gear"></i> Pengaturan
+                            </a>
+                            <hr />
+                            <a href="{{ url_for('main.index') }}" class="dropdown-item logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- ===== MAIN CONTENT ===== -->
         <main class="admin-content">
+            <div class="container">
 
-            <!-- ===== GREETING ===== -->
-            <section class="greeting">
-                <h1>Selamat Datang Admin!</h1>
-                <p>Selamat datang kembali, berikut adalah perkembangan terkini Desa Katemas.</p>
-            </section>
+                <section class="greeting">
+                    <h1>Selamat Datang Admin!</h1>
+                    <p>Selamat datang kembali, berikut adalah perkembangan terkini Desa Katemas.</p>
+                </section>
 
-            <!-- ===== STATISTICS CARDS ===== -->
-            <section class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon green">
-                        <i class="fa-regular fa-newspaper"></i>
+                <!-- ===== STATISTICS CARDS ===== -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-regular fa-newspaper"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Berita</span>
+                            <span class="stat-value">{{ total_news }}</span>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <span class="stat-label">Total Berita</span>
-                        <span class="stat-value">24</span>
+                    <div class="stat-card">
+                        <div class="stat-icon pink">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Pengumuman</span>
+                            <span class="stat-value">12</span>
+                        </div>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon pink">
-                        <i class="fa-regular fa-bullhorn"></i>
+                    <div class="stat-card">
+                        <div class="stat-icon light-green">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Penduduk</span>
+                            <span class="stat-value">2.003</span>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <span class="stat-label">Total Pengumuman</span>
-                        <span class="stat-value">12</span>
+                    <div class="stat-card">
+                        <div class="stat-icon dark-green">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Kepala Keluarga</span>
+                            <span class="stat-value">570</span>
+                        </div>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon light-green">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-                    <div class="stat-info">
-                        <span class="stat-label">Total Penduduk</span>
-                        <span class="stat-value">2.003</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon dark-green">
-                        <i class="fa-solid fa-people-group"></i>
-                    </div>
-                    <div class="stat-info">
-                        <span class="stat-label">Kepala Keluarga</span>
-                        <span class="stat-value">570</span>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- ===== DATA PENDUDUK ===== -->
-            <section class="data-section">
-                <div class="section-header">
-                    <h2>Data Penduduk</h2>
-                    <button class="btn-edit">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                        Edit Data
-                    </button>
-                </div>
-                <div class="data-body">
-                    <!-- Kiri: Jenis Kelamin + Pendidikan -->
-                    <div class="data-left">
-                        <!-- Jenis Kelamin -->
-                        <div class="data-group">
-                            <h4>Berdasarkan Jenis Kelamin</h4>
-                            <div class="chart-bar">
-                                <div class="bar-item">
-                                    <div class="bar-label">
-                                        <span class="dot green"></span>
-                                        <span>Laki-laki</span>
-                                        <span class="bar-value">1.002 Jiwa</span>
+                <!-- ===== DATA PENDUDUK ===== -->
+                <section class="data-section">
+                    <div class="section-header">
+                        <h2>Data Penduduk</h2>
+                        <button class="btn-edit">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            Edit Data
+                        </button>
+                    </div>
+                    <div class="data-body">
+                        <!-- Kiri: Jenis Kelamin + Pendidikan -->
+                        <div class="data-left">
+                            <!-- Jenis Kelamin -->
+                            <div class="data-group">
+                                <h4>Berdasarkan Jenis Kelamin</h4>
+                                <div class="chart-bar">
+                                    {% for item in gender_data %}
+                                    <div class="bar-item">
+                                        <div class="bar-label">
+                                            <span class="dot {% if loop.first %}green{% else %}orange{% endif %}"></span>
+                                            <span>{{ item.label }}</span>
+                                            <span class="bar-value">{{ item.count }} Jiwa ({{ item.value }}%)</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            <div class="bar-fill {% if loop.first %}green{% else %}orange{% endif %}" 
+                                                style="width: {{ item.value }}%;">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="bar-track">
-                                        <div class="bar-fill green" style="width: 50%;"></div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
-                                <div class="bar-item">
-                                    <div class="bar-label">
-                                        <span class="dot orange"></span>
-                                        <span>Perempuan</span>
-                                        <span class="bar-value">1.001 Jiwa</span>
+                            </div>
+
+                            <!-- Pendidikan -->
+                            <div class="data-group">
+                                <h4>Berdasarkan Pendidikan</h4>
+                                <div class="chart-bar">
+                                    {% for item in pendidikan_data %}
+                                    <div class="bar-item">
+                                        <div class="bar-label">
+                                            <span>{{ item.label }}</span>
+                                            <span class="bar-value">{{ item.count }} Jiwa ({{ item.value }}%)</span>
+                                        </div>
+                                        <div class="bar-track">
+                                            {% set color_class = 'green' if loop.first else 'orange' if loop.index == 2 else 'blue' if loop.index == 3 else 'gray' %}
+                                            <div class="bar-fill {{ color_class }}" style="width: {{ item.value }}%;"></div>
+                                        </div>
                                     </div>
-                                    <div class="bar-track">
-                                        <div class="bar-fill orange" style="width: 49.9%;"></div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pendidikan -->
-                        <div class="data-group">
-                            <h4>Berdasarkan Pendidikan</h4>
-                            <div class="chart-bar">
-                                <div class="bar-item">
-                                    <div class="bar-label">
-                                        <span>Tamat SD</span>
-                                        <span class="bar-value">42,7%</span>
-                                    </div>
-                                    <div class="bar-track">
-                                        <div class="bar-fill green" style="width: 42.7%;"></div>
-                                    </div>
-                                </div>
-                                <div class="bar-item">
-                                    <div class="bar-label">
-                                        <span>Tamat SMP</span>
-                                        <span class="bar-value">27,8%</span>
-                                    </div>
-                                    <div class="bar-track">
-                                        <div class="bar-fill orange" style="width: 27.8%;"></div>
-                                    </div>
-                                </div>
-                                <div class="bar-item">
-                                    <div class="bar-label">
-                                        <span>Tamat SMA</span>
-                                        <span class="bar-value">12,7%</span>
-                                    </div>
-                                    <div class="bar-track">
-                                        <div class="bar-fill blue" style="width: 12.7%;"></div>
-                                    </div>
-                                </div>
+                        <!-- Kanan: Pekerjaan (Pie Chart) -->
+                        <div class="pie-chart">
+                            {% for item in pekerjaan_list %}
+                            <div class="pie-segment" 
+                                style="--p: {{ item.value }}%; --c: {{ item.color }}; --offset: {{ item.offset }}%;"></div>
+                            {% endfor %}
+                            <div class="pie-center">
+                                <span class="total">{{ total_population }}</span>
+                                <span class="total-label">TOTAL</span>
                             </div>
+                        </div>
+                        <div class="pie-legend">
+                            {% for item in pekerjaan_list %}
+                            <div class="legend-item">
+                                <span class="dot" style="background: {{ item.color }};"></span>
+                                <span>{{ item.label }} <span class="legend-percent">({{ item.value }}%)</span></span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== KELOLA BERITA ===== -->
+                <section class="manage-section">
+                    <div class="section-header">
+                        <h2>Kelola Berita</h2>
+                        <button class="btn-add">
+                            <i class="fa-solid fa-plus"></i>
+                            Tambah Berita
+                        </button>
+                    </div>
+
+                    <!-- Filter -->
+                    <div class="filter-bar">
+                        <div class="filter-search">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" placeholder="Cari judul berita..." />
+                        </div>
+                        <div class="filter-select">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Semua Tanggal</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-select">
+                            <i class="fa-regular fa-circle"></i>
+                            <span>Status: Semua</span>
+                            <i class="fa-solid fa-chevron-down"></i>
                         </div>
                     </div>
 
-                    <!-- Kanan: Pekerjaan (Pie Chart) -->
-                    <div class="data-right">
-                        <h4>Berdasarkan Pekerjaan</h4>
-                        <div class="pie-chart-wrapper">
-                            <div class="pie-chart">
-                                <div class="pie-segment" style="--p: 35%; --c: #2E7D32;"></div>
-                                <div class="pie-segment" style="--p: 25%; --c: #835400; --offset: 35%;"></div>
-                                <div class="pie-segment" style="--p: 15%; --c: #0054A7; --offset: 60%;"></div>
-                                <div class="pie-segment" style="--p: 25%; --c: #E2E2E2; --offset: 75%;"></div>
-                                <div class="pie-center">
-                                    <span class="total">3.4k</span>
-                                    <span class="total-label">TOTAL</span>
-                                </div>
-                            </div>
-                            <div class="pie-legend">
-                                <div class="legend-item">
-                                    <span class="dot green"></span>
-                                    <span>Sektor Agraris <span class="legend-percent">(35%)</span></span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="dot orange"></span>
-                                    <span>Sektor Jasa <span class="legend-percent">(25%)</span></span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="dot blue"></span>
-                                    <span>Pemerintahan <span class="legend-percent">(15%)</span></span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="dot gray"></span>
-                                    <span>Lainnya <span class="legend-percent">(25%)</span></span>
-                                </div>
-                            </div>
+                    <!-- Table -->
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Slug</th>
+                                    <th>Content</th>
+                                    <th>Thumbnail</th>
+                                    <th>Tanggal Publish</th>
+                                    <th>Tanggal Dibuat</th>
+                                    <th>Tanggal Update</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Menyusuri Potensi Ekonomi Desa...</td>
+                                    <td>mahasiswa-kkn-upn-veteran-jatim...</td>
+                                    <td>Mahasiswa Kuliah Kerja Nyata (KKN) Universitas Pem...</td>
+                                    <td>thumbnail news 3.jpg</td>
+                                    <td>2026-07-20</td>
+                                    <td>2026-07-19 16:09:59</td>
+                                    <td>2026-07-19 16:09:59</td>
+                                    <td class="actions">
+                                        <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
+                                        <button class="action-view"><i class="fa-regular fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <!-- Tambahkan baris lainnya dari database nanti -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination">
+                            <button class="page-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-num active">1</button>
+                            <button class="page-num">2</button>
+                            <button class="page-num">3</button>
+                            <span class="page-dots">...</span>
+                            <button class="page-num">12</button>
+                            <button class="page-next"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- ===== KELOLA BERITA ===== -->
-            <section class="manage-section">
-                <div class="section-header">
-                    <h2>Kelola Berita</h2>
-                    <button class="btn-add">
-                        <i class="fa-solid fa-plus"></i>
-                        Tambah Berita
-                    </button>
-                </div>
-
-                <!-- Filter -->
-                <div class="filter-bar">
-                    <div class="filter-search">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" placeholder="Cari judul berita..." />
+                <!-- ===== KELOLA PENGUMUMAN ===== -->
+                <section class="manage-section">
+                    <div class="section-header">
+                        <h2>Kelola Pengumuman dan Agenda</h2>
+                        <button class="btn-add">
+                            <i class="fa-solid fa-plus"></i>
+                            Tambah Pengumuman dan Agenda
+                        </button>
                     </div>
-                    <div class="filter-select">
-                        <i class="fa-regular fa-calendar"></i>
-                        <span>Semua Tanggal</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="filter-select">
-                        <i class="fa-regular fa-circle"></i>
-                        <span>Status: Semua</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <button class="filter-btn">
-                        <i class="fa-solid fa-sliders"></i>
-                    </button>
-                </div>
 
-                <!-- Table -->
-                <div class="table-wrapper">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Judul</th>
-                                <th>Slug</th>
-                                <th>Content</th>
-                                <th>Thumbnail</th>
-                                <th>Tanggal Publish</th>
-                                <th>Tanggal Dibuat</th>
-                                <th>Tanggal Update</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Menyusuri Potensi Ekonomi Desa...</td>
-                                <td>mahasiswa-kkn-upn-veteran-jatim...</td>
-                                <td>Mahasiswa Kuliah Kerja Nyata (KKN) Universitas Pem...</td>
-                                <td>thumbnail news 3.jpg</td>
-                                <td>2026-07-20</td>
-                                <td>2026-07-19 16:09:59</td>
-                                <td>2026-07-19 16:09:59</td>
-                                <td class="actions">
-                                    <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    <button class="action-view"><i class="fa-regular fa-eye"></i></button>
-                                </td>
-                            </tr>
-                            <!-- Tambahkan baris lainnya dari database nanti -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pagination -->
-                <div class="table-footer">
-                    <div class="pagination">
-                        <button class="page-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="page-num active">1</button>
-                        <button class="page-num">2</button>
-                        <button class="page-num">3</button>
-                        <span class="page-dots">...</span>
-                        <button class="page-num">12</button>
-                        <button class="page-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    <!-- Filter -->
+                    <div class="filter-bar">
+                        <div class="filter-search">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" placeholder="Cari judul pengumuman atau agenda..." />
+                        </div>
+                        <div class="filter-select">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Semua Tanggal</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-select">
+                            <i class="fa-regular fa-circle"></i>
+                            <span>Status: Semua</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- ===== KELOLA PENGUMUMAN ===== -->
-            <section class="manage-section">
-                <div class="section-header">
-                    <h2>Kelola Pengumuman dan Agenda</h2>
-                    <button class="btn-add">
-                        <i class="fa-solid fa-plus"></i>
-                        Tambah Pengumuman dan Agenda
-                    </button>
-                </div>
-
-                <!-- Filter -->
-                <div class="filter-bar">
-                    <div class="filter-search">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" placeholder="Cari judul..." />
+                    <!-- Table -->
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Tipe</th>
+                                    <th>Deskripsi</th>
+                                    <th>Tanggal Pelaksanaan</th>
+                                    <th>Lokasi</th>
+                                    <th>Tanggal Dibuat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Senam Sehat</td>
+                                    <td><span class="badge-agenda">Agenda</span></td>
+                                    <td>Kegiatan senam bersama warga Dusun Kalitemu</td>
+                                    <td>2026-07-24 07:00</td>
+                                    <td>Masjid Darussalam</td>
+                                    <td>2026-07-23</td>
+                                    <td class="actions">
+                                        <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sosialisasi Website Desa Katemas</td>
+                                    <td><span class="badge-agenda">Agenda</span></td>
+                                    <td>Peluncuran dan sosialisasi website Desa Katemas</td>
+                                    <td>2026-08-01</td>
+                                    <td>Balai Desa</td>
+                                    <td>2026-07-23</td>
+                                    <td class="actions">
+                                        <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Dokumentasi Kerja Bakti Desa Katemas</td>
+                                    <td><span class="badge-pengumuman">Pengumuman</span></td>
+                                    <td>Publikasi dokumentasi kegiatan kerja bakti Dusun Kalitemu</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>2026-07-23</td>
+                                    <td class="actions">
+                                        <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="filter-select">
-                        <i class="fa-regular fa-calendar"></i>
-                        <span>Semua Tanggal</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <div class="filter-select">
-                        <i class="fa-regular fa-circle"></i>
-                        <span>Status: Semua</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
-                    <button class="filter-btn">
-                        <i class="fa-solid fa-sliders"></i>
-                    </button>
-                </div>
 
-                <!-- Table -->
-                <div class="table-wrapper">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Judul</th>
-                                <th>Tipe</th>
-                                <th>Deskripsi</th>
-                                <th>Tanggal Pelaksanaan</th>
-                                <th>Lokasi</th>
-                                <th>Tanggal Dibuat</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Senam Sehat</td>
-                                <td><span class="badge-agenda">Agenda</span></td>
-                                <td>Kegiatan senam bersama warga Dusun Kalitemu</td>
-                                <td>2026-07-24 07:00</td>
-                                <td>Masjid Darussalam</td>
-                                <td>2026-07-23</td>
-                                <td class="actions">
-                                    <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sosialisasi Website Desa Katemas</td>
-                                <td><span class="badge-agenda">Agenda</span></td>
-                                <td>Peluncuran dan sosialisasi website Desa Katemas</td>
-                                <td>2026-08-01</td>
-                                <td>Balai Desa</td>
-                                <td>2026-07-23</td>
-                                <td class="actions">
-                                    <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dokumentasi Kerja Bakti Desa Katemas</td>
-                                <td><span class="badge-pengumuman">Pengumuman</span></td>
-                                <td>Publikasi dokumentasi kegiatan kerja bakti Dusun Kalitemu</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>2026-07-23</td>
-                                <td class="actions">
-                                    <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pagination -->
-                <div class="table-footer">
-                    <div class="pagination">
-                        <button class="page-prev"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="page-num active">1</button>
-                        <button class="page-num">2</button>
-                        <button class="page-num">3</button>
-                        <span class="page-dots">...</span>
-                        <button class="page-num">12</button>
-                        <button class="page-next"><i class="fa-solid fa-chevron-right"></i></button>
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination">
+                            <button class="page-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-num active">1</button>
+                            <button class="page-num">2</button>
+                            <button class="page-num">3</button>
+                            <span class="page-dots">...</span>
+                            <button class="page-num">12</button>
+                            <button class="page-next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
+            </div>
         </main>
 
         <!-- ===== FOOTER ===== -->
