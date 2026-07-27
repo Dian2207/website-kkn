@@ -8,6 +8,6 @@ admin_bp = Blueprint(
     template_folder="../templates/admin",
 )
 
-@admin_bp.route("/dashboard_admin")
+@admin_bp.route("/")
 def indexAdmin():
     return render_template("dashboard_admin.html")
