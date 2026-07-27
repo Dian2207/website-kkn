@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request
 from models import Infographics, News, Announcement
 
 main = Blueprint("main", __name__)
@@ -47,18 +47,31 @@ def layanan():
 # ==========================
 @main.route("/berita")
 def berita():
-    # Ambil semua berita, urutkan dari terbaru
-    all_news = News.query.order_by(News.published_at.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    per_page = 5  # 1 headline + 4 small news per halaman
+
+    # Ambil semua berita dengan pagination
+    news_pagination = News.query.order_by(News.published_at.desc()).paginate(
+        page=page, per_page=per_page, error_out=False
+    )
+    news_list = news_pagination.items
+    total_pages = news_pagination.pages
+    current_page = news_pagination.page
+
+    # Ambil pengumuman (tidak dipaginasi)
     announcements = (
         Announcement.query
         .order_by(Announcement.created_at.desc())
         .limit(5)
         .all()
     )
+
     return render_template(
         "user/berita.html",
-        news=all_news,
-        announcements=announcements
+        news=news_list,
+        announcements=announcements,
+        total_pages=total_pages,
+        current_page=current_page
     )
 
 @main.route("/detail-berita/<int:id>")

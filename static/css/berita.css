@@ -890,6 +890,68 @@ SIDEBAR PENGUMUMAN
 
 }
 
+/* =====================================
+   PAGINATION (sama dengan layanan)
+====================================== */
+
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:18px 0 10px;
+
+}
+
+.pagination button{
+
+    width:32px;
+
+    height:32px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#e6e6e6;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:14px;
+
+}
+
+.pagination button:hover{
+
+    background:#2E7D32;
+
+    color:#fff;
+
+}
+
+.pagination button.active{
+
+    background:#2E7D32;
+
+    color:#fff;
+
+}
+
+.pagination button:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+}
+
 /*=====================================
 INFORMASI LAINNYA
 ======================================*/
