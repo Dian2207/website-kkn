@@ -599,14 +599,14 @@ body {
 /* ===== FOOTER ===== */
 .admin-footer {
     background: #2F3131;
-    padding: 24px;
+    padding: 5px;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,0.10);
     margin-top: 16px;
 }
 .admin-footer p {
     color: #E2E2E2;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 /* ===========================
