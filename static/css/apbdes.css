@@ -1,0 +1,351 @@
+/* ===========================
+RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#ffffff;
+    color:#222;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+/* ===========================
+NAVBAR
+=========================== */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#386641;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+    z-index:1000;
+}
+
+.navbar{
+    height:50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:35px;
+    height:35px;
+}
+
+.logo h2{
+    color:#fff;
+    font-size:20px;
+}
+
+.nav-menu{
+    display:flex;
+    gap:30px;
+}
+
+.nav-menu a{
+    color:#fff;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    color:#FFD54F;
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.apbdes{
+    padding:110px 0 70px;
+}
+
+.section-title{
+    margin-bottom:40px;
+}
+
+.section-title h1{
+    color:#156D2F;
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    width:75%;
+    color:#666;
+    line-height:1.8;
+}
+
+/* ===========================
+LAYOUT
+=========================== */
+
+.apbdes-wrapper{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+}
+
+.apbdes-left h2{
+    color:#156D2F;
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+/* ===========================
+CARD
+=========================== */
+
+.statistik-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.statistik-card{
+    background:#fff;
+    border-radius:15px;
+    border:1px solid #e5e5e5;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.statistik-card:hover{
+    transform:translateY(-5px);
+}
+
+.icon-box{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    background:#B9F5A8;
+    color:#156D2F;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+}
+
+.statistik-card span{
+    display:block;
+    font-size:13px;
+    color:#666;
+}
+
+.statistik-card h3{
+    margin-top:5px;
+    font-size:22px;
+    color:#222;
+}
+
+/* ===========================
+IMAGE
+=========================== */
+
+.apbdes-right{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+
+}
+
+.apbdes-right h2{
+
+    color:#156D2F;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:20px;
+    text-align:center;
+
+}
+
+#apbdesChart{
+
+    width:360px !important;
+    height:360px !important;
+
+}
+
+/* ===========================
+SECTION TITLE
+=========================== */
+
+.section-heading{
+    color:#156D2F;
+    font-size:30px;
+    margin-bottom:25px;
+}
+
+/* ===========================
+TABLE
+=========================== */
+
+.table-section{
+    padding-bottom:60px;
+}
+
+.table-card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+.table-card table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table-card th{
+    background:#156D2F;
+    color:#fff;
+    padding:15px;
+    text-align:center;
+    font-size:14px;
+}
+
+.table-card td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+    font-size:14px;
+}
+
+.table-card tbody tr:hover{
+    background:#f6fff5;
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+footer{
+    background:#2f2f2f;
+    color:#fff;
+    padding:60px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:20px;
+    padding-bottom:30px;
+}
+
+.footer-grid h3{
+    color:#32b44a;
+    margin-bottom:15px;
+}
+
+.footer-grid h4{
+    margin-bottom:15px;
+}
+
+.footer-grid p,
+.footer-grid li{
+    color:#cfcfcf;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.footer-grid li{
+    margin-bottom:8px;
+}
+
+.footer-grid li:hover{
+    color:#fff;
+}
+
+.copyright{
+    background:#2f2f2f;
+    color:#9c9c9c;
+    text-align:center;
+    font-size:10px;
+    padding:8px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+    .apbdes-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .section-title p{
+        width:100%;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .statistik-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-title h1{
+        font-size:28px;
+    }
+
+    .section-heading{
+        font-size:26px;
+    }
+
+    .table-card th,
+    .table-card td{
+        font-size:13px;
+        padding:10px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+}

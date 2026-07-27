@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, abort
-from models import Infographics, News, Announcement
+from models import Infographics, News, Announcement, APBDes
 
 main = Blueprint("main", __name__)
 
@@ -76,4 +76,17 @@ def penduduk():
     return render_template(
         "user/penduduk.html",
         infographic=infographic
+    )
+
+# ==========================
+# APBDES
+# ==========================
+@main.route("/apbdes")
+def apbdes():
+
+    apbdes = APBDes.query.first()
+
+    return render_template(
+        "user/apbdes.html",
+        apbdes=apbdes
     )

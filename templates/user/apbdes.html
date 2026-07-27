@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>APBDes - Desa Katemas</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/apbdes.css') }}">
+
+</head>
+
+<body>
+
+<!-- =========================
+NAVBAR
+========================= -->
+
+<header>
+
+    <div class="container">
+
+        <nav class="navbar">
+
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo">
+
+                <h2>Desa Katemas</h2>
+
+            </div>
+
+            <ul class="nav-menu">
+
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+
+                <li><a href="{{ url_for('main.profilDesa') }}">Profil Desa</a></li>
+
+                <li><a href="{{ url_for('main.layanan') }}">Layanan</a></li>
+
+                <li><a href="{{ url_for('main.berita') }}">Berita & Informasi</a></li>
+
+                <li><a href="{{ url_for('main.apbdes') }}" class="active">APBDes</a></li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<!-- =========================
+HEADER
+========================= -->
+
+<section class="apbdes">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h1>ANGGARAN PENDAPATAN DAN BELANJA DESA</h1>
+
+            <p>
+
+                Informasi APBDes Desa Katemas ditampilkan sebagai bentuk
+                transparansi penggunaan anggaran desa kepada masyarakat.
+
+            </p>
+
+        </div>
+
+        <div class="apbdes-wrapper">
+
+            <div class="apbdes-left">
+
+                <h2>Ringkasan APBDes</h2>
+
+                <div class="statistik-grid">
+
+                    <!-- TOTAL PENDAPATAN -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>TOTAL PENDAPATAN</span>
+
+                            <h3>
+
+                                Rp{{ "{:,.0f}".format(
+
+                                (apbdes.pendapatan_asli_desa or 0)+
+                                (apbdes.pendapatan_transfer or 0)+
+                                (apbdes.pendapatan_lain_lain or 0)
+
+                                ).replace(",",".") }}
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <!-- TOTAL BELANJA -->
+
+                    <div class="statistik-card">
+
+                        <div class="icon-box">
+
+                            <i class="fa-solid fa-money-bill-wave"></i>
+
+                        </div>
+
+                        <div>
+
+                            <span>TOTAL BELANJA</span>
+
+                            <h3>
+
+                                Rp{{ "{:,.0f}".format(
+
+                                (apbdes.belanja_penyelenggaraan_pemerintahan or 0)+
+                                (apbdes.belanja_pelaksanaan_pembangunan or 0)+
+                                (apbdes.belanja_pemberdayaan_masyarakat or 0)+
+                                (apbdes.belanja_penanggulangan_bencana or 0)
+
+                                ).replace(",",".") }}
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="apbdes-right">
+
+    <h2>Diagram APBDes</h2>
+
+    <canvas id="apbdesChart"></canvas>
+
+</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+PENDAPATAN
+========================= -->
+
+<section class="table-section">
+
+    <div class="container">
+
+        <h2 class="section-heading">
+
+            Pendapatan Desa
+
+        </h2>
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Uraian</th>
+
+                        <th>Jumlah</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>1</td>
+
+                        <td>Pendapatan Asli Desa</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.pendapatan_asli_desa or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>2</td>
+
+                        <td>Pendapatan Transfer</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.pendapatan_transfer or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>3</td>
+
+                        <td>Pendapatan Lain-lain</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.pendapatan_lain_lain or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+BELANJA
+========================= -->
+
+<section class="table-section">
+
+    <div class="container">
+
+        <h2 class="section-heading">
+
+            Belanja Desa
+
+        </h2>
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Uraian</th>
+
+                        <th>Jumlah</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>1</td>
+
+                        <td>Belanja Penyelenggaraan Pemerintahan</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.belanja_penyelenggaraan_pemerintahan or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>2</td>
+
+                        <td>Belanja Pelaksanaan Pembangunan</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.belanja_pelaksanaan_pembangunan or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>3</td>
+
+                        <td>Belanja Pemberdayaan Masyarakat</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.belanja_pemberdayaan_masyarakat or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>4</td>
+
+                        <td>Belanja Penanggulangan Bencana</td>
+
+                        <td>
+
+                            Rp{{ "{:,.0f}".format(apbdes.belanja_penanggulangan_bencana or 0).replace(",",".") }}
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-about">
+
+                <h3>Desa Katemas</h3>
+
+                <p>
+
+                    Ragas Kidul, Desa Katemas, Kecamatan Kembangbahu,
+                    Kabupaten Lamongan, Jawa Timur.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h4>Hubungi Kami</h4>
+
+                <ul>
+
+                    <li>Kepala Desa</li>
+
+                    <li>Sekretaris Desa</li>
+
+                    <li>Email Desa</li>
+
+                    <li>031-4567890</li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Layanan</h4>
+
+                <ul>
+
+                    <li>E-Surat</li>
+
+                    <li>Informasi Publik</li>
+
+                    <li>APBDes</li>
+
+                    <li>Berita Desa</li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h4>Jam Operasional</h4>
+
+                <ul>
+
+                    <li>Senin - Kamis : 08.00 - 15.00</li>
+
+                    <li>Jumat : 08.00 - 11.30</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<div class="copyright">
+
+    © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('apbdesChart');
+
+new Chart(ctx,{
+
+    type:'pie',
+
+    data:{
+
+        labels:[
+
+            'Pendapatan',
+            'Belanja'
+
+        ],
+
+        datasets:[{
+
+            data:[
+
+                {{
+                    (apbdes.pendapatan_asli_desa or 0)+
+                    (apbdes.pendapatan_transfer or 0)+
+                    (apbdes.pendapatan_lain_lain or 0)
+                }},
+
+                {{
+                    (apbdes.belanja_penyelenggaraan_pemerintahan or 0)+
+                    (apbdes.belanja_pelaksanaan_pembangunan or 0)+
+                    (apbdes.belanja_pemberdayaan_masyarakat or 0)+
+                    (apbdes.belanja_penanggulangan_bencana or 0)
+                }}
+
+            ],
+
+            backgroundColor:[
+            '#4CAF50',
+            '#F4C542'
+        ],
+
+            borderRadius:6
+
+        }]
+
+    },
+
+    options:{
+
+    responsive:true,
+
+    plugins:{
+
+        legend:{
+            position:'bottom'
+        }
+
+    }
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
