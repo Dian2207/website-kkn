@@ -1,14 +1,45 @@
 from extensions import db
 
-# ---------- INFOGRAPHICS ----------
 class Infographics(db.Model):
     __tablename__ = "infographics"
 
     id = db.Column(db.Integer, primary_key=True)
 
-    total_population = db.Column(db.Integer, nullable=False)
-    total_family = db.Column(db.Integer, nullable=False)
+    # ======================
+    # DEMOGRAFI
+    # ======================
 
+    total_population = db.Column(db.Integer)
+    total_family = db.Column(db.Integer)
+
+    male = db.Column(db.Integer)
+    female = db.Column(db.Integer)
+
+    # ======================
+    # PENDIDIKAN
+    # ======================
+
+    belum_sekolah = db.Column(db.Integer)
+    tamat_sd = db.Column(db.Integer)
+    tamat_smp = db.Column(db.Integer)
+    tamat_slta = db.Column(db.Integer)
+    sarjana_s1 = db.Column(db.Integer)
+
+    # ======================
+    # PEKERJAAN
+    # ======================
+
+    petani_perkebunan = db.Column(db.Integer)
+    wiraswasta = db.Column(db.Integer)
+    buruh_pabrik = db.Column(db.Integer)
+    pns = db.Column(db.Integer)
+    pelajar_mahasiswa = db.Column(db.Integer)
+    pedagang = db.Column(db.Integer)
+    peternak = db.Column(db.Integer)
+    karyawan = db.Column(db.Integer)
+    guru = db.Column(db.Integer)
+    bidan = db.Column(db.Integer)
+    perawat = db.Column(db.Integer)
 
 # ---------- NEWS ----------
 class News(db.Model):
