@@ -223,29 +223,28 @@ def indexAdmin():
         top_5_pekerjaan = sorted_pekerjaan[:5]
         remaining_pekerjaan = sum(v for _, v in sorted_pekerjaan[5:])
         colors = [
-    '#FF9EA7',   # Pink
-    '#72ED8B',   # Hijau
-    '#9B9CF4',   # Ungu
-    '#FFE58C',   # Kuning muda
-    '#FFD35A',   # Kuning
-    '#D9D9D9'    # Lainnya
+    '#2E7D32',  # Hijau
+    '#996000',  # Coklat
+    '#005EB8',  # Biru
+    '#9E9E9E',  # Abu
+    '#D0D0D0',  # Abu muda
 ]
         offset = 0
         for idx, (label, count) in enumerate(top_5_pekerjaan):
             percent = round((count / total_population) * 100, 1) if total_population > 0 else 0
             pekerjaan_list.append({
-                'label': label,
-                'value': percent,
-                'color': colors[idx % len(colors)],
-                'offset': offset
-            })
+    'label': label,
+    'value': percent,
+    'color': colors[idx % len(colors)],
+    'offset': offset
+})
             offset += percent
         if remaining_pekerjaan > 0:
             percent = round((remaining_pekerjaan / total_population) * 100, 1) if total_population > 0 else 0
             pekerjaan_list.append({
                 'label': 'Lainnya',
                 'value': percent,
-                'color': '#CCCCCC',
+                'color': '#E0E0E0',
                 'offset': offset
             })
 
