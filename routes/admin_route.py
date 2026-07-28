@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash
-from models import Infographics, News, Announcement, User
+from models import Infographics, News, Announcement, User, db
 from sqlalchemy import or_, and_
 from datetime import datetime, timedelta
 from functools import wraps
@@ -311,3 +311,68 @@ def simpan_berita():
     flash("Berita berhasil ditambahkan.")
 
     return redirect(url_for("admin_bp.indexAdmin"))
+
+@admin_bp.route('/tambah-pengumuman', methods=['GET'])
+@login_required
+def tambah_pengumuman():
+    return render_template('admin/tambah_pengumuman.html')
+
+@admin_bp.route('/simpan-pengumuman', methods=['POST'])
+@login_required
+def simpan_pengumuman():
+    from datetime import datetime
+    judul = request.form.get('judul')
+    jenis = request.form.get('jenis')
+    lokasi = request.form.get('lokasi')
+    deskripsi = request.form.get('deskripsi')
+    tanggal = request.form.get('tanggal')
+    waktu = request.form.get('waktu')
+    
+    event_date = None
+    if tanggal and waktu:
+        event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
+    
+    pengumuman = Announcement(
+        title=judul,
+        type=jenis,
+        location=lokasi,
+        description=deskripsi,
+        event_date=event_date,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
+    )
+    db.session.add(pengumuman)
+    db.session.commit()
+    flash('Pengumuman berhasil ditambahkan!', 'success')
+    return redirect(url_for('admin_bp.indexAdmin'))
+
+# ===== DETAIL PENGUMUMAN =====
+@admin_bp.route('/pengumuman/detail/<int:id>', methods=['GET'])
+@login_required
+def detail_pengumuman(id):
+    pengumuman = Announcement.query.get_or_404(id)
+    return render_template('admin/detail_pengumuman.html', pengumuman=pengumuman)
+
+# ===== UPDATE PENGUMUMAN =====
+@admin_bp.route('/pengumuman/update/<int:id>', methods=['POST'])
+@login_required
+def update_pengumuman(id):
+    pengumuman = Announcement.query.get_or_404(id)
+    
+    pengumuman.title = request.form.get('judul')
+    pengumuman.type = request.form.get('jenis')
+    pengumuman.location = request.form.get('lokasi')
+    pengumuman.description = request.form.get('deskripsi')
+    
+    tanggal = request.form.get('tanggal')
+    waktu = request.form.get('waktu')
+    
+    if tanggal and waktu:
+        try:
+            pengumuman.event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
+        except ValueError:
+            pass  # biarkan kosong jika format salah
+    
+    db.session.commit()
+    flash('Pengumuman berhasil diperbarui!', 'success')
+    return redirect(url_for('admin_bp.detail_pengumuman', id=pengumuman.id))

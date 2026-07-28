@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Pengumuman - Admin Desa Katemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('admin_bp.static', filename='css/detail_pengumuman.css') }}" />
+</head>
+<body>
+    <div class="admin-wrapper">
+
+        <!-- ===== TOP NAVBAR ===== -->
+        <header class="admin-navbar">
+            <div class="container">
+                <div class="navbar-left">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                        <span>Desa Katemas</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="admin-profile" id="adminProfile">
+                        <div class="profile-info">
+                            <span class="name">Admin Desa</span>
+                            <span class="role">Administrator</span>
+                        </div>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="admin-content">
+            <div class="container">
+
+                <!-- Tombol Kembali -->
+                <div class="page-header">
+                    <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+
+                <!-- FORM DETAIL (UPDATE) -->
+                <form class="detail-form" method="POST" action="{{ url_for('admin_bp.update_pengumuman', id=pengumuman.id) }}">
+
+                    <div class="content">
+
+                        <!-- KOLOM KIRI : Meta & Preview -->
+                        <div class="left-column">
+
+                            <!-- Card Meta -->
+                            <div class="card meta-card">
+                                <div class="meta-item">
+                                    <span class="meta-label">ID Dokumen</span>
+                                    <span class="meta-value">#{{ pengumuman.id }}</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">Tanggal Dibuat</span>
+                                    <span class="meta-value">{{ pengumuman.created_at.strftime('%d %B %Y') if pengumuman.created_at else '-' }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Preview Gambar -->
+                            <div class="card preview-card">
+                                <h4>Preview Gambar</h4>
+                                <div class="preview-image">
+                                    <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Preview" />
+                                </div>
+                            </div>
+
+                            <!-- Tips Card -->
+                            <div class="card tips-card">
+                                <div class="tips-icon">
+                                    <i class="fa-regular fa-lightbulb"></i>
+                                </div>
+                                <div class="tips-content">
+                                    <h4>Tips Publikasi</h4>
+                                    <p>Gunakan judul yang informatif dan jelas. Pastikan lokasi dan waktu sudah sesuai agar memudahkan warga untuk hadir.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- KOLOM KANAN : Detail Informasi -->
+                        <div class="right-column">
+
+                            <div class="card detail-card">
+
+                                <!-- Judul -->
+                                <div class="form-group">
+                                    <label>Judul Pengumuman</label>
+                                    <input type="text" name="judul" value="{{ pengumuman.title }}" />
+                                </div>
+
+                                <!-- Jenis (radio) -->
+                                <div class="form-group">
+                                    <label>Jenis</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="jenis" value="pengumuman" {% if pengumuman.type != 'agenda' %}checked{% endif %} />
+                                            <span>Pengumuman</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="jenis" value="agenda" {% if pengumuman.type == 'agenda' %}checked{% endif %} />
+                                            <span>Agenda</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Lokasi -->
+                                <div class="form-group">
+                                    <label>Lokasi</label>
+                                    <div class="input-icon">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <input type="text" name="lokasi" value="{{ pengumuman.location or '' }}" />
+                                    </div>
+                                </div>
+
+                                <!-- Deskripsi -->
+                                <div class="form-group">
+                                    <label>Deskripsi</label>
+                                    <textarea name="deskripsi" rows="4">{{ pengumuman.description or '' }}</textarea>
+                                </div>
+
+                                <!-- Tanggal & Waktu -->
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Tanggal Pelaksanaan</label>
+                                        <div class="input-icon">
+                                            <i class="fa-regular fa-calendar"></i>
+                                            <input type="date" name="tanggal" value="{{ pengumuman.event_date.strftime('%Y-%m-%d') if pengumuman.event_date else '' }}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Waktu Pelaksanaan</label>
+                                        <div class="input-icon">
+                                            <i class="fa-regular fa-clock"></i>
+                                            <input type="time" name="waktu" value="{{ pengumuman.event_date.strftime('%H:%M') if pengumuman.event_date else '' }}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tombol Aksi -->
+                                <div class="form-actions">
+                                    <button type="submit" class="btn-save">
+                                        <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan
+                                    </button>
+                                    <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-cancel">
+                                        <i class="fa-solid fa-xmark"></i> Batal
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="admin-footer">
+            <p>© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileToggle = document.getElementById('profileToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            if (profileToggle && dropdownMenu) {
+                profileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    this.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function(e) {
+                    const profile = document.getElementById('adminProfile');
+                    if (!profile.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        profileToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

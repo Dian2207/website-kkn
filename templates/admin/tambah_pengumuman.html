@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Pengumuman - Admin Desa Katemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('admin_bp.static', filename='css/tambah_pengumuman.css') }}" />
+</head>
+<body>
+    <div class="admin-wrapper">
+
+        <!-- ===== TOP NAVBAR ===== -->
+        <header class="admin-navbar">
+            <div class="container">
+                <div class="navbar-left">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                        <span>Desa Katemas</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="admin-profile" id="adminProfile">
+                        <div class="profile-info">
+                            <span class="name">Admin Desa</span>
+                            <span class="role">Administrator</span>
+                        </div>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="admin-content">
+            <div class="container">
+
+                <!-- Tombol Kembali -->
+                <div class="page-header">
+                    <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+
+                <form class="detail-form" method="POST" action="{{ url_for('admin_bp.simpan_pengumuman') }}">
+
+                    <div class="content content-full">
+
+                        <div class="card detail-card full-width">
+
+                            <!-- Judul -->
+                            <div class="form-group">
+                                <label>Judul Pengumuman <span style="color:#D62828;">*</span></label>
+                                <input type="text" name="judul" placeholder="Masukkan judul pengumuman..." required />
+                            </div>
+
+                            <!-- Jenis (radio) -->
+                            <div class="form-group">
+                                <label>Jenis</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="jenis" value="pengumuman" checked />
+                                        <span>Pengumuman</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="jenis" value="agenda" />
+                                        <span>Agenda</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Lokasi -->
+                            <div class="form-group">
+                                <label>Lokasi</label>
+                                <div class="input-icon">
+                                    <input type="text" name="lokasi" placeholder="Masukkan lokasi kegiatan..." />
+                                </div>
+                            </div>
+
+                            <!-- Deskripsi -->
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <textarea name="deskripsi" rows="5" placeholder="Masukkan deskripsi pengumuman..."></textarea>
+                            </div>
+
+                            <!-- Tanggal & Waktu -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tanggal Pelaksanaan</label>
+                                    <div class="input-icon">
+                                        <input type="date" name="tanggal" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Waktu Pelaksanaan</label>
+                                    <div class="input-icon">
+                                        <input type="time" name="waktu" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tombol Aksi -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-save">
+                                    Simpan
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="admin-footer">
+            <p>© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Dropdown toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileToggle = document.getElementById('profileToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+
+            if (profileToggle && dropdownMenu) {
+                profileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    this.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function(e) {
+                    const profile = document.getElementById('adminProfile');
+                    if (!profile.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        profileToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
