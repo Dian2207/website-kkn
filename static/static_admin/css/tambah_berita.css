@@ -230,6 +230,14 @@ body {
     color: #1a1c1c;
 }
 
+.card h4 {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #1a1c1c;
+}
+
 .card input[type="text"],
 .card input[type="date"],
 .card textarea {
@@ -272,10 +280,8 @@ body {
 }
 
 /* ===== TOMBOL ===== */
-/* ===== TOMBOL ===== */
 .form-actions {
-    display: flex;
-    justify-content: flex-end;   /* tombol ke kanan */
+    display: block;
     gap: 12px;
     margin-top: 8px;
 }
@@ -293,7 +299,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    flex: 0 0 auto;            /* jangan memenuhi lebar */
+    width: 100%;
 }
 .btn-save {
     background: #0D631B;
@@ -305,17 +311,16 @@ body {
     transform: translateY(-2px);
 }
 
-/* ===== FOOTER ===== */
-.admin-footer {
-    background: #2f2f2f;
-    padding: 5px;
+/* ===== COPYRIGHT ===== */
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.10);
+    padding: 5px 5px;
+    font-size: 10px;
+    color: #9c9c9c;
+    background: #2f2f2f;
+    width: 100%;
     margin-top: 16px;
-}
-.admin-footer p {
-    color: #cfcfcf;
-    font-size: 12px;
 }
 
 /* ===========================
