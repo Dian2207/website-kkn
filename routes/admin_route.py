@@ -259,7 +259,11 @@ def indexAdmin():
 # ==========================
 @admin_bp.route("/edit/data")
 def edit_data():
-    return render_template("edit_data.html")
+    data = Infographics.query.first()
+    return render_template(
+        "admin/edit_data.html",
+        data=data
+    )
 
 # ==========================
 # HALAMAN FORM TAMBAH BERITA

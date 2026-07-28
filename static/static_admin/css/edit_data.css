@@ -9,6 +9,30 @@ body{
 background:#f5f7f4;
 }
 
+/* ===== BACK BUTTON ===== */
+.page-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 0 8px;
+}
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0px 18px;
+    color: #386641;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+}
+.btn-back:hover {
+    color: #e76418;
+}
+.btn-back i {
+    font-size: 14px;
+}
 /* ===========================
    TOP NAVBAR (sama dengan navbar publik)
 =========================== */
@@ -182,13 +206,18 @@ padding-left:90px;
 }
 
 .title h1{
-font-size:38px;
+font-size: 28px;
+font-weight: 600;
 margin-bottom:5px;
+color:#386641;
+text-align:center
 }
 
 .title p{
 color:#666;
 margin-bottom:25px;
+text-align:center;
+font-size: 14px;
 }
 
 .card{
