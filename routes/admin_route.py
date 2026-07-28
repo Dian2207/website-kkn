@@ -331,14 +331,15 @@ def simpan_berita():
     judul = request.form.get("judul")
     slug = request.form.get("slug")
     content = request.form.get("content")
+    tanggal = request.form.get("tanggal")
     status = request.form.get("status")
 
     thumbnail = request.files.get("thumbnail")
 
     nama_file = None
 
-    # Upload Thumbnail
-    if thumbnail and thumbnail.filename != "":
+    if thumbnail and thumbnail.filename:
+
         nama_file = secure_filename(thumbnail.filename)
 
         folder = os.path.join(
@@ -364,9 +365,11 @@ def simpan_berita():
         status=status
     )
 
-    # Jika status Published
     if status == "published":
-        berita.published_at = sekarang
+        if tanggal:
+            berita.published_at = datetime.strptime(tanggal, "%Y-%m-%d")
+        else:
+            berita.published_at = sekarang
     else:
         berita.published_at = None
 

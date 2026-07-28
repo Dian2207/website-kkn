@@ -261,7 +261,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     text-align: center;
     padding: 5px 5px;
-    font-size: 10px;
+    font-size: 5px;
     color: #9c9c9c;
     background: #2f2f2f;
     width: 100%;
@@ -296,4 +296,9 @@ body {
         align-items: flex-start;
         padding-top: 20px;
     }
+}
+
+.login-footer{
+    font-size: 12px;
+    text-align:center;
 }
