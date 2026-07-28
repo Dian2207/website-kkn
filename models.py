@@ -1,3 +1,5 @@
+import datetime
+
 from extensions import db
 
 class User(db.Model):
@@ -56,17 +58,24 @@ class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     title = db.Column(db.String(255), nullable=False)
-    slug = db.Column(db.String(255), nullable=False, unique=True)
+
+    slug = db.Column(db.String(255), nullable=False)
 
     content = db.Column(db.Text, nullable=False)
 
-    thumbnail = db.Column(db.String(255), nullable=True)
+    thumbnail = db.Column(db.String(255))
 
-    published_at = db.Column(db.DateTime, nullable=False)
+    published_at = db.Column(db.DateTime)
 
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(
+        db.DateTime,
+    )
 
-    updated_at = db.Column(db.DateTime)
+    updated_at = db.Column(
+        db.DateTime,
+    )
+
+    status = db.Column(db.String(20))
 
 # ---------- ANNOUNCEMENT ----------
 class Announcement(db.Model):

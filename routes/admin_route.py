@@ -4,6 +4,7 @@ from sqlalchemy import or_, and_
 from datetime import datetime, timedelta
 from functools import wraps
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 import os
 
 admin_bp = Blueprint(
@@ -324,20 +325,20 @@ def tambah_berita():
 # SIMPAN BERITA
 # ==========================
 @admin_bp.route("/berita/simpan", methods=["POST"])
+@login_required
 def simpan_berita():
 
     judul = request.form.get("judul")
     slug = request.form.get("slug")
-    ringkasan = request.form.get("ringkasan")
     content = request.form.get("content")
-    tanggal = request.form.get("tanggal")
     status = request.form.get("status")
 
     thumbnail = request.files.get("thumbnail")
 
     nama_file = None
 
-    if thumbnail:
+    # Upload Thumbnail
+    if thumbnail and thumbnail.filename != "":
         nama_file = secure_filename(thumbnail.filename)
 
         folder = os.path.join(
@@ -351,23 +352,28 @@ def simpan_berita():
             os.path.join(folder, nama_file)
         )
 
+    sekarang = datetime.now()
+
     berita = News(
         title=judul,
         slug=slug,
-        summary=ringkasan,
         content=content,
         thumbnail=nama_file,
-        publish_date=datetime.strptime(
-            tanggal,
-            "%Y-%m-%d"
-        ),
+        created_at=sekarang,
+        updated_at=sekarang,
         status=status
     )
+
+    # Jika status Published
+    if status == "published":
+        berita.published_at = sekarang
+    else:
+        berita.published_at = None
 
     db.session.add(berita)
     db.session.commit()
 
-    flash("Berita berhasil ditambahkan.")
+    flash("Berita berhasil ditambahkan.", "success")
 
     return redirect(url_for("admin_bp.indexAdmin"))
 
