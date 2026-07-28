@@ -522,34 +522,32 @@ body {
 
 
 /* Table */
-.table-wrapper {
-    overflow-x: auto;
+.table-wrapper{
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid #BFCABA;
+    background:#fff;
 }
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    border-radius: 100px;
+.admin-table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    font-size:14px;
 }
-.admin-table thead {
-    background: #F3F3F3;
-    border-radius: 12px;
+.admin-table thead th{
+    background:#F3F3F3;
+    border-top:1px solid #BFCABA;
+    border-bottom:1px solid #BFCABA;
+    padding:12px 16px;
+    text-align:center;
+    font-weight:700;
+    color:#000;
 }
-.admin-table th {
-    padding: 12px 16px;
-    text-align: center;
-    font-weight: 700;
-    color: #000;
-    border: 1px solid #BFCABA;
-    white-space: nowrap;
-}
-.admin-table td {
-    padding: 10px 16px;
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-    font-weight: 400;
-    color: #000;
-    vertical-align: middle;
+.admin-table tbody td{
+    padding:10px 16px;
+    text-align:center;
+    border-bottom:1px solid #E5E5E5;
+    background:#fff;
 }
 .admin-table td.actions {
     display: flex;
@@ -578,7 +576,16 @@ body {
     padding-right: 12px;
     margin-right: 4px;
 }
+.admin-table thead th:first-child{
+    border-left:1px solid #BFCABA;
+    border-top-left-radius:12px;
+    border-bottom-left-radius:12px;
+}
 
+.admin-table thead th:last-child{
+    border-top-right-radius:12px;
+    border-bottom-right-radius:12px;
+}
 .action-edit {
     color: #181D17;
 }
