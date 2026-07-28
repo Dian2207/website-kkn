@@ -322,6 +322,33 @@ def tambah_berita():
     return render_template("tambah_berita.html")
 
 # ==========================
+# HAPUS BERITA
+# ==========================
+@admin_bp.route("/berita/hapus/<int:id>", methods=["POST"])
+@login_required
+def hapus_berita(id):
+
+    berita = News.query.get_or_404(id)
+
+    # Hapus file thumbnail jika ada
+    if berita.thumbnail:
+        file_path = os.path.join(
+            admin_bp.root_path,
+            "../static/uploads/news",
+            berita.thumbnail
+        )
+
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+    db.session.delete(berita)
+    db.session.commit()
+
+    flash("Berita berhasil dihapus.", "success")
+
+    return redirect(url_for("admin_bp.indexAdmin"))
+
+# ==========================
 # SIMPAN BERITA
 # ==========================
 @admin_bp.route("/berita/simpan", methods=["POST"])
@@ -384,6 +411,22 @@ def simpan_berita():
 @login_required
 def tambah_pengumuman():
     return render_template('admin/tambah_pengumuman.html')
+
+# ==========================
+# HAPUS PENGUMUMAN
+# ==========================
+@admin_bp.route("/pengumuman/hapus/<int:id>", methods=["POST"])
+@login_required
+def hapus_pengumuman(id):
+
+    pengumuman = Announcement.query.get_or_404(id)
+
+    db.session.delete(pengumuman)
+    db.session.commit()
+
+    flash("Pengumuman berhasil dihapus.", "success")
+
+    return redirect(url_for("admin_bp.indexAdmin"))
 
 @admin_bp.route('/simpan-pengumuman', methods=['POST'])
 @login_required

@@ -257,10 +257,24 @@
     </div>
 
     <div class="action-item">
-        <button type="button" class="action-delete">
-            <i class="fa-solid fa-trash-can"></i>
-        </button>
-    </div>
+
+<form
+id="deleteForm{{ item.id }}"
+action="{{ url_for('admin_bp.hapus_berita', id=item.id) }}"
+method="POST">
+
+    <button
+        type="button"
+        class="action-delete"
+        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_berita', id=item.id) }}')">
+
+        <i class="fa-solid fa-trash-can"></i>
+
+    </button>
+
+</form>
+
+</div>
 </td>
                                 </tr>
                                 {% else %}
@@ -383,10 +397,17 @@
     </div>
 
     <div class="action-item">
-        <button class="action-delete">
-            <i class="fa-solid fa-trash-can"></i>
-        </button>
-    </div>
+
+<button
+    type="button"
+    class="action-delete"
+    onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')">
+
+    <i class="fa-solid fa-trash-can"></i>
+
+</button>
+
+</div>
 </td>
                                 </tr>
                                 {% else %}
@@ -438,6 +459,41 @@
 
     </div>
 
+    <div class="modal-delete" id="deleteModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h3>Konfirmasi Hapus</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button type="button"
+                    class="btn-cancel"
+                    onclick="closeModal()">
+                Batal
+            </button>
+
+            <form id="deleteForm" method="POST">
+                <button type="submit"
+                        class="btn-delete">
+                    Ya, Hapus
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>
+
     <!-- ===== JAVASCRIPT PAGINATION & DROPDOWN ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -478,6 +534,30 @@
                 });
             });
         });
+
+
+        function openDeleteModal(url){
+
+    document.getElementById("deleteModal").classList.add("show");
+    document.getElementById("deleteForm").action = url;
+
+}
+
+function closeModal(){
+
+    document.getElementById("deleteModal").classList.remove("show");
+
+}
+
+window.onclick = function(e){
+
+    const modal = document.getElementById("deleteModal");
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+}
     </script>
 
 </body>
