@@ -160,9 +160,19 @@ def indexAdmin():
         total_gender = male + female
         if total_gender > 0:
             gender_data = [
-                {'label': 'Laki-laki', 'value': round((male / total_gender) * 100, 1), 'count': male},
-                {'label': 'Perempuan', 'value': round((female / total_gender) * 100, 1), 'count': female}
-            ]
+    {
+        'label': 'Laki-laki',
+        'value': round((male / total_gender) * 100, 1),
+        'count': male,
+        'color': '#72ED8B'
+    },
+    {
+        'label': 'Perempuan',
+        'value': round((female / total_gender) * 100, 1),
+        'count': female,
+        'color': '#FF9EA7'
+    }
+]
 
         pendidikan_fields = {
             'Belum Sekolah': infographic.belum_sekolah or 0,
@@ -212,7 +222,14 @@ def indexAdmin():
         sorted_pekerjaan = sorted(filtered_pekerjaan.items(), key=lambda x: x[1], reverse=True)
         top_5_pekerjaan = sorted_pekerjaan[:5]
         remaining_pekerjaan = sum(v for _, v in sorted_pekerjaan[5:])
-        colors = ['#2E7D32', '#835400', '#0054A7', '#E2A500', '#D62828', '#888888']
+        colors = [
+    '#FF9EA7',   # Pink
+    '#72ED8B',   # Hijau
+    '#9B9CF4',   # Ungu
+    '#FFE58C',   # Kuning muda
+    '#FFD35A',   # Kuning
+    '#D9D9D9'    # Lainnya
+]
         offset = 0
         for idx, (label, count) in enumerate(top_5_pekerjaan):
             percent = round((count / total_population) * 100, 1) if total_population > 0 else 0
@@ -317,9 +334,64 @@ def update_data():
 # ==========================
 # HALAMAN FORM TAMBAH BERITA
 # ==========================
-@admin_bp.route("/berita/tambah")
+@admin_bp.route("/berita/tambah", methods=["GET","POST"])
 def tambah_berita():
-    return render_template("tambah_berita.html")
+
+    if request.method=="POST":
+
+        # simpan berita baru
+
+        ...
+
+    return render_template(
+        "admin/tambah_berita.html",
+        berita=None,
+        edit=False
+    )
+
+@admin_bp.route("/berita/edit/<int:id>", methods=["GET", "POST"])
+def edit_berita(id):
+
+    berita = News.query.get_or_404(id)
+
+    if request.method == "POST":
+
+        berita.title = request.form["title"]
+        berita.slug = request.form["slug"]
+        berita.content = request.form["content"]
+
+        status = request.form.get("status")
+
+        if status == "published":
+            berita.published_at = datetime.now()
+        else:
+            berita.published_at = None
+
+        # upload gambar baru
+        file = request.files.get("thumbnail")
+
+        if file and file.filename != "":
+
+            filename = secure_filename(file.filename)
+
+            file.save(os.path.join(
+                current_app.config["UPLOAD_FOLDER"],
+                filename
+            ))
+
+            berita.thumbnail = filename
+
+        db.session.commit()
+
+        flash("Berita berhasil diperbarui.","success")
+
+        return redirect(url_for("admin_bp.indexAdmin"))
+
+    return render_template(
+        "admin/tambah_berita.html",
+        berita=berita,
+        edit=True
+    )
 
 # ==========================
 # HAPUS BERITA
@@ -428,6 +500,18 @@ def hapus_pengumuman(id):
 
     return redirect(url_for("admin_bp.indexAdmin"))
 
+@admin_bp.route("/pengumuman/edit/<int:id>")
+@login_required
+def edit_pengumuman(id):
+
+    announcement = Announcement.query.get_or_404(id)
+
+    return render_template(
+        "admin/tambah_pengumuman.html",
+        announcement=announcement,
+        edit=True
+    )
+
 @admin_bp.route('/simpan-pengumuman', methods=['POST'])
 @login_required
 def simpan_pengumuman():
@@ -465,25 +549,28 @@ def detail_pengumuman(id):
     return render_template('admin/detail_pengumuman.html', pengumuman=pengumuman)
 
 # ===== UPDATE PENGUMUMAN =====
-@admin_bp.route('/pengumuman/update/<int:id>', methods=['POST'])
+@admin_bp.route("/pengumuman/update/<int:id>", methods=["POST"])
 @login_required
 def update_pengumuman(id):
-    pengumuman = Announcement.query.get_or_404(id)
-    
-    pengumuman.title = request.form.get('judul')
-    pengumuman.type = request.form.get('jenis')
-    pengumuman.location = request.form.get('lokasi')
-    pengumuman.description = request.form.get('deskripsi')
-    
-    tanggal = request.form.get('tanggal')
-    waktu = request.form.get('waktu')
-    
+
+    announcement = Announcement.query.get_or_404(id)
+
+    announcement.title = request.form["title"]
+    announcement.type = request.form["type"]
+    announcement.location = request.form["location"]
+    announcement.description = request.form["description"]
+
+    tanggal = request.form["event_date"]
+    waktu = request.form["event_time"]
+
     if tanggal and waktu:
-        try:
-            pengumuman.event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
-        except ValueError:
-            pass  # biarkan kosong jika format salah
-    
+        announcement.event_date = datetime.strptime(
+            f"{tanggal} {waktu}",
+            "%Y-%m-%d %H:%M"
+        )
+
     db.session.commit()
-    flash('Pengumuman berhasil diperbarui!', 'success')
-    return redirect(url_for('admin_bp.detail_pengumuman', id=pengumuman.id))
+
+    flash("Pengumuman berhasil diperbarui.", "success")
+
+    return redirect(url_for("admin_bp.indexAdmin"))

@@ -176,7 +176,15 @@
                         <h2>Kelola Berita</h2>
                         <a href="{{ url_for('admin_bp.tambah_berita') }}" class="btn-add">
                             <i class="fa-solid fa-plus"></i>
-                                Tambah Berita
+                                {% if edit %}
+
+Edit Berita
+
+{% else %}
+
+Tambah Berita
+
+{% endif %}
                         </a>
                     </div>
 
@@ -249,12 +257,11 @@
                                     </td>
                                     <td class="actions">
     <div class="action-item">
-        <button type="button" class="action-edit">
-        <a href="{{ url_for('admin_bp.tambah_berita') }}" class="action-edit">
-            <i class="fa-solid fa-pen-to-square"></i>
-        </a>
-        </button>
-    </div>
+    <a href="{{ url_for('admin_bp.edit_berita', id=item.id) }}"
+       class="action-edit">
+        <i class="fa-solid fa-pen-to-square"></i>
+    </a>
+</div>
 
     <div class="action-item">
 
@@ -391,21 +398,31 @@ method="POST">
                                     <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</td>
                                     <td class="actions">
     <div class="action-item">
-        <button class="action-edit">
-            <i class="fa-solid fa-pen-to-square"></i>
-        </button>
-    </div>
+    <a
+    href="{{ url_for('admin_bp.edit_pengumuman', id=item.id) }}"
+    class="action-edit">
+
+    <i class="fa-solid fa-pen-to-square"></i>
+
+</a>
+</div>
 
     <div class="action-item">
 
+<form
+action="{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}"
+method="POST"
+onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
+
 <button
-    type="button"
-    class="action-delete"
-    onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')">
+        type="button"
+        class="action-delete"
+        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')">
 
-    <i class="fa-solid fa-trash-can"></i>
+        <i class="fa-solid fa-trash-can"></i>
 
-</button>
+    </button>
+</form>
 
 </div>
 </td>

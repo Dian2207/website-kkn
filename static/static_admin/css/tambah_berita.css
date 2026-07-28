@@ -320,7 +320,7 @@ body {
     color: #9c9c9c;
     background: #2f2f2f;
     width: 100%;
-    margin-top: 16px;
+    margin-top: -25px;
 }
 
 /* ===========================
@@ -351,3 +351,15 @@ body {
         padding-top: 90px;
     }
 }
+
+.preview-image{
+    margin-top:15px;
+}
+
+.preview-image img{
+    width:100%;
+    max-height:220px;
+    object-fit:cover;
+    border-radius:10px;
+    border:1px solid #ddd;
+}   
