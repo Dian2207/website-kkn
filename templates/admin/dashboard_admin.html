@@ -94,8 +94,10 @@
                     <div class="section-header">
                         <h2>Data Penduduk</h2>
                         <button class="btn-edit">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            Edit Data
+                            <a href="{{ url_for('admin_bp.edit_data') }}" class="btn-add">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                                Edit Data
+                            </a>
                         </button>
                     </div>
                     <div class="data-body">
@@ -310,7 +312,7 @@
                         <h2>Kelola Pengumuman dan Agenda</h2>
                         <button class="btn-add">
                             <i class="fa-solid fa-plus"></i>
-                            Tambah Pengumuman dan Agenda
+                            Tambah Pengumuman
                         </button>
                     </div>
 

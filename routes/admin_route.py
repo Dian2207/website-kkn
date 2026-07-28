@@ -257,6 +257,13 @@ def indexAdmin():
 # ==========================
 # HALAMAN FORM TAMBAH BERITA
 # ==========================
+@admin_bp.route("/edit/data")
+def edit_data():
+    return render_template("edit_data.html")
+
+# ==========================
+# HALAMAN FORM TAMBAH BERITA
+# ==========================
 @admin_bp.route("/berita/tambah")
 def tambah_berita():
     return render_template("tambah_berita.html")

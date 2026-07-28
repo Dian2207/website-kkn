@@ -281,7 +281,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 24px;
+    padding: 5px 12px;
     background: #2E7D32;
     color: #fff;
     border: none;
@@ -529,6 +529,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    border-radius: 100px;
 }
 .admin-table thead {
     background: #F3F3F3;
