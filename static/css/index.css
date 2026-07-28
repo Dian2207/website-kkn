@@ -835,8 +835,7 @@ footer{
 /* Copyright */
 
 .copyright{
-
-    border-top:1px solid rgba(255,255,255,.08);
+   border-top:1px solid rgba(255,255,255,.08);
 
     text-align:center;
 
@@ -851,6 +850,7 @@ footer{
     width: 100%
     
 }
+ 
 
 /*====================================
 RESPONSIVE

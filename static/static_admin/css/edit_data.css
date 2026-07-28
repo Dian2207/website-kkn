@@ -351,23 +351,16 @@ border-color:#2f6f3e;
 box-shadow:0 0 5px rgba(47,111,62,.2);
 }
 
-footer{
-
-margin-top:30px;
-
-height:25px;
-
-background:#303030;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-color:white;
-
-font-size:10px;
+/* ===== COPYRIGHT ===== */
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    padding: 5px 5px;
+    font-size: 10px;
+    color: #9c9c9c;
+    background: #2f2f2f;
+    width: 100%;
+    margin-top: 16px;
 }
 
 @media(max-width:900px){
