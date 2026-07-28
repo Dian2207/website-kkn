@@ -63,6 +63,12 @@ rel="stylesheet">
                 </div>
             </div>
         </header>
+        <div class="page-header">
+    <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i>
+        Kembali ke Dashboard
+    </a>
+</div>
 <form
 class="news-form"
 method="POST"
@@ -94,13 +100,6 @@ name="slug">
 <input
 type="date"
 name="tanggal">
-
-<label>Ringkasan Berita</label>
-
-<textarea
-name="ringkasan"
-rows="4"></textarea>
-
 </div>
 
 <div class="card">

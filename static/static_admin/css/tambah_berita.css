@@ -43,6 +43,38 @@ margin-bottom:20px;
     padding-top:10px;
 }
 
+/* ===========================
+   BUTTON BACK
+=========================== */
+
+.page-header{
+    max-width:1200px;
+    margin:auto 10px;
+    display:flex;
+    align-items:center;
+}
+
+.btn-back{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:0px 18px;
+    color:#386641;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.btn-back:hover{
+    background:#2E7D32;
+}
+
+.btn-back i{
+    font-size:14px;
+}
+
 label{
 
 display:block;
@@ -87,9 +119,9 @@ margin-top:10px;
 
 width:100%;
 
-padding:14px;
+padding:5px;
 
-background:#2E7D32;
+background:#386641;
 
 color:#fff;
 
@@ -107,7 +139,7 @@ cursor:pointer;
 
 .btn-save:hover{
 
-background:#256628;
+background:#2E7D32;
 
 }
 
