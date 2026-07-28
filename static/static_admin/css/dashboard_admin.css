@@ -281,7 +281,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 12px;
+    padding: px 12px;
     background: #2E7D32;
     color: #fff;
     border: none;
