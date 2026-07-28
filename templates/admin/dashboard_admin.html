@@ -203,7 +203,6 @@
                                 <input type="hidden" name="search_news" value="{{ search_news }}" />
                                 <input type="hidden" name="filter_date_news" value="{{ filter_date_news }}" />
                                 <input type="hidden" name="page_news" value="1" />
-                                <i class="fa-regular fa-circle"></i>
                                 <select name="filter_status_news" onchange="this.form.submit()" style="border:none; background:transparent; font-family:inherit; font-size:13px; font-weight:600; color:#181D17; cursor:pointer; outline:none;">
                                     <option value="all" {% if filter_status_news == 'all' %}selected{% endif %}>Status: Semua</option>
                                     <option value="published" {% if filter_status_news == 'published' %}selected{% endif %}>Published</option>
@@ -247,10 +246,24 @@
                                         {% endif %}
                                     </td>
                                     <td class="actions">
-                                        <button class="action-edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="action-delete"><i class="fa-solid fa-trash-can"></i></button>
-                                        <button class="action-view"><i class="fa-solid fa-eye"></i></button>
-                                    </td>
+    <div class="action-item">
+        <button class="action-edit">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+    </div>
+
+    <div class="action-item">
+        <button class="action-delete">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
+    </div>
+
+    <div class="action-item">
+        <button class="action-view">
+            <i class="fa-solid fa-eye"></i>
+        </button>
+    </div>
+</td>
                                 </tr>
                                 {% else %}
                                 <tr>
@@ -326,7 +339,6 @@
                                 <input type="hidden" name="search_announce" value="{{ search_announce }}" />
                                 <input type="hidden" name="filter_date_announce" value="{{ filter_date_announce }}" />
                                 <input type="hidden" name="page_announce" value="1" />
-                                <i class="fa-regular fa-circle"></i>
                                 <select name="filter_status_announce" onchange="this.form.submit()" style="border:none; background:transparent; font-family:inherit; font-size:13px; font-weight:600; color:#181D17; cursor:pointer; outline:none;">
                                     <option value="all" {% if filter_status_announce == 'all' %}selected{% endif %}>Status: Semua</option>
                                     <option value="agenda" {% if filter_status_announce == 'agenda' %}selected{% endif %}>Agenda</option>
@@ -366,9 +378,18 @@
                                     <td>{{ item.location or '-' }}</td>
                                     <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</td>
                                     <td class="actions">
-                                        <button class="action-edit"><i class="fa-regular fa-pen-to-square"></i></button>
-                                        <button class="action-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    </td>
+    <div class="action-item">
+        <button class="action-edit">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+    </div>
+
+    <div class="action-item">
+        <button class="action-delete">
+            <i class="fa-solid fa-trash-can"></i>
+        </button>
+    </div>
+</td>
                                 </tr>
                                 {% else %}
                                 <tr>
