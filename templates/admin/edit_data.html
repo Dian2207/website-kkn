@@ -58,8 +58,7 @@
         <p>Perbarui data kependudukan, pendidikan, dan pekerjaan secara real-time untuk transparansi publik.</p>
     </div>
 
-<form>
-
+<form method="POST" action="{{ url_for('admin_bp.update_data') }}">
 <!-- ================= DATA UMUM ================= -->
 
 <div class="card">
@@ -75,22 +74,22 @@
 
         <div class="form-group">
             <label>Jumlah Penduduk</label>
-            <input type="number">
+            <input type="number" name="total_population" value="{{ data.total_population }}">
         </div>
 
         <div class="form-group">
             <label>Jumlah KK</label>
-            <input type="number">
+            <input type="number" name="total_family" value="{{ data.total_family }}">
         </div>
 
         <div class="form-group">
             <label>Laki-Laki</label>
-            <input type="number">
+            <input type="number" name="male" value="{{ data.male }}">
         </div>
 
         <div class="form-group">
             <label>Perempuan</label>
-            <input type="number">
+            <input type="number" name="female" value="{{ data.female }}">
         </div>
 
     </div>
@@ -122,52 +121,52 @@
 
 <div class="form-group">
 <label>Belum Sekolah</label>
-<input type="number">
+<input type="number" name="belum_sekolah" value="{{ data.belum_sekolah }}">
 </div>
 
 <div class="form-group">
 <label>Belum Tamat SD</label>
-<input type="number">
+<input type="number" name="belum_tamat_sd" value="{{ data.belum_tamat_sd }}">
 </div>
 
 <div class="form-group">
 <label>Tamat SD</label>
-<input type="number">
+<input type="number" name="tamat_sd" value="{{ data.tamat_sd }}">
 </div>
 
 <div class="form-group">
 <label>Tamat SMP</label>
-<input type="number">
+<input type="number" name="tamat_smp" value="{{ data.tamat_smp }}">
 </div>
 
 <div class="form-group">
 <label>Tamat SLTA</label>
-<input type="number">
+<input type="number" name="tamat_slta" value="{{ data.tamat_slta }}">
 </div>
 
 <div class="form-group">
 <label>Diploma I/II/III</label>
-<input type="number">
+<input type="number" name="diploma" value="{{ data.diploma_i_ii_iii}}">
 </div>
 
 <div class="form-group">
 <label>Sarjana S1</label>
-<input type="number">
+<input type="number" name="sarjana" value="{{ data.sarjana_s1}}">
 </div>
 
 <div class="form-group">
 <label>Diploma IV / Strata I</label>
-<input type="number">
+<input type="number" name="diploma_iv_strata_i" value="{{ data.diploma_iv_strata_i }}">
 </div>
 
 <div class="form-group">
 <label>Strata II</label>
-<input type="number">
+<input type="number" name="strata_ii" value="{{ data.strata_ii }}">
 </div>
 
 <div class="form-group">
 <label>Strata III</label>
-<input type="number">
+<input type="number" name="strata_iii" value="{{ data.strata_iii }}">
 </div>
 
 </div>
@@ -200,72 +199,72 @@ Data Pekerjaan
 
 <div class="form-group">
 <label>Belum/Tidak Bekerja</label>
-<input type="number">
+<input type="number" name="belum_tidak_bekerja" value="{{ data.belum_tidak_bekerja }}">
 </div>
 
 <div class="form-group">
 <label>Mengurus Rumah Tangga</label>
-<input type="number">
+<input type="number" name="mengurus_rumah_tangga" value="{{ data.mengurus_rumah_tangga }}">
 </div>
 
 <div class="form-group">
 <label>Pelajar/Mahasiswa</label>
-<input type="number">
+<input type="number" name="pelajar_mahasiswa" value="{{ data.pelajar_mahasiswa }}">
 </div>
 
 <div class="form-group">
 <label>Pensiunan</label>
-<input type="number">
+<input type="number" name="pensiunan" value="{{ data.pensiunan }}">
 </div>
 
 <div class="form-group">
 <label>PNS</label>
-<input type="number">
+<input type="number" name="pns" value="{{ data.pns }}">
 </div>
 
 <div class="form-group">
 <label>Wiraswasta</label>
-<input type="number">
+<input type="number" name="wiraswasta" value="{{ data.wiraswasta }}">
 </div>
 
 <div class="form-group">
 <label>Petani</label>
-<input type="number">
+<input type="number" name="petani" value="{{ data.petani_perkebunan }}">
 </div>
 
 <div class="form-group">
 <label>Peternak</label>
-<input type="number">
+<input type="number" name="peternak" value="{{ data.peternak }}">
 </div>
 
 <div class="form-group">
 <label>Karyawan</label>
-<input type="number">
+<input type="number" name="karyawan" value="{{ data.karyawan }}">
 </div>
 
 <div class="form-group">
 <label>Buruh Pabrik</label>
-<input type="number">
+<input type="number" name="buruh_pabrik" value="{{ data.buruh_pabrik }}">
 </div>
 
 <div class="form-group">
 <label>Guru</label>
-<input type="number">
+<input type="number" name="guru" value="{{ data.guru }}">
 </div>
 
 <div class="form-group">
 <label>Bidan</label>
-<input type="number">
+<input type="number" name="bidan" value="{{ data.bidan }}">
 </div>
 
 <div class="form-group">
 <label>Perawat</label>
-<input type="number">
+<input type="number" name="perawat" value="{{ data.perawat }}">
 </div>
 
 <div class="form-group">
 <label>Pedagang</label>
-<input type="number">
+<input type="number" name="pedagang" value="{{ data.pedagang }}">
 </div>
 </div>
 <div class="button-group">

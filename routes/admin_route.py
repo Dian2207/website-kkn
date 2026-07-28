@@ -264,7 +264,55 @@ def edit_data():
         "admin/edit_data.html",
         data=data
     )
+@admin_bp.route("/edit/data/update", methods=["POST"])
+@login_required
+def update_data():
 
+    data = Infographics.query.first()
+
+    if not data:
+        data = Infographics()
+        db.session.add(data)
+
+    # ================= DATA UMUM =================
+    data.total_population = request.form.get("total_population", type=int)
+    data.total_family = request.form.get("total_family", type=int)
+    data.male = request.form.get("male", type=int)
+    data.female = request.form.get("female", type=int)
+
+    # ================= PENDIDIKAN =================
+    data.belum_sekolah = request.form.get("belum_sekolah", type=int)
+    data.belum_tamat_sd = request.form.get("belum_tamat_sd", type=int)
+    data.tamat_sd = request.form.get("tamat_sd", type=int)
+    data.tamat_smp = request.form.get("tamat_smp", type=int)
+    data.tamat_slta = request.form.get("tamat_slta", type=int)
+    data.diploma_i_ii_iii = request.form.get("diploma", type=int)
+    data.sarjana_s1 = request.form.get("sarjana", type=int)
+    data.diploma_iv_strata_i = request.form.get("diploma_iv_strata_i", type=int)
+    data.strata_ii = request.form.get("strata_ii", type=int)
+    data.strata_iii = request.form.get("strata_iii", type=int)
+
+    # ================= PEKERJAAN =================
+    data.belum_tidak_bekerja = request.form.get("belum_tidak_bekerja", type=int)
+    data.mengurus_rumah_tangga = request.form.get("mengurus_rumah_tangga", type=int)
+    data.pelajar_mahasiswa = request.form.get("pelajar_mahasiswa", type=int)
+    data.pensiunan = request.form.get("pensiunan", type=int)
+    data.pns = request.form.get("pns", type=int)
+    data.wiraswasta = request.form.get("wiraswasta", type=int)
+    data.petani_perkebunan = request.form.get("petani", type=int)
+    data.peternak = request.form.get("peternak", type=int)
+    data.karyawan = request.form.get("karyawan", type=int)
+    data.buruh_pabrik = request.form.get("buruh_pabrik", type=int)
+    data.guru = request.form.get("guru", type=int)
+    data.bidan = request.form.get("bidan", type=int)
+    data.perawat = request.form.get("perawat", type=int)
+    data.pedagang = request.form.get("pedagang", type=int)
+
+    db.session.commit()
+
+    flash("Data berhasil diperbarui.", "success")
+
+    return redirect(url_for("admin_bp.edit_data"))
 # ==========================
 # HALAMAN FORM TAMBAH BERITA
 # ==========================
