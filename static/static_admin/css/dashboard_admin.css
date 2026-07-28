@@ -281,7 +281,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 24px;
+    padding: px 12px;
     background: #2E7D32;
     color: #fff;
     border: none;
@@ -519,6 +519,8 @@ body {
     font-size: 12px;
 }
 
+
+
 /* Table */
 .table-wrapper {
     overflow-x: auto;
@@ -527,6 +529,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    border-radius: 100px;
 }
 .admin-table thead {
     background: #F3F3F3;
@@ -554,27 +557,59 @@ body {
     align-items: center;
     gap: 8px;
 }
-.admin-table td .actions button {
-    width: 40px;
-    height: 40px;
+.actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions button{
+    background: transparent;
     border: none;
-    border-radius: 8px;
-    background: rgba(226, 226, 226, 0.50);
+    outline: none;
+    box-shadow: none;
     cursor: pointer;
-    transition: .2s;
+    padding: 36px 5px;
+    font-size: 17px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
 }
-.admin-table td .actions .action-edit { color: #1A1C1C; }
-.admin-table td .actions .action-delete { color: #BA1A1A; }
-.admin-table td .actions .action-view { color: #1A1C1C; }
-.admin-table td .actions button:hover {
-    opacity: 0.7;
-    transform: scale(1.05);
+
+/* Garis pemisah */
+.actions button:not(:last-child){
+    border-right: 1px solid #CFCFCF;
 }
+
+/* Warna icon */
+.action-edit{
+    color: #181D17;
+}
+
+.action-delete{
+    color: #D62828;
+}
+
+.action-view{
+    color: #0D631B;
+}
+
+.actions button:hover{
+    opacity: .7;
+}
+
+.action-edit{
+    color: #000;
+}
+
+.admin-table tbody tr{
+    height: 90px;
+}
+
+.admin-table td{
+    vertical-align: middle;
+}
+
 
 .admin-table th:last-child,
 .admin-table td:last-child {
