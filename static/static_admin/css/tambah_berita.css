@@ -37,8 +37,8 @@ body {
     height: 50px;
 }
 .admin-navbar .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 79%;
+    max-width: 1600px;
     margin: 0 auto;
     height: 50px;
     display: flex;
