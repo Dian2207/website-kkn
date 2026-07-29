@@ -65,7 +65,14 @@ rel="stylesheet">
             </div>
 
             <!-- Form -->
-            <form class="news-form" method="POST" action="{{ url_for('admin_bp.simpan_berita') }}" enctype="multipart/form-data">
+            <form class="news-form"
+      method="POST"
+      enctype="multipart/form-data"
+      action="{% if edit %}
+                {{ url_for('admin_bp.edit_berita', id=berita.id) }}
+              {% else %}
+                {{ url_for('admin_bp.simpan_berita') }}
+              {% endif %}">
 
                 <div class="content">
 

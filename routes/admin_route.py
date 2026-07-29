@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request, flash
+from flask import Blueprint, render_template, session, redirect, url_for, request, flash, current_app
 from models import Infographics, News, Announcement, User, db
 from sqlalchemy import or_, and_
 from datetime import datetime, timedelta
@@ -6,6 +6,8 @@ from functools import wraps
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 import os
+
+from routes.route import berita
 
 admin_bp = Blueprint(
     "admin_bp",
@@ -358,7 +360,6 @@ def edit_berita(id):
         berita.title = request.form["title"]
         berita.slug = request.form["slug"]
         berita.content = request.form["content"]
-
         status = request.form.get("status")
 
         if status == "published":
@@ -426,10 +427,10 @@ def hapus_berita(id):
 @login_required
 def simpan_berita():
 
-    judul = request.form.get("judul")
+    title = request.form.get("title")
     slug = request.form.get("slug")
     content = request.form.get("content")
-    tanggal = request.form.get("tanggal")
+    published_at = request.form.get("published_at")
     status = request.form.get("status")
 
     thumbnail = request.files.get("thumbnail")
@@ -454,18 +455,21 @@ def simpan_berita():
     sekarang = datetime.now()
 
     berita = News(
-        title=judul,
-        slug=slug,
-        content=content,
-        thumbnail=nama_file,
-        created_at=sekarang,
-        updated_at=sekarang,
-        status=status
-    )
+    title=title,
+    slug=slug,
+    content=content,
+    thumbnail=nama_file,
+    created_at=sekarang,
+    updated_at=sekarang,
+    status=status
+)
 
     if status == "published":
-        if tanggal:
-            berita.published_at = datetime.strptime(tanggal, "%Y-%m-%d")
+        if published_at:
+            berita.published_at = datetime.strptime(
+            published_at,
+            "%Y-%m-%d"
+        )
         else:
             berita.published_at = sekarang
     else:
@@ -514,31 +518,37 @@ def edit_pengumuman(id):
 @admin_bp.route('/simpan-pengumuman', methods=['POST'])
 @login_required
 def simpan_pengumuman():
-    from datetime import datetime
-    judul = request.form.get('judul')
-    jenis = request.form.get('jenis')
-    lokasi = request.form.get('lokasi')
-    deskripsi = request.form.get('deskripsi')
-    tanggal = request.form.get('tanggal')
-    waktu = request.form.get('waktu')
-    
+
+    title = request.form.get("title")
+    tipe = request.form.get("type")
+    location = request.form.get("location")
+    description = request.form.get("description")
+    tanggal = request.form.get("event_date")
+    waktu = request.form.get("event_time")
+
     event_date = None
+
     if tanggal and waktu:
-        event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
-    
-    pengumuman = Announcement(
-        title=judul,
-        type=jenis,
-        location=lokasi,
-        description=deskripsi,
+        event_date = datetime.strptime(
+            f"{tanggal} {waktu}",
+            "%Y-%m-%d %H:%M"
+        )
+
+    announcement = Announcement(
+        title=title,
+        description=description,
         event_date=event_date,
-        created_at=datetime.now(),
-        updated_at=datetime.now()
+        location=location,
+        type=tipe,
+        created_at=datetime.now()
     )
-    db.session.add(pengumuman)
+
+    db.session.add(announcement)
     db.session.commit()
-    flash('Pengumuman berhasil ditambahkan!', 'success')
-    return redirect(url_for('admin_bp.indexAdmin'))
+
+    flash("Pengumuman berhasil ditambahkan!", "success")
+
+    return redirect(url_for("admin_bp.indexAdmin"))
 
 # ===== DETAIL PENGUMUMAN =====
 @admin_bp.route('/pengumuman/detail/<int:id>', methods=['GET'])
@@ -554,13 +564,13 @@ def update_pengumuman(id):
 
     announcement = Announcement.query.get_or_404(id)
 
-    announcement.title = request.form["title"]
-    announcement.type = request.form["type"]
-    announcement.location = request.form["location"]
-    announcement.description = request.form["description"]
+    announcement.title = request.form.get("title")
+    announcement.type = request.form.get("type")
+    announcement.location = request.form.get("location")
+    announcement.description = request.form.get("description")
 
-    tanggal = request.form["event_date"]
-    waktu = request.form["event_time"]
+    tanggal = request.form.get("event_date")
+    waktu = request.form.get("event_time")
 
     if tanggal and waktu:
         announcement.event_date = datetime.strptime(

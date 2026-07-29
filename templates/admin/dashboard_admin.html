@@ -31,9 +31,12 @@
                         </div>
                         <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
-                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
-                            </a>
+                            <a href="javascript:void(0);"
+   class="dropdown-item logout"
+   onclick="openLogoutModal()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Keluar / Logout
+</a>
                         </div>
                     </div>
                 </div>
@@ -511,6 +514,48 @@ onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
 
 </div>
 
+<!-- =========================
+     MODAL LOGOUT
+========================= -->
+
+<div class="modal-delete" id="logoutModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <h3>Konfirmasi Logout</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin logout?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn-cancel"
+                onclick="closeLogoutModal()">
+
+                Batal
+
+            </button>
+
+            <a
+                href="{{ url_for('admin_bp.logout') }}"
+                class="btn-delete"
+                style="text-decoration:none;text-align:center;">
+
+                Ya, Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
     <!-- ===== JAVASCRIPT PAGINATION & DROPDOWN ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -566,6 +611,24 @@ function closeModal(){
 
 }
 
+function openLogoutModal(){
+
+    document
+        .getElementById("logoutModal")
+        .classList
+        .add("show");
+
+}
+
+function closeLogoutModal(){
+
+    document
+        .getElementById("logoutModal")
+        .classList
+        .remove("show");
+
+}
+
 window.onclick = function(e){
 
     const modal = document.getElementById("deleteModal");
@@ -576,6 +639,8 @@ window.onclick = function(e){
 
 }
     </script>
+
+    
 
 </body>
 </html>
