@@ -125,8 +125,9 @@ name="content">{{ berita.content if berita else '' }}</textarea>
         {% if edit and berita.thumbnail %}
         <div class="preview-image">
             <img
-                src="{{ url_for('static', filename='uploads/' + berita.thumbnail) }}"
-                alt="Thumbnail Berita">
+src="{{ url_for('static',
+filename='uploads/news/' ~ berita.thumbnail) }}"
+alt="Thumbnail">
         </div>
         {% endif %}
     </div>

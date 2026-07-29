@@ -1,3 +1,4 @@
+from click import File
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash, current_app
 from models import Infographics, News, Announcement, User, db
 from sqlalchemy import or_, and_
@@ -350,7 +351,8 @@ def tambah_berita():
         edit=False
     )
 
-@admin_bp.route("/berita/edit/<int:id>", methods=["GET", "POST"])
+@admin_bp.route("/berita/edit/<int:id>", methods=["GET","POST"])
+@login_required
 def edit_berita(id):
 
     berita = News.query.get_or_404(id)
@@ -360,6 +362,7 @@ def edit_berita(id):
         berita.title = request.form["title"]
         berita.slug = request.form["slug"]
         berita.content = request.form["content"]
+
         status = request.form.get("status")
 
         if status == "published":
@@ -367,23 +370,31 @@ def edit_berita(id):
         else:
             berita.published_at = None
 
-        # upload gambar baru
+        berita.updated_at = datetime.now()
+
         file = request.files.get("thumbnail")
 
         if file and file.filename != "":
 
             filename = secure_filename(file.filename)
 
-            file.save(os.path.join(
+            os.makedirs(
                 current_app.config["UPLOAD_FOLDER"],
-                filename
-            ))
+                exist_ok=True
+            )
+
+            file.save(
+                os.path.join(
+                    current_app.config["UPLOAD_FOLDER"],
+                    filename
+                )
+            )
 
             berita.thumbnail = filename
 
         db.session.commit()
 
-        flash("Berita berhasil diperbarui.","success")
+        flash("Berita berhasil diperbarui.", "success")
 
         return redirect(url_for("admin_bp.indexAdmin"))
 
@@ -430,48 +441,50 @@ def simpan_berita():
     title = request.form.get("title")
     slug = request.form.get("slug")
     content = request.form.get("content")
-    published_at = request.form.get("published_at")
     status = request.form.get("status")
-
-    thumbnail = request.files.get("thumbnail")
+    published_at = request.form.get("published_at")
 
     nama_file = None
 
-    if thumbnail and thumbnail.filename:
+    thumbnail = request.files.get("thumbnail")
 
-        nama_file = secure_filename(thumbnail.filename)
+    if thumbnail and thumbnail.filename != "":
 
-        folder = os.path.join(
-            admin_bp.root_path,
-            "../static/uploads/news"
-        )
+        filename = secure_filename(thumbnail.filename)
 
-        os.makedirs(folder, exist_ok=True)
+        os.makedirs(current_app.config["UPLOAD_FOLDER"], exist_ok=True)
 
         thumbnail.save(
-            os.path.join(folder, nama_file)
+            os.path.join(
+                current_app.config["UPLOAD_FOLDER"],
+                filename
+            )
         )
+
+        nama_file = filename
 
     sekarang = datetime.now()
 
     berita = News(
-    title=title,
-    slug=slug,
-    content=content,
-    thumbnail=nama_file,
-    created_at=sekarang,
-    updated_at=sekarang,
-    status=status
-)
+        title=title,
+        slug=slug,
+        content=content,
+        thumbnail=nama_file,
+        created_at=sekarang,
+        updated_at=sekarang,
+        status=status
+    )
 
     if status == "published":
+
         if published_at:
             berita.published_at = datetime.strptime(
-            published_at,
-            "%Y-%m-%d"
-        )
+                published_at,
+                "%Y-%m-%d"
+            )
         else:
             berita.published_at = sekarang
+
     else:
         berita.published_at = None
 

@@ -51,9 +51,12 @@
                     {% set headline = news[0] %}
                     <a href="{{ url_for('main.detailBerita', id=headline.id) }}" class="headline-link">
                         <div class="headline-card">
-                            <img src="{{ url_for('static', filename='image/' ~ headline.thumbnail) }}" alt="{{ headline.title }}">
+                            <img
+src="{{ url_for('static',
+filename='uploads/news/' ~ headline.thumbnail) }}"
+alt="{{ headline.title }}">
                             <div class="headline-body">
-                                <span>{{ headline.published_at.strftime('%d %b %Y') }}</span>
+                                <span>{{ headline.published_at.strftime('%d %b %Y') if headline.published_at else '-' }}</span>
                                 <h2>{{ headline.title }}</h2>
                                 <p>{{ headline.content[:200] }}{% if headline.content|length > 200 %}...{% endif %}</p>
                             </div>
@@ -91,9 +94,12 @@
                         {% for item in news[1:5] %}  {# tampilkan 4 berita kecil #}
                         <a href="{{ url_for('main.detailBerita', id=item.id) }}" class="small-link">
                             <div class="small-card">
-                                <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}" alt="{{ item.title }}" />
+                                <img
+src="{{ url_for('static',
+filename='uploads/news/' ~ item.thumbnail) }}"
+alt="{{ item.title }}">
                                 <div class="small-body">
-                                    <span>{{ item.published_at.strftime('%d %b %Y') }}</span>
+                                    <span>{{ item.published_at.strftime('%d %b %Y') if item.published_at else '-' }}</span>
                                     <h3>{{ item.title }}</h3>
                                     <p>{{ item.content[:100] }}{% if item.content|length > 100 %}...{% endif %}</p>
                                 </div>
