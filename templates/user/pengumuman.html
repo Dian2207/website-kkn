@@ -64,7 +64,12 @@
                 </div>
 
                 <div class="calendar-grid" id="calendarGrid">
-                    <!-- Header hari akan dibuat oleh JavaScript -->
+                    <!-- header + cell akan di-render oleh JavaScript -->
+                </div>
+
+                <!-- TEMPAT DETAIL EVENT (muncul di bawah grid) -->
+                <div id="dayEventsContainer" class="day-events-list">
+                    <!-- akan diisi oleh JavaScript -->
                 </div>
             </section>
 
@@ -142,164 +147,162 @@
 
 <!-- ===== JAVASCRIPT KALENDER ===== -->
 <script>
-const eventsData = [
-    {% for item in announcements if item.event_date %}
-    {
-        date: "{{ item.event_date.strftime('%Y-%m-%d') }}",
-        title: "{{ item.title }}",
-        type: "{{ item.type or 'Pengumuman' }}",
-        location: "{{ item.location or '' }}",
-        description: "{{ item.description or '' }}"
-    },
-    {% endfor %}
-];
+    // Data dari server (Jinja2) -> eventsData
+    const eventsData = [
+        {% for item in announcements if item.event_date %}
+        {
+            date: "{{ item.event_date.strftime('%Y-%m-%d') }}",
+            title: "{{ item.title }}",
+            type: "{{ item.type or 'Pengumuman' }}",
+            location: "{{ item.location or '' }}",
+            description: "{{ item.description or '' }}"
+        },
+        {% endfor %}
+    ];
 
-const eventsByDate = {};
-eventsData.forEach(e => {
-    if (!eventsByDate[e.date]) eventsByDate[e.date] = [];
-    eventsByDate[e.date].push(e);
-});
-
-const grid = document.getElementById('calendarGrid');
-const monthLabel = document.getElementById('currentMonthYear');
-const prevBtn = document.getElementById('prevMonth');
-const nextBtn = document.getElementById('nextMonth');
-
-let currentDate = new Date();
-let selectedDate = new Date();
-
-const monthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-const dayNames = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
-
-function formatDateStr(d) {
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
-
-function renderCalendar(year, month) {
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month+1, 0).getDate();
-    const today = new Date();
-    const todayStr = formatDateStr(today);
-    const selectedStr = formatDateStr(selectedDate);
-
-    const label = monthNames[month] + ' ' + year;
-    monthLabel.textContent = label;
-
-    // Buat ulang grid dari awal (perbaiki bug refresh)
-    grid.innerHTML = '';
-
-    // Buat header hari baru
-    dayNames.forEach(day => {
-        const h = document.createElement('div');
-        h.className = 'day-header';
-        h.textContent = day;
-        grid.appendChild(h);
+    const eventsByDate = {};
+    eventsData.forEach(e => {
+        if (!eventsByDate[e.date]) eventsByDate[e.date] = [];
+        eventsByDate[e.date].push(e);
     });
 
-    // Empty cells sebelum hari pertama
-    for (let i = 0; i < firstDay; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'calendar-cell empty';
-        grid.appendChild(cell);
+    const grid = document.getElementById('calendarGrid');
+    const containerDetail = document.getElementById('dayEventsContainer');
+    const monthLabel = document.getElementById('currentMonthYear');
+    const prevBtn = document.getElementById('prevMonth');
+    const nextBtn = document.getElementById('nextMonth');
+
+    let currentDate = new Date();
+    let selectedDate = new Date();
+
+    const monthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const dayNames = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+
+    function formatDateStr(d) {
+        return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
-        const dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-        const isToday = dateStr === todayStr;
-        const isSelected = dateStr === selectedStr;
-        const events = eventsByDate[dateStr] || [];
+    function renderCalendar(year, month) {
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month+1, 0).getDate();
+        const today = new Date();
+        const todayStr = formatDateStr(today);
+        const selectedStr = formatDateStr(selectedDate);
 
-        const cell = document.createElement('div');
-        cell.className = 'calendar-cell';
-        if (isToday) cell.classList.add('today');
-        if (isSelected) cell.classList.add('selected');
-        cell.dataset.date = dateStr;
+        monthLabel.textContent = monthNames[month] + ' ' + year;
 
-        const num = document.createElement('span');
-        num.className = 'day-number';
-        num.textContent = d;
-        cell.appendChild(num);
+        // Kosongkan grid, buat ulang
+        grid.innerHTML = '';
 
-        // Tampilkan event sebagai PILL (oval) dengan ukuran seragam
-        if (events.length > 0) {
-            const pillContainer = document.createElement('div');
-            pillContainer.className = 'event-pills';
-            // Tampilkan maksimal 2 event
-            const maxShow = 2;
-            const showEvents = events.slice(0, maxShow);
-            const remaining = events.length - maxShow;
-            showEvents.forEach(e => {
-                const pill = document.createElement('span');
-                const isAgenda = e.type && e.type.toLowerCase() === 'agenda';
-                pill.className = `event-pill ${isAgenda ? 'agenda' : 'pengumuman'}`;
-                pill.textContent = e.title;
-                pill.title = e.title; // tooltip lengkap
-                pillContainer.appendChild(pill);
-            });
-            if (remaining > 0) {
-                const more = document.createElement('span');
-                more.className = 'event-pill';
-                more.style.background = '#888';
-                more.textContent = `+${remaining}`;
-                more.title = `+${remaining} kegiatan lainnya`;
-                pillContainer.appendChild(more);
-            }
-            cell.appendChild(pillContainer);
+        // Header hari
+        dayNames.forEach(day => {
+            const h = document.createElement('div');
+            h.className = 'day-header';
+            h.textContent = day;
+            grid.appendChild(h);
+        });
+
+        // Sel kosong sebelum hari pertama
+        for (let i = 0; i < firstDay; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'calendar-cell empty';
+            grid.appendChild(cell);
         }
 
-        cell.addEventListener('click', function() {
-            selectedDate = new Date(dateStr);
-            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-            showEventsForDate(dateStr);
-        });
+        // Sel tanggal
+        for (let d = 1; d <= daysInMonth; d++) {
+            const dateStr = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+            const isToday = dateStr === todayStr;
+            const isSelected = dateStr === selectedStr;
+            const events = eventsByDate[dateStr] || [];
 
-        grid.appendChild(cell);
+            const cell = document.createElement('div');
+            cell.className = 'calendar-cell';
+            if (isToday) cell.classList.add('today');
+            if (isSelected) cell.classList.add('selected');
+            cell.dataset.date = dateStr;
+
+            // Angka tanggal
+            const num = document.createElement('span');
+            num.className = 'day-number';
+            num.textContent = d;
+            cell.appendChild(num);
+
+            // Event pills (maksimal 2, sisanya +N)
+            if (events.length > 0) {
+                const pillContainer = document.createElement('div');
+                pillContainer.className = 'event-pills';
+                const maxShow = 2;
+                const showEvents = events.slice(0, maxShow);
+                const remaining = events.length - maxShow;
+                showEvents.forEach(e => {
+                    const pill = document.createElement('span');
+                    const isAgenda = e.type && e.type.toLowerCase() === 'agenda';
+                    pill.className = `event-pill ${isAgenda ? 'agenda' : 'pengumuman'}`;
+                    pill.textContent = e.title.length > 18 ? e.title.slice(0, 16) + '…' : e.title;
+                    pill.title = e.title;
+                    pillContainer.appendChild(pill);
+                });
+                if (remaining > 0) {
+                    const more = document.createElement('span');
+                    more.className = 'event-pill';
+                    more.style.background = '#888';
+                    more.textContent = `+${remaining}`;
+                    more.title = `${remaining} kegiatan lainnya`;
+                    pillContainer.appendChild(more);
+                }
+                cell.appendChild(pillContainer);
+            }
+
+            // Klik pada cell -> pilih tanggal & tampilkan event di bawah
+            cell.addEventListener('click', function() {
+                selectedDate = new Date(dateStr);
+                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                showEventsForDate(dateStr);
+            });
+
+            grid.appendChild(cell);
+        }
+
+        // Tampilkan event untuk tanggal yang dipilih
+        showEventsForDate(selectedStr);
     }
 
-    showEventsForDate(selectedStr);
-}
+    function showEventsForDate(dateStr) {
+        const events = eventsByDate[dateStr] || [];
+        const dateObj = new Date(dateStr);
+        const display = dateObj.getDate() + ' ' + monthNames[dateObj.getMonth()] + ' ' + dateObj.getFullYear();
 
-function showEventsForDate(dateStr) {
-    const events = eventsByDate[dateStr] || [];
-    const existing = document.querySelector('.day-events-list');
-    if (existing) existing.remove();
-
-    const container = document.createElement('div');
-    container.className = 'day-events-list';
-    const dateObj = new Date(dateStr);
-    const display = dateObj.getDate() + ' ' + monthNames[dateObj.getMonth()] + ' ' + dateObj.getFullYear();
-
-    if (events.length === 0) {
-        container.innerHTML = `<p class="no-event">Tidak ada kegiatan pada ${display}.</p>`;
-    } else {
-        let html = `<h4>📅 Kegiatan pada ${display}</h4>`;
-        events.forEach(e => {
-            const cls = (e.type && e.type.toLowerCase() === 'agenda') ? 'event-agenda' : 'event-pengumuman';
-            html += `
-                <div class="day-event-item ${cls}">
-                    <span class="day-event-dot"></span>
-                    <div>
-                        <strong>${e.title}</strong>
-                        <small>${e.type || 'Pengumuman'} ${e.location ? '• ' + e.location : ''}</small>
+        if (events.length === 0) {
+            containerDetail.innerHTML = `<p class="no-event">Tidak ada kegiatan pada ${display}.</p>`;
+        } else {
+            let html = `<h4>📅 Kegiatan pada ${display}</h4>`;
+            events.forEach(e => {
+                const cls = (e.type && e.type.toLowerCase() === 'agenda') ? 'event-agenda' : 'event-pengumuman';
+                html += `
+                    <div class="day-event-item ${cls}">
+                        <span class="day-event-dot"></span>
+                        <div>
+                            <strong>${e.title}</strong>
+                            <small>${e.type || 'Pengumuman'} ${e.location ? '• ' + e.location : ''}</small>
+                        </div>
                     </div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
+                `;
+            });
+            containerDetail.innerHTML = html;
+        }
     }
-    grid.parentNode.insertBefore(container, grid.nextSibling);
-}
 
-function goToMonth(delta) {
-    currentDate.setMonth(currentDate.getMonth() + delta);
+    function goToMonth(delta) {
+        currentDate.setMonth(currentDate.getMonth() + delta);
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    }
+
+    prevBtn.addEventListener('click', () => goToMonth(-1));
+    nextBtn.addEventListener('click', () => goToMonth(1));
+
+    // Render awal
     renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-}
-
-prevBtn.addEventListener('click', () => goToMonth(-1));
-nextBtn.addEventListener('click', () => goToMonth(1));
-
-// Render awal
-renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
 </script>
 
 </body>
