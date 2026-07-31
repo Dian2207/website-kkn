@@ -462,7 +462,7 @@ header {
 }
 
 /* =====================================
-   INFORMASI LAINNYA
+   INFORMASI LAINNYA — SELURUH CARD BISA DIKLIK
 ====================================== */
 
 .information {
@@ -484,6 +484,19 @@ header {
     gap: 30px;
 }
 
+/* Link pembungkus card — agar seluruh card bisa diklik */
+.info-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card-link:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
 .info-card {
     background: #fff;
     border-radius: 18px;
@@ -491,6 +504,10 @@ header {
     text-align: center;
     border: 1px solid #e5e5e5;
     transition: .3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .info-card:hover {
@@ -527,11 +544,7 @@ header {
     font-size: 14px;
 }
 
-.info-card a {
-    color: #2F8F3A;
-    font-weight: 600;
-    font-size: 14px;
-}
+/* Style untuk .info-card a sudah dihapus karena tombol sudah tidak ada di HTML */
 
 /* =====================================
    FOOTER

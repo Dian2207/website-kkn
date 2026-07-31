@@ -95,37 +95,16 @@ class Announcement(db.Model):
 
     type = db.Column(db.String(100))
 
-# ---------- APBDES ----------
-class APBDes(db.Model):
-    __tablename__ = "apbdes"
+# ---------- APBDES DOCUMENTS ----------
+class APBDocument(db.Model):
+    __tablename__ = "apb_documents"
 
     id = db.Column(db.Integer, primary_key=True)
-
-    # ======================
-    # PENDAPATAN
-    # ======================
-
-    pendapatan_asli_desa = db.Column(db.BigInteger, default=0)
-    pendapatan_transfer = db.Column(db.BigInteger, default=0)
-    pendapatan_lain_lain = db.Column(db.BigInteger, default=0)
-
-    # ======================
-    # BELANJA
-    # ======================
-
-    belanja_penyelenggaraan_pemerintahan = db.Column(db.BigInteger, default=0)
-    belanja_pelaksanaan_pembangunan = db.Column(db.BigInteger, default=0)
-    belanja_pemberdayaan_masyarakat = db.Column(db.BigInteger, default=0)
-    belanja_penanggulangan_bencana = db.Column(db.BigInteger, default=0)
-
-    created_at = db.Column(
-        db.DateTime,
-        server_default=db.func.now()
-    )
-
-    updated_at = db.Column(
-        db.DateTime,
-        server_default=db.func.now(),
-        onupdate=db.func.now()
-    )
-    
+    title = db.Column(db.String(255), nullable=False)
+    file_name = db.Column(db.String(255), nullable=False)
+    file_size = db.Column(db.String(50))
+    year = db.Column(db.Integer, default=2026)
+    category = db.Column(db.String(50), default='current')  # 'current' atau 'arsip'
+    description = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())

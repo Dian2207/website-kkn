@@ -140,24 +140,27 @@
     <div class="container">
         <h2 class="info-title">Informasi Lainnya</h2>
         <div class="information-grid">
-            <div class="info-card">
-                <div class="info-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>Penduduk</h3>
-                <p>Lihat data demografi dan kependudukan secara lengkap.</p>
-                <a href="{{ url_for('main.penduduk') }}">Eksplor Data <i class="fa-solid fa-angle-right"></i></a>
-            </div>
-            <div class="info-card">
-                <div class="info-icon"><i class="fa-solid fa-chart-column"></i></div>
-                <h3>APBDes</h3>
-                <p>Informasi anggaran, pendapatan serta belanja desa.</p>
-                <a href="{{ url_for('main.apbdes') }}">Transparansi <i class="fa-solid fa-angle-right"></i></a>
-            </div>
-            <div class="info-card">
-                <div class="info-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                <h3>Bansos</h3>
-                <p>Informasi penerima bantuan sosial dan jadwal penyaluran.</p>
-                <a href="#">Cek Penerima <i class="fa-solid fa-angle-right"></i></a>
-            </div>
+            <a href="{{ url_for('main.penduduk') }}" class="info-card-link">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>Penduduk</h3>
+                    <p>Lihat data demografi dan kependudukan secara lengkap.</p>
+                </div>
+            </a>
+            <a href="{{ url_for('main.apbdes') }}" class="info-card-link">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-chart-column"></i></div>
+                    <h3>APBDes</h3>
+                    <p>Informasi anggaran, pendapatan serta belanja desa.</p>
+                </div>
+            </a>
+            <a href="#" class="info-card-link">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <h3>Bansos</h3>
+                    <p>Informasi penerima bantuan sosial dan jadwal penyaluran.</p>
+                </div>
+            </a>
         </div>
     </div>
 </section>

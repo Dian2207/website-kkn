@@ -1,14 +1,11 @@
-from click import File
 from flask import Blueprint, render_template, session, redirect, url_for, request, flash, current_app
-from models import Infographics, News, Announcement, User, db
+from models import Infographics, News, Announcement, User, APBDocument, db
 from sqlalchemy import or_, and_
 from datetime import datetime, timedelta
 from functools import wraps
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 import os
-
-from routes.route import berita
 
 admin_bp = Blueprint(
     "admin_bp",
@@ -41,7 +38,6 @@ def login():
             flash('Username dan password wajib diisi!', 'danger')
             return render_template('login.html')
 
-        # Cari user berdasarkan username atau email
         user = User.query.filter(
             (User.username == username) | (User.email == username)
         ).first()
@@ -50,7 +46,6 @@ def login():
             session['user_id'] = user.id
             session['username'] = user.username
             session['role'] = user.role
-
             flash('Login berhasil! Selamat datang Admin.', 'success')
             return redirect(url_for('admin_bp.indexAdmin'))
         else:
@@ -64,11 +59,10 @@ def logout():
     flash('Anda telah logout.', 'success')
     return redirect(url_for('admin_bp.login'))
 
-# ===== DASHBOARD ADMIN (diproteksi) =====
+# ===== DASHBOARD ADMIN =====
 @admin_bp.route("/")
 @login_required
 def indexAdmin():
-    # --- Ambil parameter filter dari URL ---
     search_news = request.args.get('search_news', '')
     search_announce = request.args.get('search_announce', '')
     filter_date_news = request.args.get('filter_date_news', 'all')
@@ -78,14 +72,14 @@ def indexAdmin():
 
     page_news = request.args.get('page_news', 1, type=int)
     page_announce = request.args.get('page_announce', 1, type=int)
+    page_dokumen = request.args.get('page_dokumen', 1, type=int)
     per_page = 5
 
-    # ========== BERITA ==========
+    # ===== BERITA =====
     news_query = News.query
     if search_news:
         news_query = news_query.filter(News.title.like(f'%{search_news}%'))
 
-    # Filter tanggal berdasarkan published_at
     if filter_date_news != 'all':
         now = datetime.now()
         if filter_date_news == 'today':
@@ -100,7 +94,6 @@ def indexAdmin():
             start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
             news_query = news_query.filter(News.published_at >= start)
 
-    # Filter status (gunakan published_at != null sebagai 'published')
     if filter_status_news == 'published':
         news_query = news_query.filter(News.published_at.isnot(None))
     elif filter_status_news == 'draft':
@@ -114,12 +107,11 @@ def indexAdmin():
     news_total_pages = news_pagination.pages
     news_current_page = news_pagination.page
 
-    # ========== PENGUMUMAN ==========
+    # ===== PENGUMUMAN =====
     announce_query = Announcement.query
     if search_announce:
         announce_query = announce_query.filter(Announcement.title.like(f'%{search_announce}%'))
 
-    # Filter tanggal berdasarkan event_date
     if filter_date_announce != 'all':
         now = datetime.now()
         if filter_date_announce == 'today':
@@ -134,7 +126,6 @@ def indexAdmin():
             start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
             announce_query = announce_query.filter(Announcement.event_date >= start)
 
-    # Filter status (tipe: agenda atau pengumuman)
     if filter_status_announce != 'all':
         announce_query = announce_query.filter(Announcement.type == filter_status_announce)
 
@@ -146,7 +137,18 @@ def indexAdmin():
     announce_total_pages = announce_pagination.pages
     announce_current_page = announce_pagination.page
 
-    # ========== DATA INFOGRAPHICS ==========
+    # ===== DOKUMEN APBDES =====
+    dokumen_query = APBDocument.query
+    total_dokumen = dokumen_query.count()
+    dokumen_pagination = dokumen_query.order_by(
+        APBDocument.year.desc(),
+        APBDocument.id.desc()
+    ).paginate(page=page_dokumen, per_page=per_page, error_out=False)
+    dokumen_items = dokumen_pagination.items
+    dokumen_total_pages = dokumen_pagination.pages
+    dokumen_current_page = dokumen_pagination.page
+
+    # ===== DATA INFOGRAPHICS =====
     infographic = Infographics.query.first()
     total_population = 0
     total_family = 0
@@ -163,19 +165,19 @@ def indexAdmin():
         total_gender = male + female
         if total_gender > 0:
             gender_data = [
-    {
-        'label': 'Laki-laki',
-        'value': round((male / total_gender) * 100, 1),
-        'count': male,
-        'color': '#72ED8B'
-    },
-    {
-        'label': 'Perempuan',
-        'value': round((female / total_gender) * 100, 1),
-        'count': female,
-        'color': '#FF9EA7'
-    }
-]
+                {
+                    'label': 'Laki-laki',
+                    'value': round((male / total_gender) * 100, 1),
+                    'count': male,
+                    'color': '#72ED8B'
+                },
+                {
+                    'label': 'Perempuan',
+                    'value': round((female / total_gender) * 100, 1),
+                    'count': female,
+                    'color': '#FF9EA7'
+                }
+            ]
 
         pendidikan_fields = {
             'Belum Sekolah': infographic.belum_sekolah or 0,
@@ -226,21 +228,21 @@ def indexAdmin():
         top_5_pekerjaan = sorted_pekerjaan[:5]
         remaining_pekerjaan = sum(v for _, v in sorted_pekerjaan[5:])
         colors = [
-    '#2E7D32',  # Hijau
-    '#996000',  # Coklat
-    '#005EB8',  # Biru
-    '#9E9E9E',  # Abu
-    '#D0D0D0',  # Abu muda
-]
+            '#2E7D32',  # Hijau
+            '#996000',  # Coklat
+            '#005EB8',  # Biru
+            '#9E9E9E',  # Abu
+            '#D0D0D0',  # Abu muda
+        ]
         offset = 0
         for idx, (label, count) in enumerate(top_5_pekerjaan):
             percent = round((count / total_population) * 100, 1) if total_population > 0 else 0
             pekerjaan_list.append({
-    'label': label,
-    'value': percent,
-    'color': colors[idx % len(colors)],
-    'offset': offset
-})
+                'label': label,
+                'value': percent,
+                'color': colors[idx % len(colors)],
+                'offset': offset
+            })
             offset += percent
         if remaining_pekerjaan > 0:
             percent = round((remaining_pekerjaan / total_population) * 100, 1) if total_population > 0 else 0
@@ -266,6 +268,10 @@ def indexAdmin():
         announce_items=announce_items,
         announce_total_pages=announce_total_pages,
         announce_current_page=announce_current_page,
+        dokumen_items=dokumen_items,
+        dokumen_total_pages=dokumen_total_pages,
+        dokumen_current_page=dokumen_current_page,
+        total_dokumen=total_dokumen,
         search_news=search_news,
         search_announce=search_announce,
         filter_date_news=filter_date_news,
@@ -280,27 +286,21 @@ def indexAdmin():
 @admin_bp.route("/edit/data")
 def edit_data():
     data = Infographics.query.first()
-    return render_template(
-        "admin/edit_data.html",
-        data=data
-    )
+    return render_template("admin/edit_data.html", data=data)
+
 @admin_bp.route("/edit/data/update", methods=["POST"])
 @login_required
 def update_data():
-
     data = Infographics.query.first()
-
     if not data:
         data = Infographics()
         db.session.add(data)
 
-    # ================= DATA UMUM =================
     data.total_population = request.form.get("total_population", type=int)
     data.total_family = request.form.get("total_family", type=int)
     data.male = request.form.get("male", type=int)
     data.female = request.form.get("female", type=int)
 
-    # ================= PENDIDIKAN =================
     data.belum_sekolah = request.form.get("belum_sekolah", type=int)
     data.belum_tamat_sd = request.form.get("belum_tamat_sd", type=int)
     data.tamat_sd = request.form.get("tamat_sd", type=int)
@@ -312,7 +312,6 @@ def update_data():
     data.strata_ii = request.form.get("strata_ii", type=int)
     data.strata_iii = request.form.get("strata_iii", type=int)
 
-    # ================= PEKERJAAN =================
     data.belum_tidak_bekerja = request.form.get("belum_tidak_bekerja", type=int)
     data.mengurus_rumah_tangga = request.form.get("mengurus_rumah_tangga", type=int)
     data.pelajar_mahasiswa = request.form.get("pelajar_mahasiswa", type=int)
@@ -329,142 +328,73 @@ def update_data():
     data.pedagang = request.form.get("pedagang", type=int)
 
     db.session.commit()
-
     flash("Data berhasil diperbarui.", "success")
-
     return redirect(url_for("admin_bp.edit_data"))
+
 # ==========================
-# HALAMAN FORM TAMBAH BERITA
+# TAMBAH BERITA
 # ==========================
 @admin_bp.route("/berita/tambah", methods=["GET","POST"])
 def tambah_berita():
-
     if request.method=="POST":
-
         # simpan berita baru
-
-        ...
-
-    return render_template(
-        "admin/tambah_berita.html",
-        berita=None,
-        edit=False
-    )
+        pass
+    return render_template("admin/tambah_berita.html", berita=None, edit=False)
 
 @admin_bp.route("/berita/edit/<int:id>", methods=["GET","POST"])
 @login_required
 def edit_berita(id):
-
     berita = News.query.get_or_404(id)
-
     if request.method == "POST":
-
         berita.title = request.form["title"]
         berita.slug = request.form["slug"]
         berita.content = request.form["content"]
-
         status = request.form.get("status")
-
         if status == "published":
             berita.published_at = datetime.now()
         else:
             berita.published_at = None
-
         berita.updated_at = datetime.now()
-
         file = request.files.get("thumbnail")
-
         if file and file.filename != "":
-
             filename = secure_filename(file.filename)
-
-            os.makedirs(
-                current_app.config["UPLOAD_FOLDER"],
-                exist_ok=True
-            )
-
-            file.save(
-                os.path.join(
-                    current_app.config["UPLOAD_FOLDER"],
-                    filename
-                )
-            )
-
+            os.makedirs(current_app.config["UPLOAD_FOLDER"], exist_ok=True)
+            file.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
             berita.thumbnail = filename
-
         db.session.commit()
-
         flash("Berita berhasil diperbarui.", "success")
-
         return redirect(url_for("admin_bp.indexAdmin"))
+    return render_template("admin/tambah_berita.html", berita=berita, edit=True)
 
-    return render_template(
-        "admin/tambah_berita.html",
-        berita=berita,
-        edit=True
-    )
-
-# ==========================
-# HAPUS BERITA
-# ==========================
 @admin_bp.route("/berita/hapus/<int:id>", methods=["POST"])
 @login_required
 def hapus_berita(id):
-
     berita = News.query.get_or_404(id)
-
-    # Hapus file thumbnail jika ada
     if berita.thumbnail:
-        file_path = os.path.join(
-            admin_bp.root_path,
-            "../static/uploads/news",
-            berita.thumbnail
-        )
-
+        file_path = os.path.join(admin_bp.root_path, "../static/uploads/news", berita.thumbnail)
         if os.path.exists(file_path):
             os.remove(file_path)
-
     db.session.delete(berita)
     db.session.commit()
-
     flash("Berita berhasil dihapus.", "success")
-
     return redirect(url_for("admin_bp.indexAdmin"))
 
-# ==========================
-# SIMPAN BERITA
-# ==========================
 @admin_bp.route("/berita/simpan", methods=["POST"])
 @login_required
 def simpan_berita():
-
     title = request.form.get("title")
     slug = request.form.get("slug")
     content = request.form.get("content")
     status = request.form.get("status")
     published_at = request.form.get("published_at")
-
     nama_file = None
-
     thumbnail = request.files.get("thumbnail")
-
     if thumbnail and thumbnail.filename != "":
-
         filename = secure_filename(thumbnail.filename)
-
         os.makedirs(current_app.config["UPLOAD_FOLDER"], exist_ok=True)
-
-        thumbnail.save(
-            os.path.join(
-                current_app.config["UPLOAD_FOLDER"],
-                filename
-            )
-        )
-
+        thumbnail.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
         nama_file = filename
-
     sekarang = datetime.now()
-
     berita = News(
         title=title,
         slug=slug,
@@ -474,79 +404,53 @@ def simpan_berita():
         updated_at=sekarang,
         status=status
     )
-
     if status == "published":
-
         if published_at:
-            berita.published_at = datetime.strptime(
-                published_at,
-                "%Y-%m-%d"
-            )
+            berita.published_at = datetime.strptime(published_at, "%Y-%m-%d")
         else:
             berita.published_at = sekarang
-
     else:
         berita.published_at = None
-
     db.session.add(berita)
     db.session.commit()
-
     flash("Berita berhasil ditambahkan.", "success")
-
     return redirect(url_for("admin_bp.indexAdmin"))
 
+# ==========================
+# PENGUMUMAN
+# ==========================
 @admin_bp.route('/tambah-pengumuman', methods=['GET'])
 @login_required
 def tambah_pengumuman():
     return render_template('admin/tambah_pengumuman.html')
 
-# ==========================
-# HAPUS PENGUMUMAN
-# ==========================
 @admin_bp.route("/pengumuman/hapus/<int:id>", methods=["POST"])
 @login_required
 def hapus_pengumuman(id):
-
     pengumuman = Announcement.query.get_or_404(id)
-
     db.session.delete(pengumuman)
     db.session.commit()
-
     flash("Pengumuman berhasil dihapus.", "success")
-
     return redirect(url_for("admin_bp.indexAdmin"))
 
 @admin_bp.route("/pengumuman/edit/<int:id>")
 @login_required
 def edit_pengumuman(id):
-
     announcement = Announcement.query.get_or_404(id)
-
-    return render_template(
-        "admin/tambah_pengumuman.html",
-        announcement=announcement,
-        edit=True
-    )
+    return render_template("admin/tambah_pengumuman.html", announcement=announcement, edit=True)
 
 @admin_bp.route('/simpan-pengumuman', methods=['POST'])
 @login_required
 def simpan_pengumuman():
-
     title = request.form.get("title")
     tipe = request.form.get("type")
     location = request.form.get("location")
     description = request.form.get("description")
     tanggal = request.form.get("event_date")
     waktu = request.form.get("event_time")
-
     event_date = None
-
     if tanggal and waktu:
-        event_date = datetime.strptime(
-            f"{tanggal} {waktu}",
-            "%Y-%m-%d %H:%M"
-        )
-
+        event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
     announcement = Announcement(
         title=title,
         description=description,
@@ -555,44 +459,146 @@ def simpan_pengumuman():
         type=tipe,
         created_at=datetime.now()
     )
-
     db.session.add(announcement)
     db.session.commit()
-
     flash("Pengumuman berhasil ditambahkan!", "success")
-
     return redirect(url_for("admin_bp.indexAdmin"))
 
-# ===== DETAIL PENGUMUMAN =====
 @admin_bp.route('/pengumuman/detail/<int:id>', methods=['GET'])
 @login_required
 def detail_pengumuman(id):
     pengumuman = Announcement.query.get_or_404(id)
     return render_template('admin/detail_pengumuman.html', pengumuman=pengumuman)
 
-# ===== UPDATE PENGUMUMAN =====
 @admin_bp.route("/pengumuman/update/<int:id>", methods=["POST"])
 @login_required
 def update_pengumuman(id):
-
     announcement = Announcement.query.get_or_404(id)
-
     announcement.title = request.form.get("title")
     announcement.type = request.form.get("type")
     announcement.location = request.form.get("location")
     announcement.description = request.form.get("description")
-
     tanggal = request.form.get("event_date")
     waktu = request.form.get("event_time")
-
     if tanggal and waktu:
-        announcement.event_date = datetime.strptime(
-            f"{tanggal} {waktu}",
-            "%Y-%m-%d %H:%M"
-        )
+        announcement.event_date = datetime.strptime(f"{tanggal} {waktu}", "%Y-%m-%d %H:%M")
+    db.session.commit()
+    flash("Pengumuman berhasil diperbarui.", "success")
+    return redirect(url_for("admin_bp.indexAdmin"))
 
+# ==========================
+# KELOLA DOKUMEN APBDES
+# ==========================
+
+@admin_bp.route("/dokumen-apbdes")
+@login_required
+def kelola_dokumen_apbdes():
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+    pagination = APBDocument.query.order_by(
+        APBDocument.year.desc(),
+        APBDocument.id.desc()
+    ).paginate(page=page, per_page=per_page, error_out=False)
+    dokumen = pagination.items
+    total_pages = pagination.pages
+    current_page = pagination.page
+    return render_template(
+        "admin/dokumen_apbdes.html",
+        dokumen=dokumen,
+        total_pages=total_pages,
+        current_page=current_page
+    )
+
+@admin_bp.route("/dokumen-apbdes/tambah", methods=["GET", "POST"])
+@login_required
+def tambah_dokumen_apbdes():
+    if request.method == "POST":
+        title = request.form.get("title")
+        year = request.form.get("year", type=int)
+        category = request.form.get("category")
+        description = request.form.get("description")
+        file = request.files.get("file_pdf")
+
+        if not title or not file or file.filename == "":
+            flash("Judul dan file PDF wajib diisi!", "danger")
+            return redirect(url_for("admin_bp.tambah_dokumen_apbdes"))
+
+        file.seek(0, 2)
+        size_bytes = file.tell()
+        file.seek(0)
+        size_mb = round(size_bytes / (1024 * 1024), 1)
+        file_size = f"{size_mb} MB"
+
+        filename = secure_filename(file.filename)
+        upload_dir = os.path.join(current_app.root_path, "static", "uploads", "apbdes")
+        os.makedirs(upload_dir, exist_ok=True)
+        file_path = os.path.join(upload_dir, filename)
+        file.save(file_path)
+
+        doc = APBDocument(
+            title=title,
+            file_name=filename,
+            file_size=file_size,
+            year=year,
+            category=category,
+            description=description
+        )
+        db.session.add(doc)
+        db.session.commit()
+
+        flash("Dokumen APBDes berhasil ditambahkan.", "success")
+        return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))
+
+    return render_template("admin/dokumen_apbdes_form.html", edit=False, doc=None)
+
+@admin_bp.route("/dokumen-apbdes/edit/<int:id>", methods=["GET", "POST"])
+@login_required
+def edit_dokumen_apbdes(id):
+    doc = APBDocument.query.get_or_404(id)
+
+    if request.method == "POST":
+        doc.title = request.form.get("title")
+        doc.year = request.form.get("year", type=int)
+        doc.category = request.form.get("category")
+        doc.description = request.form.get("description")
+
+        file = request.files.get("file_pdf")
+        if file and file.filename != "":
+            old_path = os.path.join(current_app.root_path, "static", "uploads", "apbdes", doc.file_name)
+            if os.path.exists(old_path):
+                os.remove(old_path)
+
+            filename = secure_filename(file.filename)
+            upload_dir = os.path.join(current_app.root_path, "static", "uploads", "apbdes")
+            os.makedirs(upload_dir, exist_ok=True)
+            file_path = os.path.join(upload_dir, filename)
+            file.save(file_path)
+
+            file.seek(0, 2)
+            size_bytes = file.tell()
+            file.seek(0)
+            size_mb = round(size_bytes / (1024 * 1024), 1)
+            file_size = f"{size_mb} MB"
+
+            doc.file_name = filename
+            doc.file_size = file_size
+
+        db.session.commit()
+        flash("Dokumen berhasil diperbarui.", "success")
+        return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))
+
+    return render_template("admin/dokumen_apbdes_form.html", edit=True, doc=doc)
+
+@admin_bp.route("/dokumen-apbdes/hapus/<int:id>", methods=["POST"])
+@login_required
+def hapus_dokumen_apbdes(id):
+    doc = APBDocument.query.get_or_404(id)
+    file_path = os.path.join(current_app.root_path, "static", "uploads", "apbdes", doc.file_name)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    db.session.delete(doc)
     db.session.commit()
 
-    flash("Pengumuman berhasil diperbarui.", "success")
-
-    return redirect(url_for("admin_bp.indexAdmin"))
+    flash("Dokumen berhasil dihapus.", "success")
+    return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))

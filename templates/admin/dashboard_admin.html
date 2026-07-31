@@ -31,12 +31,9 @@
                         </div>
                         <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="javascript:void(0);"
-   class="dropdown-item logout"
-   onclick="openLogoutModal()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Keluar / Logout
-</a>
+                            <a href="javascript:void(0);" class="dropdown-item logout" onclick="openLogoutModal()">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -98,13 +95,11 @@
                         <h2>Data Penduduk</h2>
                         <button class="btn-edit">
                             <a href="{{ url_for('admin_bp.edit_data') }}" class="btn-add">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                Edit Data
+                                <i class="fa-regular fa-pen-to-square"></i> Edit Data
                             </a>
                         </button>
                     </div>
                     <div class="data-body">
-                        <!-- Kiri: Jenis Kelamin + Pendidikan -->
                         <div class="data-left">
                             <!-- Jenis Kelamin -->
                             <div class="data-group">
@@ -118,14 +113,12 @@
                                             <span class="bar-value">{{ item.count }} Jiwa ({{ item.value }}%)</span>
                                         </div>
                                         <div class="bar-track">
-                                            <div class="bar-fill {% if loop.first %}green{% else %}orange{% endif %}" 
-                                                 style="width: {{ item.value }}%;"></div>
+                                            <div class="bar-fill {% if loop.first %}green{% else %}orange{% endif %}" style="width: {{ item.value }}%;"></div>
                                         </div>
                                     </div>
                                     {% endfor %}
                                 </div>
                             </div>
-
                             <!-- Pendidikan -->
                             <div class="data-group">
                                 <h4>Berdasarkan Pendidikan</h4>
@@ -145,15 +138,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Kanan: Pekerjaan (Pie Chart) -->
                         <div class="data-right">
                             <h4>Berdasarkan Pekerjaan</h4>
                             <div class="pie-chart-wrapper">
                                 <div class="pie-chart">
                                     {% for item in pekerjaan_list %}
-                                    <div class="pie-segment" 
-                                         style="--p: {{ item.value }}%; --c: {{ item.color }}; --offset: {{ item.offset }}%;"></div>
+                                    <div class="pie-segment" style="--p: {{ item.value }}%; --c: {{ item.color }}; --offset: {{ item.offset }}%;"></div>
                                     {% endfor %}
                                     <div class="pie-center">
                                         <span class="total">{{ total_population }}</span>
@@ -178,20 +168,9 @@
                     <div class="section-header">
                         <h2>Kelola Berita</h2>
                         <a href="{{ url_for('admin_bp.tambah_berita') }}" class="btn-add">
-                            <i class="fa-solid fa-plus"></i>
-                                {% if edit %}
-
-Edit Berita
-
-{% else %}
-
-Tambah Berita
-
-{% endif %}
+                            <i class="fa-solid fa-plus"></i> Tambah Berita
                         </a>
                     </div>
-
-                    <!-- Filter + Search -->
                     <div class="filter-bar">
                         <form class="filter-search" action="{{ url_for('admin_bp.indexAdmin') }}" method="GET">
                             <i class="fa-solid fa-search"></i>
@@ -224,8 +203,6 @@ Tambah Berita
                             </form>
                         </div>
                     </div>
-
-                    <!-- Table -->
                     <div class="table-wrapper">
                         <table class="admin-table">
                             <thead>
@@ -259,54 +236,23 @@ Tambah Berita
                                         {% endif %}
                                     </td>
                                     <td class="actions">
-    <div class="action-item">
-    <a href="{{ url_for('admin_bp.edit_berita', id=item.id) }}"
-       class="action-edit">
-        <i class="fa-solid fa-pen-to-square"></i>
-    </a>
-</div>
-
-    <div class="action-item">
-
-<form
-id="deleteForm{{ item.id }}"
-action="{{ url_for('admin_bp.hapus_berita', id=item.id) }}"
-method="POST">
-
-    <button
-        type="button"
-        class="action-delete"
-        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_berita', id=item.id) }}')">
-
-        <i class="fa-solid fa-trash-can"></i>
-
-    </button>
-
-</form>
-
-</div>
-</td>
+                                        <a href="{{ url_for('admin_bp.edit_berita', id=item.id) }}" class="action-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_berita', id=item.id) }}')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
                                 </tr>
                                 {% else %}
-                                <tr>
-                                    <td colspan="9" style="text-align:center; padding:20px; color:#999;">Belum ada data berita</td>
-                                </tr>
+                                <tr><td colspan="9" style="text-align:center; padding:20px; color:#999;">Belum ada data berita</td></tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- Pagination -->
                     <div class="pagination-container">
                         <div class="pagination">
                             {% if news_current_page > 1 %}
-                            <button class="page-link" data-page="{{ news_current_page - 1 }}" data-type="news">
-                                &lt;
-                            </button>
+                            <button class="page-link" data-page="{{ news_current_page - 1 }}" data-type="news">&lt;</button>
                             {% else %}
                             <button class="page-link" disabled>&lt;</button>
                             {% endif %}
-
                             {% for p in range(1, news_total_pages + 1) %}
                                 {% if p == news_current_page %}
                                 <button class="page-link active" data-page="{{ p }}" data-type="news">{{ p }}</button>
@@ -314,11 +260,8 @@ method="POST">
                                 <button class="page-link" data-page="{{ p }}" data-type="news">{{ p }}</button>
                                 {% endif %}
                             {% endfor %}
-
                             {% if news_current_page < news_total_pages %}
-                            <button class="page-link" data-page="{{ news_current_page + 1 }}" data-type="news">
-                                &gt;
-                            </button>
+                            <button class="page-link" data-page="{{ news_current_page + 1 }}" data-type="news">&gt;</button>
                             {% else %}
                             <button class="page-link" disabled>&gt;</button>
                             {% endif %}
@@ -330,13 +273,10 @@ method="POST">
                 <section class="manage-section">
                     <div class="section-header">
                         <h2>Kelola Pengumuman dan Agenda</h2>
-                            <a href="{{ url_for('admin_bp.tambah_pengumuman') }}" class="btn-add">
-                                <i class="fa-solid fa-plus"></i>
-                                Tambah Pengumuman
-                            </a>
+                        <a href="{{ url_for('admin_bp.tambah_pengumuman') }}" class="btn-add">
+                            <i class="fa-solid fa-plus"></i> Tambah Pengumuman
+                        </a>
                     </div>
-
-                    <!-- Filter + Search -->
                     <div class="filter-bar">
                         <form class="filter-search" action="{{ url_for('admin_bp.indexAdmin') }}" method="GET">
                             <i class="fa-solid fa-search"></i>
@@ -369,8 +309,6 @@ method="POST">
                             </form>
                         </div>
                     </div>
-
-                    <!-- Table -->
                     <div class="table-wrapper">
                         <table class="admin-table">
                             <thead>
@@ -400,56 +338,23 @@ method="POST">
                                     <td>{{ item.location or '-' }}</td>
                                     <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</td>
                                     <td class="actions">
-    <div class="action-item">
-    <a
-    href="{{ url_for('admin_bp.edit_pengumuman', id=item.id) }}"
-    class="action-edit">
-
-    <i class="fa-solid fa-pen-to-square"></i>
-
-</a>
-</div>
-
-    <div class="action-item">
-
-<form
-action="{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}"
-method="POST"
-onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
-
-<button
-        type="button"
-        class="action-delete"
-        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')">
-
-        <i class="fa-solid fa-trash-can"></i>
-
-    </button>
-</form>
-
-</div>
-</td>
+                                        <a href="{{ url_for('admin_bp.edit_pengumuman', id=item.id) }}" class="action-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
                                 </tr>
                                 {% else %}
-                                <tr>
-                                    <td colspan="7" style="text-align:center; padding:20px; color:#999;">Belum ada data pengumuman</td>
-                                </tr>
+                                <tr><td colspan="7" style="text-align:center; padding:20px; color:#999;">Belum ada data pengumuman</td></tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
-
-                    <!-- Pagination -->
                     <div class="pagination-container">
                         <div class="pagination">
                             {% if announce_current_page > 1 %}
-                            <button class="page-link" data-page="{{ announce_current_page - 1 }}" data-type="announce">
-                                &lt;
-                            </button>
+                            <button class="page-link" data-page="{{ announce_current_page - 1 }}" data-type="announce">&lt;</button>
                             {% else %}
                             <button class="page-link" disabled>&lt;</button>
                             {% endif %}
-
                             {% for p in range(1, announce_total_pages + 1) %}
                                 {% if p == announce_current_page %}
                                 <button class="page-link active" data-page="{{ p }}" data-type="announce">{{ p }}</button>
@@ -457,15 +362,85 @@ onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
                                 <button class="page-link" data-page="{{ p }}" data-type="announce">{{ p }}</button>
                                 {% endif %}
                             {% endfor %}
-
                             {% if announce_current_page < announce_total_pages %}
-                            <button class="page-link" data-page="{{ announce_current_page + 1 }}" data-type="announce">
-                                &gt;
-                            </button>
+                            <button class="page-link" data-page="{{ announce_current_page + 1 }}" data-type="announce">&gt;</button>
                             {% else %}
                             <button class="page-link" disabled>&gt;</button>
                             {% endif %}
                         </div>
+                    </div>
+                </section>
+
+                <!-- ===== KELOLA DOKUMEN APBDES ===== -->
+                <section class="manage-section">
+                    <div class="section-header">
+                        <h2>Kelola Dokumen APBDes</h2>
+                        <a href="{{ url_for('admin_bp.tambah_dokumen_apbdes') }}" class="btn-add">
+                            <i class="fa-solid fa-plus"></i> Tambah Dokumen
+                        </a>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Tahun</th>
+                                    <th>Kategori</th>
+                                    <th>Ukuran</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for doc in dokumen_items %}
+                                <tr>
+                                    <td>{{ doc.title }}</td>
+                                    <td>{{ doc.year }}</td>
+                                    <td>{{ 'Arsip' if doc.category == 'arsip' else 'APBDes Berjalan' }}</td>
+                                    <td>{{ doc.file_size }}</td>
+                                    <td class="actions">
+                                        <a href="{{ url_for('admin_bp.edit_dokumen_apbdes', id=doc.id) }}" class="action-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_dokumen_apbdes', id=doc.id) }}')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr><td colspan="5" style="text-align:center; padding:20px; color:#999;">Belum ada dokumen APBDes.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination">
+                            {% if dokumen_current_page > 1 %}
+                            <button class="page-link" data-page="{{ dokumen_current_page - 1 }}" data-type="dokumen">&lt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&lt;</button>
+                            {% endif %}
+                            {% for p in range(1, dokumen_total_pages + 1) %}
+                                {% if p == dokumen_current_page %}
+                                <button class="page-link active" data-page="{{ p }}" data-type="dokumen">{{ p }}</button>
+                                {% else %}
+                                <button class="page-link" data-page="{{ p }}" data-type="dokumen">{{ p }}</button>
+                                {% endif %}
+                            {% endfor %}
+                            {% if dokumen_current_page < dokumen_total_pages %}
+                            <button class="page-link" data-page="{{ dokumen_current_page + 1 }}" data-type="dokumen">&gt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&gt;</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== KELOLA BANSOS ===== -->
+                <section class="manage-section">
+                    <div class="section-header">
+                        <h2>Kelola Bansos</h2>
+                        <a href="#" class="btn-add">
+                            <i class="fa-solid fa-plus"></i> Tambah Bansos
+                        </a>
+                    </div>
+                    <div style="padding: 12px 0; color: #666; font-size: 14px;">
+                        Kelola data penerima bantuan sosial dan jadwal penyaluran. (Fitur dalam pengembangan)
                     </div>
                 </section>
 
@@ -476,100 +451,54 @@ onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
         <div class="copyright">
             © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
         </div>
-
     </div>
 
+    <!-- ===== MODAL DELETE ===== -->
     <div class="modal-delete" id="deleteModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <h3>Konfirmasi Hapus</h3>
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Konfirmasi Hapus</h3>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                <form id="deleteForm" method="POST">
+                    <button type="submit" class="btn-delete">Ya, Hapus</button>
+                </form>
+            </div>
         </div>
-
-        <div class="modal-body">
-            <p>Apakah Anda yakin ingin menghapus data ini?</p>
-        </div>
-
-        <div class="modal-footer">
-
-            <button type="button"
-                    class="btn-cancel"
-                    onclick="closeModal()">
-                Batal
-            </button>
-
-            <form id="deleteForm" method="POST">
-                <button type="submit"
-                        class="btn-delete">
-                    Ya, Hapus
-                </button>
-            </form>
-
-        </div>
-
     </div>
 
-
-</div>
-
-<!-- =========================
-     MODAL LOGOUT
-========================= -->
-
-<div class="modal-delete" id="logoutModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <h3>Konfirmasi Logout</h3>
+    <!-- ===== MODAL LOGOUT ===== -->
+    <div class="modal-delete" id="logoutModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <h3>Konfirmasi Logout</h3>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
+                <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">Ya, Logout</a>
+            </div>
         </div>
-
-        <div class="modal-body">
-            <p>Apakah Anda yakin ingin logout?</p>
-        </div>
-
-        <div class="modal-footer">
-
-            <button
-                type="button"
-                class="btn-cancel"
-                onclick="closeLogoutModal()">
-
-                Batal
-
-            </button>
-
-            <a
-                href="{{ url_for('admin_bp.logout') }}"
-                class="btn-delete"
-                style="text-decoration:none;text-align:center;">
-
-                Ya, Logout
-
-            </a>
-
-        </div>
-
     </div>
 
-</div>
-    <!-- ===== JAVASCRIPT PAGINATION & DROPDOWN ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Dropdown toggle
             const profileToggle = document.getElementById('profileToggle');
             const dropdownMenu = document.getElementById('dropdownMenu');
-
             if (profileToggle && dropdownMenu) {
                 profileToggle.addEventListener('click', function(e) {
                     e.stopPropagation();
                     dropdownMenu.classList.toggle('show');
                     this.classList.toggle('active');
                 });
-
                 document.addEventListener('click', function(e) {
                     const profile = document.getElementById('adminProfile');
                     if (!profile.contains(e.target)) {
@@ -579,68 +508,37 @@ onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
                 });
             }
 
-            // Pagination click handler
             document.querySelectorAll('.page-link[data-page]').forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
                     const page = this.dataset.page;
                     const type = this.dataset.type;
                     if (!page || this.disabled) return;
-
                     const url = new URL(window.location.href);
-                    if (type === 'news') {
-                        url.searchParams.set('page_news', page);
-                    } else if (type === 'announce') {
-                        url.searchParams.set('page_announce', page);
-                    }
+                    if (type === 'news') url.searchParams.set('page_news', page);
+                    else if (type === 'announce') url.searchParams.set('page_announce', page);
+                    else if (type === 'dokumen') url.searchParams.set('page_dokumen', page);
                     window.location.href = url.toString();
                 });
             });
         });
 
-
-        function openDeleteModal(url){
-
-    document.getElementById("deleteModal").classList.add("show");
-    document.getElementById("deleteForm").action = url;
-
-}
-
-function closeModal(){
-
-    document.getElementById("deleteModal").classList.remove("show");
-
-}
-
-function openLogoutModal(){
-
-    document
-        .getElementById("logoutModal")
-        .classList
-        .add("show");
-
-}
-
-function closeLogoutModal(){
-
-    document
-        .getElementById("logoutModal")
-        .classList
-        .remove("show");
-
-}
-
-window.onclick = function(e){
-
-    const modal = document.getElementById("deleteModal");
-
-    if(e.target === modal){
-        closeModal();
-    }
-
-}
+        function openDeleteModal(url) {
+            document.getElementById('deleteModal').classList.add('show');
+            document.getElementById('deleteForm').action = url;
+        }
+        function closeModal() {
+            document.getElementById('deleteModal').classList.remove('show');
+        }
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.add('show');
+        }
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+        }
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('deleteModal')) closeModal();
+            if (e.target === document.getElementById('logoutModal')) closeLogoutModal();
+        }
     </script>
-
-    
-
 </body>
 </html>

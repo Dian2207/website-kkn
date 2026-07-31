@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Dokumen APBDes - Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='static_admin/css/dashboard_admin.css') }}" />
+</head>
+<body>
+    <div class="admin-wrapper">
+        <header class="admin-navbar">
+            <div class="container">
+                <div class="navbar-left">
+                    <div class="logo">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                        <span>Desa Katemas</span>
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <div class="admin-profile" id="adminProfile">
+                        <div class="profile-info">
+                            <span class="name">Admin Desa</span>
+                            <span class="role">Administrator</span>
+                        </div>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="javascript:void(0);" class="dropdown-item logout" onclick="openLogoutModal()">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-content">
+            <div class="container">
+                <div class="page-header">
+                    <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+                    </a>
+                </div>
+                <div class="manage-section">
+                    <div class="section-header">
+                        <h2>Kelola Dokumen APBDes</h2>
+                        <a href="{{ url_for('admin_bp.tambah_dokumen_apbdes') }}" class="btn-add">
+                            <i class="fa-solid fa-plus"></i> Tambah Dokumen
+                        </a>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Tahun</th>
+                                    <th>Kategori</th>
+                                    <th>Ukuran</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for doc in dokumen %}
+                                <tr>
+                                    <td>{{ doc.title }}</td>
+                                    <td>{{ doc.year }}</td>
+                                    <td>{{ 'Arsip' if doc.category == 'arsip' else 'APBDes Berjalan' }}</td>
+                                    <td>{{ doc.file_size }}</td>
+                                    <td class="actions">
+                                        <a href="{{ url_for('admin_bp.edit_dokumen_apbdes', id=doc.id) }}" class="action-edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_dokumen_apbdes', id=doc.id) }}')"><i class="fa-solid fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr><td colspan="5" style="text-align:center; padding:20px; color:#999;">Belum ada dokumen APBDes.</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination">
+                            {% if current_page > 1 %}
+                            <button class="page-link" data-page="{{ current_page - 1 }}">&lt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&lt;</button>
+                            {% endif %}
+                            {% for p in range(1, total_pages + 1) %}
+                                {% if p == current_page %}
+                                <button class="page-link active" data-page="{{ p }}">{{ p }}</button>
+                                {% else %}
+                                <button class="page-link" data-page="{{ p }}">{{ p }}</button>
+                                {% endif %}
+                            {% endfor %}
+                            {% if current_page < total_pages %}
+                            <button class="page-link" data-page="{{ current_page + 1 }}">&gt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&gt;</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal-delete" id="deleteModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Konfirmasi Hapus</h3>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus dokumen ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                <form id="deleteForm" method="POST">
+                    <button type="submit" class="btn-delete">Ya, Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Logout -->
+    <div class="modal-delete" id="logoutModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <h3>Konfirmasi Logout</h3>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin logout?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
+                <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">Ya, Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileToggle = document.getElementById('profileToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            if (profileToggle && dropdownMenu) {
+                profileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    this.classList.toggle('active');
+                });
+                document.addEventListener('click', function(e) {
+                    const profile = document.getElementById('adminProfile');
+                    if (!profile.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        profileToggle.classList.remove('active');
+                    }
+                });
+            }
+            document.querySelectorAll('.page-link[data-page]').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    const page = this.dataset.page;
+                    if (!page || this.disabled) return;
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('page', page);
+                    window.location.href = url.toString();
+                });
+            });
+        });
+
+        function openDeleteModal(url) {
+            document.getElementById('deleteModal').classList.add('show');
+            document.getElementById('deleteForm').action = url;
+        }
+        function closeModal() {
+            document.getElementById('deleteModal').classList.remove('show');
+        }
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.add('show');
+        }
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
+        }
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('deleteModal')) closeModal();
+            if (e.target === document.getElementById('logoutModal')) closeLogoutModal();
+        }
+    </script>
+</body>
+</html>

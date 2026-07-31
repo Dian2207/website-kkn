@@ -86,15 +86,15 @@ header{
 }
 
 /* ===========================
-HEADER
+HEADER (HERO)
 =========================== */
 
 .apbdes{
-    padding:110px 0 70px;
+    padding:110px 0 50px;
 }
 
 .section-title{
-    margin-bottom:40px;
+    margin-bottom:20px;
 }
 
 .section-title h1{
@@ -110,148 +110,150 @@ HEADER
 }
 
 /* ===========================
-LAYOUT
+DOKUMEN APBDES
 =========================== */
 
-.apbdes-wrapper{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:40px;
+.dokumen-section{
+    padding: 20px 0 60px;
 }
 
-.apbdes-left h2{
-    color:#156D2F;
-    margin-bottom:25px;
-    font-size:28px;
-}
-
-/* ===========================
-CARD
-=========================== */
-
-.statistik-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
-}
-
-.statistik-card{
-    background:#fff;
-    border-radius:15px;
-    border:1px solid #e5e5e5;
-    padding:20px;
+.section-title-dokumen{
     display:flex;
     align-items:center;
-    gap:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,.06);
-    transition:.3s;
+    gap:12px;
+    font-size:24px;
+    font-weight:700;
+    color:#1A1C1C;
+    margin-bottom:24px;
 }
 
-.statistik-card:hover{
-    transform:translateY(-5px);
+.section-title-dokumen .green-bar{
+    display:inline-block;
+    width:6px;
+    height:28px;
+    background:#006E23;
+    border-radius:3px;
 }
 
-.icon-box{
-    width:50px;
-    height:50px;
-    border-radius:12px;
-    background:#B9F5A8;
-    color:#156D2F;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:20px;
-}
-
-.statistik-card span{
-    display:block;
-    font-size:13px;
-    color:#666;
-}
-
-.statistik-card h3{
-    margin-top:5px;
-    font-size:22px;
-    color:#222;
-}
-
-/* ===========================
-IMAGE
-=========================== */
-
-.apbdes-right{
-
+/* Daftar dokumen */
+.doc-list{
     display:flex;
     flex-direction:column;
+    gap:16px;
+}
+
+.doc-item{
+    display:flex;
     align-items:center;
-    justify-content:flex-start;
-
-}
-
-.apbdes-right h2{
-
-    color:#156D2F;
-    font-size:28px;
-    font-weight:700;
-    margin-bottom:20px;
-    text-align:center;
-
-}
-
-#apbdesChart{
-
-    width:360px !important;
-    height:360px !important;
-
-}
-
-/* ===========================
-SECTION TITLE
-=========================== */
-
-.section-heading{
-    color:#156D2F;
-    font-size:30px;
-    margin-bottom:25px;
-}
-
-/* ===========================
-TABLE
-=========================== */
-
-.table-section{
-    padding-bottom:60px;
-}
-
-.table-card{
+    gap:20px;
+    padding:16px 20px;
     background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    border:1px solid rgba(190,202,185,0.3);
+    border-radius:12px;
+    transition:.2s;
 }
 
-.table-card table{
-    width:100%;
-    border-collapse:collapse;
+.doc-item:hover{
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
-.table-card th{
-    background:#156D2F;
+.doc-icon{
+    width:48px;
+    height:48px;
+    background:#A3E6A8;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.doc-icon i{
+    font-size:22px;
+    color:#1A1C1C;
+}
+
+.doc-info{
+    flex:1;
+    min-width:0;
+}
+
+.doc-info h3{
+    font-size:18px;
+    font-weight:700;
+    color:#1A1C1C;
+    line-height:1.4;
+    margin-bottom:2px;
+}
+
+.doc-meta{
+    font-size:12px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:0.6px;
+    color:#3F4A3D;
+}
+
+.doc-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-shrink:0;
+}
+
+.btn-outline,
+.btn-primary{
+    padding:8px 18px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+    border:1px solid #006E23;
+    background:transparent;
+    color:#006E23;
+    text-align:center;
+}
+
+.btn-outline:hover{
+    background:#006E23;
     color:#fff;
-    padding:15px;
-    text-align:center;
-    font-size:14px;
 }
 
-.table-card td{
-    padding:14px;
-    border-bottom:1px solid #eee;
-    text-align:center;
-    font-size:14px;
+.btn-primary{
+    background:#006E23;
+    color:#fff;
+    border-color:#006E23;
 }
 
-.table-card tbody tr:hover{
-    background:#f6fff5;
+.btn-primary:hover{
+    background:#005a1c;
+    border-color:#005a1c;
+}
+
+/* Kotak bantuan */
+.help-box{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    margin-top:40px;
+    padding:20px 24px;
+    background:rgba(190,239,191,0.3);
+    border:1px solid #BEEFBF;
+    border-radius:12px;
+}
+
+.help-box i{
+    font-size:24px;
+    color:#3D6842;
+    flex-shrink:0;
+    margin-top:2px;
+}
+
+.help-box p{
+    font-size:16px;
+    line-height:1.6;
+    color:#436E48;
+    margin:0;
 }
 
 /* ===========================
@@ -310,10 +312,6 @@ RESPONSIVE
 
 @media(max-width:992px){
 
-    .apbdes-wrapper{
-        grid-template-columns:1fr;
-    }
-
     .section-title p{
         width:100%;
     }
@@ -322,30 +320,86 @@ RESPONSIVE
         grid-template-columns:1fr 1fr;
     }
 
+    .doc-item{
+        flex-wrap:wrap;
+        gap:12px;
+    }
+
+    .doc-actions{
+        width:100%;
+        justify-content:flex-start;
+    }
+
 }
 
 @media(max-width:768px){
 
-    .statistik-grid{
-        grid-template-columns:1fr;
-    }
-
     .section-title h1{
         font-size:28px;
-    }
-
-    .section-heading{
-        font-size:26px;
-    }
-
-    .table-card th,
-    .table-card td{
-        font-size:13px;
-        padding:10px;
     }
 
     .footer-grid{
         grid-template-columns:1fr;
     }
 
+    .section-title-dokumen{
+        font-size:20px;
+    }
+
+    .doc-info h3{
+        font-size:16px;
+    }
+
+    .doc-item{
+        padding:14px 16px;
+    }
+
+    .help-box{
+        flex-wrap:wrap;
+        padding:16px 18px;
+    }
+
+    .help-box p{
+        font-size:14px;
+    }
+
+}
+
+/* ===========================
+DETAIL DOKUMEN (TOGGLE)
+=========================== */
+
+.doc-item {
+    position: relative;
+    flex-wrap: wrap; /* agar detail bisa turun ke baris baru */
+}
+
+.doc-detail {
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px 20px;
+    background: #f9fcf9;
+    border-radius: 10px;
+    border: 1px solid #e0ebe0;
+    transition: all 0.3s ease;
+}
+
+.doc-detail-content {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.doc-detail-content strong {
+    color: #006E23;
+}
+
+/* Agar tombol tidak berubah saat toggle */
+.doc-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-outline.toggle-doc {
+    cursor: pointer;
 }
