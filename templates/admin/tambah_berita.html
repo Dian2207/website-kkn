@@ -67,6 +67,12 @@ rel="stylesheet">
                 </a>
             </div>
 
+            <!-- ===== TITLE ===== -->
+            <div class="title">
+                <h1>Tambah Berita</h1>
+                <p>Tambahkan berita terbaru untuk informasikan kepada masyarakat Desa Katemas.</p>
+            </div>
+
             <!-- Form -->
             <form class="news-form"
       method="POST"
@@ -111,6 +117,8 @@ name="content">{{ berita.content if berita else '' }}</textarea>
                         </div>
 
                     </div>
+
+                    <div class="right">
 <div class="right">
 
     <!-- Gambar -->
@@ -132,6 +140,17 @@ alt="Thumbnail">
         {% endif %}
     </div>
 
+                        <div class="card">
+                            <h4>Status</h4>
+                            <label>
+                                <input type="radio" name="status" value="draft" checked>
+                                Draft
+                            </label>
+                            <label>
+                                <input type="radio" name="status" value="published">
+                                Publikasikan
+                            </label>
+                        </div>
     <!-- Status -->
     <div class="card">
         <h4>Status</h4>
@@ -166,6 +185,7 @@ alt="Thumbnail">
         </button>
     </div>
 
+                </div>
 </div>
 
             </form>
