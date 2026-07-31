@@ -6,9 +6,16 @@ from routes.route import main
 from routes.admin_route import admin_bp
 from dotenv import load_dotenv
 load_dotenv()
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config["UPLOAD_FOLDER"] = os.path.join(
+    app.root_path,
+    "static",
+    "uploads",
+    "news"
+)
 db.init_app(app)
 
 # Membuat tabel jika belum ada

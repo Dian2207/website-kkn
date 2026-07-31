@@ -265,7 +265,7 @@ background-repeat: no-repeat;">
                          alt="{{ item.title }}">
                     <div class="news-content">
                         <div class="news-meta">
-                            <small>{{ item.published_at.strftime('%d %b %Y') }}</small>
+                            <small>{{ item.published_at.strftime('%d %b %Y') if item.published_at else '-' }}</small>
                         </div>
                         <h3>
                             <a href="{{ url_for('main.detailBerita', id=item.id) }}">

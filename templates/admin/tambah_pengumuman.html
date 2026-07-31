@@ -31,9 +31,12 @@
                         </div>
                         <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
-                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
-                            </a>
+                            <a href="javascript:void(0);"
+   class="dropdown-item logout"
+   onclick="openLogoutModal()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Keluar / Logout
+</a>
                         </div>
                     </div>
                 </div>
@@ -51,69 +54,137 @@
                     </a>
                 </div>
 
-                <form class="detail-form" method="POST" action="{{ url_for('admin_bp.simpan_pengumuman') }}">
+                <form  class="detail-form"
+    method="POST"
+    action="{% if edit %}
+                {{ url_for('admin_bp.update_pengumuman', id=announcement.id) }}
+            {% else %}
+                {{ url_for('admin_bp.simpan_pengumuman') }}
+            {% endif %}">
 
                     <div class="content content-full">
 
                         <div class="card detail-card full-width">
 
                             <!-- Judul -->
-                            <div class="form-group">
-                                <label>Judul Pengumuman <span style="color:#D62828;">*</span></label>
-                                <input type="text" name="judul" placeholder="Masukkan judul pengumuman..." required />
-                            </div>
+                           <div class="form-group">
+    <label>Judul Pengumuman <span style="color:#D62828;">*</span></label>
+
+    <input
+        type="text"
+        name="title"
+        placeholder="Masukkan judul pengumuman..."
+        value="{{ announcement.title if announcement else '' }}"
+        required>
+</div>
 
                             <!-- Jenis (radio) -->
                             <div class="form-group">
-                                <label>Jenis</label>
-                                <div class="radio-group">
-                                    <label class="radio-option">
-                                        <input type="radio" name="jenis" value="pengumuman" checked />
-                                        <span>Pengumuman</span>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="jenis" value="agenda" />
-                                        <span>Agenda</span>
-                                    </label>
-                                </div>
-                            </div>
+    <label>Jenis</label>
+
+    <div class="radio-group">
+
+        <label class="radio-option">
+
+            <input
+                type="radio"
+                name="type"
+                value="Pengumuman"
+
+                {% if not announcement or announcement.type == "Pengumuman" %}
+                checked
+                {% endif %}>
+
+            <span>Pengumuman</span>
+
+        </label>
+
+        <label class="radio-option">
+
+            <input
+                type="radio"
+                name="type"
+                value="Agenda"
+
+                {% if announcement and announcement.type == "Agenda" %}
+                checked
+                {% endif %}>
+
+            <span>Agenda</span>
+
+        </label>
+
+    </div>
+
+</div>
 
                             <!-- Lokasi -->
                             <div class="form-group">
-                                <label>Lokasi</label>
-                                <div class="input-icon">
-                                    <input type="text" name="lokasi" placeholder="Masukkan lokasi kegiatan..." />
-                                </div>
-                            </div>
+
+    <label>Lokasi</label>
+
+    <input
+        type="text"
+        name="location"
+        placeholder="Masukkan lokasi kegiatan..."
+        value="{{ announcement.location if announcement else '' }}">
+
+</div>
 
                             <!-- Deskripsi -->
                             <div class="form-group">
-                                <label>Deskripsi</label>
-                                <textarea name="deskripsi" rows="5" placeholder="Masukkan deskripsi pengumuman..."></textarea>
-                            </div>
+
+    <label>Deskripsi</label>
+
+    <textarea
+        name="description"
+        rows="5"
+        placeholder="Masukkan deskripsi pengumuman...">{{ announcement.description if announcement else '' }}</textarea>
+
+</div>
 
                             <!-- Tanggal & Waktu -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Tanggal Pelaksanaan</label>
-                                    <div class="input-icon">
-                                        <input type="date" name="tanggal" />
-                                    </div>
-                                </div>
+
+    <label>Tanggal Pelaksanaan</label>
+
+    <input
+        type="date"
+        name="event_date"
+        value="{% if announcement and announcement.event_date %}{{ announcement.event_date.strftime('%Y-%m-%d') }}{% endif %}">
+
+</div>
                                 <div class="form-group">
-                                    <label>Waktu Pelaksanaan</label>
-                                    <div class="input-icon">
-                                        <input type="time" name="waktu" />
-                                    </div>
-                                </div>
+
+    <label>Waktu Pelaksanaan</label>
+
+    <input
+        type="time"
+        name="event_time"
+        value="{% if announcement and announcement.event_date %}{{ announcement.event_date.strftime('%H:%M') }}{% endif %}">
+
+</div>
                             </div>
 
                             <!-- Tombol Aksi -->
                             <div class="form-actions">
-                                <button type="submit" class="btn-save">
-                                    Simpan
-                                </button>
-                            </div>
+
+    <button type="submit" class="btn-save">
+
+        {% if edit %}
+
+            Perbarui Pengumuman
+
+        {% else %}
+
+            Simpan
+
+        {% endif %}
+
+    </button>
+
+</div>
 
                         </div>
 
@@ -130,6 +201,47 @@
         </div>
 
     </div>
+<!-- =========================
+     MODAL LOGOUT
+========================= -->
+<div class="modal-delete" id="logoutModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <h3>Konfirmasi Logout</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin logout?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn-cancel"
+                onclick="closeLogoutModal()">
+
+                Batal
+
+            </button>
+
+            <a
+                href="{{ url_for('admin_bp.logout') }}"
+                class="btn-delete"
+                style="text-decoration:none;text-align:center;">
+
+                Ya, Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
     <script>
         // Dropdown toggle
@@ -153,6 +265,29 @@
                 });
             }
         });
+         function openLogoutModal() {
+    document
+        .getElementById("logoutModal")
+        .classList
+        .add("show");
+}
+
+function closeLogoutModal() {
+    document
+        .getElementById("logoutModal")
+        .classList
+        .remove("show");
+}
+
+window.onclick = function(e) {
+
+    const logoutModal = document.getElementById("logoutModal");
+
+    if (e.target === logoutModal) {
+        closeLogoutModal();
+    }
+
+}
     </script>
 
 </body>

@@ -1,3 +1,32 @@
+<<<<<<< HEAD
+=======
+
+
+/* ===== BACK BUTTON ===== */
+.page-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 0 8px;
+}
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0px 18px;
+    color: #386641;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+}
+.btn-back:hover {
+    color: #e76418;
+}
+.btn-back i {
+    font-size: 14px;
+}
+>>>>>>> 0880a2af85bfa69e19330613871f4ed3e5b53755
 /* ===========================
    GLOBAL FONT
 =========================== */
@@ -14,12 +43,27 @@
     box-sizing: border-box;
 }
 body {
+<<<<<<< HEAD
     background: #f5f7f4;
     color: #222;
 }
 
 /* ===========================
    TOP NAVBAR (sama dengan dashboard)
+=======
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+    color: #222;
+}
+.admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ===========================
+   TOP NAVBAR (sama dengan navbar publik)
+>>>>>>> 0880a2af85bfa69e19330613871f4ed3e5b53755
 =========================== */
 .admin-navbar {
     position: fixed;
@@ -32,8 +76,8 @@ body {
     height: 50px;
 }
 .admin-navbar .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 91%;
+    max-width: 1550px;
     margin: 0 auto;
     height: 50px;
     display: flex;
@@ -354,6 +398,7 @@ font-size: 14px;
         flex: 1;
     }
 }
+<<<<<<< HEAD
 @media (max-width: 768px) {
     .admin-navbar {
         height: auto;
@@ -381,4 +426,132 @@ font-size: 14px;
     .title p {
         text-align: center;
     }
+=======
+
+.card-header{
+
+flex-direction:column;
+
+gap:15px;
+
+align-items:flex-start;
+
+}
+
+.button-group{
+
+width:100%;
+
+}
+
+.button-group button{
+
+flex:1;
+
+}
+
+}
+
+/* ===========================
+   MODAL DELETE / LOGOUT
+=========================== */
+
+.modal-delete{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-delete.show{
+    display:flex;
+}
+
+.modal-box{
+    width:420px;
+    background:#ffffff;
+    border-radius:18px;
+    overflow:hidden;
+    animation:popup .3s ease;
+    box-shadow:0 18px 45px rgba(0,0,0,.25);
+}
+
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.modal-header{
+    background:linear-gradient(135deg,#2E7D32,#43A047);
+    color:white;
+    padding:22px;
+    text-align:center;
+}
+
+.modal-header i{
+    font-size:50px;
+    margin-bottom:10px;
+}
+
+.modal-header h3{
+    font-size:22px;
+    font-weight:700;
+}
+
+.modal-body{
+    padding:30px;
+    text-align:center;
+}
+
+.modal-body p{
+    color:#555;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.modal-footer{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:20px 30px 30px;
+}
+
+.btn-cancel{
+    padding:12px 28px;
+    border:none;
+    border-radius:8px;
+    background:#ECEFF1;
+    color:#333;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-cancel:hover{
+    background:#CFD8DC;
+}
+
+.btn-delete{
+    padding:12px 28px;
+    border:none;
+    border-radius:8px;
+    background:#2E7D32;
+    color:#fff;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-delete:hover{
+    background:#1B5E20;
+>>>>>>> 0880a2af85bfa69e19330613871f4ed3e5b53755
 }

@@ -44,9 +44,12 @@ rel="stylesheet">
                     </div>
                     <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
-                            <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
-                        </a>
+                        <a href="javascript:void(0);"
+   class="dropdown-item logout"
+   onclick="openLogoutModal()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Keluar / Logout
+</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +74,14 @@ rel="stylesheet">
             </div>
 
             <!-- Form -->
-            <form class="news-form" method="POST" action="{{ url_for('admin_bp.simpan_berita') }}" enctype="multipart/form-data">
+            <form class="news-form"
+      method="POST"
+      enctype="multipart/form-data"
+      action="{% if edit %}
+                {{ url_for('admin_bp.edit_berita', id=berita.id) }}
+              {% else %}
+                {{ url_for('admin_bp.simpan_berita') }}
+              {% endif %}">
 
                 <div class="content">
 
@@ -80,31 +90,55 @@ rel="stylesheet">
                         <div class="card">
 
                             <label>Judul Berita</label>
-                            <input type="text" name="judul" placeholder="Masukkan judul berita..." required>
+                            <input
+type="text"
+name="title"
+placeholder="Masukkan judul berita..."
+value="{{ berita.title if berita else '' }}">
 
                             <label>Slug</label>
-                            <input type="text" name="slug">
-
+                            <input
+type="text"
+name="slug"
+value="{{ berita.slug if berita else '' }}">
                             <label>Tanggal Publikasi</label>
-                            <input type="date" name="tanggal">
-
+<input
+type="date"
+name="published_at"
+value="{% if berita and berita.published_at %}{{ berita.published_at.strftime('%Y-%m-%d') }}{% endif %}">
                         </div>
 
                         <div class="card">
 
                             <label>Isi Berita</label>
-                            <textarea name="content" placeholder="Masukkan isi berita..." rows="18"></textarea>
+                            <textarea
+name="content">{{ berita.content if berita else '' }}</textarea>
 
                         </div>
 
                     </div>
 
                     <div class="right">
+<div class="right">
 
-                        <div class="card">
-                            <h4>Gambar Utama</h4>
-                            <input type="file" name="thumbnail" accept=".jpg,.jpeg,.png">
-                        </div>
+    <!-- Gambar -->
+    <div class="card">
+        <h4>Gambar Utama</h4>
+
+        <input
+            type="file"
+            name="thumbnail"
+            accept="image/*">
+
+        {% if edit and berita.thumbnail %}
+        <div class="preview-image">
+            <img
+src="{{ url_for('static',
+filename='uploads/news/' ~ berita.thumbnail) }}"
+alt="Thumbnail">
+        </div>
+        {% endif %}
+    </div>
 
                         <div class="card">
                             <h4>Status</h4>
@@ -117,26 +151,88 @@ rel="stylesheet">
                                 Publikasikan
                             </label>
                         </div>
+    <!-- Status -->
+    <div class="card">
+        <h4>Status</h4>
 
-                        <!-- TOMBOL SIMPAN -->
-                        <div class="form-actions">
-                            <button class="btn-save" type="submit">
-                                <i class="fa-solid fa-floppy-disk"></i> Simpan
-                            </button>
-                        </div>
+        <label class="radio-item">
+            <input
+                type="radio"
+                name="status"
+                value="draft"
+                {% if not berita or not berita.published_at %}checked{% endif %}>
+            Draft
+        </label>
 
-                    </div>
+        <label class="radio-item">
+            <input
+                type="radio"
+                name="status"
+                value="published"
+                {% if berita and berita.published_at %}checked{% endif %}>
+            Publikasikan
+        </label>
+    </div>
+
+    <!-- Tombol -->
+    <div class="form-actions">
+        <button class="btn-save" type="submit">
+            {% if edit %}
+                Perbarui Berita
+            {% else %}
+                Simpan
+            {% endif %}
+        </button>
+    </div>
 
                 </div>
+</div>
 
             </form>
 
         </div>
     </main>
 
-    <!-- ===== COPYRIGHT ===== -->
-    <div class="copyright">
-        © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+</div>
+
+<!-- =========================
+     MODAL LOGOUT
+========================= -->
+<div class="modal-delete" id="logoutModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <h3>Konfirmasi Logout</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin logout?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn-cancel"
+                onclick="closeLogoutModal()">
+
+                Batal
+
+            </button>
+
+            <a
+                href="{{ url_for('admin_bp.logout') }}"
+                class="btn-delete"
+                style="text-decoration:none;text-align:center;">
+
+                Ya, Logout
+
+            </a>
+
+        </div>
+
     </div>
 
 </div>
@@ -163,7 +259,35 @@ rel="stylesheet">
             });
         }
     });
-</script>
 
+    function openLogoutModal() {
+    document
+        .getElementById("logoutModal")
+        .classList
+        .add("show");
+}
+
+function closeLogoutModal() {
+    document
+        .getElementById("logoutModal")
+        .classList
+        .remove("show");
+}
+
+window.onclick = function(e) {
+
+    const logoutModal = document.getElementById("logoutModal");
+
+    if (e.target === logoutModal) {
+        closeLogoutModal();
+    }
+
+}
+</script>
+<!-- ===== COPYRIGHT ===== -->
+    <div class="copyright">
+        © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+    </div>
 </body>
+
 </html>

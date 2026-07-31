@@ -31,9 +31,12 @@
                         </div>
                         <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="{{ url_for('admin_bp.logout') }}" class="dropdown-item logout">
-                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
-                            </a>
+                            <a href="javascript:void(0);"
+   class="dropdown-item logout"
+   onclick="openLogoutModal()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Keluar / Logout
+</a>
                         </div>
                     </div>
                 </div>
@@ -176,7 +179,15 @@
                         <h2>Kelola Berita</h2>
                         <a href="{{ url_for('admin_bp.tambah_berita') }}" class="btn-add">
                             <i class="fa-solid fa-plus"></i>
-                                Tambah Berita
+                                {% if edit %}
+
+Edit Berita
+
+{% else %}
+
+Tambah Berita
+
+{% endif %}
                         </a>
                     </div>
 
@@ -249,16 +260,31 @@
                                     </td>
                                     <td class="actions">
     <div class="action-item">
-        <button type="button" class="action-edit">
-            <i class="fa-solid fa-pen-to-square"></i>
-        </button>
-    </div>
+    <a href="{{ url_for('admin_bp.edit_berita', id=item.id) }}"
+       class="action-edit">
+        <i class="fa-solid fa-pen-to-square"></i>
+    </a>
+</div>
 
     <div class="action-item">
-        <button type="button" class="action-delete">
-            <i class="fa-solid fa-trash-can"></i>
-        </button>
-    </div>
+
+<form
+id="deleteForm{{ item.id }}"
+action="{{ url_for('admin_bp.hapus_berita', id=item.id) }}"
+method="POST">
+
+    <button
+        type="button"
+        class="action-delete"
+        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_berita', id=item.id) }}')">
+
+        <i class="fa-solid fa-trash-can"></i>
+
+    </button>
+
+</form>
+
+</div>
 </td>
                                 </tr>
                                 {% else %}
@@ -375,16 +401,33 @@
                                     <td>{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '-' }}</td>
                                     <td class="actions">
     <div class="action-item">
-        <button class="action-edit">
-            <i class="fa-solid fa-pen-to-square"></i>
-        </button>
-    </div>
+    <a
+    href="{{ url_for('admin_bp.edit_pengumuman', id=item.id) }}"
+    class="action-edit">
+
+    <i class="fa-solid fa-pen-to-square"></i>
+
+</a>
+</div>
 
     <div class="action-item">
-        <button class="action-delete">
-            <i class="fa-solid fa-trash-can"></i>
-        </button>
-    </div>
+
+<form
+action="{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}"
+method="POST"
+onsubmit="return confirm('Anda yakin ingin menghapus pengumuman ini?');">
+
+<button
+        type="button"
+        class="action-delete"
+        onclick="openDeleteModal('{{ url_for('admin_bp.hapus_pengumuman', id=item.id) }}')">
+
+        <i class="fa-solid fa-trash-can"></i>
+
+    </button>
+</form>
+
+</div>
 </td>
                                 </tr>
                                 {% else %}
@@ -436,6 +479,83 @@
 
     </div>
 
+    <div class="modal-delete" id="deleteModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h3>Konfirmasi Hapus</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button type="button"
+                    class="btn-cancel"
+                    onclick="closeModal()">
+                Batal
+            </button>
+
+            <form id="deleteForm" method="POST">
+                <button type="submit"
+                        class="btn-delete">
+                    Ya, Hapus
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<!-- =========================
+     MODAL LOGOUT
+========================= -->
+
+<div class="modal-delete" id="logoutModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <h3>Konfirmasi Logout</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>Apakah Anda yakin ingin logout?</p>
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="btn-cancel"
+                onclick="closeLogoutModal()">
+
+                Batal
+
+            </button>
+
+            <a
+                href="{{ url_for('admin_bp.logout') }}"
+                class="btn-delete"
+                style="text-decoration:none;text-align:center;">
+
+                Ya, Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
     <!-- ===== JAVASCRIPT PAGINATION & DROPDOWN ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -476,7 +596,51 @@
                 });
             });
         });
+
+
+        function openDeleteModal(url){
+
+    document.getElementById("deleteModal").classList.add("show");
+    document.getElementById("deleteForm").action = url;
+
+}
+
+function closeModal(){
+
+    document.getElementById("deleteModal").classList.remove("show");
+
+}
+
+function openLogoutModal(){
+
+    document
+        .getElementById("logoutModal")
+        .classList
+        .add("show");
+
+}
+
+function closeLogoutModal(){
+
+    document
+        .getElementById("logoutModal")
+        .classList
+        .remove("show");
+
+}
+
+window.onclick = function(e){
+
+    const modal = document.getElementById("deleteModal");
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+}
     </script>
+
+    
 
 </body>
 </html>
