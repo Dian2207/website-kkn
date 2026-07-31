@@ -323,6 +323,23 @@ body {
     margin-top: 16px;
 }
 
+/* ===== TITLE ===== */
+.title {
+    padding: 12px 0 20px;
+}
+.title h1{
+font-size: 28px;
+font-weight: 600;
+margin-bottom:5px;
+color:#386641;
+text-align:center
+}
+.title p{
+color:#666;
+text-align:center;
+font-size: 14px;
+}
+
 /* ===========================
    RESPONSIVE
 =========================== */

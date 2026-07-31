@@ -1,40 +1,25 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#f5f7f4;
-}
-
-/* ===== BACK BUTTON ===== */
-.page-header {
-    display: flex;
-    align-items: center;
-    padding: 12px 0 8px;
-}
-.btn-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0px 18px;
-    color: #386641;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: .3s;
-}
-.btn-back:hover {
-    color: #e76418;
-}
-.btn-back i {
-    font-size: 14px;
-}
 /* ===========================
-   TOP NAVBAR (sama dengan navbar publik)
+   GLOBAL FONT
+=========================== */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ===========================
+   RESET & GLOBAL
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #f5f7f4;
+    color: #222;
+}
+
+/* ===========================
+   TOP NAVBAR (sama dengan dashboard)
 =========================== */
 .admin-navbar {
     position: fixed;
@@ -76,23 +61,6 @@ background:#f5f7f4;
     display: flex;
     align-items: center;
     gap: 16px;
-}
-.notification {
-    position: relative;
-    padding: 4px;
-}
-.notification i {
-    font-size: 20px;
-    color: rgba(255,255,255,0.8);
-}
-.notification .badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 8px;
-    background: #BA1A1A;
-    border-radius: 50%;
 }
 .admin-profile {
     display: flex;
@@ -194,17 +162,44 @@ background:#f5f7f4;
     margin: 6px 12px;
 }
 
-
-.container{
-
-width:95%;
-
-margin:80px auto;
-
-padding-right:90px;
-padding-left:90px;
+/* ===== BACK BUTTON ===== */
+.page-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 0 8px;
+}
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0px 18px;
+    color: #386641;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+}
+.btn-back:hover {
+    color: #e76418;
+}
+.btn-back i {
+    font-size: 14px;
 }
 
+/* ===== MAIN CONTAINER ===== */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 70px auto 0;
+    padding: 0;
+}
+
+/* ===== TITLE ===== */
+
+.title {
+    padding: 12px 0 20px;
+}
 .title h1{
 font-size: 28px;
 font-weight: 600;
@@ -212,143 +207,115 @@ margin-bottom:5px;
 color:#386641;
 text-align:center
 }
-
 .title p{
 color:#666;
-margin-bottom:25px;
 text-align:center;
 font-size: 14px;
 }
 
-.card{
-
-background:white;
-
-border-radius:12px;
-
-box-shadow:0 5px 18px rgba(0,0,0,.08);
-
-margin-bottom:30px;
-
-overflow:hidden;
+/* ===== CARD ===== */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+    margin-bottom: 30px;
+    overflow: hidden;
+    border: 1px solid #d8ded6;
 }
 
-.card-header{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:5px 25px;
-
-background:#edf4e8;
-
-border-bottom:1px solid #d9e3d2;
-}
-
-.card-header h3{
-
-color:#2c6d37;
-
-font-size:20px;
-
-font-weight:600;
-}
-
-.button-group{
+.card-header {
     display: flex;
-    justify-content: flex-end; /* tombol ke kanan */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: #edf4e8;
+    border-bottom: 1px solid #d9e3d2;
+}
+.card-header h3 {
+    color: #2c6d37;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 20px 20px 20px; /* kanan bawah */
+}
+.card-header h3 i {
+    color: #2c6d37;
 }
 
+/* ===== GRID ===== */
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 25px;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 25px;
+}
+
+/* ===== FORM GROUP ===== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1c1c;
+}
+.form-group input {
+    height: 46px;
+    padding: 12px;
+    border: 1px solid #d7d7d7;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group input:focus {
+    border-color: #2f6f3e;
+    box-shadow: 0 0 5px rgba(47,111,62,.2);
+}
+
+/* ===== BUTTON GROUP (di dalam card) ===== */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 20px 20px;
+}
 .btn-save,
-.btn-cancel{
+.btn-cancel {
     border: none;
-    padding: 8px 18px;      /* sebelumnya 11px 22px */
-    border-radius: 6px;     /* sebelumnya 7px */
+    padding: 8px 18px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;        /* tambahkan */
-    height: 38px;           /* tambahkan */
-    min-width: 110px;       /* tambahkan */
+    font-size: 13px;
+    height: 38px;
+    min-width: 110px;
     transition: .3s;
 }
-
-.btn-save{
+.btn-save {
     background: #2f6f3e;
     color: #fff;
 }
-
-.btn-cancel{
+.btn-cancel {
     background: #d93025;
     color: #fff;
 }
-
-.btn-save:hover{
-    background:#275b33;
+.btn-save:hover {
+    background: #275b33;
 }
-
-.btn-cancel:hover{
-    background:#bf251d;
-}
-
-.grid-4{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:25px;
-
-padding:25px;
-}
-
-.grid-2{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:20px;
-
-padding:25px;
-}
-
-.form-group{
-display:flex;
-flex-direction:column;
-}
-
-label{
-margin-bottom:8px;
-font-size:14px;
-font-weight:500;
-}
-
-input{
-
-height:46px;
-
-padding:12px;
-
-border:1px solid #d7d7d7;
-
-border-radius:7px;
-
-font-size:15px;
-
-outline:none;
-}
-
-input:focus{
-
-border-color:#2f6f3e;
-
-box-shadow:0 0 5px rgba(47,111,62,.2);
+.btn-cancel:hover {
+    background: #bf251d;
 }
 
 /* ===== COPYRIGHT ===== */
@@ -363,40 +330,55 @@ box-shadow:0 0 5px rgba(47,111,62,.2);
     margin-top: 16px;
 }
 
-@media(max-width:900px){
-
-.grid-4{
-
-grid-template-columns:repeat(2,1fr);
-
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 1024px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
-
-.grid-2{
-
-grid-template-columns:1fr;
-
+@media (max-width: 900px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .card-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    .button-group {
+        width: 100%;
+    }
+    .button-group button {
+        flex: 1;
+    }
 }
-
-.card-header{
-
-flex-direction:column;
-
-gap:15px;
-
-align-items:flex-start;
-
-}
-
-.button-group{
-
-width:100%;
-
-}
-
-.button-group button{
-
-flex:1;
-
-}
-
+@media (max-width: 768px) {
+    .admin-navbar {
+        height: auto;
+        padding: 12px 0;
+    }
+    .admin-navbar .container {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 8px;
+    }
+    .navbar-right .admin-profile .profile-info {
+        display: none;
+    }
+    .container {
+        margin-top: 100px;
+        width: 95%;
+    }
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    .title h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    .title p {
+        text-align: center;
+    }
 }

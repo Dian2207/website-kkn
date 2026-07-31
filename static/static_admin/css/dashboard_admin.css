@@ -642,7 +642,6 @@ body {
 
 .admin-table th:last-child,
 .admin-table td:last-child {
-    min-width: 120px;
     white-space: nowrap;
 }
 
@@ -843,6 +842,7 @@ body {
     .filter-search {
         flex: 1;
     }
+
     .table-footer {
         flex-direction: column;
         align-items: center;

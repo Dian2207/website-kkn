@@ -64,6 +64,12 @@ rel="stylesheet">
                 </a>
             </div>
 
+            <!-- ===== TITLE ===== -->
+            <div class="title">
+                <h1>Tambah Berita</h1>
+                <p>Tambahkan berita terbaru untuk informasikan kepada masyarakat Desa Katemas.</p>
+            </div>
+
             <!-- Form -->
             <form class="news-form" method="POST" action="{{ url_for('admin_bp.simpan_berita') }}" enctype="multipart/form-data">
 
@@ -92,6 +98,7 @@ rel="stylesheet">
                         </div>
 
                     </div>
+
                     <div class="right">
 
                         <div class="card">
@@ -102,24 +109,25 @@ rel="stylesheet">
                         <div class="card">
                             <h4>Status</h4>
                             <label>
-    <input type="radio" name="status" value="draft" checked>
-    Draft
-</label>
-
-<label>
-    <input type="radio" name="status" value="published">
-    Publikasikan
-</label>
+                                <input type="radio" name="status" value="draft" checked>
+                                Draft
+                            </label>
+                            <label>
+                                <input type="radio" name="status" value="published">
+                                Publikasikan
+                            </label>
                         </div>
 
-                        <!-- TOMBOL SIMPAN DI KANAN -->
+                        <!-- TOMBOL SIMPAN -->
                         <div class="form-actions">
                             <button class="btn-save" type="submit">
-                                Simpan
+                                <i class="fa-solid fa-floppy-disk"></i> Simpan
                             </button>
                         </div>
 
                     </div>
+
+                </div>
 
             </form>
 
@@ -158,3 +166,4 @@ rel="stylesheet">
 </script>
 
 </body>
+</html>
