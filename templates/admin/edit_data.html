@@ -17,276 +17,217 @@
 
 <body>
 
-<!-- ===== TOP NAVBAR ===== -->
-        <header class="admin-navbar">
-            <div class="container">
-                <div class="navbar-left">
-                    <div class="logo">
-                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
-                        <span>Desa Katemas</span>
-                    </div>
+<!-- ===== WRAPPER ===== -->
+<div class="admin-wrapper">
+
+    <!-- ===== TOP NAVBAR ===== -->
+    <header class="admin-navbar">
+        <div class="container">
+            <div class="navbar-left">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa" />
+                    <span>Desa Katemas</span>
                 </div>
-                <div class="navbar-right">
-                    <div class="admin-profile" id="adminProfile">
-                        <div class="profile-info">
-                            <span class="name">Admin Desa</span>
-                            <span class="role">Administrator</span>
-                        </div>
-                        <div class="avatar">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
-                        <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="javascript:void(0);"
-   class="dropdown-item logout"
-   onclick="openLogoutModal()">
-    <i class="fa-solid fa-right-from-bracket"></i>
-    Keluar / Logout
-</a>
-                        </div>
+            </div>
+            <div class="navbar-right">
+                <div class="admin-profile" id="adminProfile">
+                    <div class="profile-info">
+                        <span class="name">Admin Desa</span>
+                        <span class="role">Administrator</span>
+                    </div>
+                    <div class="avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="javascript:void(0);" class="dropdown-item logout" onclick="openLogoutModal()">
+                            <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                        </a>
                     </div>
                 </div>
             </div>
-        </header>
-        
-<div class="container">
-<!-- Tombol Kembali -->
-            <div class="page-header">
-                <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
-                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
-                </a>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+
+        <!-- Tombol Kembali -->
+        <div class="page-header">
+            <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+            </a>
+        </div>
+
+        <div class="title">
+            <h1>Kelola Data Penduduk</h1>
+            <p>Perbarui data kependudukan, pendidikan, dan pekerjaan secara real-time untuk transparansi publik.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('admin_bp.update_data') }}">
+
+            <!-- ================= DATA UMUM ================= -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-users"></i> Data Umum Kependudukan</h3>
+                </div>
+                <div class="grid-4">
+                    <div class="form-group">
+                        <label>Jumlah Penduduk</label>
+                        <input type="number" name="total_population" value="{{ data.total_population }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah KK</label>
+                        <input type="number" name="total_family" value="{{ data.total_family }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Laki-Laki</label>
+                        <input type="number" name="male" value="{{ data.male }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Perempuan</label>
+                        <input type="number" name="female" value="{{ data.female }}">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="reset" class="btn-cancel">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
             </div>
-    <div class="title">
-        <h1>Kelola Data Penduduk</h1>
-        <p>Perbarui data kependudukan, pendidikan, dan pekerjaan secara real-time untuk transparansi publik.</p>
+
+            <!-- ================= PENDIDIKAN ================= -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-graduation-cap"></i> Data Pendidikan</h3>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Belum Sekolah</label>
+                        <input type="number" name="belum_sekolah" value="{{ data.belum_sekolah }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Belum Tamat SD</label>
+                        <input type="number" name="belum_tamat_sd" value="{{ data.belum_tamat_sd }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Tamat SD</label>
+                        <input type="number" name="tamat_sd" value="{{ data.tamat_sd }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Tamat SMP</label>
+                        <input type="number" name="tamat_smp" value="{{ data.tamat_smp }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Tamat SLTA</label>
+                        <input type="number" name="tamat_slta" value="{{ data.tamat_slta }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Diploma I/II/III</label>
+                        <input type="number" name="diploma_i_ii_iii" value="{{ data.diploma_i_ii_iii }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Sarjana S1</label>
+                        <input type="number" name="sarjana_s1" value="{{ data.sarjana_s1 }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Diploma IV / Strata I</label>
+                        <input type="number" name="diploma_iv_strata_i" value="{{ data.diploma_iv_strata_i }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Strata II</label>
+                        <input type="number" name="strata_ii" value="{{ data.strata_ii }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Strata III</label>
+                        <input type="number" name="strata_iii" value="{{ data.strata_iii }}">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="reset" class="btn-cancel">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </div>
+
+            <!-- ================= PEKERJAAN ================= -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-briefcase"></i> Data Pekerjaan</h3>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Belum/Tidak Bekerja</label>
+                        <input type="number" name="belum_tidak_bekerja" value="{{ data.belum_tidak_bekerja }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Mengurus Rumah Tangga</label>
+                        <input type="number" name="mengurus_rumah_tangga" value="{{ data.mengurus_rumah_tangga }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Pelajar/Mahasiswa</label>
+                        <input type="number" name="pelajar_mahasiswa" value="{{ data.pelajar_mahasiswa }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Pensiunan</label>
+                        <input type="number" name="pensiunan" value="{{ data.pensiunan }}">
+                    </div>
+                    <div class="form-group">
+                        <label>PNS</label>
+                        <input type="number" name="pns" value="{{ data.pns }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Wiraswasta</label>
+                        <input type="number" name="wiraswasta" value="{{ data.wiraswasta }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Petani/Perkebunan</label>
+                        <input type="number" name="petani_perkebunan" value="{{ data.petani_perkebunan }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Peternak</label>
+                        <input type="number" name="peternak" value="{{ data.peternak }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Karyawan</label>
+                        <input type="number" name="karyawan" value="{{ data.karyawan }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Buruh Pabrik</label>
+                        <input type="number" name="buruh_pabrik" value="{{ data.buruh_pabrik }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Guru</label>
+                        <input type="number" name="guru" value="{{ data.guru }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Bidan</label>
+                        <input type="number" name="bidan" value="{{ data.bidan }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Perawat</label>
+                        <input type="number" name="perawat" value="{{ data.perawat }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Pedagang</label>
+                        <input type="number" name="pedagang" value="{{ data.pedagang }}">
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="reset" class="btn-cancel">Batal</button>
+                    <button type="submit" class="btn-save">Simpan</button>
+                </div>
+            </div>
+
+        </form>
+
     </div>
 
-<form method="POST" action="{{ url_for('admin_bp.update_data') }}">
-<!-- ================= DATA UMUM ================= -->
-
-<div class="card">
-
-    <div class="card-header">
-        <h3>
-             <i class="fa-solid fa-users"></i>
-             Data Umum Kependudukan</h3>
-
+    <!-- ===== COPYRIGHT ===== -->
+    <div class="copyright">
+        © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
     </div>
 
-    <div class="grid-4">
+</div><!-- end .admin-wrapper -->
 
-        <div class="form-group">
-            <label>Jumlah Penduduk</label>
-            <input type="number" name="total_population" value="{{ data.total_population }}">
-        </div>
-
-        <div class="form-group">
-            <label>Jumlah KK</label>
-            <input type="number" name="total_family" value="{{ data.total_family }}">
-        </div>
-
-        <div class="form-group">
-            <label>Laki-Laki</label>
-            <input type="number" name="male" value="{{ data.male }}">
-        </div>
-
-        <div class="form-group">
-            <label>Perempuan</label>
-            <input type="number" name="female" value="{{ data.female }}">
-        </div>
-
-    </div>
-<div class="button-group">
-            <button type="reset" class="btn-cancel">
-                Batal
-            </button>
-
-            <button type="submit" class="btn-save">
-                Simpan
-            </button>
-        </div>
-</div>
-
-<!-- ================= PENDIDIKAN ================= -->
-
-<div class="card">
-
-    <div class="card-header">
-
-        <h3>
-            <i class="fa-solid fa-graduation-cap"></i>
-            Data Pendidikan
-        </h3>
-
-    </div>
-
-<div class="grid-2">
-
-<div class="form-group">
-<label>Belum Sekolah</label>
-<input type="number" name="belum_sekolah" value="{{ data.belum_sekolah }}">
-</div>
-
-<div class="form-group">
-<label>Belum Tamat SD</label>
-<input type="number" name="belum_tamat_sd" value="{{ data.belum_tamat_sd }}">
-</div>
-
-<div class="form-group">
-<label>Tamat SD</label>
-<input type="number" name="tamat_sd" value="{{ data.tamat_sd }}">
-</div>
-
-<div class="form-group">
-<label>Tamat SMP</label>
-<input type="number" name="tamat_smp" value="{{ data.tamat_smp }}">
-</div>
-
-<div class="form-group">
-<label>Tamat SLTA</label>
-<input type="number" name="tamat_slta" value="{{ data.tamat_slta }}">
-</div>
-
-<div class="form-group">
-<label>Diploma I/II/III</label>
-<input type="number" name="diploma" value="{{ data.diploma_i_ii_iii}}">
-</div>
-
-<div class="form-group">
-<label>Sarjana S1</label>
-<input type="number" name="sarjana" value="{{ data.sarjana_s1}}">
-</div>
-
-<div class="form-group">
-<label>Diploma IV / Strata I</label>
-<input type="number" name="diploma_iv_strata_i" value="{{ data.diploma_iv_strata_i }}">
-</div>
-
-<div class="form-group">
-<label>Strata II</label>
-<input type="number" name="strata_ii" value="{{ data.strata_ii }}">
-</div>
-
-<div class="form-group">
-<label>Strata III</label>
-<input type="number" name="strata_iii" value="{{ data.strata_iii }}">
-</div>
-
-</div>
-<div class="button-group">
-
-            <button type="reset" class="btn-cancel">
-                Batal
-            </button>
-
-            <button type="submit" class="btn-save">
-                Simpan
-            </button>
-
-        </div>
-</div>
-
-<!-- ================= PEKERJAAN ================= -->
-
-<div class="card">
-
-<div class="card-header">
-
-<h3>
-<i class="fa-solid fa-briefcase"></i>
-Data Pekerjaan
-</h3>
-</div>
-
-<div class="grid-2">
-
-<div class="form-group">
-<label>Belum/Tidak Bekerja</label>
-<input type="number" name="belum_tidak_bekerja" value="{{ data.belum_tidak_bekerja }}">
-</div>
-
-<div class="form-group">
-<label>Mengurus Rumah Tangga</label>
-<input type="number" name="mengurus_rumah_tangga" value="{{ data.mengurus_rumah_tangga }}">
-</div>
-
-<div class="form-group">
-<label>Pelajar/Mahasiswa</label>
-<input type="number" name="pelajar_mahasiswa" value="{{ data.pelajar_mahasiswa }}">
-</div>
-
-<div class="form-group">
-<label>Pensiunan</label>
-<input type="number" name="pensiunan" value="{{ data.pensiunan }}">
-</div>
-
-<div class="form-group">
-<label>PNS</label>
-<input type="number" name="pns" value="{{ data.pns }}">
-</div>
-
-<div class="form-group">
-<label>Wiraswasta</label>
-<input type="number" name="wiraswasta" value="{{ data.wiraswasta }}">
-</div>
-
-<div class="form-group">
-<label>Petani</label>
-<input type="number" name="petani" value="{{ data.petani_perkebunan }}">
-</div>
-
-<div class="form-group">
-<label>Peternak</label>
-<input type="number" name="peternak" value="{{ data.peternak }}">
-</div>
-
-<div class="form-group">
-<label>Karyawan</label>
-<input type="number" name="karyawan" value="{{ data.karyawan }}">
-</div>
-
-<div class="form-group">
-<label>Buruh Pabrik</label>
-<input type="number" name="buruh_pabrik" value="{{ data.buruh_pabrik }}">
-</div>
-
-<div class="form-group">
-<label>Guru</label>
-<input type="number" name="guru" value="{{ data.guru }}">
-</div>
-
-<div class="form-group">
-<label>Bidan</label>
-<input type="number" name="bidan" value="{{ data.bidan }}">
-</div>
-
-<div class="form-group">
-<label>Perawat</label>
-<input type="number" name="perawat" value="{{ data.perawat }}">
-</div>
-
-<div class="form-group">
-<label>Pedagang</label>
-<input type="number" name="pedagang" value="{{ data.pedagang }}">
-</div>
-</div>
-<div class="button-group">
-
-    <button type="reset" class="btn-cancel">
-        Batal
-    </button>
-
-    <button type="submit" class="btn-save">
-        Simpan
-    </button>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</form>
 <!-- =========================
      MODAL LOGOUT
 ========================= -->
@@ -305,22 +246,12 @@ Data Pekerjaan
 
         <div class="modal-footer">
 
-            <button
-                type="button"
-                class="btn-cancel"
-                onclick="closeLogoutModal()">
-
+            <button type="button" class="btn-cancel" onclick="closeLogoutModal()">
                 Batal
-
             </button>
 
-            <a
-                href="{{ url_for('admin_bp.logout') }}"
-                class="btn-delete"
-                style="text-decoration:none;text-align:center;">
-
+            <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">
                 Ya, Logout
-
             </a>
 
         </div>
@@ -369,37 +300,20 @@ document.addEventListener("DOMContentLoaded", function () {
 // ==========================
 
 function openLogoutModal() {
-
-    document
-        .getElementById("logoutModal")
-        .classList
-        .add("show");
-
+    document.getElementById("logoutModal").classList.add("show");
 }
 
 function closeLogoutModal() {
-
-    document
-        .getElementById("logoutModal")
-        .classList
-        .remove("show");
-
+    document.getElementById("logoutModal").classList.remove("show");
 }
 
 window.onclick = function (e) {
-
     const logoutModal = document.getElementById("logoutModal");
-
     if (e.target === logoutModal) {
         closeLogoutModal();
     }
-
 }
 </script>
-</div>
+
 </body>
-        <!-- ===== COPYRIGHT ===== -->
-        <div class="copyright">
-            © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
-        </div>
 </html>

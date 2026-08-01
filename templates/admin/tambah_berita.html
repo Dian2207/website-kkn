@@ -119,81 +119,75 @@ name="content">{{ berita.content if berita else '' }}</textarea>
                     </div>
 
                     <div class="right">
-<div class="right">
 
-    <!-- Gambar -->
-    <div class="card">
-        <h4>Gambar Utama</h4>
+                        <!-- Gambar -->
+                        <div class="card">
+                            <h4>Gambar Utama</h4>
 
-        <input
-            type="file"
-            name="thumbnail"
-            accept="image/*">
+                            <input
+                                type="file"
+                                name="thumbnail"
+                                accept="image/*">
 
-        {% if edit and berita.thumbnail %}
-        <div class="preview-image">
-            <img
+                            {% if edit and berita.thumbnail %}
+                            <div class="preview-image">
+                                <img
 src="{{ url_for('static',
 filename='uploads/news/' ~ berita.thumbnail) }}"
 alt="Thumbnail">
-        </div>
-        {% endif %}
-    </div>
+                            </div>
+                            {% endif %}
+                        </div>
 
+                        <!-- Status -->
                         <div class="card">
                             <h4>Status</h4>
-                            <label>
-                                <input type="radio" name="status" value="draft" checked>
+
+                            <label class="radio-item">
+                                <input
+                                    type="radio"
+                                    name="status"
+                                    value="draft"
+                                    {% if not berita or not berita.published_at %}checked{% endif %}>
                                 Draft
                             </label>
-                            <label>
-                                <input type="radio" name="status" value="published">
+
+                            <label class="radio-item">
+                                <input
+                                    type="radio"
+                                    name="status"
+                                    value="published"
+                                    {% if berita and berita.published_at %}checked{% endif %}>
                                 Publikasikan
                             </label>
                         </div>
-    <!-- Status -->
-    <div class="card">
-        <h4>Status</h4>
 
-        <label class="radio-item">
-            <input
-                type="radio"
-                name="status"
-                value="draft"
-                {% if not berita or not berita.published_at %}checked{% endif %}>
-            Draft
-        </label>
+                        <!-- Tombol -->
+                        <div class="form-actions">
+                            <button class="btn-save" type="submit">
+                                {% if edit %}
+                                    Perbarui Berita
+                                {% else %}
+                                    Simpan
+                                {% endif %}
+                            </button>
+                        </div>
 
-        <label class="radio-item">
-            <input
-                type="radio"
-                name="status"
-                value="published"
-                {% if berita and berita.published_at %}checked{% endif %}>
-            Publikasikan
-        </label>
-    </div>
-
-    <!-- Tombol -->
-    <div class="form-actions">
-        <button class="btn-save" type="submit">
-            {% if edit %}
-                Perbarui Berita
-            {% else %}
-                Simpan
-            {% endif %}
-        </button>
-    </div>
+                    </div>
 
                 </div>
-</div>
 
             </form>
 
         </div>
     </main>
 
-</div>
+    <!-- ===== COPYRIGHT ===== -->
+    <div class="copyright">
+        © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+    </div>
+
+</div><!-- end admin-wrapper -->
 
 <!-- =========================
      MODAL LOGOUT
@@ -284,10 +278,6 @@ window.onclick = function(e) {
 
 }
 </script>
-<!-- ===== COPYRIGHT ===== -->
-    <div class="copyright">
-        © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
-    </div>
-</body>
 
+</body>
 </html>
