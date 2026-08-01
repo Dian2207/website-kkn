@@ -33,13 +33,12 @@
     <div class="container">
         <div class="detail-card">
             <h1>{{ news.title }}</h1>
-            <div class="meta">{{ news.published_at.strftime('%d %b %Y') if news.published_at else '-' }}
-                <span><i class="fa-regular fa-calendar"></i> {{ news.published_at.strftime('%d %b %Y') }}</span>
-                <span><i class="fa-regular fa-user"></i>Pemerintah Desa Katemas</span>
+            <div class="meta">
+                <span><i class="fa-regular fa-calendar"></i> {{ news.published_at.strftime('%d %b %Y') if news.published_at else '-' }}</span>
+                <span><i class="fa-regular fa-user"></i> Pemerintah Desa Katemas</span>
             </div>
             <hr />
-            <img class="cover" src="{{ url_for('static',
-filename='uploads/news/' ~ news.thumbnail) }}" alt="{{ news.title }}" />
+            <img class="cover" src="{{ url_for('static', filename='uploads/news/' ~ news.thumbnail) }}" alt="{{ news.title }}" />
             <div class="content">
                 {% for paragraph in news.content.split('\n') if paragraph.strip() %}
                     <p>{{ paragraph }}</p>

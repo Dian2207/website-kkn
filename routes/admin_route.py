@@ -6,6 +6,8 @@ from functools import wraps
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
 import os
+from models import Infographics, News, Announcement, User, APBDocument, Bansos, db
+
 
 admin_bp = Blueprint(
     "admin_bp",
@@ -73,6 +75,7 @@ def indexAdmin():
     page_news = request.args.get('page_news', 1, type=int)
     page_announce = request.args.get('page_announce', 1, type=int)
     page_dokumen = request.args.get('page_dokumen', 1, type=int)
+    page_bansos = request.args.get('page_bansos', 1, type=int)
     per_page = 5
 
     # ===== BERITA =====
@@ -147,6 +150,18 @@ def indexAdmin():
     dokumen_items = dokumen_pagination.items
     dokumen_total_pages = dokumen_pagination.pages
     dokumen_current_page = dokumen_pagination.page
+
+    # ===== BANSOS =====
+    page_bansos = request.args.get('page_bansos', 1, type=int)
+    bansos_query = Bansos.query
+    total_bansos = bansos_query.count()
+    bansos_pagination = bansos_query.order_by(
+        Bansos.year.desc(),
+        Bansos.id.desc()
+    ).paginate(page=page_bansos, per_page=per_page, error_out=False)
+    bansos_items = bansos_pagination.items
+    bansos_total_pages = bansos_pagination.pages
+    bansos_current_page = bansos_pagination.page
 
     # ===== DATA INFOGRAPHICS =====
     infographic = Infographics.query.first()
@@ -277,7 +292,11 @@ def indexAdmin():
         filter_date_news=filter_date_news,
         filter_status_news=filter_status_news,
         filter_date_announce=filter_date_announce,
-        filter_status_announce=filter_status_announce
+        filter_status_announce=filter_status_announce,
+        total_bansos=total_bansos,
+        bansos_items=bansos_items,
+        bansos_total_pages=bansos_total_pages,
+        bansos_current_page=bansos_current_page
     )
 
 # ==========================
@@ -490,26 +509,7 @@ def update_pengumuman(id):
 # KELOLA DOKUMEN APBDES
 # ==========================
 
-@admin_bp.route("/dokumen-apbdes")
-@login_required
-def kelola_dokumen_apbdes():
-    page = request.args.get('page', 1, type=int)
-    per_page = 5
-    pagination = APBDocument.query.order_by(
-        APBDocument.year.desc(),
-        APBDocument.id.desc()
-    ).paginate(page=page, per_page=per_page, error_out=False)
-    dokumen = pagination.items
-    total_pages = pagination.pages
-    current_page = pagination.page
-    return render_template(
-        "admin/dokumen_apbdes.html",
-        dokumen=dokumen,
-        total_pages=total_pages,
-        current_page=current_page
-    )
-
-@admin_bp.route("/dokumen-apbdes/tambah", methods=["GET", "POST"])
+@admin_bp.route("/tambah", methods=["GET", "POST"])
 @login_required
 def tambah_dokumen_apbdes():
     if request.method == "POST":
@@ -547,11 +547,11 @@ def tambah_dokumen_apbdes():
         db.session.commit()
 
         flash("Dokumen APBDes berhasil ditambahkan.", "success")
-        return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))
+        return redirect(url_for("admin_bp.indexAdmin"))
 
     return render_template("admin/dokumen_apbdes_form.html", edit=False, doc=None)
 
-@admin_bp.route("/dokumen-apbdes/edit/<int:id>", methods=["GET", "POST"])
+@admin_bp.route("/edit/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit_dokumen_apbdes(id):
     doc = APBDocument.query.get_or_404(id)
@@ -585,11 +585,11 @@ def edit_dokumen_apbdes(id):
 
         db.session.commit()
         flash("Dokumen berhasil diperbarui.", "success")
-        return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))
+        return redirect(url_for("admin_bp.indexAdmin"))
 
     return render_template("admin/dokumen_apbdes_form.html", edit=True, doc=doc)
 
-@admin_bp.route("/dokumen-apbdes/hapus/<int:id>", methods=["POST"])
+@admin_bp.route("/hapus/<int:id>", methods=["POST"])
 @login_required
 def hapus_dokumen_apbdes(id):
     doc = APBDocument.query.get_or_404(id)
@@ -601,4 +601,123 @@ def hapus_dokumen_apbdes(id):
     db.session.commit()
 
     flash("Dokumen berhasil dihapus.", "success")
-    return redirect(url_for("admin_bp.kelola_dokumen_apbdes"))
+    return redirect(url_for("admin_bp.indexAdmin"))
+
+# ==========================
+# KELOLA BANSOS
+# ==========================
+
+@admin_bp.route("/bansos/tambah", methods=["GET", "POST"])
+@login_required
+def tambah_bansos():
+    if request.method == "POST":
+        title = request.form.get("title")
+        description = request.form.get("description")
+        year = request.form.get("year", type=int)
+
+        file_pdf = request.files.get("file_pdf")
+        image = request.files.get("image")
+
+        if not title:
+            flash("Judul wajib diisi!", "danger")
+            return redirect(url_for("admin_bp.tambah_bansos"))
+
+        # Simpan PDF
+        file_name = None
+        if file_pdf and file_pdf.filename != "":
+            filename = secure_filename(file_pdf.filename)
+            upload_dir = os.path.join(current_app.root_path, "static", "uploads", "bansos")
+            os.makedirs(upload_dir, exist_ok=True)
+            file_path = os.path.join(upload_dir, filename)
+            file_pdf.save(file_path)
+            file_name = filename
+
+        # Simpan Gambar
+        image_name = None
+        if image and image.filename != "":
+            filename = secure_filename(image.filename)
+            upload_dir = os.path.join(current_app.root_path, "static", "uploads", "bansos", "images")
+            os.makedirs(upload_dir, exist_ok=True)
+            file_path = os.path.join(upload_dir, filename)
+            image.save(file_path)
+            image_name = filename
+
+        bansos = Bansos(
+            title=title,
+            description=description,
+            file_name=file_name,
+            image_name=image_name,
+            year=year
+        )
+        db.session.add(bansos)
+        db.session.commit()
+
+        flash("Bansos berhasil ditambahkan.", "success")
+        return redirect(url_for("admin_bp.indexAdmin"))
+
+    return render_template("admin/bansos_form.html", edit=False, item=None)
+
+@admin_bp.route("/bansos/edit/<int:id>", methods=["GET", "POST"])
+@login_required
+def edit_bansos(id):
+    item = Bansos.query.get_or_404(id)
+
+    if request.method == "POST":
+        item.title = request.form.get("title")
+        item.description = request.form.get("description")
+        item.year = request.form.get("year", type=int)
+
+        # Update PDF
+        file_pdf = request.files.get("file_pdf")
+        if file_pdf and file_pdf.filename != "":
+            if item.file_name:
+                old_path = os.path.join(current_app.root_path, "static", "uploads", "bansos", item.file_name)
+                if os.path.exists(old_path):
+                    os.remove(old_path)
+            filename = secure_filename(file_pdf.filename)
+            upload_dir = os.path.join(current_app.root_path, "static", "uploads", "bansos")
+            os.makedirs(upload_dir, exist_ok=True)
+            file_path = os.path.join(upload_dir, filename)
+            file_pdf.save(file_path)
+            item.file_name = filename
+
+        # Update Gambar
+        image = request.files.get("image")
+        if image and image.filename != "":
+            if item.image_name:
+                old_path = os.path.join(current_app.root_path, "static", "uploads", "bansos", "images", item.image_name)
+                if os.path.exists(old_path):
+                    os.remove(old_path)
+            filename = secure_filename(image.filename)
+            upload_dir = os.path.join(current_app.root_path, "static", "uploads", "bansos", "images")
+            os.makedirs(upload_dir, exist_ok=True)
+            file_path = os.path.join(upload_dir, filename)
+            image.save(file_path)
+            item.image_name = filename
+
+        db.session.commit()
+        flash("Bansos berhasil diperbarui.", "success")
+        return redirect(url_for("admin_bp.indexAdmin"))
+
+    return render_template("admin/bansos_form.html", edit=True, item=item)
+
+@admin_bp.route("/bansos/hapus/<int:id>", methods=["POST"])
+@login_required
+def hapus_bansos(id):
+    item = Bansos.query.get_or_404(id)
+
+    if item.file_name:
+        file_path = os.path.join(current_app.root_path, "static", "uploads", "bansos", item.file_name)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+    if item.image_name:
+        file_path = os.path.join(current_app.root_path, "static", "uploads", "bansos", "images", item.image_name)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+    db.session.delete(item)
+    db.session.commit()
+
+    flash("Bansos berhasil dihapus.", "success")
+    return redirect(url_for("admin_bp.indexAdmin"))

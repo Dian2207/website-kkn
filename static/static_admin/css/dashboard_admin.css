@@ -804,6 +804,33 @@ body {
     cursor: not-allowed;
 }
 
+/* ===== TABEL APBDES - LEBIH KOMPAK ===== */
+/* Batasi lebar kolom judul di tabel APBDes agar tidak melebar */
+.admin-table td:first-child,
+.admin-table th:first-child {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Padding sel lebih kecil */
+.admin-table td,
+.admin-table th {
+    padding: 8px 12px !important; /* menimpa padding default */
+}
+/* Ukuran font sedikit lebih kecil untuk tabel APBDes */
+.admin-table td {
+    font-size: 13px;
+}
+/* Jika ingin kolom aksi tidak terlalu lebar */
+.admin-table td:last-child,
+.admin-table th:last-child {
+    min-width: 80px;
+    max-width: 100px;
+    white-space: nowrap;
+}
+
+
 /* ===========================
    RESPONSIVE
 =========================== */
@@ -988,4 +1015,55 @@ body {
 
     background:#1B5E20;
 
+}
+
+/* ===== PERBAIKAN KOLOM AKSI - CENTER ===== */
+.admin-table td.actions {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 4px 8px !important;
+}
+
+.admin-table td.actions a,
+.admin-table td.actions button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 4px !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: background 0.2s !important;
+}
+
+.admin-table td.actions a:hover,
+.admin-table td.actions button:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
+.admin-table td.actions a.action-edit {
+    color: #181D17 !important;
+}
+
+.admin-table td.actions button.action-delete {
+    color: #D62828 !important;
+}
+
+/* Hapus garis pemisah yang tidak perlu */
+.admin-table td.actions a::after,
+.admin-table td.actions button::after {
+    display: none !important;
+}
+
+.admin-table td.actions a:not(:last-child),
+.admin-table td.actions button:not(:last-child) {
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
 }

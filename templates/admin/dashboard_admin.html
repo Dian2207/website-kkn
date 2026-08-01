@@ -379,6 +379,7 @@
                             <i class="fa-solid fa-plus"></i> Tambah Dokumen
                         </a>
                     </div>
+
                     <div class="table-wrapper">
                         <table class="admin-table">
                             <thead>
@@ -398,16 +399,24 @@
                                     <td>{{ 'Arsip' if doc.category == 'arsip' else 'APBDes Berjalan' }}</td>
                                     <td>{{ doc.file_size }}</td>
                                     <td class="actions">
-                                        <a href="{{ url_for('admin_bp.edit_dokumen_apbdes', id=doc.id) }}" class="action-edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_dokumen_apbdes', id=doc.id) }}')"><i class="fa-solid fa-trash-can"></i></button>
+                                        <a href="{{ url_for('admin_bp.edit_dokumen_apbdes', id=doc.id) }}" class="action-edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_dokumen_apbdes', id=doc.id) }}')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 {% else %}
-                                <tr><td colspan="5" style="text-align:center; padding:20px; color:#999;">Belum ada dokumen APBDes.</td></tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding:20px; color:#999;">Belum ada dokumen APBDes.</td>
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Pagination -->
                     <div class="pagination-container">
                         <div class="pagination">
                             {% if dokumen_current_page > 1 %}
@@ -415,6 +424,7 @@
                             {% else %}
                             <button class="page-link" disabled>&lt;</button>
                             {% endif %}
+
                             {% for p in range(1, dokumen_total_pages + 1) %}
                                 {% if p == dokumen_current_page %}
                                 <button class="page-link active" data-page="{{ p }}" data-type="dokumen">{{ p }}</button>
@@ -422,6 +432,7 @@
                                 <button class="page-link" data-page="{{ p }}" data-type="dokumen">{{ p }}</button>
                                 {% endif %}
                             {% endfor %}
+
                             {% if dokumen_current_page < dokumen_total_pages %}
                             <button class="page-link" data-page="{{ dokumen_current_page + 1 }}" data-type="dokumen">&gt;</button>
                             {% else %}
@@ -435,17 +446,78 @@
                 <section class="manage-section">
                     <div class="section-header">
                         <h2>Kelola Bansos</h2>
-                        <a href="#" class="btn-add">
+                        <a href="{{ url_for('admin_bp.tambah_bansos') }}" class="btn-add">
                             <i class="fa-solid fa-plus"></i> Tambah Bansos
                         </a>
                     </div>
-                    <div style="padding: 12px 0; color: #666; font-size: 14px;">
-                        Kelola data penerima bantuan sosial dan jadwal penyaluran. (Fitur dalam pengembangan)
+
+                    <div class="table-wrapper">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Tahun</th>
+                                    <th>Gambar</th>
+                                    <th>File PDF</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in bansos_items %}
+                                <tr>
+                                    <td style="max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ item.title }}</td>
+                                    <td>{{ item.year }}</td>
+                                    <td>
+                                        {% if item.image_name %}
+                                        <img src="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}" style="width:40px; height:40px; object-fit:cover; border-radius:6px;">
+                                        {% else %}
+                                        -
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ item.file_name or '-' }}</td>
+                                    <td class="actions">
+                                        <a href="{{ url_for('admin_bp.edit_bansos', id=item.id) }}" class="action-edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <button type="button" class="action-delete" onclick="openDeleteModal('{{ url_for('admin_bp.hapus_bansos', id=item.id) }}')">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding:20px; color:#999;">Belum ada data bansos.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-container">
+                        <div class="pagination">
+                            {% if bansos_current_page > 1 %}
+                            <button class="page-link" data-page="{{ bansos_current_page - 1 }}" data-type="bansos">&lt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&lt;</button>
+                            {% endif %}
+
+                            {% for p in range(1, bansos_total_pages + 1) %}
+                                {% if p == bansos_current_page %}
+                                <button class="page-link active" data-page="{{ p }}" data-type="bansos">{{ p }}</button>
+                                {% else %}
+                                <button class="page-link" data-page="{{ p }}" data-type="bansos">{{ p }}</button>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if bansos_current_page < bansos_total_pages %}
+                            <button class="page-link" data-page="{{ bansos_current_page + 1 }}" data-type="bansos">&gt;</button>
+                            {% else %}
+                            <button class="page-link" disabled>&gt;</button>
+                            {% endif %}
+                        </div>
                     </div>
                 </section>
-
-            </div>
-        </main>
 
         <!-- ===== COPYRIGHT ===== -->
         <div class="copyright">
@@ -513,10 +585,17 @@
                     const page = this.dataset.page;
                     const type = this.dataset.type;
                     if (!page || this.disabled) return;
+
                     const url = new URL(window.location.href);
-                    if (type === 'news') url.searchParams.set('page_news', page);
-                    else if (type === 'announce') url.searchParams.set('page_announce', page);
-                    else if (type === 'dokumen') url.searchParams.set('page_dokumen', page);
+                    if (type === 'news') {
+                        url.searchParams.set('page_news', page);
+                    } else if (type === 'announce') {
+                        url.searchParams.set('page_announce', page);
+                    } else if (type === 'dokumen') {
+                        url.searchParams.set('page_dokumen', page);
+                    } else if (type === 'bansos') {   // <-- TAMBAHKAN INI
+                        url.searchParams.set('page_bansos', page);
+                    }
                     window.location.href = url.toString();
                 });
             });

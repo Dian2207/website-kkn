@@ -108,3 +108,16 @@ class APBDocument(db.Model):
     description = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
+
+# ---------- BANSOS ----------
+class Bansos(db.Model):
+    __tablename__ = "bansos"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text)
+    file_name = db.Column(db.String(255))          # PDF file
+    image_name = db.Column(db.String(255))         # Foto/gambar
+    year = db.Column(db.Integer, default=2026)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())

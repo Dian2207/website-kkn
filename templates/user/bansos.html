@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bansos - Desa Katemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/apbdes.css') }}" />
+    <style>
+        .bansos-item {
+            display: flex;
+            gap: 24px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid rgba(190, 202, 185, 0.3);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: .2s;
+            align-items: center;
+        }
+        .bansos-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .bansos-image {
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bansos-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bansos-image .no-image {
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+        }
+        .bansos-info {
+            flex: 1;
+        }
+        .bansos-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1C1C;
+            margin-bottom: 6px;
+        }
+        .bansos-info .meta {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .bansos-info p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        .bansos-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        .bansos-actions .btn-pdf {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #006E23;
+            color: #fff;
+            border: 1px solid #006E23;
+        }
+        .bansos-actions .btn-pdf:hover {
+            background: #005a1c;
+            border-color: #005a1c;
+        }
+        .bansos-actions .btn-image {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #006E23;
+            color: #006E23;
+            background: transparent;
+        }
+        .bansos-actions .btn-image:hover {
+            background: #006E23;
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .bansos-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .bansos-image {
+                width: 100%;
+                height: 200px;
+            }
+            .bansos-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" />
+                <h2>Desa Katemas</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.profilDesa') }}">Profil Desa</a></li>
+                <li><a href="{{ url_for('main.layanan') }}">Layanan</a></li>
+                <li><a href="{{ url_for('main.berita') }}" class="active">Berita & Informasi</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="apbdes">
+    <div class="container">
+        <div class="section-title">
+            <h1>BANTUAN SOSIAL DESA KATEMAS</h1>
+            <p>Informasi program bantuan sosial yang disalurkan kepada masyarakat Desa Katemas.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DAFTAR BANSOS ===== -->
+<section class="dokumen-section">
+    <div class="container">
+        <h2 class="section-title-dokumen">
+            <span class="green-bar"></span>
+            Program Bantuan Sosial
+        </h2>
+
+        {% for item in items %}
+        <div class="bansos-item">
+            <!-- GAMBAR -->
+            <div class="bansos-image">
+                {% if item.image_name %}
+                <img src="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}" alt="{{ item.title }}">
+                {% else %}
+                <span class="no-image"><i class="fa-regular fa-image" style="font-size:32px; display:block; margin-bottom:4px;"></i> Tidak ada gambar</span>
+                {% endif %}
+            </div>
+
+            <!-- INFO -->
+            <div class="bansos-info">
+                <h3>{{ item.title }}</h3>
+                <div class="meta">
+                    <span><i class="fa-regular fa-calendar"></i> Tahun {{ item.year }}</span>
+                </div>
+                {% if item.description %}
+                <p>{{ item.description }}</p>
+                {% endif %}
+            </div>
+
+            <!-- AKSI -->
+            <div class="bansos-actions">
+                {% if item.image_name %}
+                <a href="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}" class="btn-image" target="_blank">
+                    <i class="fa-regular fa-eye"></i> Lihat Gambar
+                </a>
+                <a href="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}" class="btn-image" download>
+                    <i class="fa-solid fa-download"></i> Download Gambar
+                </a>
+                {% endif %}
+
+                {% if item.file_name %}
+                <a href="{{ url_for('static', filename='uploads/bansos/' ~ item.file_name) }}" class="btn-pdf" download>
+                    <i class="fa-regular fa-file-pdf"></i> Download PDF
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <p style="color:#999; text-align:center; padding:40px 0;">Belum ada program bantuan sosial.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h3>Desa Katemas</h3>
+                <p>Ragas Kidul, Desa Katemas, Kecamatan Kembangbahu, Kabupaten Lamongan, Jawa Timur.</p>
+            </div>
+            <div>
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li>Kepala Desa</li>
+                    <li>Sekretaris Desa</li>
+                    <li>Email Desa</li>
+                    <li>031-4567890</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Layanan</h4>
+                <ul>
+                    <li>E-Surat</li>
+                    <li>Informasi Publik</li>
+                    <li>APBDes</li>
+                    <li>Berita Desa</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Jam Operasional</h4>
+                <ul>
+                    <li>Senin - Kamis : 08.00 - 15.00</li>
+                    <li>Jumat : 08.00 - 11.30</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
+
+</body>
+</html>

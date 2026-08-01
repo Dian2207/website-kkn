@@ -1,6 +1,7 @@
 from models import Infographics, News, Announcement
 from flask import Blueprint, render_template, abort, request
 from models import Infographics, News, Announcement, APBDocument
+from models import Infographics, News, Announcement, APBDocument, Bansos
 
 main = Blueprint("main", __name__)
 
@@ -114,4 +115,15 @@ def apbdes():
     return render_template(
         "user/apbdes.html",
         documents=documents
+    )
+
+# ==========================
+# BANSOS
+# ==========================
+@main.route("/bansos")
+def bansos():
+    items = Bansos.query.order_by(Bansos.year.desc(), Bansos.id.desc()).all()
+    return render_template(
+        "user/bansos.html",
+        items=items
     )
