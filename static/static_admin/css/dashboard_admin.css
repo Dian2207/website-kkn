@@ -553,33 +553,56 @@ body {
     border-bottom:1px solid #E5E5E5;
     background:#fff;
 }
+
+/* ===== KOLOM AKSI - PERBAIKAN CENTER ===== */
 .admin-table td.actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 90px; /* Menyamakan dengan tinggi baris tbody tr */
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 4px 8px !important;
+    width: 100px;
+    min-width: 100px;
+    max-width: 120px;
 }
 
+.admin-table td.actions a,
 .admin-table td.actions button {
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 8px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    margin: 0 2px !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
 }
 
-/* Garis pemisah antar tombol aksi (opsional jika ingin tetap ada garis) */
-.admin-table td.actions button:not(:last-child) {
-    border-right: 1px solid #CFCFCF;
-    padding-right: 12px;
-    margin-right: 4px;
+.admin-table td.actions a:hover,
+.admin-table td.actions button:hover {
+    background: rgba(0, 0, 0, 0.06) !important;
 }
+
+.admin-table td.actions a.action-edit {
+    color: #181D17 !important;
+}
+
+.admin-table td.actions button.action-delete {
+    color: #D62828 !important;
+}
+
+/* Hilangkan border & padding tambahan */
+.admin-table td.actions a:not(:last-child),
+.admin-table td.actions button:not(:last-child) {
+    border-right: none !important;
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+}
+
 .admin-table thead th:first-child{
     border-left:1px solid #BFCABA;
     border-top-left-radius:12px;
@@ -590,66 +613,10 @@ body {
     border-top-right-radius:12px;
     border-bottom-right-radius:12px;
 }
-.action-edit {
-    color: #181D17;
-}
-
-.action-delete {
-    color: #D62828;
-}
-
-.admin-table td.actions button:hover {
-    opacity: 0.7;
-}
-.actions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.actions button{
-    background: transparent;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    cursor: pointer;
-    padding: 36px 5px;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Garis pemisah */
-.actions button:not(:last-child){
-    border-right: 1px solid #CFCFCF;
-}
-
-/* Warna icon */
-.action-edit{
-    color: #181D17;
-}
-
-.action-delete{
-    color: #D62828;
-}
-
-.action-view{
-    color: #0D631B;
-}
-
-.actions button:hover{
-    opacity: .7;
-}
-
-.action-edit{
-    color: #000;
-}
 
 .admin-table tbody tr{
-    height: 90px;
+    height: 70px; /* lebih proporsional */
 }
-
 
 .admin-table th:last-child,
 .admin-table td:last-child {
@@ -804,8 +771,8 @@ body {
     cursor: not-allowed;
 }
 
-/* ===== TABEL APBDES - LEBIH KOMPAK ===== */
-/* Batasi lebar kolom judul di tabel APBDes agar tidak melebar */
+/* ===== TABEL APBDES & BANSOS - LEBIH KOMPAK ===== */
+/* Batasi lebar kolom judul di tabel APBDes dan Bansos agar tidak melebar */
 .admin-table td:first-child,
 .admin-table th:first-child {
     max-width: 200px;
@@ -818,11 +785,11 @@ body {
 .admin-table th {
     padding: 8px 12px !important; /* menimpa padding default */
 }
-/* Ukuran font sedikit lebih kecil untuk tabel APBDes */
+/* Ukuran font sedikit lebih kecil untuk tabel APBDes dan Bansos */
 .admin-table td {
     font-size: 13px;
 }
-/* Jika ingin kolom aksi tidak terlalu lebar */
+/* Kolom aksi tidak terlalu lebar */
 .admin-table td:last-child,
 .admin-table th:last-child {
     min-width: 80px;
@@ -894,7 +861,6 @@ body {
 /* ===========================
    MODAL DELETE
 =========================== */
-
 .modal-delete{
     display:none;
     position:fixed;
@@ -904,11 +870,9 @@ body {
     align-items:center;
     z-index:9999;
 }
-
 .modal-delete.show{
     display:flex;
 }
-
 .modal-box{
     width:420px;
     background:#ffffff;
@@ -917,56 +881,53 @@ body {
     animation:popup .3s ease;
     box-shadow:0 18px 45px rgba(0,0,0,.25);
 }
+<<<<<<< HEAD
 
 .modal-header{
 
     background:linear-gradient(135deg,#d42c2c,#FB4141);
+=======
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+.modal-header{
+    background:linear-gradient(135deg,#2E7D32,#43A047);
+>>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
     color:white;
     padding:22px;
     text-align:center;
-
 }
-
 .modal-header i{
-
     font-size:50px;
     margin-bottom:10px;
-
 }
-
 .modal-header h3{
-
     font-size:22px;
     font-weight:700;
-
 }
-
 .modal-body{
-
     padding:30px;
     text-align:center;
-
 }
-
 .modal-body p{
-
     color:#555;
     font-size:14px;
     line-height:1.7;
-
 }
-
 .modal-footer{
-
     display:flex;
     justify-content:center;
     gap:15px;
     padding:20px 30px 30px;
-
 }
-
 .btn-cancel{
-
     padding:12px 28px;
     border:none;
     border-radius:8px;
@@ -975,17 +936,11 @@ body {
     cursor:pointer;
     font-weight:600;
     transition:.3s;
-
 }
-
 .btn-cancel:hover{
-
     background:#CFD8DC;
-
 }
-
 .btn-delete{
-
     padding:12px 28px;
     border:none;
     border-radius:8px;
@@ -994,10 +949,9 @@ body {
     cursor:pointer;
     font-weight:600;
     transition:.3s;
-
 }
-
 .btn-delete:hover{
+<<<<<<< HEAD
 
     background:#d42c2c;
 
@@ -1067,4 +1021,7 @@ body {
     border-right: none !important;
     padding-right: 0 !important;
     margin-right: 0 !important;
+=======
+    background:#1B5E20;
+>>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
 }
