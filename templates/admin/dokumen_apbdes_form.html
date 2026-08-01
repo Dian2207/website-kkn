@@ -7,6 +7,133 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='static_admin/css/dashboard_admin.css') }}" />
+    <style>
+        /* ===== STYLE TOMBOL KEMBALI (sama seperti tambah_pengumuman) ===== */
+        .page-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 0 8px;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0px 18px;
+            color: #386641;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            transition: .3s;
+        }
+        .btn-back:hover {
+            color: #e76418;
+        }
+        .btn-back i {
+            font-size: 14px;
+        }
+
+        /* ===== FULL WIDTH FORM (sama seperti tambah_pengumuman) ===== */
+        .content-full {
+            display: block !important;
+        }
+        .full-width {
+            width: 100%;
+            max-width: 100%;
+        }
+        .detail-card.full-width {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1C1C;
+            margin-bottom: 6px;
+        }
+        .form-group label .required {
+            color: #D62828;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #BFCABA;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #1A1C1C;
+            transition: .3s;
+            background: #fff;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2E7D32;
+            box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .btn-save {
+            padding: 12px 32px;
+            background: #2E7D32;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-save:hover {
+            background: #1f5c24;
+            transform: translateY(-2px);
+        }
+        .btn-cancel {
+            padding: 12px 32px;
+            background: transparent;
+            color: #666;
+            border: 1px solid #BFCABA;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-cancel:hover {
+            background: #f5f5f5;
+        }
+
+        .file-info {
+            margin-top: 8px;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
     <div class="admin-wrapper">
@@ -40,50 +167,67 @@
 
         <main class="admin-content">
             <div class="container">
+                <!-- Tombol Kembali -->
                 <div class="page-header">
                     <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
-                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar
+                        <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
                     </a>
                 </div>
-                <div class="manage-section">
-                    <h2>{% if edit %}Edit{% else %}Tambah{% endif %} Dokumen APBDes</h2>
-                    <form method="POST" enctype="multipart/form-data">
-                        <div class="card" style="padding:25px;">
-                            <div class="form-group" style="margin-bottom:18px;">
-                                <label>Judul Dokumen</label>
-                                <input type="text" name="title" value="{{ doc.title if doc else '' }}" required style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;">
+
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="content content-full">
+                        <div class="card detail-card full-width">
+                            <h2 style="font-size:22px; font-weight:600; margin-bottom:8px;">{% if edit %}Edit{% else %}Tambah{% endif %} Dokumen APBDes</h2>
+                            <p style="color:#666; font-size:14px; margin-bottom:24px;">{% if edit %}Perbarui{% else %}Tambahkan{% endif %} dokumen APBDes.</p>
+
+                            <!-- Judul -->
+                            <div class="form-group">
+                                <label>Judul Dokumen <span class="required">*</span></label>
+                                <input type="text" name="title" value="{{ doc.title if doc else '' }}" placeholder="Masukkan judul dokumen..." required>
                             </div>
-                            <div class="form-group" style="margin-bottom:18px;">
-                                <label>Tahun Anggaran</label>
-                                <input type="number" name="year" value="{{ doc.year if doc else 2026 }}" required style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;">
+
+                            <!-- Tahun -->
+                            <div class="form-group">
+                                <label>Tahun Anggaran <span class="required">*</span></label>
+                                <input type="number" name="year" value="{{ doc.year if doc else 2026 }}" required>
                             </div>
-                            <div class="form-group" style="margin-bottom:18px;">
+
+                            <!-- Kategori -->
+                            <div class="form-group">
                                 <label>Kategori</label>
-                                <select name="category" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;">
+                                <select name="category">
                                     <option value="current" {% if doc and doc.category == 'current' %}selected{% endif %}>APBDes Berjalan</option>
                                     <option value="arsip" {% if doc and doc.category == 'arsip' %}selected{% endif %}>Arsip</option>
                                 </select>
                             </div>
-                            <div class="form-group" style="margin-bottom:18px;">
+
+                            <!-- Deskripsi -->
+                            <div class="form-group">
                                 <label>Deskripsi (opsional)</label>
-                                <textarea name="description" rows="3" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;">{{ doc.description if doc else '' }}</textarea>
+                                <textarea name="description" rows="4">{{ doc.description if doc else '' }}</textarea>
                             </div>
-                            <div class="form-group" style="margin-bottom:18px;">
-                                <label>File PDF</label>
-                                <input type="file" name="file_pdf" accept=".pdf" {% if not edit %}required{% endif %} style="padding:8px;">
+
+                            <!-- Upload PDF -->
+                            <div class="form-group">
+                                <label>File PDF <span class="required">*</span></label>
+                                <input type="file" name="file_pdf" accept=".pdf" {% if not edit %}required{% endif %}>
                                 {% if edit and doc.file_name %}
-                                <p style="margin-top:8px; color:#666;">File saat ini: {{ doc.file_name }} ({{ doc.file_size }})</p>
+                                <div class="file-info">File saat ini: {{ doc.file_name }} ({{ doc.file_size }})</div>
                                 {% endif %}
                             </div>
-                            <div class="form-actions" style="display:flex; gap:12px;">
-                                <button type="submit" class="btn-save" style="padding:12px 28px; background:#0D631B; color:#fff; border:none; border-radius:8px; cursor:pointer;">
-                                    {% if edit %}Perbarui{% else %}Simpan{% endif %}
+
+                            <!-- Tombol Aksi -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-save">
+                                    <i class="fa-solid fa-floppy-disk"></i> {% if edit %}Perbarui{% else %}Simpan{% endif %}
                                 </button>
-                                <a href="{{ url_for('admin_bp.indexAdmin' }}" class="btn-cancel" style="padding:12px 28px; background:#ccc; color:#333; border-radius:8px; text-decoration:none;">Batal</a>
+                                <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-cancel">
+                                    <i class="fa-solid fa-xmark"></i> Batal
+                                </a>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </main>
 
