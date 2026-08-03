@@ -511,7 +511,7 @@ flex:1;
     padding:20px 30px 30px;
 }
 
-.btn-cancel,
+.btn-cancel-modal,
 .btn-delete{
     min-width:140px;
     height:48px;
