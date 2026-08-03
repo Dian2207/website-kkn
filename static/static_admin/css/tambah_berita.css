@@ -311,7 +311,7 @@ body {
     font-weight: 600;
     font-size: 13px;
     height: 38px;
-    min-width: 110px;
+    width: 100%;
     transition: .3s;
     font-family: 'Poppins', sans-serif;
     display: inline-flex;
@@ -320,6 +320,7 @@ body {
     gap: 6px;
     text-decoration: none;
 }
+
 
 .btn-save {
     background: #2f6f3e;
