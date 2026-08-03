@@ -7,161 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% if edit %}Edit{% else %}Tambah{% endif %} Bansos</title>
-<<<<<<< HEAD
 
-    <link rel="stylesheet"
-    href="{{ url_for('admin_bp.static',
-    filename='css/tambah_berita.css') }}">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-=======
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='static_admin/css/dashboard_admin.css') }}" />
-    <style>
-        /* ===== STYLE TOMBOL KEMBALI (sama seperti tambah_pengumuman) ===== */
-        .page-header {
-            display: flex;
-            align-items: center;
-            padding: 12px 0 8px;
-        }
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0px 18px;
-            color: #386641;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
-            transition: .3s;
-        }
-        .btn-back:hover {
-            color: #e76418;
-        }
-        .btn-back i {
-            font-size: 14px;
-        }
+    <link rel="stylesheet" href="{{ url_for('admin_bp.static', filename='css/bansos_form.css') }}" />
 
-        /* ===== FULL WIDTH FORM (sama seperti tambah_pengumuman) ===== */
-        .content-full {
-            display: block !important;
-        }
-        .full-width {
-            width: 100%;
-            max-width: 100%;
-        }
-        .detail-card.full-width {
-            padding: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #1A1C1C;
-            margin-bottom: 6px;
-        }
-        .form-group label .required {
-            color: #D62828;
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #BFCABA;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            color: #1A1C1C;
-            transition: .3s;
-            background: #fff;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #2E7D32;
-            box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
-            outline: none;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
-        .btn-save {
-            padding: 12px 32px;
-            background: #2E7D32;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            transition: .3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-save:hover {
-            background: #1f5c24;
-            transform: translateY(-2px);
-        }
-        .btn-cancel {
-            padding: 12px 32px;
-            background: transparent;
-            color: #666;
-            border: 1px solid #BFCABA;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-            transition: .3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-cancel:hover {
-            background: #f5f5f5;
-        }
-
-        .preview-image {
-            margin-top: 10px;
-        }
-        .preview-image img {
-            max-width: 200px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-        .file-info {
-            margin-top: 8px;
-            color: #666;
-            font-size: 13px;
-        }
-    </style>
->>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
 </head>
 
 <body>
+
     <div class="admin-wrapper">
 
         <!-- ===== TOP NAVBAR ===== -->
@@ -184,21 +38,19 @@
                         </div>
                         <i class="fa-solid fa-chevron-down" id="profileToggle"></i>
                         <div class="dropdown-menu" id="dropdownMenu">
-                            <a href="javascript:void(0);"
-                            class="dropdown-item logout"
-                            onclick="openLogoutModal()">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Keluar / Logout
-                        </a>
+                            <a href="javascript:void(0);" class="dropdown-item logout" onclick="openLogoutModal()">
+                                <i class="fa-solid fa-right-from-bracket"></i> Keluar / Logout
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
         </header>
 
+        <!-- ===== MAIN CONTENT ===== -->
         <main class="admin-content">
             <div class="container">
+
                 <!-- Tombol Kembali -->
                 <div class="page-header">
                     <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
@@ -206,270 +58,171 @@
                     </a>
                 </div>
 
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="content content-full">
-                        <div class="card detail-card full-width">
-                            <h2 style="font-size:22px; font-weight:600; margin-bottom:8px;">{% if edit %}Edit{% else %}Tambah{% endif %} Bansos</h2>
-                            <p style="color:#666; font-size:14px; margin-bottom:24px;">{% if edit %}Perbarui{% else %}Tambahkan{% endif %} data bantuan sosial.</p>
+                <!-- ===== TITLE ===== -->
+                <div class="title">
+                    <h1>{% if edit %}Edit{% else %}Tambah{% endif %} Bansos</h1>
+                    <p>{% if edit %}Perbarui{% else %}Tambahkan{% endif %} data bansos untuk informasikan kepada masyarakat.</p>
+                </div>
+
+                <!-- ===== FORM ===== -->
+                <form class="news-form"
+                      method="POST"
+                      enctype="multipart/form-data"
+                      action="{% if edit %}
+                                {{ url_for('admin_bp.edit_bansos', id=item.id) }}
+                             {% else %}
+                                {{ url_for('admin_bp.tambah_bansos') }}
+                             {% endif %}">
+
+                    <div class="content">
+
+                        <div class="left">
 
                             <!-- Judul -->
-                            <div class="form-group">
-                                <label>Judul Bansos <span class="required">*</span></label>
-                                <input type="text" name="title" value="{{ item.title if item else '' }}" placeholder="Masukkan judul bansos..." required>
+                            <div class="card">
+                                <label>Judul Bansos <span style="color:#D62828;">*</span></label>
+                                <input type="text" name="title" placeholder="Masukkan judul bansos..."
+                                       value="{{ item.title if item else '' }}" required>
                             </div>
 
                             <!-- Tahun -->
-                            <div class="form-group">
+                            <div class="card">
                                 <label>Tahun</label>
                                 <input type="number" name="year" value="{{ item.year if item else 2026 }}" required>
                             </div>
 
                             <!-- Deskripsi -->
-                            <div class="form-group">
+                            <div class="card">
                                 <label>Deskripsi (opsional)</label>
-                                <textarea name="description" rows="4" placeholder="Masukkan deskripsi bansos...">{{ item.description if item else '' }}</textarea>
+                                <textarea name="description" rows="4"
+                                          placeholder="Masukkan deskripsi bansos...">{{ item.description if item else '' }}</textarea>
                             </div>
 
+                        </div>
+
+                        <div class="right">
+
                             <!-- Upload Gambar -->
-                            <div class="form-group">
-                                <label>Gambar / Foto</label>
+                            <div class="card">
+                                <h4>Gambar / Foto</h4>
                                 <input type="file" name="image" accept="image/*">
+
                                 {% if edit and item.image_name %}
-                                <div class="file-info">Gambar saat ini: {{ item.image_name }}</div>
                                 <div class="preview-image">
-                                    <img src="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}" alt="Gambar bansos">
+                                    <img src="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}"
+                                         alt="Gambar Bansos">
                                 </div>
+                                <p class="file-info">Gambar saat ini: {{ item.image_name }}</p>
                                 {% endif %}
                             </div>
 
                             <!-- Upload PDF -->
-                            <div class="form-group">
-                                <label>File PDF (opsional)</label>
+                            <div class="card">
+                                <h4>File PDF (opsional)</h4>
                                 <input type="file" name="file_pdf" accept=".pdf">
+
                                 {% if edit and item.file_name %}
-                                <div class="file-info">File PDF saat ini: {{ item.file_name }}</div>
+                                <p class="file-info">File PDF saat ini: {{ item.file_name }}</p>
                                 {% endif %}
                             </div>
 
-                            <!-- Tombol Aksi -->
+                            <!-- Tombol -->
                             <div class="form-actions">
-                                <button type="submit" class="btn-save">
-                                    <i class="fa-solid fa-floppy-disk"></i> {% if edit %}Perbarui{% else %}Simpan{% endif %}
+                                <button class="btn-save" type="submit">
+                                    {% if edit %}
+                                        Perbarui Bansos
+                                    {% else %}
+                                        Simpan
+                                    {% endif %}
                                 </button>
-                                <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-cancel">
-                                    <i class="fa-solid fa-xmark"></i> Batal
-                                </a>
                             </div>
+
                         </div>
+
                     </div>
+
                 </form>
+
             </div>
         </main>
 
-        <div class="copyright">© 2026 KKN Kelompok 16 UPN Veteran Jawa Timur</div>
-    </div>
+        <!-- ===== COPYRIGHT ===== -->
+        <div class="copyright">
+            © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
+        </div>
 
-    <!-- Modal Logout -->
+    </div><!-- end admin-wrapper -->
+
+    <!-- =========================
+         MODAL LOGOUT
+    ========================= -->
     <div class="modal-delete" id="logoutModal">
+
         <div class="modal-box">
+
             <div class="modal-header">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <h3>Konfirmasi Logout</h3>
             </div>
+
             <div class="modal-body">
                 <p>Apakah Anda yakin ingin logout?</p>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
-                <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">Ya, Logout</a>
-            </div>
->>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
-        </div>
-    </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
-    <main class="admin-content">
-        <div class="container">
+                <button type="button" class="btn-cancel-modal" onclick="closeLogoutModal()">
+                    Batal
+                </button>
 
-            <!-- Tombol Kembali -->
-            <div class="page-header">
-                <a href="{{ url_for('admin_bp.indexAdmin') }}" class="btn-back">
-                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+                <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">
+                    Ya, Logout
                 </a>
-            </div>
-
-            <!-- ===== TITLE ===== -->
-            <div class="title">
-                <h1>{% if edit %}Edit{% else %}Tambah{% endif %} Bansos</h1>
-                <p>{% if edit %}Perbarui{% else %}Tambahkan{% endif %} data bansos untuk informasikan kepada masyarakat.</p>
-            </div>
-
-            <!-- ===== FORM ===== -->
-            <form class="news-form"
-            method="POST"
-            enctype="multipart/form-data"
-            action="{% if edit %}
-            {{ url_for('admin_bp.edit_bansos', id=item.id) }}
-            {% else %}
-            {{ url_for('admin_bp.tambah_bansos') }}
-            {% endif %}">
-
-            <div class="content">
-
-                <div class="left">
-
-                    <!-- Judul -->
-                    <div class="card">
-                        <label>Judul Bansos</label>
-                        <input type="text" name="title"
-                        placeholder="Masukkan judul bansos..."
-                        value="{{ item.title if item else '' }}" required>
-                    </div>
-
-                    <!-- Tahun -->
-                    <div class="card">
-                        <label>Tahun</label>
-                        <input type="number" name="year"
-                        value="{{ item.year if item else 2026 }}"
-                        required>
-                    </div>
-
-                    <!-- Deskripsi -->
-                    <div class="card">
-                        <label>Deskripsi (opsional)</label>
-                        <textarea name="description" rows="4"
-                        placeholder="Masukkan deskripsi bansos...">{{ item.description if item else '' }}</textarea>
-                    </div>
-
-                </div>
-
-                <div class="right">
-
-                    <!-- Upload Gambar -->
-                    <div class="card">
-                        <h4>Gambar / Foto</h4>
-                        <input type="file" name="image" accept="image/*">
-
-                        {% if edit and item.image_name %}
-                        <div class="preview-image">
-                            <img src="{{ url_for('static', filename='uploads/bansos/images/' ~ item.image_name) }}"
-                            alt="Gambar Bansos">
-                        </div>
-                        <p style="font-size:12px; color:#666; margin-top:6px;">
-                            Gambar saat ini: {{ item.image_name }}
-                        </p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Upload PDF -->
-                    <div class="card">
-                        <h4>File PDF (opsional)</h4>
-                        <input type="file" name="file_pdf" accept=".pdf">
-
-                        {% if edit and item.file_name %}
-                        <p style="font-size:12px; color:#666; margin-top:8px;">
-                            File PDF saat ini: {{ item.file_name }}
-                        </p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Tombol -->
-                    <div class="form-actions">
-                        <button class="btn-save" type="submit">
-                            {% if edit %}
-                            Perbarui Bansos
-                            {% else %}
-                            Simpan
-                            {% endif %}
-                        </button>
-                    </div>
-
-                </div>
 
             </div>
-
-        </form>
-
-    </div>
-</main>
-
-<!-- ===== COPYRIGHT ===== -->
-<div class="copyright">
-    © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
-</div>
-
-</div>
-
-<!-- =========================
-MODAL LOGOUT
-========================= -->
-<div class="modal-delete" id="logoutModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <h3>Konfirmasi Logout</h3>
-        </div>
-
-        <div class="modal-body">
-            <p>Apakah Anda yakin ingin logout?</p>
-        </div>
-
-        <div class="modal-footer">
-
-            <button type="button" class="btn-cancel" onclick="closeLogoutModal()">
-                Batal
-            </button>
-
-            <a href="{{ url_for('admin_bp.logout') }}" class="btn-delete" style="text-decoration:none;text-align:center;">
-                Ya, Logout
-            </a>
 
         </div>
 
     </div>
 
-</div>
+    <script>
+        // Dropdown toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileToggle = document.getElementById('profileToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
 
-<script>
-    // Dropdown toggle
-    document.addEventListener('DOMContentLoaded', function() {
-        const profileToggle = document.getElementById('profileToggle');
-        const dropdownMenu = document.getElementById('dropdownMenu');
+            if (profileToggle && dropdownMenu) {
+                profileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                    this.classList.toggle('active');
+                });
 
-        if (profileToggle && dropdownMenu) {
-            profileToggle.addEventListener('click', function(e) {
-                e.stopPropagation();
-                dropdownMenu.classList.toggle('show');
-                this.classList.toggle('active');
-            });
+                document.addEventListener('click', function(e) {
+                    const profile = document.getElementById('adminProfile');
+                    if (!profile.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                        profileToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
 
-            document.addEventListener('click', function(e) {
-                const profile = document.getElementById('adminProfile');
-                if (!profile.contains(e.target)) {
-                    dropdownMenu.classList.remove('show');
-                    profileToggle.classList.remove('active');
-                }
-            });
+        function openLogoutModal() {
+            document.getElementById('logoutModal').classList.add('show');
         }
-    });
 
-    function openLogoutModal() {
-        document.getElementById('logoutModal').classList.add('show');
-    }
-
-    function closeLogoutModal() {
-        document.getElementById('logoutModal').classList.remove('show');
-    }
-
-    window.onclick = function(e) {
-        const logoutModal = document.getElementById('logoutModal');
-        if (e.target === logoutModal) {
-            closeLogoutModal();
+        function closeLogoutModal() {
+            document.getElementById('logoutModal').classList.remove('show');
         }
-    }
-</script>
+
+        window.onclick = function(e) {
+            const logoutModal = document.getElementById('logoutModal');
+            if (e.target === logoutModal) {
+                closeLogoutModal();
+            }
+        }
+    </script>
 
 </body>
 </html>

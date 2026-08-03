@@ -38,14 +38,6 @@
     box-sizing: border-box;
 }
 body {
-<<<<<<< HEAD
-    background: #f5f7f4;
-    color: #222;
-}
-
-/* ===========================
-   TOP NAVBAR (sama dengan dashboard)
-=======
     font-family: 'Poppins', sans-serif;
     background: #f9f9f9;
     color: #222;
@@ -58,7 +50,6 @@ body {
 
 /* ===========================
    TOP NAVBAR (sama dengan navbar publik)
->>>>>>> 0880a2af85bfa69e19330613871f4ed3e5b53755
 =========================== */
 .admin-navbar {
     position: fixed;
@@ -71,8 +62,8 @@ body {
     height: 50px;
 }
 .admin-navbar .container {
-    width: 91%;
-    max-width: 1550px;
+    width: 90%;
+    max-width: 1200px;
     margin: 0 auto;
     height: 50px;
     display: flex;

@@ -291,35 +291,50 @@ body {
     border:1px solid #ddd;
 }
 
-/* ===== TOMBOL ===== */
+/* ===========================
+   TOMBOL (sama dengan edit_data)
+=========================== */
 .form-actions {
-    display: block;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0 0 20px 0;
     margin-top: 8px;
 }
-.btn-save {
-    display: flex;
+
+.btn-save,
+.btn-cancel {
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    height: 38px;
+    min-width: 110px;
+    transition: .3s;
+    font-family: 'Poppins', sans-serif;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
     text-decoration: none;
-    width: 100%;
 }
+
 .btn-save {
-    background: #0D631B;
+    background: #2f6f3e;
     color: #fff;
-    box-shadow: 0 2px 8px rgba(13,99,27,0.20);
 }
 .btn-save:hover {
-    background: #0a4f15;
-    transform: translateY(-2px);
+    background: #275b33;
+}
+
+.btn-cancel {
+    background: #d93025;
+    color: #fff;
+}
+.btn-cancel:hover {
+    background: #bf251d;
 }
 
 /* ===== COPYRIGHT ===== */

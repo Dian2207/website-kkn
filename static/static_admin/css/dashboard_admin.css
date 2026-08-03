@@ -881,12 +881,6 @@ body {
     animation:popup .3s ease;
     box-shadow:0 18px 45px rgba(0,0,0,.25);
 }
-<<<<<<< HEAD
-
-.modal-header{
-
-    background:linear-gradient(135deg,#d42c2c,#FB4141);
-=======
 @keyframes popup{
     from{
         transform:scale(.8);
@@ -899,7 +893,6 @@ body {
 }
 .modal-header{
     background:linear-gradient(135deg,#2E7D32,#43A047);
->>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
     color:white;
     padding:22px;
     text-align:center;
@@ -951,77 +944,5 @@ body {
     transition:.3s;
 }
 .btn-delete:hover{
-<<<<<<< HEAD
-
-    background:#d42c2c;
-
-}
-
-
-@keyframes popup{
-
-    from{
-        transform:scale(.8);
-        opacity:0;
-    }
-
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-
-}
-
-/* ===== PERBAIKAN KOLOM AKSI - CENTER ===== */
-.admin-table td.actions {
-    text-align: center !important;
-    vertical-align: middle !important;
-    padding: 4px 8px !important;
-}
-
-.admin-table td.actions a,
-.admin-table td.actions button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 32px !important;
-    height: 32px !important;
-    padding: 0 !important;
-    margin: 0 4px !important;
-    border: none !important;
-    background: transparent !important;
-    border-radius: 6px !important;
-    font-size: 16px !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    transition: background 0.2s !important;
-}
-
-.admin-table td.actions a:hover,
-.admin-table td.actions button:hover {
-    background: rgba(0, 0, 0, 0.06) !important;
-}
-
-.admin-table td.actions a.action-edit {
-    color: #181D17 !important;
-}
-
-.admin-table td.actions button.action-delete {
-    color: #D62828 !important;
-}
-
-/* Hapus garis pemisah yang tidak perlu */
-.admin-table td.actions a::after,
-.admin-table td.actions button::after {
-    display: none !important;
-}
-
-.admin-table td.actions a:not(:last-child),
-.admin-table td.actions button:not(:last-child) {
-    border-right: none !important;
-    padding-right: 0 !important;
-    margin-right: 0 !important;
-=======
     background:#1B5E20;
->>>>>>> 9472adf4335bf6a9dfd773a7050b763a93b80713
 }

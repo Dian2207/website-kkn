@@ -53,6 +53,10 @@
                         <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
                     </a>
                 </div>
+                <div class="title">
+                <h1>{% if edit %}Edit{% else %}Tambah{% endif %} Pengumuman</h1>
+                <p>{% if edit %}Perbarui{% else %}Tambahkan{% endif %} pengumuman atau agenda desa untuk informasikan kepada masyarakat.</p>
+            </div>
 
                 <form  class="detail-form"
     method="POST"
