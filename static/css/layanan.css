@@ -87,6 +87,20 @@ header{
 .nav-menu a.active{
     color:#FFD54F;
 }
+/* ===================================
+   HAMBURGER MENU
+=================================== */
+
+/* Desktop: tombol disembunyikan */
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
 
 /* ===========================
 HERO
@@ -592,47 +606,194 @@ footer a:hover {
     
 }
 
-/* ===========================
-RESPONSIVE (opsional)
+/* ===================================
+   RESPONSIVE LAYANAN
+=================================== */
+
+@media (max-width:768px){
+
+    /* Container */
+    .container{
+        width:92%;
+    }
+
+    /* HERO */
+    .hero{
+        margin-top:90px;
+        margin-bottom:50px;
+    }
+
+    .hero h1{
+        font-size:24px;
+        line-height:1.3;
+    }
+
+    .hero > .container > p{
+        font-size:12px;
+        line-height:1.8;
+    }
+
+    /* ===========================
+   HERO RESPONSIVE
 =========================== */
-@media (max-width: 768px) {
-    .hero-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
+
+.hero{
+    margin-top:80px;
+    margin-bottom:50px;
+}
+
+.hero-card{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:25px;
+    border-radius:18px;
+    gap:20px;
+}
+
+.hero-left{
+
+    width:72%;
+
+}
+
+.hero-left h2{
+
+    font-size:20px;
+    margin-bottom:15px;
+
+}
+
+.hero-left p{
+
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:22px;
+
+}
+
+.hero-button{
+
+    display:flex;
+    flex-direction:row;
+    gap:12px;
+    flex-wrap:wrap;
+
+}
+
+.btn-primary,
+.btn-secondary{
+
+    padding:11px 22px;
+    font-size:12px;
+    width:200px;
+
+}
+
+.hero-right{
+
+    width:28%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.hero-right i{
+
+    font-size:100px;
+
+}
+    /* SECTION TITLE */
+
+    .section-title{
+        margin-bottom:30px;
     }
-    .hero-left {
-        width: 100%;
+
+    .section-title h2{
+        font-size:20px;
     }
-    .hero-right i {
-        font-size: 80px;
-        margin-top: 20px;
+
+    .section-title p{
+        font-size:12px;
     }
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+
+    /* ACCORDION */
+
+    .accordion{
+        margin-bottom:15px;
+        border-radius:12px;
     }
-    .nav-menu {
-        gap: 15px;
+
+    .accordion-btn{
+        padding:18px;
+        font-size:12px;
+        text-align:left;
+        gap:15px;
+        color:#000000;
     }
-    .navbar {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px 0;
+
+    .accordion-btn span{
+        flex:1;
     }
-    .hero h1 {
-        font-size: 28px;
+
+    .accordion-content{
+        padding:0 15px;
     }
-    .section-title h2 {
-        font-size: 30px;
+
+    .accordion.active .accordion-content{
+        padding:15px;
     }
-    .accordion-btn {
-        font-size: 15px;
-        padding: 16px 18px;
+
+    /* TABLE */
+
+    .document-table{
+        table-layout: fixed;
+        width:100%;
     }
+
     .document-table th,
-    .document-table td {
-        padding: 8px 6px;
-        font-size: 13px;
+    .document-table td{
+
+        font-size:10px !important;
+        line-height:1.4;
+        padding:6px 8px !important;
+        color:#222 !important;
+        white-space:normal;
+        word-break:break-word;
+
+    }
+
+    .document-table th:nth-child(1),
+    .document-table td:nth-child(1){
+        width:45px;
+        text-align:center;
+    }
+
+    .document-table th:nth-child(2),
+    .document-table td:nth-child(2){
+        width:38%;
+    }
+
+    .document-table th:nth-child(3),
+    .document-table td:nth-child(3){
+        width:42%;
+    }
+
+
+    /* PAGINATION */
+
+    .pagination{
+        flex-wrap:wrap;
+        gap:6px;
+    }
+
+    .pagination button{
+        width:30px;
+        height:30px;
+        font-size:12px;
+        color:#000000
     }
 }

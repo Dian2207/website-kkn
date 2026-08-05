@@ -17,6 +17,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 </head>
 
 <body>
@@ -38,7 +39,9 @@
                     <h2>Desa Katemas</h2>
 
                 </div>
-
+                <button class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+</button>
                 <ul class="nav-menu">
 
     <li>
@@ -264,7 +267,7 @@ background-repeat: no-repeat;">
 
                 {% for item in news %}
                 <div class="news-item">
-                    <img src="{{ url_for('static', filename='image/' ~ item.thumbnail) }}"
+                    <img src="{{ url_for('static', filename='uploads/news/' ~ item.thumbnail) }}"
                          alt="{{ item.title }}">
                     <div class="news-content">
                         <div class="news-meta">
@@ -354,6 +357,18 @@ background-repeat: no-repeat;">
 
         </div>
 
+        <script>
+
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.querySelector(".nav-menu");
+
+menuToggle.addEventListener("click", function () {
+
+    navMenu.classList.toggle("active");
+
+});
+
+</script>
 
 </body>
 

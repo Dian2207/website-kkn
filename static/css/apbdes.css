@@ -85,6 +85,21 @@ header{
     color:#FFD54F;
 }
 
+/* ===================================
+   HAMBURGER MENU
+=================================== */
+
+/* Desktop: tombol disembunyikan */
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
 /* ===========================
 HEADER (HERO)
 =========================== */
@@ -540,5 +555,98 @@ DETAIL DOKUMEN (TOGGLE)
     }
     .bansos-actions {
         justify-content: center;
+    }
+}
+
+/* ===================================
+   NAVBAR HP
+=================================== */
+
+@media (max-width:768px){
+
+    header{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        z-index:1000;
+    }
+
+    .navbar{
+        position:relative;
+        height:60px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+
+    .logo h2{
+        font-size:18px;
+    }
+
+    .logo img{
+        width:32px;
+        height:32px;
+    }
+
+    /* Tombol muncul */
+    .menu-toggle{
+        display:block;
+    }
+
+    /* Menu disembunyikan */
+    .nav-menu{
+
+        display:none;
+
+        position:absolute;
+
+        top:60px;
+
+        left:0;
+
+        width:100%;
+
+        background:#386641;
+
+        flex-direction:column;
+
+        gap:0;
+
+        box-shadow:0 10px 20px rgba(0,0,0,.15);
+
+        z-index:999;
+
+    }
+
+    /* Saat tombol ditekan */
+    .nav-menu.active{
+
+        display:flex;
+
+    }
+
+    .nav-menu li{
+
+        width:100%;
+
+    }
+
+    .nav-menu a{
+
+        display:block;
+
+        padding:15px 20px;
+
+        font-size:15px;
+
+        color:#fff;
+
+    }
+
+    .nav-menu a:hover{
+
+        background:#2f5637;
+
     }
 }

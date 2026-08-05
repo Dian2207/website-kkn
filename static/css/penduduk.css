@@ -102,6 +102,21 @@ header{
 .nav-menu a.active{
     color: #FFD54F;
 }
+
+/* ===================================
+   HAMBURGER MENU
+=================================== */
+
+/* Desktop: tombol disembunyikan */
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
 /*======================================
 DEMOGRAFI PENDUDUK
 ======================================*/
@@ -830,22 +845,181 @@ footer a:hover {
     
 }
 
-/*====================================
-RESPONSIVE
-=====================================*/
+/* ===========================
+   MOBILE
+=========================== */
 
-@media(max-width:992px){
+@media (max-width:768px){
 
-.news-wrapper{
+    .container{
+        width:92%;
+    }
 
-grid-template-columns:1fr;
+    /* DEMOGRAFI */
+
+    .demografi{
+        padding:85px 0 40px;
+    }
+
+    .section-title{
+        text-align:center;
+    }
+
+    .section-title h1{
+        font-size:24px;
+    }
+
+    .section-title p{
+        width:100%;
+        font-size:12px;
+        line-height:1.8;
+    }
+
+    .demografi-left h2{
+        text-align:center;
+        font-size:20px;
+        margin-bottom:20px;
+    }
+
+.statistik-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.statistik-card{
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:18px;
+    padding:10px 24px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    min-height:120px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.statistik-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 30px rgba(0,0,0,.10);
+}
+
+.icon-box{
+    width:40px;
+    height:40px;
+    background:#B9F5A8;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.icon-box i{
+    font-size:20px;
+    color:#156D2F;
+}
+
+.statistik-card div{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.statistik-card span{
+    font-size:12px;
+    font-weight:700;
+    color:#333;
+    text-transform:uppercase;
+    margin-bottom:8px;
+    line-height:1.3;
+}
+
+.statistik-card h3{
+    font-size:20px;
+    font-weight:700;
+    color:#222;
+    line-height:1;
+}
+
+    .demografi-right{
+        margin-top:20px;
+    }
+
+    .demografi-right img{
+        max-width:220px;
+        margin-top:0;
+    }
+
+    /* PENDIDIKAN */
+
+    .education{
+        padding:10px 0 50px;
+    }
+
+    .section-heading{
+        text-align:center;
+        font-size:20px;
+    }
+
+    .education-wrapper{
+        gap:20px;
+    }
+
+    .education-chart{
+        width:100%;
+        max-width:320px;
+        height:320px;
+    }
+
+    .education-info{
+        width:100%;
+        padding:18px;
+    }
+
+    .education-info h3{
+        font-size:18px;
+    }
+
+    .education-info li{
+        font-size:12px;
+    }
+
+    /* PEKERJAAN */
+
+    .job-section{
+        padding:45px 0;
+    }
+
+    .job-title{
+        text-align:center;
+        font-size:20px;
+    }
+
+    .job-table{
+        overflow-x:auto;
+    }
+
+    .job-table table{
+        min-width:200px;
+    }
+
+    .job-table th,
+    .job-table td{
+        font-size:12px;
+        padding:10px;
+    }
+
+    .job-chart{
+        height:360px;
+        padding:15px;
+    }
+
+    .job-chart h2{
+        font-size:18px;
+    }
+
 
 }
 
-.footer-grid{
-
-grid-template-columns:1fr 1fr;
-
-}
-
-}
