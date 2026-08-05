@@ -370,8 +370,20 @@ RESPONSIVE
 
 @media(max-width:768px){
 
+    .apbdes{
+    padding:100px 0 20px;
+    }
+
+    .section-title{
+    margin-bottom:12px;
+    }
+
     .section-title h1{
-        font-size:28px;
+        font-size:24px;
+    }
+
+    .section-title p{
+        font-size:14px;
     }
 
     .footer-grid{
@@ -383,20 +395,42 @@ RESPONSIVE
     }
 
     .doc-info h3{
-        font-size:16px;
+        font-size:14px;
     }
 
     .doc-item{
         padding:14px 16px;
     }
+    
+    .sub-section-title{
+    font-size:18px;
+    margin-bottom:16px;
+    gap:8px;
+    line-height:1;
+    padding-top:20px;
+    }
 
+    .section-title-dokumen{
+    font-size:18px;
+    margin-bottom:16px;
+    gap:8px;
+    line-height:1;
+    padding-top:20px;
+    }
+
+    .gray-bar{
+    width:4px;
+    height:22px;
+    flex-shrink:0;
+    
+    }
     .help-box{
         flex-wrap:wrap;
         padding:16px 18px;
     }
 
     .help-box p{
-        font-size:14px;
+        font-size:12px;
     }
 
 }
@@ -558,95 +592,3 @@ DETAIL DOKUMEN (TOGGLE)
     }
 }
 
-/* ===================================
-   NAVBAR HP
-=================================== */
-
-@media (max-width:768px){
-
-    header{
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        z-index:1000;
-    }
-
-    .navbar{
-        position:relative;
-        height:60px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-    }
-
-    .logo h2{
-        font-size:18px;
-    }
-
-    .logo img{
-        width:32px;
-        height:32px;
-    }
-
-    /* Tombol muncul */
-    .menu-toggle{
-        display:block;
-    }
-
-    /* Menu disembunyikan */
-    .nav-menu{
-
-        display:none;
-
-        position:absolute;
-
-        top:60px;
-
-        left:0;
-
-        width:100%;
-
-        background:#386641;
-
-        flex-direction:column;
-
-        gap:0;
-
-        box-shadow:0 10px 20px rgba(0,0,0,.15);
-
-        z-index:999;
-
-    }
-
-    /* Saat tombol ditekan */
-    .nav-menu.active{
-
-        display:flex;
-
-    }
-
-    .nav-menu li{
-
-        width:100%;
-
-    }
-
-    .nav-menu a{
-
-        display:block;
-
-        padding:15px 20px;
-
-        font-size:15px;
-
-        color:#fff;
-
-    }
-
-    .nav-menu a:hover{
-
-        background:#2f5637;
-
-    }
-}

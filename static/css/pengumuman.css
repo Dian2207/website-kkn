@@ -510,94 +510,169 @@ footer a:hover {
 }
 
 /* ===================================
-   NAVBAR HP
+   RESPONSIVE PENGUMUMAN MOBILE
 =================================== */
 
 @media (max-width:768px){
 
-    header{
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        z-index:1000;
+    .container{
+        width:94%;
     }
 
-    .navbar{
-        position:relative;
-        height:60px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
+    /* ===== JUDUL ===== */
+
+    .page-title{
+        margin-top:80px;
+        padding:20px 0;
     }
 
-    .logo h2{
-        font-size:18px;
+    .page-title h1{
+        font-size:24px;
+        line-height:1.5;
     }
 
-    .logo img{
-        width:32px;
-        height:32px;
+    .page-title > .container > p{
+        font-size:12px;
+        line-height:1.7;
+        max-width:300px;
+        margin:0 auto;
     }
 
-    /* Tombol muncul */
-    .menu-toggle{
-        display:block;
-    }
+    /* ===== TOOLBAR ===== */
 
-    /* Menu disembunyikan */
-    .nav-menu{
-
-        display:none;
-
-        position:absolute;
-
-        top:60px;
-
-        left:0;
-
-        width:100%;
-
-        background:#386641;
-
+    .calendar-toolbar{
         flex-direction:column;
-
-        gap:0;
-
-        box-shadow:0 10px 20px rgba(0,0,0,.15);
-
-        z-index:999;
-
+        gap:15px;
+        padding:15px;
     }
 
-    /* Saat tombol ditekan */
-    .nav-menu.active{
-
-        display:flex;
-
-    }
-
-    .nav-menu li{
-
+    .toolbar-left{
         width:100%;
-
+        justify-content:center;
     }
 
-    .nav-menu a{
-
-        display:block;
-
-        padding:15px 20px;
-
-        font-size:15px;
-
-        color:#fff;
-
+    .toolbar-right{
+        position:static;
+        justify-content:center;
+        width:100%;
     }
 
-    .nav-menu a:hover{
-
-        background:#2f5637;
-
+    .nav-group span{
+        font-size:16px;
+        min-width:auto;
     }
+
+    .legend{
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:10px;
+        font-size:12px;
+    }
+
+    /* ===== KALENDER ===== */
+
+    .calendar-main{
+        border-radius:15px;
+    }
+
+    .day-header{
+        font-size:10px;
+        padding:8px 0;
+    }
+
+    .calendar-cell{
+        height:60px;
+        min-height:60px;
+        max-height:60px;
+        padding:2px;
+    }
+
+    .calendar-cell .day-number{
+        font-size:10px;
+    }
+
+    .calendar-cell .event-pills{
+        max-height:28px;
+        gap:1px;
+    }
+
+    .calendar-cell .event-pill{
+        font-size:7px;
+        padding:1px 4px;
+        border-radius:8px;
+    }
+
+    /* ===== DETAIL EVENT ===== */
+
+    .day-events-list{
+        padding:15px;
+    }
+
+    .day-events-list h4{
+        font-size:14px;
+    }
+
+    .day-event-item strong{
+        font-size:13px;
+    }
+
+    .day-event-item small{
+        font-size:11px;
+    }
+
+    /* ===== SEMUA EVENT ===== */
+
+    .all-events{
+        margin-top:30px;
+    }
+
+    .all-events h2{
+        font-size:20px;
+        text-align:center;
+    }
+
+    .event-row{
+        flex-direction:column;
+        gap:12px;
+        padding:15px;
+    }
+
+    .event-row-date{
+        flex-direction:row;
+        justify-content:flex-start;
+        gap:10px;
+        border-right:none;
+        border-bottom:1px solid #eee;
+        padding-right:0;
+        padding-bottom:10px;
+    }
+
+    .event-row-date .row-day{
+        font-size:20px;
+    }
+
+    .event-row-date .row-month{
+        font-size:12px;
+    }
+
+    .event-row-body h4{
+        font-size:14px;
+    }
+
+    .event-row-body p{
+        font-size:12px;
+    }
+
+    .event-row-meta{
+        gap:8px;
+    }
+
+    .event-row-meta span{
+        font-size:12px;
+    }
+
+    .event-row-meta .badge{
+        font-size:10px;
+    }
+
 }
