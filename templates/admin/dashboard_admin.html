@@ -209,6 +209,7 @@
                                 <tr>
                                     <th>Judul</th>
                                     <th>Slug</th>
+                                    <th>Lokasi</th>
                                     <th>Content</th>
                                     <th>Thumbnail</th>
                                     <th>Tanggal Publish</th>
@@ -223,6 +224,7 @@
                                 <tr>
                                     <td>{{ item.title[:30] }}{% if item.title|length > 30 %}...{% endif %}</td>
                                     <td>{{ item.slug[:30] }}{% if item.slug|length > 30 %}...{% endif %}</td>
+                                    <td>{{ item.location or '-' }}</td>
                                     <td>{{ item.content[:40] }}{% if item.content|length > 40 %}...{% endif %}</td>
                                     <td>{{ item.thumbnail or '-' }}</td>
                                     <td>{{ item.published_at.strftime('%Y-%m-%d') if item.published_at else '-' }}</td>

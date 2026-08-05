@@ -101,7 +101,7 @@ background-repeat: no-repeat;">
 
         <div class="hero-btn">
 
-            <a href="https://forms.gle/6Uw1vh9dimqK2Lso9" class="btn-primary" target="_blank">
+            <a href="https://forms.gle/8tyXaZEvRMbtz15E7" class="btn-primary" target="_blank">
                 <i class="fa-regular fa-file-lines"></i>
                 Ajukan Surat
             </a>
@@ -223,7 +223,7 @@ background-repeat: no-repeat;">
         <i class="fa-solid fa-newspaper"></i>
         <h4>Berita & Informasi</h4>
     </a>
-        <a href="https://drive.google.com/drive/folders/1jJ_OSBwlBUfYoFqgGL2DKqO9djOvLIxJ" class="menu-card">
+        <a href="https://drive.google.com/drive/folders/15pr-SFHHne8yImR0w4giYqKUb923cfkE?usp=sharing" class="menu-card" target="_blank">
         <i class="fa-solid fa-images"></i>
         <h4>Galeri Desa</h4>
     </a>
@@ -271,7 +271,7 @@ background-repeat: no-repeat;">
                             <small>{{ item.published_at.strftime('%d %b %Y') if item.published_at else '-' }}</small>
                         </div>
                         <h3>
-                            <a href="{{ url_for('main.detailBerita', id=item.id) }}">
+                            <a href="{{ url_for('main.detailBerita', slug=item.slug) }}">
                                 {{ item.title }}
                             </a>
                         </h3>
@@ -331,7 +331,7 @@ background-repeat: no-repeat;">
                 <h4>Layanan</h4>
                 <ul>
                     <li>
-                        <a href="https://forms.gle/6Uw1vh9dimqK2Lso9" target="_blank" rel="noopener noreferrer">
+                        <a href="https://forms.gle/8tyXaZEvRMbtz15E7" target="_blank" rel="noopener noreferrer">
                             E-Surat
                         </a>
                     </li>

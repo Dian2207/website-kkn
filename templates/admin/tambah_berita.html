@@ -91,21 +91,30 @@ rel="stylesheet">
 
                             <label>Judul Berita</label>
                             <input
-type="text"
-name="title"
-placeholder="Masukkan judul berita..."
-value="{{ berita.title if berita else '' }}">
+                            type="text"
+                            name="title"
+                            placeholder="Masukkan judul berita..."
+                            value="{{ berita.title if berita else '' }}">
 
                             <label>Slug</label>
                             <input
-type="text"
-name="slug"
-value="{{ berita.slug if berita else '' }}">
+                            type="text"
+                            name="slug"
+                            placeholder="Akan digunakan untuk alamat URL berita"
+                            value="{{ berita.slug if berita else '' }}">
+
+                            <label>Lokasi Berita</label>
+                            <input
+                            type="text"
+                            name="location"
+                            placeholder="Contoh: Lamongan"
+                            value="{{ berita.location if berita else '' }}">
+
                             <label>Tanggal Publikasi</label>
-<input
-type="date"
-name="published_at"
-value="{% if berita and berita.published_at %}{{ berita.published_at.strftime('%Y-%m-%d') }}{% endif %}">
+                            <input
+                            type="date"
+                            name="published_at"
+                            value="{% if berita and berita.published_at %}{{ berita.published_at.strftime('%Y-%m-%d') }}{% endif %}">
                         </div>
 
                         <div class="card">

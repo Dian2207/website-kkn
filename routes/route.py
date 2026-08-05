@@ -76,9 +76,9 @@ def berita():
         current_page=current_page
     )
 
-@main.route("/detail-berita/<int:id>")
-def detailBerita(id):
-    news_item = News.query.get_or_404(id)
+@main.route("/detail-berita/<slug>")
+def detailBerita(slug):
+    news_item = News.query.filter_by(slug=slug).first_or_404()
     return render_template("user/detail_berita.html", news=news_item)
 
 # ==========================

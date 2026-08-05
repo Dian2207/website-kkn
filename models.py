@@ -59,6 +59,8 @@ class News(db.Model):
 
     title = db.Column(db.String(255), nullable=False)
 
+    location = db.Column(db.String(100), nullable=False)
+
     slug = db.Column(db.String(255), nullable=False)
 
     content = db.Column(db.Text, nullable=False)

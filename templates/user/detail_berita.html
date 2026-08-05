@@ -40,9 +40,26 @@
             <hr />
             <img class="cover" src="{{ url_for('static', filename='uploads/news/' ~ news.thumbnail) }}" alt="{{ news.title }}" />
             <div class="content">
-                {% for paragraph in news.content.split('\n') if paragraph.strip() %}
-                    <p>{{ paragraph }}</p>
-                {% endfor %}
+
+                {% if news.location %}
+                    <p>
+                        <strong>{{ news.location }}</strong> —
+                        {% set paragraphs = news.content.split('\n') %}
+                        {{ paragraphs[0] }}
+                    </p>
+
+                    {% for paragraph in paragraphs[1:] if paragraph.strip() %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+
+                {% else %}
+
+                    {% for paragraph in news.content.split('\n') if paragraph.strip() %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -74,7 +91,7 @@
                 <h4>Layanan</h4>
                 <ul>
                     <li>
-                        <a href="https://forms.gle/6Uw1vh9dimqK2Lso9" target="_blank" rel="noopener noreferrer">
+                        <a href="https://forms.gle/8tyXaZEvRMbtz15E7" target="_blank" rel="noopener noreferrer">
                             E-Surat
                         </a>
                     </li>
