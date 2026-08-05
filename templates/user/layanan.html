@@ -17,6 +17,7 @@
 
     <!-- CSS Eksternal -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layanan.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 
 </head>
 
@@ -33,6 +34,9 @@
                     <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo Desa">
                     <h2>Desa Katemas</h2>
                 </div>
+                <button class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+</button>
                 <ul class="nav-menu">
                     <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     <li><a href="{{ url_for('main.profilDesa') }}">Profil Desa</a></li>
@@ -472,7 +476,18 @@
             });
         });
     </script>
+ <script>
 
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.querySelector(".nav-menu");
+
+menuToggle.addEventListener("click", function () {
+
+    navMenu.classList.toggle("active");
+
+});
+
+</script>
 </body>
 
 </html>

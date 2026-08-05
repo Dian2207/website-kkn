@@ -103,6 +103,21 @@ header{
     color: #FFD54F;
 }
 
+/* ===================================
+   HAMBURGER MENU
+=================================== */
+
+/* Desktop: tombol disembunyikan */
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
 
 /* ===========================
 HEADER
@@ -151,53 +166,6 @@ HEADER
 }
 
 
-/* ===========================
-RESPONSIVE
-=========================== */
-
-@media(max-width:768px){
-
-.navbar{
-
-    flex-direction:column;
-
-    height:auto;
-
-    padding:20px 0;
-
-}
-
-.nav-menu{
-
-    margin-top:20px;
-
-    gap:18px;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-}
-
-.header-box{
-
-    padding:35px 25px;
-
-}
-
-.header-box h1{
-
-    font-size:32px;
-
-}
-
-.header-box p{
-
-    font-size:15px;
-
-}
-
-}
 
 /* ===========================
 SEJARAH DESA
@@ -388,42 +356,8 @@ SEJARAH DESA
     line-height:1.5;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .vision-grid {
-        grid-template-columns: 1fr;
-    }
-    .vision-card p {
-        font-size: 18px;
-    }
-}
 
 
-/* ===========================
-RESPONSIVE
-=========================== */
-
-@media(max-width:768px){
-
-.history-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-.vision-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-.vision-card p{
-
-    font-size:22px;
-
-}
-
-}
 /* ===========================
 POTENSI DESA
 =========================== */
@@ -543,24 +477,6 @@ PERANGKAT DESA
     max-width:1100px;
     border-radius:18px;
     box-shadow:0 8px 25px rgba(0,0,0,.12);
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-    .staff-header h2{
-        font-size:32px;
-    }
-
-    .staff-header p{
-        font-size:14px;
-    }
-
-    .bagan-desa img{
-        width:100%;
-    }
-
 }
 
 /* ===========================
@@ -751,62 +667,6 @@ PERANGKAT DESA
     padding: 2px 0;
 }
 
-/* Responsif */
-@media (max-width: 768px) {
-    .office-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .office-left {
-        align-items: center;
-    }
-
-    .office-left .btn-map {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .office-right {
-        text-align: center;
-    }
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media (max-width: 992px) {
-    .location-grid {
-        grid-template-columns: 1fr;
-        align-items: start; /* kembali ke default agar tidak memaksa tinggi */
-    }
-
-    .location-info,
-    .location-right {
-        height: auto;
-    }
-
-    .location-hours {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .border-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .location-map iframe {
-        height: 300px;
-    }
-
-    .location-info {
-        padding: 30px;
-    }
-}
 
 /*====================================
 FOOTER
@@ -945,4 +805,340 @@ footer a:hover {
 
     width: 100%
     
+}
+/* ===================================
+   PROFIL DESA RESPONSIVE
+=================================== */
+
+@media (max-width:768px){
+
+    /* HEADER */
+    .page-header{
+        margin-top:85px;
+        margin-bottom:40px;
+    }
+
+    .header-box{
+        padding:28px 22px;
+        border-radius:16px;
+        text-align:center;
+    }
+
+    .header-box h1{
+        font-size:24px;
+        margin-bottom:12px;
+    }
+
+    .header-box p{
+        font-size:12px;
+        line-height:1.8;
+    }
+
+    /* JUDUL SECTION */
+    .section-title{
+        justify-content:center;
+        margin-bottom:22px;
+    }
+
+    .section-title h2{
+        margin-left:0;
+        font-size:24px;
+        text-align:center;
+    }
+
+      /* ================= SEJARAH ================= */
+
+    .history-grid{
+        display:flex;
+        flex-direction:column-reverse;
+        gap:25px;
+        align-items:stretch;
+    }
+
+    .history-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+    .history-image img{
+        width:100%;
+        height:260px;
+        object-fit:cover;
+        border-radius:18px;
+    }
+
+    .history-text{
+    background:#fff;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+    .history-text p{
+        font-size:12px;
+        line-height:1.9;
+        text-align:justify;
+    }
+
+    .section-title{
+        margin-bottom:25px;
+    }
+
+    .section-title h2{
+        margin-left:0;
+        font-size:24px;
+    }
+
+    /* ======================================
+   RESPONSIVE VISI MISI
+====================================== */
+
+    .vision-section{
+        margin-bottom:60px;
+    }
+
+    .vision-grid{
+
+        display:grid;
+        grid-template-columns:0.85fr 1.15fr;
+        gap:18px;
+        align-items:stretch;
+
+    }
+
+    .vision-card,
+    .mission-card{
+
+        padding:20px;
+        border-radius:18px;
+
+    }
+
+    .card-title{
+
+        margin-bottom:18px;
+
+    }
+
+    .card-title h2{
+
+        font-size:20px;
+
+    }
+
+    .vision-card{
+
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+
+    }
+
+    .vision-card p{
+
+        display:block;
+        font-size:12px;
+        line-height:1.8;
+        font-style:italic;
+        font-weight:600;
+
+    }
+
+    .mission-card ol{
+
+        padding-left:20px;
+
+    }
+
+    .mission-card li{
+
+        font-size:10px;
+        line-height:1.7;
+        margin-bottom:10px;
+
+    }
+
+
+/* ======================================
+   RESPONSIVE POTENSI DESA
+====================================== */
+
+    .potential-section{
+        margin-bottom:60px;
+    }
+
+    .potential-grid{
+
+        display:grid;
+        grid-template-columns:1fr;
+        gap:25px;
+
+    }
+
+    .potential-card{
+
+        width:100%;
+        border-radius:20px;
+
+    }
+
+    .potential-card img{
+
+        width:100%;
+        height:240px;
+        object-fit:cover;
+
+    }
+
+    .potential-content{
+
+        padding:25px;
+
+    }
+
+    .potential-content h3{
+
+        font-size:20px;
+        margin-bottom:12px;
+
+    }
+
+    .potential-content p{
+
+        font-size:12px;
+        line-height:1.8;
+
+    }
+
+
+
+    /* PERANGKAT DESA */
+
+    .staff-section{
+        padding:10px 0;
+    }
+
+    .staff-header{
+        margin-bottom:25px;
+    }
+
+    .staff-header h2{
+        font-size:26px;
+    }
+
+    .staff-header p{
+        font-size:14px;
+    }
+
+    .bagan-desa img{
+        width:100%;
+    }
+
+/* ==========================
+   RESPONSIVE PETA LOKASI
+========================== */
+
+.location-section{
+    margin-top:45px;
+    margin-bottom:45px;
+}
+
+.location-grid{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.location-info{
+    padding:18px;
+    border-radius:16px;
+}
+
+.location-info h3{
+    font-size:16px;
+    margin-bottom:18px;
+}
+
+/* Batas Desa */
+.border-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    column-gap:20px;
+    row-gap:18px;
+}
+
+.border-grid div{
+    display:flex;
+    flex-direction:column;
+}
+
+.border-grid strong{
+    font-size:13px;
+    margin-bottom:5px;
+    color:#222;
+    font-weight:700;
+}
+
+.border-grid p{
+    font-size:12px;
+    line-height:1.5;
+    color:#666;
+    margin:0;
+}
+
+.location-data{
+    margin-bottom:12px;
+}
+
+.location-data h4{
+    font-size:13px;
+    font-weight:600;
+}
+
+.location-data span{
+    font-size:13px;
+    font-weight:700;
+}
+
+.location-section .section-title{
+    justify-content:center;
+    margin-bottom:20px;
+}
+
+.location-section .section-title h2{
+    font-size:22px;
+    margin-left:0;
+}
+/* MAP */
+
+.location-map iframe{
+    width:100%;
+    height:180px;
+    border-radius:16px;
+}
+
+/* OFFICE CARD */
+
+.office-card{
+    padding:18px;
+    border-radius:16px;
+    gap:15px;
+}
+
+.office-left h3{
+    font-size:16px;
+}
+
+.office-left .btn-map{
+    padding:9px 16px;
+    font-size:12px;
+}
+
+.office-right{
+    font-size:12px;
+    line-height:1.7;
+}
 }

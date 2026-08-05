@@ -17,6 +17,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profilDesa.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
 
 </head>
 
@@ -41,7 +42,10 @@
                 <h2>Desa Katemas</h2>
 
             </div>
-
+            
+            <button class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+</button>
             <!-- Menu -->
 
             <ul class="nav-menu">
@@ -345,7 +349,18 @@
             © 2026 KKN Kelompok 16 UPN Veteran Jawa Timur
 
         </div>
+ <script>
 
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.querySelector(".nav-menu");
+
+menuToggle.addEventListener("click", function () {
+
+    navMenu.classList.toggle("active");
+
+});
+
+</script>
 
 </body>
 

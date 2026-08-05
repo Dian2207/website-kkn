@@ -103,6 +103,21 @@ header{
     color: #FFD54F;
 }
 
+/* ===================================
+   HAMBURGER MENU
+=================================== */
+
+/* Desktop: tombol disembunyikan */
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+}
+
+
 /* =====================================
 DETAIL BERITA
 ===================================== */
@@ -389,143 +404,70 @@ footer a:hover {
     width: 100%
     
 }
-/* =====================================
-RESPONSIVE
-===================================== */
-
-@media(max-width:992px){
-
-.detail-card h1{
-
-    font-size:36px;
-
-}
-
-.cover{
-
-    height:420px;
-
-}
-
-.gallery{
-
-    grid-template-columns:1fr;
-
-}
-
-.footer-grid{
-
-    grid-template-columns:1fr 1fr;
-
-}
-
-}
-
-@media(max-width:768px){
-
-.navbar{
-
-    flex-direction:column;
-    justify-content:center;
-    gap:15px;
-    height:auto;
-    padding:15px 0;
-
-}
-
-header{
-
-    height:auto;
-
-}
-
-.detail-news{
-
-    padding-top:170px;
-
-}
-
-.detail-card{
-
-    padding:20px;
-
-}
-
-.detail-card h1{
-
-    font-size:30px;
-
-}
-
-.meta{
-
-    flex-direction:column;
-    gap:12px;
-
-}
-
-.cover{
-
-    height:260px;
-
-}
-
-.gallery img{
-
-    height:220px;
-
-}
-
-.footer-grid{
-
-    grid-template-columns:1fr;
-
-    gap:35px;
-
-}
-
-}
-
-@media(max-width:576px){
-
-.detail-card h1{
-
-    font-size:26px;
-
-}
-
-.content{
-
-    font-size:15px;
-
-}
-
-blockquote{
-
-    font-size:16px;
-
-    padding:18px;
-
-}
-
-.logo h2{
-
-    font-size:24px;
-
-}
-
-.nav-menu{
-
-    gap:18px;
-    flex-wrap:wrap;
-    justify-content:center;
-
-}
-
-.nav-menu a{
-
-    font-size:14px;
-
-}
+@media (max-width:768px){
+
+    .detail-news{
+        padding:90px 0 45px;
+    }
+
+    .detail-card{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .detail-card h1{
+        font-size:24px;
+        line-height:1.5;
+        margin-bottom:15px;
+    }
+
+    .meta{
+        flex-direction:column;
+        gap:10px;
+        font-size:12px;
+        margin-bottom:18px;
+    }
+
+    hr{
+        margin-bottom:20px;
+    }
+
+    .cover{
+        height:220px;
+        margin-bottom:20px;
+    }
+
+    .content,
+    .last-text{
+        font-size:12px;
+        line-height:1.8;
+        text-align:justify;
+    }
+
+    .content p{
+        margin-bottom:18px;
+    }
+
+    blockquote{
+        font-size:12px;
+        line-height:1.7;
+        padding:16px;
+        margin:25px 0;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+        gap:15px;
+        margin:25px 0;
+    }
+
+    .gallery img{
+        height:200px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
 
 }
